@@ -674,7 +674,7 @@ section {
   content: '"';
   position: absolute;
   top: -20px;
-  left: -10px;
+  left: -30px;
   font-size: 5rem;
   color: rgba(100, 255, 218, 0.1);
   font-family: serif;
@@ -891,6 +891,7 @@ footer {
 }
 
 .social-link {
+  text-decoration: none;
   display: flex;
   align-items: center;
   justify-content: center;
