@@ -15,7 +15,7 @@
 This is my **personal digital portfolio**, designed to highlight my **skills, projects, and professional profile** in a modern and interactive way.  
 It reflects my growth as a **front-end developer** by combining **clean UI, responsive design, and smooth interactivity**.  
 
-🔗 **Live Portfolio:** [digital-portfolio1.netlify.app](https://digital-portfolio1.netlify.app/)  
+🔗 **Live Portfolio:** [dynamic-portfolio.vercel.app](https://lakhvinder-portfolio.vercel.app/)  
 
 ---
 
