@@ -148,7 +148,6 @@ const typewriterElement = document.getElementById('typewriter');
 const phrases = [
   "Web Developer",
   "UI/UX Designer",
-  "Mobile Developer",
   "Creative Thinker",
   "Problem Solver"
 ];
