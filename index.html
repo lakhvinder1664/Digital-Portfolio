@@ -371,10 +371,50 @@
     <a href="#home" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
   </footer>
 
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+  import { getFirestore, collection, addDoc, serverTimestamp } 
+    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyAPCxxAERDnOvoxBYHuKzDPZ7XLp63OQcM",
+    authDomain: "portfolio-contact-fe911.firebaseapp.com",
+    projectId: "portfolio-contact-fe911",
+    storageBucket: "portfolio-contact-fe911.firebasestorage.app",
+    messagingSenderId: "48417656668",
+    appId: "1:48417656668:web:759f639f233ea8a53c3b99"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const db = getFirestore(app);
+
+  document.getElementById("contactForm").addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("emailInput").value;
+    const subject = document.getElementById("subject").value;
+    const message = document.getElementById("message").value;
+
+    await addDoc(collection(db, "messages"), {
+      name,
+      email,
+      subject,
+      message,
+      time: serverTimestamp()
+    });
+
+    alert("Message sent successfully!");
+    document.getElementById("contactForm").reset();
+  });
+</script>
+
   <!-- Swiper JS -->
   <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
   <!-- Main JS -->
   <script src="script.js"></script>
+
+
 </body>
 </html>
