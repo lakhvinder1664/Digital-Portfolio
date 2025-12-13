@@ -597,7 +597,7 @@ section {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to top, rgba(10, 25, 47, 0.9), transparent);
+  background: linear-gradient(to top, var(--primary), transparent);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
@@ -623,6 +623,7 @@ section {
 .portfolio-title {
   font-size: 1.5rem;
   margin-bottom: 0.8rem;
+  color: var(--text);
 }
 
 .portfolio-links {
@@ -646,6 +647,21 @@ section {
   background: var(--accent);
   color: var(--black);
   transform: translateY(-3px);
+}
+
+/* Light mode portfolio overlay adjustments */
+[data-theme="light"] .portfolio-overlay {
+  background: linear-gradient(to top, rgba(248, 249, 250, 0.95), transparent);
+}
+
+[data-theme="light"] .portfolio-link {
+  background: rgba(67, 97, 238, 0.2);
+  color: var(--accent);
+}
+
+[data-theme="light"] .portfolio-link:hover {
+  background: var(--accent);
+  color: var(--white);
 }
 
 /* Testimonials Section */
