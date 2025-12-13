@@ -2,7 +2,8 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard — Portfolio Messages</title>
 
   <style>
     body {
@@ -25,13 +26,33 @@
     }
 
     .logout-btn {
-      background: red;
+      background: #dc2626;
       color: white;
-      padding: 10px 15px;
+      padding: 10px 20px;
       border: none;
+      border-radius: 5px;
       cursor: pointer;
       float: right;
       margin-bottom: 20px;
+      font-weight: 500;
+      transition: background 0.3s;
+    }
+    .logout-btn:hover {
+      background: #b91c1c;
+    }
+    .logout-btn:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+    .message-box {
+      word-wrap: break-word;
+    }
+    .message-box a {
+      color: #2563eb;
+      text-decoration: none;
+    }
+    .message-box a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
@@ -41,6 +62,7 @@
   <button class="logout-btn" id="logoutBtn">Logout</button>
   <h1>Inbox Messages</h1>
 
+  <div id="loading" style="text-align: center; padding: 20px; color: #666;">Loading messages...</div>
   <div id="messages"></div>
 
 <script type="module">
@@ -66,18 +88,62 @@
 
   // Protect page
   onAuthStateChanged(auth, (user) => {
-    if (!user) window.location.href = "admin-login.html";
+    if (!user) {
+      window.location.href = "admin-login.html";
+    } else {
+      // Hide loading once authenticated
+      document.getElementById("loading").style.display = "none";
+    }
   });
 
   // Logout
-  document.getElementById("logoutBtn").onclick = () => {
-    signOut(auth);
+  document.getElementById("logoutBtn").onclick = async () => {
+    try {
+      await signOut(auth);
+      window.location.href = "admin-login.html";
+    } catch (error) {
+      console.error("Logout error:", error);
+      alert("Error logging out. Please try again.");
+    }
   };
 
   // Real-time messages
   const q = query(collection(db, "messages"), orderBy("time", "desc"));
 
+  // XSS Protection: Escape HTML to prevent injection attacks
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  // Format date
+  function formatDate(timestamp) {
+    if (!timestamp) return 'No date';
+    try {
+      const date = timestamp.toDate();
+      return date.toLocaleString('en-US', {
+        year: 'numeric',
+        month: 'short',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    } catch (e) {
+      return 'Invalid date';
+    }
+  }
+
   onSnapshot(q, (snapshot) => {
+    const messagesDiv = document.getElementById("messages");
+    const loadingDiv = document.getElementById("loading");
+    if (loadingDiv) loadingDiv.style.display = "none";
+    
+    if (snapshot.empty) {
+      messagesDiv.innerHTML = '<p style="text-align: center; color: #666;">No messages yet.</p>';
+      return;
+    }
+
     let html = "";
 
     snapshot.forEach((doc) => {
@@ -85,16 +151,20 @@
 
       html += `
         <div class="message-box">
-          <p><strong>Name:</strong> ${d.name}</p>
-          <p><strong>Email:</strong> ${d.email}</p>
-          <p><strong>Subject:</strong> ${d.subject}</p>
-          <p><strong>Message:</strong> ${d.message}</p>
-          <p><small>${d.time?.toDate()}</small></p>
+          <p><strong>Name:</strong> ${escapeHtml(d.name || 'N/A')}</p>
+          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}">${escapeHtml(d.email || 'N/A')}</a></p>
+          <p><strong>Subject:</strong> ${escapeHtml(d.subject || 'N/A')}</p>
+          <p><strong>Message:</strong> ${escapeHtml(d.message || 'N/A')}</p>
+          <p><small>${formatDate(d.time)}</small></p>
         </div>
       `;
     });
 
-    document.getElementById("messages").innerHTML = html;
+    messagesDiv.innerHTML = html;
+  }, (error) => {
+    console.error("Error fetching messages:", error);
+    document.getElementById("messages").innerHTML = 
+      '<p style="text-align: center; color: red;">Error loading messages. Please refresh the page.</p>';
   });
 </script>
 

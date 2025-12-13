@@ -3,7 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Dynamic Portfolio — Lakhvinder Singh</title>
+  <meta name="description" content="Lakhvinder Singh - Front-End Developer & UI/UX Designer. Portfolio showcasing web development projects, skills, and professional experience.">
+  <meta name="keywords" content="Front-End Developer, Web Developer, UI/UX Designer, React, JavaScript, HTML, CSS, Portfolio">
+  <meta name="author" content="Lakhvinder Singh">
+  <meta property="og:title" content="Lakhvinder Singh - Front-End Developer Portfolio">
+  <meta property="og:description" content="Professional portfolio showcasing web development projects and skills">
+  <meta property="og:type" content="website">
+  <title>Lakhvinder Singh — Front-End Developer Portfolio</title>
   
   <!-- Fonts & Icons -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -218,7 +224,7 @@
             <div class="testimonial-content">
               <p class="testimonial-text">Attention to detail and creative problem-solving were truly impressive. Highly recommended!</p>
               <div class="testimonial-author">
-                <img src="/assets/WhatsApp Image 2025-09-28 at 19.01.14.jpeg" alt="Client" class="author-image">
+                <img src="assets/WhatsApp Image 2025-09-28 at 19.01.14.jpeg" alt="Client" class="author-image">
                 <div class="author-info">
                   <h4>Saraswati</h4>
                   <p>Fronted Developer</p>
@@ -257,7 +263,7 @@
             <div class="testimonial-content">
               <p class="testimonial-text">Clean, efficient code with excellent design execution — one of the best devs we've worked with.</p>
               <div class="testimonial-author">
-                <img src="/assets/WhatsApp Image 2025-08-20 at 15.13.32.jpeg" alt="Client" class="author-image">
+                <img src="assets/WhatsApp Image 2025-08-20 at 15.13.32.jpeg" alt="Client" class="author-image">
                 <div class="author-info">
                   <h4>Manish Kumar</h4>
                   <p>Frontend Developer</p>
@@ -388,24 +394,61 @@
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
 
-  document.getElementById("contactForm").addEventListener("submit", async (e) => {
+  const contactForm = document.getElementById("contactForm");
+  const submitBtn = contactForm.querySelector('button[type="submit"]');
+  const originalBtnText = submitBtn.textContent;
+
+  contactForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("emailInput").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("emailInput").value.trim();
+    const subject = document.getElementById("subject").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-    await addDoc(collection(db, "messages"), {
-      name,
-      email,
-      subject,
-      message,
-      time: serverTimestamp()
-    });
+    // Basic validation
+    if (!name || !email || !subject || !message) {
+      alert("Please fill in all fields.");
+      return;
+    }
 
-    alert("Message sent successfully!");
-    document.getElementById("contactForm").reset();
+    // Email validation
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+      alert("Please enter a valid email address.");
+      return;
+    }
+
+    // Disable button and show loading state
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Sending...";
+
+    try {
+      await addDoc(collection(db, "messages"), {
+        name,
+        email,
+        subject,
+        message,
+        time: serverTimestamp()
+      });
+
+      // Success feedback
+      submitBtn.textContent = "✓ Message Sent!";
+      submitBtn.style.background = "linear-gradient(135deg, #4ade80, #22c55e)";
+      contactForm.reset();
+      
+      // Reset button after 3 seconds
+      setTimeout(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        submitBtn.style.background = "";
+      }, 3000);
+    } catch (error) {
+      console.error("Error sending message:", error);
+      alert("Failed to send message. Please try again later.");
+      submitBtn.disabled = false;
+      submitBtn.textContent = originalBtnText;
+    }
   });
 </script>
 
