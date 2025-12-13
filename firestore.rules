@@ -1,0 +1,38 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isAdmin() {
+      return request.auth != null
+        && request.auth.uid == "YOUR_ADMIN_UID_HERE";
+    }
+
+    match /messages/{messageId} {
+      allow create: if
+        request.resource.data.name is string &&
+        request.resource.data.email is string &&
+        request.resource.data.subject is string &&
+        request.resource.data.message is string &&
+        request.resource.data.name.size() > 0 &&
+        request.resource.data.email.size() > 0 &&
+        request.resource.data.subject.size() > 0 &&
+        request.resource.data.message.size() > 0;
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /newsletter/{subscriberId} {
+      allow create: if
+        request.resource.data.email is string &&
+        request.resource.data.email.size() > 0 &&
+        request.resource.data.email.size() <= 200;
+
+      allow read, update, delete: if isAdmin();
+    }
+
+    match /{document=**} {
+      allow read, write: if false;
+    }
+  }
+}
