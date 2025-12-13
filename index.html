@@ -315,20 +315,51 @@
       <form class="contact-form" id="contactForm">
         <div class="form-group">
           <label for="name" class="form-label">Your Name</label>
-          <input type="text" id="name" class="form-control" required>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            class="form-control"
+            autocomplete="name"
+            required
+          >
         </div>
+      
         <div class="form-group">
           <label for="emailInput" class="form-label">Your Email</label>
-          <input type="email" id="emailInput" class="form-control" required>
+          <input
+            type="email"
+            id="emailInput"
+            name="email"
+            class="form-control"
+            autocomplete="email"
+            required
+          >
         </div>
+      
         <div class="form-group">
           <label for="subject" class="form-label">Subject</label>
-          <input type="text" id="subject" class="form-control" required>
+          <input
+            type="text"
+            id="subject"
+            name="subject"
+            class="form-control"
+            autocomplete="subject"
+            required
+          >
         </div>
+      
         <div class="form-group">
           <label for="message" class="form-label">Your Message</label>
-          <textarea id="message" class="form-control" required></textarea>
+          <textarea
+            id="message"
+            name="message"
+            class="form-control"
+            autocomplete="off"
+            required
+          ></textarea>
         </div>
+      
         <button type="submit" class="submit-btn">Send Message</button>
       </form>
     </div>
