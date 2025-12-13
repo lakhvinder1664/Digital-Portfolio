@@ -31,6 +31,38 @@
     </div>
   </div>
 
+  <!-- Theme Selection Popup -->
+  <div class="theme-popup" id="themePopup">
+    <div class="theme-popup-content">
+      <div class="theme-popup-header">
+        <h3>Choose Your Theme</h3>
+        <button class="theme-popup-close" id="themePopupClose" aria-label="Close">
+          <i class="fas fa-times"></i>
+        </button>
+      </div>
+      <div class="theme-popup-body">
+        <p>Select your preferred color theme</p>
+        <div class="theme-options">
+          <button class="theme-option" data-theme="dark" id="themeDark">
+            <div class="theme-option-icon">
+              <i class="fas fa-moon"></i>
+            </div>
+            <span>Dark Mode</span>
+          </button>
+          <button class="theme-option" data-theme="light" id="themeLight">
+            <div class="theme-option-icon">
+              <i class="fas fa-sun"></i>
+            </div>
+            <span>Light Mode</span>
+          </button>
+        </div>
+      </div>
+      <div class="theme-popup-footer">
+        <button class="theme-popup-dismiss" id="themePopupDismiss">Don't show again</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Header -->
   <header>
     <nav>

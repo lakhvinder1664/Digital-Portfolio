@@ -34,6 +34,96 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  // Theme Selection Popup
+  const themePopup = document.getElementById('themePopup');
+  const themePopupClose = document.getElementById('themePopupClose');
+  const themePopupDismiss = document.getElementById('themePopupDismiss');
+  const themeDark = document.getElementById('themeDark');
+  const themeLight = document.getElementById('themeLight');
+
+  // Show popup on page load (shows every time unless user clicked "Don't show again")
+  function showThemePopup() {
+    const dontShowAgain = localStorage.getItem('theme-popup-dismissed');
+    if (dontShowAgain !== 'true' && themePopup) {
+      // Wait for preloader to finish
+      setTimeout(() => {
+        themePopup.classList.add('show');
+        // Highlight current theme
+        const currentTheme = document.documentElement.getAttribute('data-theme') || 'dark';
+        if (currentTheme === 'dark') {
+          themeDark.classList.add('active');
+          themeLight.classList.remove('active');
+        } else {
+          themeLight.classList.add('active');
+          themeDark.classList.remove('active');
+        }
+      }, 1000);
+    }
+  }
+
+  // Close popup
+  function closeThemePopup() {
+    if (themePopup) {
+      themePopup.classList.remove('show');
+    }
+  }
+
+  // Dismiss popup permanently
+  if (themePopupDismiss) {
+    themePopupDismiss.addEventListener('click', () => {
+      localStorage.setItem('theme-popup-dismissed', 'true');
+      closeThemePopup();
+    });
+  }
+
+  // Close button
+  if (themePopupClose) {
+    themePopupClose.addEventListener('click', closeThemePopup);
+  }
+
+  // Close on background click
+  if (themePopup) {
+    themePopup.addEventListener('click', (e) => {
+      if (e.target === themePopup) {
+        closeThemePopup();
+      }
+    });
+  }
+
+  // Theme selection handlers
+  if (themeDark) {
+    themeDark.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'dark');
+      localStorage.setItem('portfolio-theme', 'dark');
+      themeDark.classList.add('active');
+      themeLight.classList.remove('active');
+      // Update header icon
+      const icon = themeToggle?.querySelector('i');
+      if (icon) {
+        icon.classList.replace('fa-sun', 'fa-moon');
+      }
+      closeThemePopup();
+    });
+  }
+
+  if (themeLight) {
+    themeLight.addEventListener('click', () => {
+      document.documentElement.setAttribute('data-theme', 'light');
+      localStorage.setItem('portfolio-theme', 'light');
+      themeLight.classList.add('active');
+      themeDark.classList.remove('active');
+      // Update header icon
+      const icon = themeToggle?.querySelector('i');
+      if (icon) {
+        icon.classList.replace('fa-moon', 'fa-sun');
+      }
+      closeThemePopup();
+    });
+  }
+
+  // Show popup after page loads
+  showThemePopup();
+
   // Mobile Menu Toggle
   if (menuToggle && navLinks) {
     menuToggle.addEventListener('click', () => {
