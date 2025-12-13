@@ -100,17 +100,8 @@ document.addEventListener('DOMContentLoaded', () => {
   // Note: Contact form is handled by Firebase in index.html
   // No need for a separate handler here
 
-  // Newsletter form - can be connected to email service or Firebase
-  const newsletterForm = document.getElementById('newsletterForm');
-  if (newsletterForm) {
-    newsletterForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // TODO: Connect to email service or Firebase
-      const email = newsletterForm.querySelector('input[type="email"]').value;
-      console.log('Newsletter subscription:', email);
-      newsletterForm.reset();
-    });
-  }
+  // Newsletter form - removed demo handler
+  // Can be implemented later with Firebase or email service if needed
 
   // Portfolio Filter
   const filterButtons = document.querySelectorAll('.filter-btn');
