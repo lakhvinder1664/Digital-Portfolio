@@ -97,6 +97,9 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // Note: Contact form is handled by Firebase in index.html
+  // No need for a separate handler here
+
   // Newsletter form - can be connected to email service or Firebase
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
