@@ -97,23 +97,14 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Contact form submission (basic front-end)
-  const contactForm = document.getElementById('contactForm');
-  if (contactForm) {
-    contactForm.addEventListener('submit', (e) => {
-      e.preventDefault();
-      // You can replace this with actual email sending / API
-      alert('Thanks! Your message has been received (demo).');
-      contactForm.reset();
-    });
-  }
-
-  // Newsletter demo
+  // Newsletter form - can be connected to email service or Firebase
   const newsletterForm = document.getElementById('newsletterForm');
   if (newsletterForm) {
     newsletterForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Subscribed (demo).');
+      // TODO: Connect to email service or Firebase
+      const email = newsletterForm.querySelector('input[type="email"]').value;
+      console.log('Newsletter subscription:', email);
       newsletterForm.reset();
     });
   }
