@@ -5,7 +5,9 @@
 </p>
 
 <p align="center">
-  <a href="https://digital-portfolio1.netlify.app/"><img src="https://img.shields.io/badge/Live%20Demo-00C7B7?style=for-the-badge&logo=netlify&logoColor=white" alt="Live Demo"></a>
+  <a href="https://lakhvinder-portfolio.vercel.app/">
+    <img src="https://img.shields.io/badge/Live%20Demo-000000?style=for-the-badge&logoColor=white" alt="Live Demo">
+  </a>
 </p>
 
 ---
@@ -15,7 +17,7 @@
 This is my **personal digital portfolio**, designed to highlight my **skills, projects, and professional profile** in a modern and interactive way.  
 It reflects my growth as a **front-end developer** by combining **clean UI, responsive design, and smooth interactivity**.  
 
-🔗 **Live Portfolio:** [dynamic-portfolio.vercel.app](https://lakhvinder-portfolio.vercel.app/)  
+🔗 **Live Portfolio:** [lakhvinder-portfolio.vercel.app](https://lakhvinder-portfolio.vercel.app/)  
 
 ---
 
@@ -25,7 +27,7 @@ It reflects my growth as a **front-end developer** by combining **clean UI, resp
 - 📱 **Responsive Layout** — optimized for desktop, tablet, and mobile  
 - ⚡ **Interactive Components** — animations, smooth scrolling, and navigation  
 - 🗂️ **Projects Showcase** — highlights selected works with details  
-- 📬 **Contact Section** — easy to reach out directly  
+- 📬 **Contact Section** — contact form and newsletter subscription  
 
 ---
 
@@ -38,4 +40,7 @@ It reflects my growth as a **front-end developer** by combining **clean UI, resp
   <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"></a>
 </p>
 
+- Firebase (Firestore & Authentication) for contact messages, newsletter, and admin dashboard.
 
+> Note: The Firebase `apiKey` in this repo is a public client key used by the browser.  
+> It is restricted to `https://lakhvinder-portfolio.vercel.app/*` and protected by Firestore security rules.
