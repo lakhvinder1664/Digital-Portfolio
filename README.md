@@ -44,3 +44,10 @@ It reflects my growth as a **front-end developer** by combining **clean UI, resp
 
 > Note: The Firebase `apiKey` in this repo is a public client key used by the browser.  
 > It is restricted to `https://lakhvinder-portfolio.vercel.app/*` and protected by Firestore security rules.
+
+
+## 📧 Contact Email Notifications
+
+If you want email alerts when someone submits the contact form, follow `EMAIL_NOTIFICATIONS_SETUP.md`.
+This uses Firebase Extension **Trigger Email** plus a Cloud Function trigger in `functions/index.js`.
+If emails are not arriving, check `messages/{id}.notification.status` and extension logs as described in the setup guide.
