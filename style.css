@@ -1463,3 +1463,257 @@ footer input::placeholder {
     padding: 1.25rem 1.75rem !important;
     background-color: #FFFFFF !important;
 }
+
+/* ==========================================================================
+   Contact Page Styles (Matching Reference & Home Page Aesthetic)
+   ========================================================================== */
+
+.contact-section {
+    position: relative;
+    padding: 80px 0 120px 0;
+    background-color: var(--white);
+    overflow: hidden;
+}
+
+.contact-display-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.8rem, 5.2vw, 4.6rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.98;
+    letter-spacing: -1px;
+    color: var(--dark-black);
+    margin-bottom: 1.75rem;
+}
+
+.contact-lead-desc {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.1rem;
+    line-height: 1.75;
+    color: var(--dark-black);
+    font-weight: 500;
+    max-width: 480px;
+    margin-bottom: 2.5rem;
+}
+
+/* Contact Detail Items */
+.contact-info-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-bottom: 3rem;
+}
+
+.contact-info-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    text-decoration: none !important;
+    transition: transform 0.25s ease;
+}
+
+.contact-info-item:hover {
+    transform: translateX(6px);
+}
+
+.contact-icon-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: #F4F4F2;
+    color: var(--dark-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    flex-shrink: 0;
+    border: 1.5px solid var(--dark-black);
+    transition: all 0.3s ease;
+}
+
+.contact-info-item:hover .contact-icon-circle {
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    transform: scale(1.08);
+}
+
+.contact-info-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--dark-black);
+    line-height: 1.4;
+}
+
+.contact-info-label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--text-muted);
+    display: block;
+    margin-bottom: 2px;
+}
+
+/* Follow Us Social Icons */
+.contact-follow-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    color: var(--dark-black);
+    margin-bottom: 1rem;
+}
+
+.contact-social-pills {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.contact-social-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    border: 1.5px solid var(--dark-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    text-decoration: none !important;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-social-btn:hover {
+    background-color: var(--dark-black);
+    color: var(--white);
+    transform: translateY(-3px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Right Column Contact Form Box */
+.contact-form-box {
+    background-color: #FFFFFF;
+    border: 2px solid var(--dark-black);
+    border-radius: 12px;
+    padding: 3rem 2.5rem;
+    box-shadow: 12px 12px 0px var(--dark-black);
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 768px) {
+    .contact-form-box {
+        padding: 2rem 1.5rem;
+        box-shadow: 6px 6px 0px var(--dark-black);
+    }
+}
+
+.contact-input-field {
+    width: 100%;
+    background-color: #FAFAF8;
+    border: 1.5px solid #E0E0E0;
+    border-radius: 6px;
+    padding: 16px 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    color: var(--dark-black);
+    outline: none;
+    transition: all 0.25s ease;
+    margin-bottom: 1.25rem;
+}
+
+.contact-input-field::placeholder {
+    color: #888;
+    font-size: 0.95rem;
+}
+
+.contact-input-field:focus {
+    background-color: #FFFFFF;
+    border-color: var(--dark-black);
+    box-shadow: 0 0 0 3px rgba(101, 192, 240, 0.25);
+}
+
+.contact-textarea-field {
+    min-height: 150px;
+    resize: vertical;
+}
+
+/* Submit Action Button (Pill + Circle matching image & site style) */
+.contact-submit-cta {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin-top: 0.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+}
+
+.contact-submit-pill {
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    padding: 14px 34px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    border: 1.5px solid var(--dark-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-submit-circle {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background-color: var(--dark-black);
+    color: var(--white);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    font-weight: 700;
+    border: 1.5px solid var(--dark-black);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.contact-submit-cta:hover .contact-submit-pill {
+    background-color: var(--dark-black);
+    color: var(--neon-lime);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.contact-submit-cta:hover .contact-submit-circle {
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    transform: translateY(-2px) rotate(45deg);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Form Success Toast */
+.contact-alert-success {
+    display: none;
+    background-color: #E8F7EE;
+    border: 1.5px solid #27AE60;
+    color: #196F3D;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+}
