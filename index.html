@@ -1,550 +1,468 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <meta name="description" content="Lakhvinder Singh - Front-End Developer & UI/UX Designer. Portfolio showcasing web development projects, skills, and professional experience.">
-  <meta name="keywords" content="Front-End Developer, Web Developer, UI/UX Designer, React, JavaScript, HTML, CSS, Portfolio">
-  <meta name="author" content="Lakhvinder Singh">
-  <meta property="og:title" content="Lakhvinder Singh - Front-End Developer Portfolio">
-  <meta property="og:description" content="Professional portfolio showcasing web development projects and skills">
-  <meta property="og:type" content="website">
-  <title>Lakhvinder Singh — Front-End Developer Portfolio</title>
-  
-  <!-- Fonts & Icons -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <!-- Swiper CSS (testimonials) -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
-
-  <!-- Main CSS -->
-  <link rel="stylesheet" href="style.css">
-  <link rel="stylesheet" href="responsive.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PORTFOLIO | APRIL-2026</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Layout Fixes */
+        .laptop-img-wrapper img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+    </style>
 </head>
+
 <body>
-  <!-- Preloader -->
-  <div class="preloader">
-    <div class="preloader-inner">
-      <div class="preloader-spinner"></div>
-      <div class="preloader-spinner"></div>
-    </div>
-  </div>
+    <div id="preloader">
+        <svg id="svg-stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
+            <g class="group1">
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+            </g>
 
-  <!-- Theme Selection Popup -->
-  <div class="theme-popup" id="themePopup">
-    <div class="theme-popup-content">
-      <div class="theme-popup-header">
-        <h3>Choose Your Theme</h3>
-        <button class="theme-popup-close" id="themePopupClose" aria-label="Close">
-          <i class="fas fa-times"></i>
-        </button>
-      </div>
-      <div class="theme-popup-body">
-        <p>Select your preferred color theme</p>
-        <div class="theme-options">
-          <button class="theme-option" data-theme="dark" id="themeDark">
-            <div class="theme-option-icon">
-              <i class="fas fa-moon"></i>
-            </div>
-            <span>Dark Mode</span>
-          </button>
-          <button class="theme-option" data-theme="light" id="themeLight">
-            <div class="theme-option-icon">
-              <i class="fas fa-sun"></i>
-            </div>
-            <span>Light Mode</span>
-          </button>
-        </div>
-      </div>
-      <div class="theme-popup-footer">
-        <button class="theme-popup-dismiss" id="themePopupDismiss">Don't show again</button>
-      </div>
-    </div>
-  </div>
+            <g class="group2">
+                <image href="https://assets.codepen.io/16327/flair-3.png" mask="url(#g2_mask)" />
+            </g>
+            <mask id="g2_mask" fill="#fff">
+                <circle cx="124" cy="0" r="0" />
+                <circle cx="124" cy="248" r="0" />
+            </mask>
 
-  <!-- Header -->
-  <header>
-    <nav>
-      <a href="#" class="logo">Lakhvinder</a>
-      <div class="nav-links">
-        <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#services">Services</a>
-        <a href="#work">Work</a>
-        <a href="#testimonials">Team</a>
-        <a href="#contact">Contact</a>
-      </div>
-      <div class="nav-right">
-        <button class="theme-toggle" id="themeToggle">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="menu-toggle" id="menuToggle">
-          <i class="fas fa-bars"></i>
-        </button>
-      </div>
-    </nav>
-  </header>
+            <g class="group3">
+                <image href="https://assets.codepen.io/16327/flair-4.png" mask="url(#g3_mask)" />
+            </g>
+            <mask id="g3_mask" fill="#fff">
+                <rect x="0" y="0" width="124" height="124" />
+                <rect x="124" y="0" width="124" height="124" />
+                <rect x="0" y="124" width="124" height="124" />
+                <rect x="124" y="124" width="124" height="124" />
+            </mask>
 
-  <!-- Hero Section -->
-  <section class="hero" id="home">
-    <div class="floating-elements" aria-hidden="true">
-      <div class="floating-element"></div>
-      <div class="floating-element"></div>
+            <g class="group4">
+                <image href="https://assets.codepen.io/16327/flair-5.png" x="70" />
+            </g>
+
+            <g class="group5">
+                <image href="https://assets.codepen.io/16327/flair-7.png" mask="url(#g5_mask)" />
+            </g>
+            <mask id="g5_mask" fill="#fff">
+                <path d="M0 248h248L124 0 0 247z" />
+                <circle cx="124" cy="83" r="83" />
+            </mask>
+        </svg>
     </div>
 
-    <div class="hero-content">
-      <p class="hero-subtitle">Welcome to my portfolio</p>
-      <h1 class="hero-title">Hi, I'm <span>Lakhvinder</span></h1>
-      <p class="hero-description">
-        I'm a <span class="typewriter" id="typewriter"></span><span class="cursor"></span>
-      </p>
-      <div class="btn-group">
-        <a href="#contact" class="btn btn-primary">Get In Touch</a>
-        <a href="#portfolio" class="btn btn-secondary">View Work</a>
-      </div>
-    </div>
-
-    <img src="assets/WhatsApp Image 2025-05-30 at 03.54.32_e0ff0544.JPG" alt="Hero Image" class="hero-image">
-  </section>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2 class="section-title">About Me</h2>
-    <div class="about-container">
-      <div class="about-image">
-        <img src="assets/about me.jpeg" alt="About Me">
-      </div>
-      <div class="about-content">
-        <h3>Professional Profile</h3>
-        <p>I'm a front-end developer with hands-on experience in Figma, HTML, CSS, Bootstrap, JavaScript, and React Bootstrap. I also bring 6+ months of off-page SEO experience, which helps me build websites that not only look great but also perform well online.</p>
-        <p>🎨 What I love: Crafting responsive, user-friendly interfaces and turning creative ideas into interactive web experiences.</p>
-        <p>🎮 Outside coding: I enjoy volleyball, gaming, reading Manga, and of course, exploring delicious food!</p>
-        <p>My approach combines clean code, accessible practices, and visual polish to deliver high-quality service.</p>
-
-        <div class="skills-list">
-          <div class="skill-item"><i class="fas fa-check skill-icon"></i><span>Frontend Development</span></div>
-          <div class="skill-item"><i class="fas fa-check skill-icon"></i><span>UI/UX Design</span></div>
-          <!-- <div class="skill-item"><i class="fas fa-check skill-icon"></i><span>Backend Basics</span></div> -->
-          <!-- <div class="skill-item"><i class="fas fa-check skill-icon"></i><span>Mobile Apps</span></div> -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Services Section -->
-  <section id="services">
-    <h2 class="section-title">My Services</h2>
-    <div class="services-grid">
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-code"></i></div>
-        <h3 class="service-title">Web Development</h3>
-        <p class="service-description">I build responsive websites that look good on all devices using HTML, CSS, Bootstrap, JavaScript, and React Bootstrap.</p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-paint-brush"></i></div>
-        <h3 class="service-title">UI/UX Design</h3>
-        <p class="service-description">I create simple and user-friendly designs using Figma, including wireframes and prototypes.</p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-
-      <div class="service-card">
-        <div class="service-icon"><i class="fas fa-mobile-alt"></i></div>
-        <h3 class="service-title">Web Performance & Optimization</h3>
-        <p class="service-description">I make websites fast and smooth by writing clean code and optimizing layouts.</p>
-        <a href="#" class="service-link">Learn More <i class="fas fa-arrow-right"></i></a>
-      </div>
-    </div>
-  </section>
-
-  <!-- Portfolio Section -->
-  <section id="work">
-    <h2 class="section-title">My Work</h2>
-
-    <div class="portfolio-filter">
-      <button class="filter-btn active" data-filter="all">All</button>
-      <button class="filter-btn" data-filter="web">Web</button>
-      <button class="filter-btn" data-filter="app">App</button>
-      <button class="filter-btn" data-filter="design">Design</button>
-    </div>
-
-    <div class="portfolio-grid">
-      <div class="portfolio-item" data-category="web">
-        <img src="https://images.unsplash.com/photo-1529374255404-311a2a4f1fd9?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1528&q=80" alt="Shop-Easy" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Web Development</span>
-          <h3 class="portfolio-title">E-Commerce Platform</h3>
-          <div class="portfolio-links">
-            <a href="https://shop-easy01.netlify.app/" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="#" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-category="web">
-        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80" alt="Workout Template" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Mobile App</span>
-          <h3 class="portfolio-title">Fitness Tracker</h3>
-          <div class="portfolio-links">
-            <a href="https://workout-template.netlify.app/" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="#" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-      
-      <div class="portfolio-item" data-category="web">
-        <img src="https://github.com/lakhvinder1664/Villa-Template/raw/main/assets/Images/banner-01.jpg" alt="Workout Template" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Web Development</span>
-          <h3 class="portfolio-title">Villa Template</h3>
-          <div class="portfolio-links">
-            <a href="https://villa-template-demo.netlify.app/" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="#" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-item" data-category="web">
-        <img src="https://camo.githubusercontent.com/f350c99dec9298608fb9f3f83b927aff66cbbd4556d1fadf6982fc07bcaae3d5/68747470733a2f2f626f6f7473747261706d6164652e636f6d2f636f6e74656e742f64656d6f2f52657374617572616e746c792f6173736574732f696d672f6865726f2d62672e6a7067" alt="Workout Template" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Web Development</span>
-          <h3 class="portfolio-title">Restorent Template</h3>
-          <div class="portfolio-links">
-            <a href="https://xportsoft-work2.netlify.app/" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="#" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-      <div class="portfolio-item" data-category="web">
-        <img src="https://react-template-nu-two.vercel.app/assets/homeban2-DeJaoEiS.jpg" alt="Workout Template" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Web Development</span>
-          <h3 class="portfolio-title">React Website Template</h3>
-          <div class="portfolio-links">
-            <a href="https://react-template-nu-two.vercel.app/" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="#" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="portfolio-item" data-category="web">
-        <img src="https://media.contra.com/image/upload/w_1100/c3bntdswqcqf0qc9rmgy.avif" alt="Workout Template" class="portfolio-image">
-        <div class="portfolio-overlay">
-          <span class="portfolio-category">Web Development</span>
-          <h3 class="portfolio-title">Zerdia Lifesciences</h3>
-          <div class="portfolio-links">
-            <a href="https://hivends.org/zerdia" class="portfolio-link" target="_blank" rel="noopener"><i class="fas fa-link"></i></a>
-            <a href="https://hivends.org/zerdia" class="portfolio-link"><i class="fas fa-search"></i></a>
-          </div>
-        </div>
-      </div>
-
-     
-    </div>
-  </section>
-
-  <!-- Testimonials Section -->
-  <section id="testimonials">
-    <h2 class="section-title">Team Members</h2>
-    <div class="testimonials-container">
-      <div class="testimonial-slider swiper">
-        <div class="swiper-wrapper">
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Working with this developer was an absolute pleasure and the quality exceeded expectations.</p>
-              <div class="testimonial-author">
-                <img src="https://avatars.githubusercontent.com/u/103100457?v=4" alt="Client" class="author-image">
-                <div class="author-info">
-                  <h4>Dhirendra Bam</h4>
-                  <p>Full Stack Developer</p>
+    <div class="main-wrapper">
+        <nav class="navbar navbar-expand-lg border-top border-dark px-4 mt-3">
+            <div class="container-fluid">
+                <a class="navbar-brand fw-bold" href="/index.html">
+                    <img src="img/cat-logo-animate.gif" class="logo-img" alt="logo">
+                </a>
+                <div class="d-none d-md-block text-uppercase small-text text-center mx-auto">
+                    I'm Front-end developer building modern,<br>responsive, and clean web interfaces.<br> [Since 2024]
                 </div>
-              </div>
+                <button class="btn border-0 fw-bold text-uppercase" type="button" data-bs-toggle="offcanvas"
+                    data-bs-target="#offcanvasRight">
+                    (Browse — Menu)
+                </button>
             </div>
-          </div>
+        </nav>
 
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Attention to detail and creative problem-solving were truly impressive. Highly recommended!</p>
-              <div class="testimonial-author">
-                <img src="/assets/WhatsApp Image 2025-09-28 at 19.01.14.jpeg" alt="Client" class="author-image">
-                <div class="author-info">
-                  <h4>Saraswati</h4>
-                  <p>Fronted Developer</p>
+        <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight">
+            <div class="offcanvas-header border-bottom border-secondary p-4">
+                <h5 class="offcanvas-title fw-bold">LAKHVINDER SINGH</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <ul class="list-group list-group-flush menu-list">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Home</li>
+                    <li class="list-group-item">About Us</li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Service <span>+</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Pages <span>+</span>
+                    </li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">Blog <span>+</span>
+                    </li>
+                    <li class="list-group-item">Contact</li>
+                </ul>
+                <div class="contact-info p-4 mt-5">
+                    <h6>Contact Me</h6>
+                    <p class="small text-secondary mb-1">Ambala Cantt, Haryana</p>
+                    <p class="small text-secondary mb-1">lakhvinder9567@gmail.com</p>
+                    <p class="small text-secondary">798-837-9885</p>
                 </div>
-              </div>
             </div>
-          </div>
+        </div>
 
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Clean, efficient code with excellent design execution — one of the best devs we've worked with.</p>
-              <div class="testimonial-author">
-                <img src="https://avatars.githubusercontent.com/u/204461360?v=4" alt="Client" class="author-image">
-                <div class="author-info">
-                  <h4>Rozy Dogra</h4>
-                  <p>Frontend Developer</p>
+        <main class="container-fluid p-0">
+            <div class="row g-0 align-items-center my-5">
+                <div class="col-lg-2 px-lg-4 px-4 mb-4">
+                    <div class="thumbnail-box">
+                        <img src="https://wp.ravextheme.com/redox-dark/wp-content/uploads/2025/07/ax-ca-hero-video.gif"
+                            class="img-fluid" alt="Work Preview">
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-                
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Clean, efficient code with excellent design execution — one of the best devs we've worked with.</p>
-              <div class="testimonial-author">
-                <img src="https://avatars.githubusercontent.com/u/204535657?v=4" alt="Client" class="author-image">
-                <div class="author-info">
-                  <h4>Hanshika Sharma</h4>
-                  <p>Frontend Developer</p>
+                <div class="col-lg-2 px-lg-0 px-4 mb-4">
+                    <div class="service-list-container">
+                        <div class="divider mb-3" style="width: 100px; height: 1px; background: #000;"></div>
+                        <ul class="list-unstyled service-list">
+                            <li>Branding</li>
+                            <li>Development</li>
+                            <li>Creative Design</li>
+                            <li>UI/UX Design</li>
+                        </ul>
+                    </div>
                 </div>
-              </div>
-            </div>
-          </div>
-                
-          <div class="testimonial-card swiper-slide">
-            <div class="testimonial-content">
-              <p class="testimonial-text">Clean, efficient code with excellent design execution — one of the best devs we've worked with.</p>
-              <div class="testimonial-author">
-                <img src="/assets/WhatsApp Image 2025-08-20 at 15.13.32.jpeg" alt="Client" class="author-image">
-                <div class="author-info">
-                  <h4>Manish Kumar</h4>
-                  <p>Frontend Developer</p>
+                <div class="col-lg-8 px-lg-5 px-4 text-end text-lg-start">
+                    <h1 class="hero-subtext" style="margin-top: -10px;">
+                        LIVE IN A <span class="italic-outline">WORLD</span> <br>
+                        OF CREATIVE DESIGNS
+                    </h1>
                 </div>
-              </div>
             </div>
-          </div>
-        </div>
 
-        <div class="swiper-pagination"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2 class="section-title">Get In Touch</h2>
-    <div class="contact-container">
-      <div class="contact-info">
-        <h3>Let's talk about your project</h3>
-        <p>Have a project in mind or want to discuss potential opportunities? Reach out via the contact form or by email/phone below.</p>
-        <div class="contact-details">
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-envelope"></i></div>
-            <div class="contact-text">
-              <h4>Email</h4>
-              <a href="mailto:lakhvnder9567@gmail.com">lakhvnder9567@gmail.com</a>
+            <div class="giant-text-container px-4">
+                <div class="d-flex align-items-center">
+                    <span class="giant-title">LAKHVINDER</span>
+                    <div class="thick-line flex-grow-1 mx-4"></div>
+                </div>
+                <div class="row align-items-end">
+                    <div class="col-md-6">
+                        <span class="giant-title">SINGH</span>
+                    </div>
+                    <div class="col-md-5 offset-md-1 pt-4">
+                        <p class="body-description">
+                            Front-end developer experienced in creating responsive, clean, and user-friendly websites
+                            using modern frameworks.
+                        </p>
+                    </div>
+                </div>
             </div>
-          </div>
 
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-phone-alt"></i></div>
-            <div class="contact-text">
-              <h4>Phone</h4>
-              <a href="tel:+917988379885">+91 798-837-9885</a>
+            <div class="container-fluid px-4 pb-5 mt-5">
+                <div class="row align-items-end section-scroll">
+                    <div class="col-lg-6 mb-4 mb-lg-0">
+                        <div class="d-flex flex-wrap gap-4">
+                            <a href="#" class="social-link">Instagram</a>
+                            <a href="#" class="social-link">Linkedin</a>
+                            <a href="#" class="social-link">GitHub</a>
+                        </div>
+                    </div>
+
+                    <div class="col-12 col-lg-6">
+                        <div class="laptop-img-wrapper overflow-hidden">
+                            <img src="img/laptop-working(2).png" class="img-fluid scroll-scale-img" alt="Studio Setup">
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
-
-          <div class="contact-item">
-            <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
-            <div class="contact-text">
-              <h4>Location</h4>
-              <span>Zirakpur, Punjab, India</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <form class="contact-form" id="contactForm">
-        <div class="form-group">
-          <label for="name" class="form-label">Your Name</label>
-          <input
-            type="text"
-            id="name"
-            name="name"
-            class="form-control"
-            autocomplete="name"
-            required
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="emailInput" class="form-label">Your Email</label>
-          <input
-            type="email"
-            id="emailInput"
-            name="email"
-            class="form-control"
-            autocomplete="email"
-            required
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="subject" class="form-label">Subject</label>
-          <input
-            type="text"
-            id="subject"
-            name="subject"
-            class="form-control"
-            autocomplete="subject"
-            required
-          >
-        </div>
-      
-        <div class="form-group">
-          <label for="message" class="form-label">Your Message</label>
-          <textarea
-            id="message"
-            name="message"
-            class="form-control"
-            autocomplete="off"
-            required
-          ></textarea>
-        </div>
-      
-        <button type="submit" class="submit-btn">Send Message</button>
-      </form>
-    </div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <div class="footer-content">
-      <div class="footer-about">
-        <div class="footer-logo">Follow Me on</div>
-        <p>A premium portfolio i hope you follow me on my socials.</p>
-        <div class="social-links">
-          <a href="https://www.youtube.com/@EldestCreek" class="social-link"><i class="fab fa-youtube"></i></a>
-          <a href="https://www.instagram.com/lakhvinder012/" class="social-link"><i class="fab fa-instagram"></i></a>
-          <a href="https://www.linkedin.com/in/lakhvinder-singh-6055362b8" class="social-link" target="_blank" rel="noopener"><i class="fab fa-linkedin-in"></i></a>
-          <a href="https://github.com/lakhvinder1664" class="social-link" target="_blank" rel="noopener"><i class="fab fa-github"></i></a>
-        </div>
-      </div>
-
-      <div class="footer-links">
-        <h3>Quick Links</h3>
-        <ul>
-          <li><a href="#home">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#services">Services</a></li>
-          <li><a href="#work">Work</a></li>
-          <li><a href="#contact">Contact</a></li>
-        </ul>
-      </div>
-
-      <div class="footer-newsletter">
-        <h3>Newsletter</h3>
-        <p>Subscribe to get latest updates</p>
-        <form class="newsletter-form" id="newsletterForm">
-          <input type="email" id="newsletterEmail" name="newsletterEmail" placeholder="Your Email" class="newsletter-input" autocomplete="email" required>
-          <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
-        </form>
-        <p>Never sharing your email with anyone else.</p>
-      </div>
+        </main>
     </div>
 
-    <div class="footer-bottom">
-      <p>&copy; 2025 Lakhvinder Singh. All rights reserved.</p>
+    <div class="marquee-section">
+        <div class="marquee-container">
+
+            <div class="marquee-fixed-side">
+                <div class="side-img-box">
+                    <img src="img/cat-logo-animate.gif" alt="Left thumb">
+                </div>
+
+                <div class="play-btn-circle">
+                    <i class="fas fa-play"></i>
+                </div>
+            </div>
+
+            <div class="marquee-moving-part">
+                <div class="marquee-inner-content">
+                    <div class="marquee-item"><span>UI/UX Design</span></div>
+                    <div class="marquee-item"><span>HTML5</span></div>
+                    <div class="marquee-item"><span>CSS3</span></div>
+                    <div class="marquee-item"><span>Bootstrap 5</span></div>
+                    <div class="marquee-item"><span>JavaScript</span></div>
+                    <div class="marquee-item"><span>React.js</span></div>
+                    <div class="marquee-item"><span>WordPress</span></div>
+                    <div class="marquee-item"><span>Responsive Design</span></div>
+
+                    <div class="marquee-item"><span>UI/UX Design</span></div>
+                    <div class="marquee-item"><span>HTML5</span></div>
+                    <div class="marquee-item"><span>CSS3</span></div>
+                    <div class="marquee-item"><span>Bootstrap 5</span></div>
+                    <div class="marquee-item"><span>JavaScript</span></div>
+                    <div class="marquee-item"><span>React.js</span></div>
+                    <div class="marquee-item"><span>WordPress</span></div>
+                    <div class="marquee-item"><span>Responsive Design</span></div>
+
+                </div>
+            </div>
+        </div>
     </div>
 
-    <a href="#home" class="back-to-top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></a>
-  </footer>
 
-  <script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getFirestore, collection, addDoc, serverTimestamp } 
-    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyAPCxxAERDnOvoxBYHuKzDPZ7XLp63OQcM",
-    authDomain: "portfolio-contact-fe911.firebaseapp.com",
-    projectId: "portfolio-contact-fe911",
-    storageBucket: "portfolio-contact-fe911.firebasestorage.app",
-    messagingSenderId: "48417656668",
-    appId: "1:48417656668:web:759f639f233ea8a53c3b99"
-  };
+    <section class="expertise-section py-5 overflow-hidden">
+        <div class="container-fluid px-0 position-relative">
+            <h2 class="expertise-bg-text text-uppercase">EXPERTISE</h2>
+            <div class="container py-5">
+                <div class="row">
+                    <div class="col-lg-5">
+                        <p class="small-text text-uppercase mb-4">SERVICES</p>
+                        <p class="body-description text-start mb-5" style="max-width: 300px;">
+                            I create clean modern designs that reflect my creativity and build strong user experiences
+                            every day.
+                        </p>
+                    </div>
+                    <div class="col-lg-7">
+                        <h2 class="expertise-section-right-title mb-5">Services i provide.</h2>
 
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
+                        <div class="service-item d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start">
+                                <span class="index-number mt-2">(001)</span>
+                                <div class="ms-1">
+                                    <h3 class="mb-2">UI/UX Design</h3>
+                                    <p class="text-secondary mb-0" style="max-width: 400px;">I create clean designs, by
+                                        knowing users and delivering great strong results.</p>
+                                </div>
+                            </div>
+                            <div class="service-img">
+                                <img src="img/service1.jpg" alt="UI/UX">
+                            </div>
+                        </div>
 
-  document.getElementById("contactForm").addEventListener("submit", async (e) => {
-    e.preventDefault();
+                        <div class="service-item d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start">
+                                <span class="index-number mt-2">(002)</span>
+                                <div class="ms-1">
+                                    <h3 class="mb-2">Web Development</h3>
+                                    <p class="text-secondary mb-0" style="max-width: 400px;">Custom-built websites that
+                                        are fast, secure, and optimized for conversions.</p>
+                                </div>
+                            </div>
+                            <div class="service-img">
+                                <img src="img/service2.jpg" alt="Web Dev">
+                            </div>
+                        </div>
 
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("emailInput").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
+                        <div class="service-item d-flex align-items-center justify-content-between">
+                            <div class="d-flex align-items-start">
+                                <span class="index-number mt-2">(003)</span>
+                                <div class="ms-1">
+                                    <h3 class="mb-2">Optimization</h3>
+                                    <p class="text-secondary mb-0" style="max-width: 400px;">I make websites fast and
+                                        smooth by writing clean code and optimizing layouts.</p>
+                                </div>
+                            </div>
+                            <div class="service-img">
+                                <img src="img/service1.jpg" alt="UI/UX">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    await addDoc(collection(db, "messages"), {
-      name,
-      email,
-      subject,
-      message,
-      time: serverTimestamp()
-    });
+    <section class="client-section py-5 mt-5">
+        <div class="container py-5">
+            <h1 class="giant-title mb-5"><span style="color: #65c0f0;">Building</span> brands that stand out, connect
+                deeply, and leave a
+                lasting impact...
+            </h1>
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <p class="text-secondary text-center">
+                        We combine creativity and expertise to help progressive brands achieve meaningful growth through
+                        impactful digital solutions.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    alert("Message sent successfully!");
-    document.getElementById("contactForm").reset();
-  });
+    <!-- footer -->
+    <footer class="bg-black text-white py-5 px-4 mt-5">
+        <div class="container-fluid">
+            <div class="row pt-4">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <div class="position-relative" style="max-width: 400px;">
+                        <input type="email" class="form-control bg-dark border-0 text-white p-3 rounded-pill"
+                            placeholder="Enter your email" style="padding-right: 50px;">
+                        <button class="btn position-absolute end-0 top-50 translate-middle-y me-2 text-white border-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                                class="bi bi-send-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.001.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
+                            </svg>
+                        </button>
+                    </div>
+                    <p class="small text-secondary mt-3 mb-0">
+                        By subscribing you agree with our <a href="#"
+                            class="text-white text-decoration-underline">Privacy Policy</a>
+                    </p>
+                </div>
 
-  // Newsletter form → save subscriber emails to Firestore
-  const newsletterForm = document.getElementById("newsletterForm");
+                <div class="col-lg-6">
+                    <div class="row">
+                        <div class="col-4">
+                            <h6 class="text-secondary small text-uppercase mb-4">Services</h6>
+                            <ul class="list-unstyled footer-link-list">
+                                <li><a href="#">Web Development</a></li>
+                                <li><a href="#">UI/UX Design</a></li>
+                                <li><a href="#">WordPress Customization</a></li>
+                                <li><a href="#">Web Performance & Optimization</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="text-secondary small text-uppercase mb-4">Social</h6>
+                            <ul class="list-unstyled footer-link-list">
+                                <li><a href="#">LinkedIn</a></li>
+                                <li><a href="#">GitHub</a></li>
+                                <li><a href="#">WhatsApp</a></li>
+                                <li><a href="#">Instagram</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-4">
+                            <h6 class="text-secondary small text-uppercase mb-4">Contact Info</h6>
+                            <ul class="list-unstyled footer-link-list">
+                                <li>Zirakpur, Punjanb (current)</li>
+                                <li>Ambala Cantt, HR (from) </li>
+                                <li>+91 798-837-9885</li>
+                                <!-- <li>lakhvinder9567<br>@gmail.com</li> -->
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-  if (newsletterForm) {
-    const newsletterBtn = newsletterForm.querySelector('button[type="submit"]');
-    const originalNewsletterHTML = newsletterBtn.innerHTML;
+            <div class="row mt-5 pt-5 border-top border-secondary align-items-center">
+                <div class="col-12">
+                    <p class="small text-secondary m-0">
+                        © 2026 <span class="text-white fw-bold">Lakhvinder Singh Portfolio</span>. All rights reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-    newsletterForm.addEventListener("submit", async (e) => {
-      e.preventDefault();
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-      const emailInput = document.getElementById("newsletterEmail");
-      const email = emailInput.value.trim();
+    <!-- GSAP ORDER -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
 
-      if (!email) {
-        alert("Please enter your email.");
-        return;
-      }
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
 
-      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-      if (!emailRegex.test(email)) {
-        alert("Please enter a valid email address.");
-        return;
-      }
+        // Preloader Animation Function
+        function createPreloaderTimeline() {
+            const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+            tl.fromTo('.group1', { scale: 0.1, transformOrigin: '124 124' }, { duration: 0.35, scale: 1, ease: 'expo.inOut' })
+                .to('.group1', { duration: 1.2, rotate: 15, ease: 'none' }, 0.1)
+                .to('.group1 image', { scale: (i) => [0.4, 0.2, 0.3][i], x: (i) => [0, 135, 100][i], y: (i) => [90, 24, 124][i], ease: 'back' }, 0.4)
+                .to('.group1 image', { duration: 0.01, opacity: 0, stagger: 0.06 }, 1.1)
+                .to('#g2_mask circle', { duration: 0.4, attr: { r: "124" }, ease: 'circ' }, 1.3)
+                .fromTo('.group2', { scale: 1, transformOrigin: '124 124' }, { duration: 1.5, scale: 0.9, ease: 'none' }, 1.3)
+                .to('#g2_mask circle', { duration: 0.3, attr: { cx: (i) => ["+=248", "-=248"][i] }, ease: 'sine.in' }, 2.45)
+                .fromTo('.group3', { transformOrigin: '124 124', rotate: -90 }, { duration: 0.9, rotate: 0, ease: 'expo' }, 2.6)
+                .fromTo('#g3_mask rect', { transformOrigin: (i) => ['0 124', '124 0', '124 124', '248 124'][i], scale: 0 }, { duration: 0.4, scale: 1, ease: 'expo', stagger: -0.03 }, 2.6)
+                .to('.group3', { duration: 0.01, scale: 0 }, 3.7)
+                .from('.group4 image', { duration: 0.01, opacity: 0 }, 3.8)
+                .fromTo('.group4', { transformOrigin: '83 124', rotate: 15, scale: 0.2 }, { duration: 0.5, rotate: 0, scale: 0.85, ease: 'bounce' }, 3.8)
+                .to('.group4 image', { duration: 0.01, opacity: 0 }, 4.7)
+                .fromTo('#g5_mask path', { transformOrigin: '124 124', scale: 0 }, { duration: 0.8, scale: 1, ease: 'expo' }, 4.7)
+                .fromTo('#g5_mask circle', { transformOrigin: '83 0', scale: 0 }, { scale: 1, ease: 'expo' }, 4.7);
+            return tl;
+        }
 
-      newsletterBtn.disabled = true;
-      newsletterBtn.textContent = "Subscribing...";
+        const preloaderTl = createPreloaderTimeline();
 
-      try {
-        await addDoc(collection(db, "newsletter"), {
-          email,
-          time: serverTimestamp()
+        // PAGE LOAD ANIMATION
+        window.addEventListener("load", () => {
+            gsap.to("#preloader", {
+                duration: 0.8,
+                opacity: 0,
+                delay: 1.5, // Allow some time for the animation to play
+                onComplete: () => {
+                    gsap.set("#preloader", { display: "none" });
+                    preloaderTl.pause();
+                }
+            });
         });
 
-        newsletterBtn.textContent = "✓ Subscribed!";
-        newsletterForm.reset();
+        // PAGE TRANSITION
+        function pageTransition(url) {
+            gsap.set("#preloader", { display: "flex", opacity: 0 });
+            preloaderTl.play();
 
-        setTimeout(() => {
-          newsletterBtn.disabled = false;
-          newsletterBtn.innerHTML = originalNewsletterHTML;
-        }, 3000);
-      } catch (error) {
-        console.error("Error subscribing:", error);
-        alert("Failed to subscribe. Please try again later.");
-        newsletterBtn.disabled = false;
-        newsletterBtn.innerHTML = originalNewsletterHTML;
-      }
-    });
-  }
-</script>
+            gsap.to("#preloader", {
+                duration: 0.5,
+                opacity: 1,
+                onComplete: () => {
+                    window.location.href = url;
+                }
+            });
+        }
 
-  <!-- Swiper JS -->
-  <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+        // LINK CLICK HANDLER
+        document.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', (e) => {
+                if (link.hostname === window.location.hostname && !link.hash && link.target !== "_blank") {
+                    e.preventDefault();
+                    pageTransition(link.href);
+                }
+            });
+        });
 
-  <!-- Main JS -->
-  <script src="script.js"></script>
+        gsap.timeline({
+            scrollTrigger: {
+                trigger: ".laptop-img-wrapper",
+                start: "top 80%",
+                end: "bottom top",
+                scrub: 1.2   // smooth
+                // markers: true
+            }
+        })
+            .fromTo(".scroll-scale-img",
+                {
+                    x: 200,      // right side se start
+                    scale: 0.8   // choti image
+                },
+                {
+                    x: 0,        // center
+                    scale: 1.1,  // zoom in
+                    ease: "none"
+                }
+            )
+            .to(".scroll-scale-img",
+                {
+                    x: 200,        // right side se start
+                    scale: 0.8,
+                    ease: "none"
+                }
 
+
+            );
+
+        document.querySelectorAll('.team-section .carousel').forEach(carousel => {
+            carousel.addEventListener('slide.bs.carousel', () => {
+                const scrollPos = window.scrollY;
+                setTimeout(() => {
+                    window.scrollTo(0, scrollPos);
+                }, 50);
+            });
+        });
+
+    </script>
 
 </body>
+
 </html>
