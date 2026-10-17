@@ -1,955 +1,798 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Lakhvinder Singh Portfolio</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --primary: #0a192f;
-      --secondary: #172a45;
-      --accent: #65c0f0;
-      --text: #ccd6f6;
-      --text-secondary: #8892b0;
-      --black: #020c1b;
-      --white: #ffffff;
-      --card-bg: rgba(10, 25, 47, 0.7);
-      --card-border: rgba(101, 192, 240, 0.2);
-      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    [data-theme="light"] {
-      --primary: #f4f6f8;
-      --secondary: #ffffff;
-      --accent: #0077b6;
-      --text: #0e0e0e;
-      --text-secondary: #555555;
-      --black: #e2e8f0;
-      --white: #0e0e0e;
-      --card-bg: #ffffff;
-      --card-border: rgba(0, 0, 0, 0.12);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: var(--primary);
-      color: var(--text);
-      padding: 24px;
-      min-height: 100vh;
-      transition: var(--transition);
-    }
-
-    .dashboard-container {
-      max-width: 1200px;
-      margin: 0 auto;
-    }
-
-    .header-controls {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 2rem;
-      flex-wrap: wrap;
-      gap: 1.25rem;
-      border-bottom: 2px solid var(--card-border);
-      padding-bottom: 1.5rem;
-    }
-
-    .brand-title {
-      font-family: 'Oswald', sans-serif;
-      font-size: 1.8rem;
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      color: var(--text);
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .brand-title span {
-      color: var(--accent);
-    }
-
-    .header-actions {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
-      margin-bottom: 2rem;
-    }
-
-    .stat-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 1.25rem;
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-    }
-
-    .stat-card .num {
-      font-size: 2rem;
-      font-weight: 700;
-      color: var(--accent);
-      line-height: 1;
-    }
-
-    .stat-card .label {
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-      font-weight: 600;
-      margin-top: 4px;
-    }
-
-    .stat-card i {
-      font-size: 2rem;
-      opacity: 0.3;
-      color: var(--text);
-    }
-
-    /* Tabs Bar */
-    .dashboard-tabs {
-      display: flex;
-      gap: 8px;
-      border-bottom: 2px solid var(--card-border);
-      margin-bottom: 2rem;
-      overflow-x: auto;
-      padding-bottom: 4px;
-    }
-
-    .tab-btn {
-      background: transparent;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 8px 8px 0 0;
-      color: var(--text-secondary);
-      font-weight: 600;
-      font-size: 0.95rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: var(--transition);
-      white-space: nowrap;
-    }
-
-    .tab-btn:hover {
-      color: var(--text);
-      background: var(--card-bg);
-    }
-
-    .tab-btn.active {
-      color: var(--accent);
-      background: var(--card-bg);
-      border-bottom: 3px solid var(--accent);
-    }
-
-    .tab-pane {
-      display: none;
-    }
-
-    .tab-pane.active {
-      display: block;
-      animation: fadeIn 0.3s ease;
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(6px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* Message / Post Boxes */
-    .message-box {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      padding: 1.5rem;
-      margin-bottom: 1.5rem;
-      border-radius: 12px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-      border: 1px solid var(--card-border);
-      word-wrap: break-word;
-      transition: var(--transition);
-      position: relative;
-    }
-
-    .message-box:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
-      border-color: var(--accent);
-    }
-
-    .message-box p {
-      margin-bottom: 0.6rem;
-      line-height: 1.6;
-    }
-
-    .message-box strong {
-      color: var(--accent);
-    }
-
-    .message-box small {
-      color: var(--text-secondary);
-      font-size: 0.85rem;
-    }
-
-    /* Broadcast Post Form */
-    .form-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 2rem;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-      margin-bottom: 2.5rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.25rem;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-      font-size: 0.9rem;
-      color: var(--text);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .form-control {
-      width: 100%;
-      background: var(--secondary);
-      border: 1px solid var(--card-border);
-      border-radius: 8px;
-      padding: 12px 16px;
-      color: var(--text);
-      font-size: 0.95rem;
-      outline: none;
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] .form-control {
-      background: #f8fafc;
-      border-color: #cbd5e1;
-    }
-
-    .form-control:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(101, 192, 240, 0.25);
-    }
-
-    textarea.form-control {
-      min-height: 120px;
-      resize: vertical;
-    }
-
-    .btn-publish {
-      background: var(--accent);
-      color: #0E0E0E;
-      border: none;
-      border-radius: 50px;
-      padding: 14px 32px;
-      font-size: 0.95rem;
-      font-weight: 700;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      transition: var(--transition);
-    }
-
-    .btn-publish:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(101, 192, 240, 0.4);
-    }
-
-    .btn-publish:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-
-    .btn-delete {
-      background: transparent;
-      border: 1px solid rgba(220, 38, 38, 0.4);
-      color: #ef4444;
-      padding: 6px 14px;
-      border-radius: 6px;
-      font-size: 0.85rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    .btn-delete:hover {
-      background: #ef4444;
-      color: white;
-    }
-
-    .alert-banner {
-      padding: 14px 18px;
-      border-radius: 8px;
-      margin-bottom: 1.5rem;
-      font-weight: 500;
-      display: none;
-    }
-
-    .alert-success {
-      background: rgba(34, 197, 94, 0.15);
-      border: 1px solid #22c55e;
-      color: #22c55e;
-    }
-
-    .post-badge {
-      display: inline-block;
-      padding: 4px 10px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      background: rgba(101, 192, 240, 0.2);
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      margin-bottom: 8px;
-    }
-
-    .logout-btn {
-      background: linear-gradient(135deg, #dc2626, #b91c1c);
-      color: white;
-      padding: 0.65rem 1.25rem;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      font-weight: 600;
-      font-size: 0.9rem;
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-    }
-
-    .logout-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.35);
-    }
-
-    .theme-toggle {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text);
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      transition: var(--transition);
-    }
-
-    .theme-toggle:hover {
-      border-color: var(--accent);
-      color: var(--accent);
-      transform: rotate(20deg);
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard | Lakhvinder Singh Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="dashboard-container">
-    <!-- Top Header -->
-    <div class="header-controls">
-      <div class="brand-title">
-        <i class="fas fa-terminal"></i>
-        LAKHVINDER SINGH <span>/ ADMIN</span>
-      </div>
-      <div class="header-actions">
-        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
-          <i class="fas fa-moon"></i>
-        </button>
-        <button class="logout-btn" id="logoutBtn">
-          <i class="fas fa-sign-out-alt"></i>
-          Logout
-        </button>
-      </div>
+    <!-- Preloader Animation -->
+    <div id="preloader">
+        <svg id="svg-stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
+            <g class="group1">
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+            </g>
+            <g class="group2">
+                <image href="https://assets.codepen.io/16327/flair-3.png" mask="url(#g2_mask)" />
+            </g>
+            <mask id="g2_mask" fill="#fff">
+                <circle cx="124" cy="0" r="0" />
+                <circle cx="124" cy="248" r="0" />
+            </mask>
+            <g class="group3">
+                <image href="https://assets.codepen.io/16327/flair-4.png" mask="url(#g3_mask)" />
+            </g>
+            <mask id="g3_mask" fill="#fff">
+                <rect x="0" y="0" width="124" height="124" />
+                <rect x="124" y="0" width="124" height="124" />
+                <rect x="0" y="124" width="124" height="124" />
+                <rect x="124" y="124" width="124" height="124" />
+            </mask>
+            <g class="group4">
+                <image href="https://assets.codepen.io/16327/flair-5.png" x="70" />
+            </g>
+            <g class="group5">
+                <image href="https://assets.codepen.io/16327/flair-7.png" mask="url(#g5_mask)" />
+            </g>
+            <mask id="g5_mask" fill="#fff">
+                <path d="M0 248h248L124 0 0 247z" />
+                <circle cx="124" cy="83" r="83" />
+            </mask>
+        </svg>
     </div>
 
-    <!-- Quick Stats Bar -->
-    <div class="stats-row">
-      <div class="stat-card">
-        <div>
-          <div class="num" id="statSubscribersCount">0</div>
-          <div class="label">Subscribers</div>
-        </div>
-        <i class="fas fa-users"></i>
-      </div>
-      <div class="stat-card">
-        <div>
-          <div class="num" id="statPostsCount">0</div>
-          <div class="label">Published Posts</div>
-        </div>
-        <i class="fas fa-bullhorn"></i>
-      </div>
-      <div class="stat-card">
-        <div>
-          <div class="num" id="statMessagesCount">0</div>
-          <div class="label">Inbox Messages</div>
-        </div>
-        <i class="fas fa-envelope"></i>
-      </div>
-    </div>
+    <div class="main-wrapper">
+        <!-- Dynamic Header -->
+        <header id="site-header"></header>
 
-    <!-- Tabs Navigation -->
-    <div class="dashboard-tabs">
-      <button class="tab-btn active" data-tab="tab-broadcast">
-        <i class="fas fa-paper-plane"></i> Publish & Notify Subscribers
-      </button>
-      <button class="tab-btn" data-tab="tab-posts">
-        <i class="fas fa-layer-group"></i> Manage Posts (<span id="tabPostsBadge">0</span>)
-      </button>
-      <button class="tab-btn" data-tab="tab-messages">
-        <i class="fas fa-inbox"></i> Inbox Messages (<span id="tabMessagesBadge">0</span>)
-      </button>
-      <button class="tab-btn" data-tab="tab-subscribers">
-        <i class="fas fa-address-book"></i> Newsletter Subscribers (<span id="tabSubscribersBadge">0</span>)
-      </button>
-    </div>
+        <!-- Dynamic Breadcrumb & Inner Banner -->
+        <div id="site-breadcrumb" data-title="ADMIN DASHBOARD" data-label="Console" data-index="007"></div>
 
-    <!-- Feedback Toast Alert -->
-    <div id="broadcastSuccessAlert" class="alert-banner alert-success">
-      <i class="fas fa-check-circle me-2"></i>
-      <span id="broadcastSuccessText">Post published successfully!</span>
-    </div>
+        <main class="container-fluid p-0">
+            <!-- Admin Dashboard Section -->
+            <section class="admin-section position-relative">
+                <div class="container position-relative" style="z-index: 1;">
 
-    <!-- TAB 1: Create & Broadcast Post to All Subscribers -->
-    <div class="tab-pane active" id="tab-broadcast">
-      <div class="form-card">
-        <h2 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text);">
-          <i class="fas fa-bullhorn" style="color: var(--accent);"></i>
-          Create New Project / Post Announcement
-        </h2>
-        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.75rem;">
-          Publish a new project or mockup to your website. Once published, an automated email notification will be queued and dispatched to all <strong><span id="subscriberCountNotice">0</span> newsletter subscribers</strong>!
-        </p>
+                    <!-- Top Action Bar -->
+                    <div class="admin-top-bar">
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="live-pulse-dot"></span>
+                            <div>
+                                <span class="small-text text-uppercase fw-bold text-dark">[ CONTROL CONSOLE ]</span>
+                                <div style="font-size: 0.9rem; font-weight: 600; color: #444;" id="adminUserEmail">
+                                    Authenticated Administrator
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex align-items-center gap-2 flex-wrap">
+                            <a href="my-work.html" target="_blank" class="btn-outline-brutalist">
+                                <i class="fas fa-external-link-alt"></i> View Live Projects Page ↗
+                            </a>
+                            <button id="logoutBtn" class="btn-delete-brutalist" style="padding: 8px 18px; font-size: 12px;">
+                                <i class="fas fa-sign-out-alt"></i> Logout
+                            </button>
+                        </div>
+                    </div>
 
-        <form id="broadcastPostForm" autocomplete="off">
-          <div class="form-group">
-            <label for="postTitle">Post / Project Title *</label>
-            <input type="text" id="postTitle" class="form-control" placeholder="e.g. Launched New Pharmaceutical Web Application / Approved Client Mockups" required>
-          </div>
+                    <!-- Quick Stats Grid -->
+                    <div class="admin-stats-grid">
+                        <div class="admin-stat-card">
+                            <div>
+                                <div class="admin-stat-number" id="statSubscribersCount">0</div>
+                                <div class="admin-stat-label">Newsletter Subscribers</div>
+                            </div>
+                            <div class="admin-stat-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                        </div>
 
-          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
-            <div class="form-group">
-              <label for="postCategory">Category / Type *</label>
-              <select id="postCategory" class="form-control" required>
-                <option value="Live Website">Live Website</option>
-                <option value="Approved UI Mockup">Approved UI Mockup</option>
-                <option value="Pharma Portal & UI">Pharma Portal & UI</option>
-                <option value="WordPress Theme Customization">WordPress Theme Customization</option>
-                <option value="Project Announcement">Project Announcement</option>
-              </select>
-            </div>
+                        <div class="admin-stat-card">
+                            <div>
+                                <div class="admin-stat-number" id="statPostsCount">0</div>
+                                <div class="admin-stat-label">Published Projects</div>
+                            </div>
+                            <div class="admin-stat-icon">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                        </div>
 
-            <div class="form-group">
-              <label for="postLink">Project / Live Demo URL</label>
-              <input type="url" id="postLink" class="form-control" placeholder="e.g. https://lakhvinder-portfolio.vercel.app/my-work.html">
-            </div>
-          </div>
+                        <div class="admin-stat-card">
+                            <div>
+                                <div class="admin-stat-number" id="statMessagesCount">0</div>
+                                <div class="admin-stat-label">Inbox Inquiries</div>
+                            </div>
+                            <div class="admin-stat-icon">
+                                <i class="fas fa-envelope"></i>
+                            </div>
+                        </div>
+                    </div>
 
-          <div class="form-group">
-            <label for="postImage">Mockup / Banner Image URL (Optional)</label>
-            <input type="url" id="postImage" class="form-control" placeholder="e.g. assets/portfolio-2026.png or public image link">
-          </div>
+                    <!-- Brutalist Navigation Tabs -->
+                    <div class="admin-tabs-bar">
+                        <button class="admin-tab-btn active" data-tab="tab-broadcast">
+                            <i class="fas fa-paper-plane"></i> Publish & Notify Subscribers
+                        </button>
+                        <button class="admin-tab-btn" data-tab="tab-posts">
+                            <i class="fas fa-layer-group"></i> Manage Projects (<span id="tabPostsBadge">0</span>)
+                        </button>
+                        <button class="admin-tab-btn" data-tab="tab-messages">
+                            <i class="fas fa-inbox"></i> Inbox Messages (<span id="tabMessagesBadge">0</span>)
+                        </button>
+                        <button class="admin-tab-btn" data-tab="tab-subscribers">
+                            <i class="fas fa-address-book"></i> Newsletter Subscribers (<span id="tabSubscribersBadge">0</span>)
+                        </button>
+                    </div>
 
-          <div class="form-group">
-            <label for="postDescription">Post Description / Key Details *</label>
-            <textarea id="postDescription" class="form-control" placeholder="Describe the project, technologies used (HTML, CSS, Bootstrap, WordPress, PHP), client approvals, and responsive architecture..." required></textarea>
-          </div>
+                    <!-- Global Success Toast Alert -->
+                    <div id="broadcastSuccessAlert" class="contact-alert-success" style="display: none; border-width: 2px;">
+                        <i class="fas fa-check-circle me-2"></i>
+                        <span id="broadcastSuccessText">Post published successfully!</span>
+                    </div>
 
-          <button type="submit" class="btn-publish" id="publishBtn">
-            <i class="fas fa-paper-plane"></i>
-            Publish & Notify All Subscribers
-          </button>
-        </form>
-      </div>
-    </div>
+                    <!-- TAB 1: Publish New Project / Post Announcement -->
+                    <div class="admin-tab-pane active" id="tab-broadcast">
+                        <div class="admin-card">
+                            <div class="d-flex justify-content-between align-items-center border-bottom border-dark pb-3 mb-4 flex-wrap gap-2">
+                                <div>
+                                    <span class="admin-badge mb-1">REAL-TIME BROADCAST ENGINE</span>
+                                    <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                        Publish New Project / Mockup
+                                    </h2>
+                                </div>
+                                <div class="small-text fw-bold text-dark">
+                                    [ <span id="subscriberCountNotice">0</span> SUBSCRIBERS QUEUED ]
+                                </div>
+                            </div>
 
-    <!-- TAB 2: Manage Published Posts -->
-    <div class="tab-pane" id="tab-posts">
-      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
-        Published Posts & Projects
-      </h2>
-      <div id="loadingPosts" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading published posts...</div>
-      <div id="postsList"></div>
-    </div>
+                            <p style="font-size: 0.95rem; line-height: 1.6; color: #444; margin-bottom: 2rem;">
+                                Once published, the new project will automatically appear on your <strong>Client Projects & Case Studies</strong> page, and an instant email alert will be queued for all newsletter subscribers!
+                            </p>
 
-    <!-- TAB 3: Inbox Messages -->
-    <div class="tab-pane" id="tab-messages">
-      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
-        Inbox Messages (Contact Form)
-      </h2>
-      <div id="loadingMessages" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading messages...</div>
-      <div id="messages"></div>
-    </div>
+                            <form id="broadcastPostForm" autocomplete="off">
+                                <div class="admin-form-group">
+                                    <label for="postTitle">Post / Project Title *</label>
+                                    <input type="text" id="postTitle" class="admin-input-field"
+                                        placeholder="e.g. Launched New Pharmaceutical Web Application / Approved Client Mockups" required>
+                                </div>
 
-    <!-- TAB 4: Newsletter Subscribers -->
-    <div class="tab-pane" id="tab-subscribers">
-      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
-        Newsletter Subscribers
-      </h2>
-      <div id="loadingSubscribers" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading subscribers...</div>
-      <div id="subscribers"></div>
-    </div>
-  </div>
+                                <div class="row g-3">
+                                    <div class="col-md-6 admin-form-group">
+                                        <label for="postCategory">Category / Type *</label>
+                                        <select id="postCategory" class="admin-select-field" required>
+                                            <option value="Live Website">Live Website</option>
+                                            <option value="Approved UI Mockup">Approved UI Mockup</option>
+                                            <option value="Pharma Portal & UI">Pharma Portal & UI</option>
+                                            <option value="WordPress Theme Customization">WordPress Theme Customization</option>
+                                            <option value="Project Announcement">Project Announcement</option>
+                                        </select>
+                                    </div>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { 
-    getFirestore, 
-    collection, 
-    query, 
-    orderBy, 
-    onSnapshot, 
-    addDoc, 
-    deleteDoc, 
-    doc, 
-    serverTimestamp,
-    getDocs 
-  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+                                    <div class="col-md-6 admin-form-group">
+                                        <label for="postLink">Project / Live Demo URL</label>
+                                        <input type="url" id="postLink" class="admin-input-field"
+                                            placeholder="e.g. https://lakhvinder-portfolio.vercel.app/my-work.html">
+                                    </div>
+                                </div>
 
-  import { getAuth, onAuthStateChanged, signOut }
-    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+                                <div class="admin-form-group">
+                                    <label for="postImage">Mockup / Banner Image URL (Optional)</label>
+                                    <input type="url" id="postImage" class="admin-input-field"
+                                        placeholder="e.g. assets/portfolio-2026.png or public image link">
+                                </div>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
-    authDomain: "portfolio-contact-fe911.firebaseapp.com",
-    projectId: "portfolio-contact-fe911",
-    storageBucket: "portfolio-contact-fe911.firebasestorage.app",
-    messagingSenderId: "48417656668",
-    appId: "1:48417656668:web:759f639f233ea8a53c3b99"
-  };
+                                <div class="admin-form-group">
+                                    <label for="postDescription">Post Description / Key Details *</label>
+                                    <textarea id="postDescription" class="admin-input-field admin-textarea-field"
+                                        placeholder="Describe the project, technologies used (HTML, CSS, Bootstrap, WordPress, PHP), client approvals, and responsive architecture..." required></textarea>
+                                </div>
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
-  const db = getFirestore(app);
+                                <div class="pt-2">
+                                    <button type="submit" class="contact-submit-cta" id="publishBtn">
+                                        <span class="contact-submit-pill">
+                                            PUBLISH & NOTIFY ALL SUBSCRIBERS
+                                        </span>
+                                        <span class="contact-submit-circle" aria-hidden="true">
+                                            ↗
+                                        </span>
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
 
-  // Protect page
-  onAuthStateChanged(auth, (user) => {
-    if (!user) {
-      window.location.href = "admin-login.html";
-    }
-  });
+                    <!-- TAB 2: Manage Published Posts -->
+                    <div class="admin-tab-pane" id="tab-posts">
+                        <div class="admin-card">
+                            <div class="d-flex justify-content-between align-items-center border-bottom border-dark pb-3 mb-4 flex-wrap gap-2">
+                                <div>
+                                    <span class="admin-badge mb-1">LIVE CONTENT DIRECTORY</span>
+                                    <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                        Published Projects & Posts
+                                    </h2>
+                                </div>
+                                <a href="my-work.html" target="_blank" class="btn-pill-brutalist">
+                                    View On Website ↗
+                                </a>
+                            </div>
 
-  // Logout
-  document.getElementById("logoutBtn").onclick = async () => {
-    try {
-      await signOut(auth);
-      window.location.href = "admin-login.html";
-    } catch (error) {
-      console.error("Logout error:", error);
-      alert("Error logging out. Please try again.");
-    }
-  };
+                            <div id="loadingPosts" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
+                                <i class="fas fa-spinner fa-spin me-2"></i> Loading published projects...
+                            </div>
+                            <div id="postsList"></div>
+                        </div>
+                    </div>
 
-  // Helper: XSS Protection
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text ?? '';
-    return div.innerHTML;
-  }
+                    <!-- TAB 3: Inbox Messages -->
+                    <div class="admin-tab-pane" id="tab-messages">
+                        <div class="admin-card">
+                            <div class="border-bottom border-dark pb-3 mb-4">
+                                <span class="admin-badge mb-1">CONTACT FORM INQUIRIES</span>
+                                <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                    Inbox Messages
+                                </h2>
+                            </div>
 
-  // Helper: Format Firestore timestamp
-  function formatDate(timestamp) {
-    if (!timestamp) return 'Just now';
-    try {
-      const date = timestamp.toDate();
-      return date.toLocaleString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit'
-      });
-    } catch (e) {
-      return 'Recent';
-    }
-  }
+                            <div id="loadingMessages" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
+                                <i class="fas fa-spinner fa-spin me-2"></i> Loading inbox messages...
+                            </div>
+                            <div id="messages"></div>
+                        </div>
+                    </div>
 
-  // Tab Switching Logic
-  const tabButtons = document.querySelectorAll('.tab-btn');
-  const tabPanes = document.querySelectorAll('.tab-pane');
+                    <!-- TAB 4: Newsletter Subscribers -->
+                    <div class="admin-tab-pane" id="tab-subscribers">
+                        <div class="admin-card">
+                            <div class="d-flex justify-content-between align-items-center border-bottom border-dark pb-3 mb-4 flex-wrap gap-2">
+                                <div>
+                                    <span class="admin-badge mb-1">AUDIENCE & SUBSCRIBERS</span>
+                                    <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                        Newsletter Subscribers
+                                    </h2>
+                                </div>
+                                <button id="copyAllEmailsBtn" class="btn-outline-brutalist">
+                                    <i class="fas fa-copy"></i> Copy All Emails
+                                </button>
+                            </div>
 
-  tabButtons.forEach(btn => {
-    btn.addEventListener('click', () => {
-      const targetId = btn.getAttribute('data-tab');
-      tabButtons.forEach(b => b.classList.remove('active'));
-      tabPanes.forEach(p => p.classList.remove('active'));
-      btn.classList.add('active');
-      const targetPane = document.getElementById(targetId);
-      if (targetPane) targetPane.classList.add('active');
-    });
-  });
+                            <div id="loadingSubscribers" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
+                                <i class="fas fa-spinner fa-spin me-2"></i> Loading subscribers...
+                            </div>
+                            <div id="subscribers"></div>
+                        </div>
+                    </div>
 
-  // Global cache of current subscribers
-  let currentSubscribersList = [];
-
-  // =========================================================================
-  // 1. Real-time Newsletter Subscribers Listener & Counts
-  // =========================================================================
-  const subscribersDiv = document.getElementById("subscribers");
-  const loadingSubscribersDiv = document.getElementById("loadingSubscribers");
-  const subscribersQuery = query(collection(db, "newsletter"), orderBy("time", "desc"));
-
-  onSnapshot(subscribersQuery, (snapshot) => {
-    if (loadingSubscribersDiv) loadingSubscribersDiv.style.display = "none";
-
-    currentSubscribersList = [];
-    const count = snapshot.size;
-
-    document.getElementById("statSubscribersCount").textContent = count;
-    document.getElementById("tabSubscribersBadge").textContent = count;
-    document.getElementById("subscriberCountNotice").textContent = count;
-
-    if (snapshot.empty) {
-      subscribersDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No subscribers registered yet.</p>';
-      return;
-    }
-
-    let html = "<ul style='list-style: none; padding: 0;'>";
-    snapshot.forEach((docSnap) => {
-      const d = docSnap.data();
-      const email = d.email || '';
-      if (email) currentSubscribersList.push({ id: docSnap.id, email: email });
-
-      html += `
-        <li class="message-box" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <p style="margin: 0;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: var(--accent); text-decoration: none;">${escapeHtml(email || 'N/A')}</a></p>
-            <p style="margin: 0;"><small><i class="fas fa-clock"></i> Subscribed: ${formatDate(d.time)}</small></p>
-          </div>
-          <button class="btn-delete" data-sub-id="${docSnap.id}">
-            <i class="fas fa-trash-alt"></i> Remove
-          </button>
-        </li>
-      `;
-    });
-    html += "</ul>";
-    subscribersDiv.innerHTML = html;
-
-    // Attach subscriber delete listeners
-    subscribersDiv.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const subId = btn.getAttribute('data-sub-id');
-        if (confirm("Are you sure you want to remove this subscriber?")) {
-          try {
-            await deleteDoc(doc(db, "newsletter", subId));
-          } catch (err) {
-            alert("Error removing subscriber: " + err.message);
-          }
-        }
-      });
-    });
-  }, (error) => {
-    console.error("Error fetching subscribers:", error);
-    subscribersDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading subscribers.</p>';
-  });
-
-  // =========================================================================
-  // 2. Real-time Messages Listener
-  // =========================================================================
-  const messagesDiv = document.getElementById("messages");
-  const loadingMessagesDiv = document.getElementById("loadingMessages");
-  const messagesQuery = query(collection(db, "messages"), orderBy("time", "desc"));
-
-  onSnapshot(messagesQuery, (snapshot) => {
-    if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
-
-    const count = snapshot.size;
-    document.getElementById("statMessagesCount").textContent = count;
-    document.getElementById("tabMessagesBadge").textContent = count;
-
-    if (snapshot.empty) {
-      messagesDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No messages received yet.</p>';
-      return;
-    }
-
-    let html = "";
-    snapshot.forEach((docSnap) => {
-      const d = docSnap.data();
-      html += `
-        <div class="message-box">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
-            <span class="post-badge"><i class="fas fa-envelope-open-text me-1"></i> Contact Inquiry</span>
-            <button class="btn-delete" data-msg-id="${docSnap.id}" title="Delete Message">
-              <i class="fas fa-trash-alt"></i>
-            </button>
-          </div>
-          <p><strong>Name:</strong> ${escapeHtml(d.name || 'N/A')}</p>
-          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}" style="color: var(--accent);">${escapeHtml(d.email || 'N/A')}</a></p>
-          <p><strong>Phone:</strong> ${escapeHtml(d.phone || 'N/A')}</p>
-          <p><strong>Subject:</strong> ${escapeHtml(d.subject || '(Direct Inquiry)')}</p>
-          <p><strong>Message:</strong><br>${escapeHtml(d.message || 'N/A')}</p>
-          <p><small><i class="fas fa-calendar-alt"></i> ${formatDate(d.time)}</small></p>
-        </div>
-      `;
-    });
-    messagesDiv.innerHTML = html;
-
-    // Attach message delete listeners
-    messagesDiv.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const msgId = btn.getAttribute('data-msg-id');
-        if (confirm("Delete this inbox message?")) {
-          try {
-            await deleteDoc(doc(db, "messages", msgId));
-          } catch (err) {
-            alert("Error deleting message: " + err.message);
-          }
-        }
-      });
-    });
-  }, (error) => {
-    console.error("Error fetching messages:", error);
-    messagesDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading messages.</p>';
-  });
-
-  // =========================================================================
-  // 3. Real-time Published Posts Listener
-  // =========================================================================
-  const postsListDiv = document.getElementById("postsList");
-  const loadingPostsDiv = document.getElementById("loadingPosts");
-  const postsQuery = query(collection(db, "posts"), orderBy("createdAt", "desc"));
-
-  onSnapshot(postsQuery, (snapshot) => {
-    if (loadingPostsDiv) loadingPostsDiv.style.display = "none";
-
-    const count = snapshot.size;
-    document.getElementById("statPostsCount").textContent = count;
-    document.getElementById("tabPostsBadge").textContent = count;
-
-    if (snapshot.empty) {
-      postsListDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No published posts yet. Create your first post using the Publish tab!</p>';
-      return;
-    }
-
-    let html = "";
-    snapshot.forEach((docSnap) => {
-      const d = docSnap.data();
-      html += `
-        <div class="message-box">
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
-            <div>
-              <span class="post-badge">${escapeHtml(d.category || 'Release')}</span>
-              <h3 style="color: var(--text); font-size: 1.25rem; margin-top: 4px;">${escapeHtml(d.title || 'Untitled Post')}</h3>
-            </div>
-            <button class="btn-delete" data-post-id="${docSnap.id}" title="Delete Post">
-              <i class="fas fa-trash-alt"></i> Delete
-            </button>
-          </div>
-          <p style="color: var(--text-secondary);">${escapeHtml(d.description || '')}</p>
-          ${d.link ? `<p><strong>Link:</strong> <a href="${escapeHtml(d.link)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">${escapeHtml(d.link)} ↗</a></p>` : ''}
-          ${d.imageUrl ? `<p><strong>Image:</strong> <a href="${escapeHtml(d.imageUrl)}" target="_blank" style="color: var(--accent);">View Thumbnail ↗</a></p>` : ''}
-          <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
-            <small><i class="fas fa-clock"></i> ${formatDate(d.createdAt)}</small>
-            <small><i class="fas fa-paper-plane"></i> Notified: ${d.subscribersNotified || 0} subscriber(s)</small>
-          </div>
-        </div>
-      `;
-    });
-    postsListDiv.innerHTML = html;
-
-    // Attach post delete listeners
-    postsListDiv.querySelectorAll('.btn-delete').forEach(btn => {
-      btn.addEventListener('click', async () => {
-        const postId = btn.getAttribute('data-post-id');
-        if (confirm("Are you sure you want to delete this post from your website?")) {
-          try {
-            await deleteDoc(doc(db, "posts", postId));
-          } catch (err) {
-            alert("Error deleting post: " + err.message);
-          }
-        }
-      });
-    });
-  }, (error) => {
-    console.error("Error fetching posts:", error);
-    postsListDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading published posts.</p>';
-  });
-
-  // =========================================================================
-  // 4. Create Post & Broadcast to Subscribers
-  // =========================================================================
-  const broadcastForm = document.getElementById("broadcastPostForm");
-  const publishBtn = document.getElementById("publishBtn");
-  const alertBanner = document.getElementById("broadcastSuccessAlert");
-  const alertText = document.getElementById("broadcastSuccessText");
-
-  broadcastForm.addEventListener("submit", async (e) => {
-    e.preventDefault();
-
-    const title = document.getElementById("postTitle").value.trim();
-    const category = document.getElementById("postCategory").value;
-    const link = document.getElementById("postLink").value.trim();
-    const imageUrl = document.getElementById("postImage").value.trim();
-    const description = document.getElementById("postDescription").value.trim();
-
-    if (!title || !description) {
-      alert("Please enter a title and description for your post.");
-      return;
-    }
-
-    publishBtn.disabled = true;
-    publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing & Sending Notifications...';
-
-    try {
-      // 1. Fetch current subscriber emails directly
-      let subscriberEmails = [];
-      const subSnap = await getDocs(collection(db, "newsletter"));
-      subSnap.forEach(d => {
-        const em = d.data().email;
-        if (em && em.includes("@")) {
-          subscriberEmails.push(em);
-        }
-      });
-
-      // 2. Add post document to Firestore 'posts' collection
-      const postRef = await addDoc(collection(db, "posts"), {
-        title: title,
-        category: category,
-        link: link || "https://lakhvinder-portfolio.vercel.app/my-work.html",
-        imageUrl: imageUrl || "",
-        description: description,
-        author: "Lakhvinder Singh",
-        subscribersNotified: subscriberEmails.length,
-        createdAt: serverTimestamp()
-      });
-
-      // 3. Queue email notification jobs into 'mail' collection for Trigger Email extension
-      let queuedCount = 0;
-      for (const subscriberEmail of subscriberEmails) {
-        try {
-          await addDoc(collection(db, "mail"), {
-            to: [subscriberEmail],
-            message: {
-              subject: `🚀 New Post by Lakhvinder Singh: ${title}`,
-              text: `Hello,\n\nA new post has been published on Lakhvinder Singh's portfolio:\n\nTitle: ${title} [${category}]\n\n${description}\n\nView details: ${link || "https://lakhvinder-portfolio.vercel.app/my-work.html"}\n\nThank you for following my journey!\nLakhvinder Singh`,
-              html: `
-                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #ffffff; border: 2px solid #0E0E0E; border-radius: 12px;">
-                  <div style="text-align: center; border-bottom: 2px solid #0E0E0E; padding-bottom: 20px; margin-bottom: 25px;">
-                    <h2 style="margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; color: #0E0E0E;">LAKHVINDER SINGH</h2>
-                    <span style="font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px;">[ Project Release & Announcement ]</span>
-                  </div>
-                  
-                  <div style="margin-bottom: 15px;">
-                    <span style="background-color: #65c0f0; color: #0E0E0E; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; border: 1.5px solid #0E0E0E; display: inline-block;">
-                      ${escapeHtml(category)}
-                    </span>
-                  </div>
-
-                  <h1 style="font-size: 24px; color: #0E0E0E; line-height: 1.25; margin: 10px 0 15px 0;">
-                    ${escapeHtml(title)}
-                  </h1>
-
-                  <p style="font-size: 15px; line-height: 1.7; color: #222222; margin-bottom: 25px;">
-                    ${escapeHtml(description)}
-                  </p>
-
-                  ${imageUrl ? `<div style="text-align: center; margin-bottom: 25px;"><img src="${escapeHtml(imageUrl)}" alt="Project Preview" style="max-width: 100%; border-radius: 8px; border: 2px solid #0E0E0E;" /></div>` : ''}
-
-                  <div style="text-align: center; margin: 30px 0;">
-                    <a href="${escapeHtml(link || "https://lakhvinder-portfolio.vercel.app/my-work.html")}" style="background-color: #0E0E0E; color: #65c0f0; text-decoration: none; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">
-                      View Live Project ↗
-                    </a>
-                  </div>
-
-                  <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #718096; text-align: center; line-height: 1.5;">
-                    You are receiving this update because you subscribed to updates on Lakhvinder Singh's Web Development Portfolio.<br>
-                    Ambala Cantt, Haryana • Zirakpur, Punjab
-                  </div>
                 </div>
-              `
-            },
-            source: "admin-broadcast",
-            postId: postRef.id,
-            createdAt: serverTimestamp()
-          });
-          queuedCount++;
-        } catch (err) {
-          console.warn("Failed queuing mail for", subscriberEmail, err);
+
+                <!-- Bottom Watermark (Subtle watermark matching Home/Contact) -->
+                <div class="contact-watermark-wrap text-center overflow-hidden position-relative">
+                    <h2 class="contact-bottom-watermark text-uppercase">DASHBOARD</h2>
+                </div>
+            </section>
+        </main>
+
+        <!-- Dynamic Footer -->
+        <div id="site-footer"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+
+    <script>
+        // Preloader Animation
+        function createPreloaderTimeline() {
+            const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+            tl.fromTo('.group1', { scale: 0.1, transformOrigin: '124 124' }, { duration: 0.35, scale: 1, ease: 'expo.inOut' })
+                .to('.group1', { duration: 1.2, rotate: 15, ease: 'none' }, 0.1)
+                .to('.group1 image', { scale: (i) => [0.4, 0.2, 0.3][i], x: (i) => [0, 135, 100][i], y: (i) => [90, 24, 124][i], ease: 'back' }, 0.4)
+                .to('.group1 image', { duration: 0.01, opacity: 0, stagger: 0.06 }, 1.1)
+                .to('#g2_mask circle', { duration: 0.4, attr: { r: "124" }, ease: 'circ' }, 1.3)
+                .to('#g3_mask rect', { duration: 0.4, stagger: 0.05, attr: { y: "124" }, ease: 'power2.inOut' }, 1.6)
+                .to('.group4 image', { duration: 0.4, x: -70, ease: 'back' }, 1.9)
+                .to('#g5_mask circle', { duration: 0.3, attr: { r: 0 }, ease: 'expo.in' }, 2.3)
+                .to('#g5_mask path', { duration: 0.4, opacity: 0 }, 2.5);
+            return tl;
         }
-      }
 
-      // Reset form
-      broadcastForm.reset();
+        const preloaderTl = createPreloaderTimeline();
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.6,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        preloaderTl.kill();
+                    }
+                });
+            }
+        });
+    </script>
 
-      // Show success feedback
-      alertBanner.style.display = "block";
-      alertText.textContent = `🎉 Success! Post published live to your website, and email notification queued for ${queuedCount} subscriber(s)!`;
-      setTimeout(() => {
-        alertBanner.style.display = "none";
-      }, 7000);
+    <!-- Firebase App & Firestore Services Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { 
+            getFirestore, 
+            collection, 
+            onSnapshot, 
+            addDoc, 
+            deleteDoc, 
+            doc, 
+            serverTimestamp,
+            getDocs 
+        } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
-      // Switch to Manage Posts tab to show the new post
-      const postsTabBtn = document.querySelector('[data-tab="tab-posts"]');
-      if (postsTabBtn) postsTabBtn.click();
+        import { getAuth, onAuthStateChanged, signOut }
+            from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
 
-    } catch (err) {
-      console.error("Error broadcasting post:", err);
-      alert("Error publishing post: " + err.message);
-    } finally {
-      publishBtn.disabled = false;
-      publishBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish & Notify All Subscribers';
-    }
-  });
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
+            authDomain: "portfolio-contact-fe911.firebaseapp.com",
+            projectId: "portfolio-contact-fe911",
+            storageBucket: "portfolio-contact-fe911.firebasestorage.app",
+            messagingSenderId: "48417656668",
+            appId: "1:48417656668:web:759f639f233ea8a53c3b99"
+        };
 
-  // =========================================================================
-  // 5. Theme Toggle Logic
-  // =========================================================================
-  const themeToggle = document.getElementById("themeToggle");
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    const icon = themeToggle?.querySelector('i');
-    if (icon) {
-      if (savedTheme === 'light') icon.classList.replace('fa-moon', 'fa-sun');
-      else icon.classList.replace('fa-sun', 'fa-moon');
-    }
-  }
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+        const db = getFirestore(app);
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('portfolio-theme', next);
-      const icon = themeToggle.querySelector('i');
-      if (icon) {
-        if (next === 'light') icon.classList.replace('fa-moon', 'fa-sun');
-        else icon.classList.replace('fa-sun', 'fa-moon');
-      }
-    });
-  }
-</script>
+        // Protect dashboard
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.href = "admin-login.html";
+            } else {
+                const userEmailEl = document.getElementById("adminUserEmail");
+                if (userEmailEl) {
+                    userEmailEl.textContent = `Logged in: ${user.email || 'Admin'}`;
+                }
+            }
+        });
 
+        // Logout
+        document.getElementById("logoutBtn").onclick = async () => {
+            try {
+                await signOut(auth);
+                window.location.href = "admin-login.html";
+            } catch (error) {
+                console.error("Logout error:", error);
+                alert("Error logging out. Please try again.");
+            }
+        };
+
+        // Helper: XSS Protection
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text ?? '';
+            return div.innerHTML;
+        }
+
+        // Helper: Format timestamp
+        function formatDate(timestamp) {
+            if (!timestamp) return 'Just now';
+            try {
+                const date = timestamp.toDate ? timestamp.toDate() : new Date(timestamp.seconds ? timestamp.seconds * 1000 : timestamp);
+                return date.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: 'short',
+                    day: 'numeric',
+                    hour: '2-digit',
+                    minute: '2-digit'
+                });
+            } catch (e) {
+                return 'Recent';
+            }
+        }
+
+        // Helper: Get timestamp numeric value for sorting
+        function getMillis(timestamp) {
+            if (!timestamp) return 0;
+            if (timestamp.toMillis) return timestamp.toMillis();
+            if (timestamp.seconds) return timestamp.seconds * 1000;
+            if (typeof timestamp === 'number') return timestamp;
+            return 0;
+        }
+
+        // Tab Switching Logic
+        const tabButtons = document.querySelectorAll('.admin-tab-btn');
+        const tabPanes = document.querySelectorAll('.admin-tab-pane');
+
+        tabButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const targetId = btn.getAttribute('data-tab');
+                tabButtons.forEach(b => b.classList.remove('active'));
+                tabPanes.forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                const targetPane = document.getElementById(targetId);
+                if (targetPane) targetPane.classList.add('active');
+            });
+        });
+
+        // Global cache of current subscribers
+        let currentSubscribersList = [];
+
+        // =====================================================================
+        // 1. Real-time Newsletter Subscribers Listener & Counts
+        // =====================================================================
+        const subscribersDiv = document.getElementById("subscribers");
+        const loadingSubscribersDiv = document.getElementById("loadingSubscribers");
+
+        onSnapshot(collection(db, "newsletter"), (snapshot) => {
+            if (loadingSubscribersDiv) loadingSubscribersDiv.style.display = "none";
+
+            currentSubscribersList = [];
+            const count = snapshot.size;
+
+            document.getElementById("statSubscribersCount").textContent = count;
+            document.getElementById("tabSubscribersBadge").textContent = count;
+            document.getElementById("subscriberCountNotice").textContent = count;
+
+            if (snapshot.empty) {
+                subscribersDiv.innerHTML = '<div class="text-center py-4 text-muted fw-bold">No subscribers registered yet.</div>';
+                return;
+            }
+
+            const docs = snapshot.docs.slice();
+            docs.sort((a, b) => getMillis(b.data().time) - getMillis(a.data().time));
+
+            let html = "<div class='d-flex flex-column gap-3'>";
+            docs.forEach((docSnap) => {
+                const d = docSnap.data();
+                const email = d.email || '';
+                if (email) currentSubscribersList.push({ id: docSnap.id, email: email });
+
+                html += `
+                    <div class="admin-item-box d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <div>
+                            <div class="d-flex align-items-center gap-2 mb-1">
+                                <i class="fas fa-envelope text-dark"></i>
+                                <a href="mailto:${escapeHtml(email)}" style="color: var(--dark-black); font-weight: 700; text-decoration: none;">${escapeHtml(email || 'N/A')}</a>
+                            </div>
+                            <small class="text-muted"><i class="fas fa-clock me-1"></i> Subscribed: ${formatDate(d.time)}</small>
+                        </div>
+                        <button class="btn-delete-brutalist" data-sub-id="${docSnap.id}">
+                            <i class="fas fa-trash-alt"></i> Remove
+                        </button>
+                    </div>
+                `;
+            });
+            html += "</div>";
+            subscribersDiv.innerHTML = html;
+
+            // Attach subscriber delete listeners
+            subscribersDiv.querySelectorAll('.btn-delete-brutalist').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const subId = btn.getAttribute('data-sub-id');
+                    if (confirm("Are you sure you want to remove this subscriber?")) {
+                        try {
+                            await deleteDoc(doc(db, "newsletter", subId));
+                        } catch (err) {
+                            alert("Error removing subscriber: " + err.message);
+                        }
+                    }
+                });
+            });
+        }, (error) => {
+            console.error("Error fetching subscribers:", error);
+            if (loadingSubscribersDiv) loadingSubscribersDiv.style.display = "none";
+            subscribersDiv.innerHTML = '<div class="text-danger text-center py-3">Error loading subscribers.</div>';
+        });
+
+        // Copy All Emails Button
+        document.getElementById("copyAllEmailsBtn").addEventListener("click", () => {
+            if (currentSubscribersList.length === 0) {
+                alert("No subscriber emails available to copy.");
+                return;
+            }
+            const emailsText = currentSubscribersList.map(s => s.email).join(", ");
+            navigator.clipboard.writeText(emailsText).then(() => {
+                alert(`Copied ${currentSubscribersList.length} email address(es) to clipboard!`);
+            }).catch(err => {
+                prompt("Copy subscriber emails:", emailsText);
+            });
+        });
+
+        // =====================================================================
+        // 2. Real-time Messages Listener
+        // =====================================================================
+        const messagesDiv = document.getElementById("messages");
+        const loadingMessagesDiv = document.getElementById("loadingMessages");
+
+        onSnapshot(collection(db, "messages"), (snapshot) => {
+            if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
+
+            const count = snapshot.size;
+            document.getElementById("statMessagesCount").textContent = count;
+            document.getElementById("tabMessagesBadge").textContent = count;
+
+            if (snapshot.empty) {
+                messagesDiv.innerHTML = '<div class="text-center py-4 text-muted fw-bold">No messages received yet.</div>';
+                return;
+            }
+
+            const docs = snapshot.docs.slice();
+            docs.sort((a, b) => getMillis(b.data().time) - getMillis(a.data().time));
+
+            let html = "";
+            docs.forEach((docSnap) => {
+                const d = docSnap.data();
+                html += `
+                    <div class="admin-item-box">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-3 flex-wrap">
+                            <div>
+                                <span class="admin-badge mb-2"><i class="fas fa-envelope-open-text me-1"></i> Contact Inquiry</span>
+                                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; margin: 0; text-transform: uppercase;">
+                                    ${escapeHtml(d.name || 'Anonymous Client')}
+                                </h3>
+                            </div>
+                            <div class="d-flex gap-2">
+                                <a href="mailto:${escapeHtml(d.email || '')}?subject=Re: Inquiry on Lakhvinder Singh Portfolio" class="btn-outline-brutalist">
+                                    <i class="fas fa-reply"></i> Reply
+                                </a>
+                                <button class="btn-delete-brutalist" data-msg-id="${docSnap.id}" title="Delete Message">
+                                    <i class="fas fa-trash-alt"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-3 small" style="color: #444;">
+                            <div class="col-sm-6">
+                                <strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}" style="color: var(--dark-black); font-weight: 600;">${escapeHtml(d.email || 'N/A')}</a>
+                            </div>
+                            <div class="col-sm-6">
+                                <strong>Phone:</strong> ${escapeHtml(d.phone || 'Not Provided')}
+                            </div>
+                            <div class="col-12">
+                                <strong>Subject:</strong> ${escapeHtml(d.subject || '(Direct Inquiry)')}
+                            </div>
+                        </div>
+
+                        <div class="p-3 mb-3 rounded" style="background: #F4F4F2; border: 1px solid #DDD; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(d.message || 'No message content.')}</div>
+
+                        <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Received: ${formatDate(d.time)}</small>
+                    </div>
+                `;
+            });
+            messagesDiv.innerHTML = html;
+
+            // Attach message delete listeners
+            messagesDiv.querySelectorAll('.btn-delete-brutalist').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const msgId = btn.getAttribute('data-msg-id');
+                    if (confirm("Delete this inbox message?")) {
+                        try {
+                            await deleteDoc(doc(db, "messages", msgId));
+                        } catch (err) {
+                            alert("Error deleting message: " + err.message);
+                        }
+                    }
+                });
+            });
+        }, (error) => {
+            console.error("Error fetching messages:", error);
+            if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
+            messagesDiv.innerHTML = '<div class="text-danger text-center py-3">Error loading inbox messages.</div>';
+        });
+
+        // =====================================================================
+        // 3. Real-time Published Posts Listener
+        // =====================================================================
+        const postsListDiv = document.getElementById("postsList");
+        const loadingPostsDiv = document.getElementById("loadingPosts");
+
+        onSnapshot(collection(db, "posts"), (snapshot) => {
+            if (loadingPostsDiv) loadingPostsDiv.style.display = "none";
+
+            const count = snapshot.size;
+            document.getElementById("statPostsCount").textContent = count;
+            document.getElementById("tabPostsBadge").textContent = count;
+
+            if (snapshot.empty) {
+                postsListDiv.innerHTML = '<div class="text-center py-4 text-muted fw-bold">No published projects yet. Create your first project using the Publish tab!</div>';
+                return;
+            }
+
+            const docs = snapshot.docs.slice();
+            docs.sort((a, b) => getMillis(b.data().createdAt) - getMillis(a.data().createdAt));
+
+            let html = "";
+            docs.forEach((docSnap) => {
+                const d = docSnap.data();
+                html += `
+                    <div class="admin-item-box">
+                        <div class="d-flex justify-content-between align-items-start gap-3 mb-2 flex-wrap">
+                            <div>
+                                <span class="admin-badge mb-2">${escapeHtml(d.category || 'Release')}</span>
+                                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.5rem; margin: 0; text-transform: uppercase;">
+                                    ${escapeHtml(d.title || 'Untitled Project')}
+                                </h3>
+                            </div>
+                            <button class="btn-delete-brutalist" data-post-id="${docSnap.id}" title="Delete Project">
+                                <i class="fas fa-trash-alt"></i> Delete Project
+                            </button>
+                        </div>
+
+                        <p style="font-size: 0.95rem; line-height: 1.6; color: #333; margin-bottom: 1rem;">
+                            ${escapeHtml(d.description || '')}
+                        </p>
+
+                        <div class="d-flex gap-3 flex-wrap mb-3">
+                            ${d.link ? `<a href="${escapeHtml(d.link)}" target="_blank" rel="noopener noreferrer" class="btn-outline-brutalist"><i class="fas fa-external-link-alt"></i> Live Link ↗</a>` : ''}
+                            ${d.imageUrl ? `<a href="${escapeHtml(d.imageUrl)}" target="_blank" class="btn-outline-brutalist"><i class="fas fa-image"></i> View Banner Image ↗</a>` : ''}
+                        </div>
+
+                        <div class="d-flex gap-4 flex-wrap text-muted small pt-2 border-top">
+                            <span><i class="fas fa-clock me-1"></i> Published: ${formatDate(d.createdAt)}</span>
+                            <span><i class="fas fa-paper-plane me-1"></i> Notified: ${d.subscribersNotified || 0} subscriber(s)</span>
+                        </div>
+                    </div>
+                `;
+            });
+            postsListDiv.innerHTML = html;
+
+            // Attach post delete listeners
+            postsListDiv.querySelectorAll('.btn-delete-brutalist').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const postId = btn.getAttribute('data-post-id');
+                    if (confirm("Are you sure you want to permanently delete this project from your website?")) {
+                        try {
+                            await deleteDoc(doc(db, "posts", postId));
+                        } catch (err) {
+                            alert("Error deleting post: " + err.message);
+                        }
+                    }
+                });
+            });
+        }, (error) => {
+            console.error("Error fetching posts:", error);
+            if (loadingPostsDiv) loadingPostsDiv.style.display = "none";
+            postsListDiv.innerHTML = '<div class="text-danger text-center py-3">Error loading published projects.</div>';
+        });
+
+        // =====================================================================
+        // 4. Create Post & Broadcast to Subscribers
+        // =====================================================================
+        const broadcastForm = document.getElementById("broadcastPostForm");
+        const publishBtn = document.getElementById("publishBtn");
+        const alertBanner = document.getElementById("broadcastSuccessAlert");
+        const alertText = document.getElementById("broadcastSuccessText");
+
+        broadcastForm.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const title = document.getElementById("postTitle").value.trim();
+            const category = document.getElementById("postCategory").value;
+            const link = document.getElementById("postLink").value.trim();
+            const imageUrl = document.getElementById("postImage").value.trim();
+            const description = document.getElementById("postDescription").value.trim();
+
+            if (!title || !description) {
+                alert("Please enter a title and description for your project.");
+                return;
+            }
+
+            publishBtn.style.opacity = "0.5";
+            publishBtn.style.pointerEvents = "none";
+            const pillSpan = publishBtn.querySelector(".contact-submit-pill");
+            const originalPillText = pillSpan ? pillSpan.innerHTML : "PUBLISH";
+            if (pillSpan) pillSpan.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> PUBLISHING & NOTIFYING...';
+
+            try {
+                // 1. Fetch current subscriber emails directly
+                let subscriberEmails = [];
+                const subSnap = await getDocs(collection(db, "newsletter"));
+                subSnap.forEach(d => {
+                    const em = d.data().email;
+                    if (em && em.includes("@")) {
+                        subscriberEmails.push(em);
+                    }
+                });
+
+                // 2. Add post document to Firestore 'posts' collection
+                const postRef = await addDoc(collection(db, "posts"), {
+                    title: title,
+                    category: category,
+                    link: link || "https://lakhvinder-portfolio.vercel.app/my-work.html",
+                    imageUrl: imageUrl || "",
+                    description: description,
+                    author: "Lakhvinder Singh",
+                    subscribersNotified: subscriberEmails.length,
+                    createdAt: serverTimestamp()
+                });
+
+                // 3. Queue email notification jobs into 'mail' collection for Trigger Email extension
+                let queuedCount = 0;
+                for (const subscriberEmail of subscriberEmails) {
+                    try {
+                        await addDoc(collection(db, "mail"), {
+                            to: [subscriberEmail],
+                            message: {
+                                subject: `🚀 New Project by Lakhvinder Singh: ${title}`,
+                                text: `Hello,\n\nA new project has been published on Lakhvinder Singh's portfolio:\n\nTitle: ${title} [${category}]\n\n${description}\n\nView details: ${link || "https://lakhvinder-portfolio.vercel.app/my-work.html"}\n\nThank you for following my journey!\nLakhvinder Singh`,
+                                html: `
+                                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #ffffff; border: 2px solid #0E0E0E; border-radius: 12px;">
+                                        <div style="text-align: center; border-bottom: 2px solid #0E0E0E; padding-bottom: 20px; margin-bottom: 25px;">
+                                            <h2 style="margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; color: #0E0E0E;">LAKHVINDER SINGH</h2>
+                                            <span style="font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px;">[ Project Release & Announcement ]</span>
+                                        </div>
+                                        
+                                        <div style="margin-bottom: 15px;">
+                                            <span style="background-color: #65c0f0; color: #0E0E0E; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; border: 1.5px solid #0E0E0E; display: inline-block;">
+                                                ${escapeHtml(category)}
+                                            </span>
+                                        </div>
+
+                                        <h1 style="font-size: 24px; color: #0E0E0E; line-height: 1.25; margin: 10px 0 15px 0;">
+                                            ${escapeHtml(title)}
+                                        </h1>
+
+                                        <p style="font-size: 15px; line-height: 1.7; color: #222222; margin-bottom: 25px;">
+                                            ${escapeHtml(description)}
+                                        </p>
+
+                                        ${imageUrl ? `<div style="text-align: center; margin-bottom: 25px;"><img src="${escapeHtml(imageUrl)}" alt="Project Preview" style="max-width: 100%; border-radius: 8px; border: 2px solid #0E0E0E;" /></div>` : ''}
+
+                                        <div style="text-align: center; margin: 30px 0;">
+                                            <a href="${escapeHtml(link || "https://lakhvinder-portfolio.vercel.app/my-work.html")}" style="background-color: #0E0E0E; color: #65c0f0; text-decoration: none; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">
+                                                View Live Project ↗
+                                            </a>
+                                        </div>
+
+                                        <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #718096; text-align: center; line-height: 1.5;">
+                                            You are receiving this update because you subscribed to updates on Lakhvinder Singh's Web Development Portfolio.<br>
+                                            Ambala Cantt, Haryana • Zirakpur, Punjab
+                                        </div>
+                                    </div>
+                                `
+                            },
+                            source: "admin-broadcast",
+                            postId: postRef.id,
+                            createdAt: serverTimestamp()
+                        });
+                        queuedCount++;
+                    } catch (err) {
+                        console.warn("Failed queuing mail for", subscriberEmail, err);
+                    }
+                }
+
+                // Reset form
+                broadcastForm.reset();
+
+                // Show success feedback
+                alertBanner.style.display = "block";
+                alertText.textContent = `🎉 Success! Project published live to your website, and email notification queued for ${queuedCount} subscriber(s)!`;
+                setTimeout(() => {
+                    alertBanner.style.display = "none";
+                }, 7000);
+
+                // Switch to Manage Projects tab to show the new post
+                const postsTabBtn = document.querySelector('[data-tab="tab-posts"]');
+                if (postsTabBtn) postsTabBtn.click();
+
+            } catch (err) {
+                console.error("Error broadcasting post:", err);
+                alert("Error publishing post: " + err.message);
+            } finally {
+                publishBtn.style.opacity = "1";
+                publishBtn.style.pointerEvents = "auto";
+                if (pillSpan) pillSpan.innerHTML = originalPillText;
+            }
+        });
+    </script>
 </body>
 </html>

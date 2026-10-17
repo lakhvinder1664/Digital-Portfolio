@@ -107,7 +107,9 @@
             'my-work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
             'pages': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
             'work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
-            'contact': { title: 'CONTACT ME', label: 'Contact', index: '004' }
+            'contact': { title: 'CONTACT ME', label: 'Contact', index: '004' },
+            'admin-login': { title: 'ADMIN LOGIN', label: 'Admin Login', index: '005' },
+            'admin-dashboard': { title: 'ADMIN DASHBOARD', label: 'Admin Console', index: '006' }
         };
 
         const fallbackTitle = cleanName ? cleanName.replace(/[-_]/g, ' ').toUpperCase() : 'PORTFOLIO';

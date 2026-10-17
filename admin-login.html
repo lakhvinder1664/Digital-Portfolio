@@ -1,313 +1,290 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login — Portfolio Dashboard</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
-  <style>
-    :root {
-      --primary: #0a192f;
-      --secondary: #172a45;
-      --accent: #64ffda;
-      --text: #ccd6f6;
-      --text-secondary: #8892b0;
-      --black: #020c1b;
-      --white: #e6f1ff;
-      --card-bg: rgba(10, 25, 47, 0.5);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    }
-
-    [data-theme="light"] {
-      --primary: #f8f9fa;
-      --secondary: #e9ecef;
-      --accent: #4361ee;
-      --text: #212529;
-      --text-secondary: #495057;
-      --black: #dee2e6;
-      --white: #020c1b;
-      --card-bg: rgba(248, 249, 250, 0.7);
-    }
-
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    body {
-      background: var(--primary);
-      color: var(--text);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-      transition: var(--transition);
-    }
-
-    .theme-toggle-container {
-      position: fixed;
-      top: 20px;
-      right: 20px;
-      z-index: 1000;
-    }
-
-    .theme-toggle {
-      background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(100, 255, 218, 0.2);
-      color: var(--text);
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] .theme-toggle {
-      border-color: rgba(67, 97, 238, 0.2);
-    }
-
-    .theme-toggle:hover {
-      background: var(--accent);
-      color: var(--black);
-      transform: rotate(30deg);
-    }
-
-    .login-box {
-      background: var(--card-bg);
-      backdrop-filter: blur(20px);
-      padding: 2.5rem;
-      border-radius: 20px;
-      width: 100%;
-      max-width: 400px;
-      box-shadow: 0 20px 60px rgba(2, 12, 27, 0.3);
-      border: 1px solid rgba(100, 255, 218, 0.2);
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] .login-box {
-      border-color: rgba(67, 97, 238, 0.2);
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-    }
-
-    .login-box h2 {
-      color: var(--text);
-      margin-bottom: 1.5rem;
-      font-size: 2rem;
-      text-align: center;
-      background: linear-gradient(90deg, var(--accent), #3a86ff);
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
-    }
-
-    input {
-      width: 100%;
-      padding: 0.9rem 1.2rem;
-      margin: 0.8rem 0;
-      background: rgba(100, 255, 218, 0.05);
-      border: 1px solid rgba(100, 255, 218, 0.2);
-      border-radius: 8px;
-      color: var(--text);
-      font-size: 1rem;
-      transition: var(--transition);
-    }
-
-    [data-theme="light"] input {
-      background: rgba(67, 97, 238, 0.05);
-      border-color: rgba(67, 97, 238, 0.2);
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px rgba(100, 255, 218, 0.1);
-    }
-
-    [data-theme="light"] input:focus {
-      box-shadow: 0 0 0 3px rgba(67, 97, 238, 0.1);
-    }
-
-    input::placeholder {
-      color: var(--text-secondary);
-    }
-
-    button {
-      width: 100%;
-      padding: 0.9rem;
-      margin: 1rem 0;
-      background: linear-gradient(135deg, var(--accent), #3a86ff);
-      color: var(--black);
-      border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: var(--transition);
-    }
-
-    button:hover:not(:disabled) {
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(58, 134, 255, 0.3);
-    }
-
-    button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    .error {
-      color: #ff6b6b;
-      font-size: 0.9rem;
-      margin-top: 0.5rem;
-      min-height: 1.5rem;
-    }
-
-    #loading {
-      text-align: center;
-      color: var(--text-secondary);
-      margin-top: 10px;
-    }
-
-    @media (max-width: 576px) {
-      .login-box {
-        padding: 2rem 1.5rem;
-      }
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Lakhvinder Singh Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-  <div class="theme-toggle-container">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <i class="fas fa-moon"></i>
-    </button>
-  </div>
+    <!-- Preloader Animation -->
+    <div id="preloader">
+        <svg id="svg-stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
+            <g class="group1">
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+            </g>
+            <g class="group2">
+                <image href="https://assets.codepen.io/16327/flair-3.png" mask="url(#g2_mask)" />
+            </g>
+            <mask id="g2_mask" fill="#fff">
+                <circle cx="124" cy="0" r="0" />
+                <circle cx="124" cy="248" r="0" />
+            </mask>
+            <g class="group3">
+                <image href="https://assets.codepen.io/16327/flair-4.png" mask="url(#g3_mask)" />
+            </g>
+            <mask id="g3_mask" fill="#fff">
+                <rect x="0" y="0" width="124" height="124" />
+                <rect x="124" y="0" width="124" height="124" />
+                <rect x="0" y="124" width="124" height="124" />
+                <rect x="124" y="124" width="124" height="124" />
+            </mask>
+            <g class="group4">
+                <image href="https://assets.codepen.io/16327/flair-5.png" x="70" />
+            </g>
+            <g class="group5">
+                <image href="https://assets.codepen.io/16327/flair-7.png" mask="url(#g5_mask)" />
+            </g>
+            <mask id="g5_mask" fill="#fff">
+                <path d="M0 248h248L124 0 0 247z" />
+                <circle cx="124" cy="83" r="83" />
+            </mask>
+        </svg>
+    </div>
 
-  <div class="login-box">
-    <h2>Admin Login</h2>
+    <div class="main-wrapper">
+        <!-- Dynamic Header -->
+        <header id="site-header"></header>
 
-    <input type="email" id="email" placeholder="Email" required autocomplete="email">
-    <input type="password" id="password" placeholder="Password" required autocomplete="current-password">
+        <!-- Dynamic Breadcrumb & Inner Banner -->
+        <div id="site-breadcrumb" data-title="ADMIN LOGIN" data-label="Authentication" data-index="006"></div>
 
-    <button id="loginBtn">Login</button>
-    <p id="error" class="error"></p>
-    <div id="loading" style="display: none; text-align: center; color: #666; margin-top: 10px;">Logging in...</div>
-  </div>
+        <main class="container-fluid p-0">
+            <!-- Admin Login Section -->
+            <section class="admin-section position-relative">
+                <div class="container position-relative" style="z-index: 1;">
+                    <div class="row g-5 align-items-center">
+                        <!-- Left Column: Display Headline & Admin Overview -->
+                        <div class="col-lg-6">
+                            <div class="d-flex align-items-center gap-3 mb-3">
+                                <span class="small-text text-uppercase fw-bold text-dark">[ RESTRICTED ACCESS ]</span>
+                                <div class="thick-line"
+                                    style="width: 60px; height: 2px; background: var(--dark-black);"></div>
+                            </div>
 
+                            <h1 class="contact-display-title" style="margin-bottom: 1.5rem;">
+                                Portfolio<br>
+                                Control Center
+                            </h1>
 
-<script type="module">
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getAuth, signInWithEmailAndPassword }
-    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+                            <p class="contact-lead-desc" style="margin-bottom: 2rem;">
+                                Authorized administrator login for Lakhvinder Singh's portfolio. Manage and publish live client projects, mockups, review inbox inquiries, and broadcast notifications directly to subscribers.
+                            </p>
 
-  const firebaseConfig = {
-    apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
-    authDomain: "portfolio-contact-fe911.firebaseapp.com",
-    projectId: "portfolio-contact-fe911",
-    storageBucket: "portfolio-contact-fe911.firebasestorage.app",
-    messagingSenderId: "48417656668",
-    appId: "1:48417656668:web:759f639f233ea8a53c3b99"
-  };
+                            <!-- Feature Badges -->
+                            <div class="d-flex flex-column gap-3 mb-4">
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="contact-icon-circle" style="width: 38px; height: 38px; min-width: 38px; font-size: 14px;">
+                                        <i class="fas fa-layer-group"></i>
+                                    </div>
+                                    <span style="font-weight: 600; color: var(--dark-black); font-size: 0.95rem;">
+                                        Publish & Update Client Projects & Mockups
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="contact-icon-circle" style="width: 38px; height: 38px; min-width: 38px; font-size: 14px;">
+                                        <i class="fas fa-paper-plane"></i>
+                                    </div>
+                                    <span style="font-weight: 600; color: var(--dark-black); font-size: 0.95rem;">
+                                        Automated Email Alerts to All Newsletter Subscribers
+                                    </span>
+                                </div>
+                                <div class="d-flex align-items-center gap-3">
+                                    <div class="contact-icon-circle" style="width: 38px; height: 38px; min-width: 38px; font-size: 14px;">
+                                        <i class="fas fa-inbox"></i>
+                                    </div>
+                                    <span style="font-weight: 600; color: var(--dark-black); font-size: 0.95rem;">
+                                        Real-Time Client Inquiry & Messages Console
+                                    </span>
+                                </div>
+                            </div>
 
-  const app = initializeApp(firebaseConfig);
-  const auth = getAuth(app);
+                            <div>
+                                <a href="index.html" class="btn-pill-brutalist">
+                                    <i class="fas fa-arrow-left"></i> Back To Home
+                                </a>
+                            </div>
+                        </div>
 
-  const loginBtn = document.getElementById("loginBtn");
-  const errorMsg = document.getElementById("error");
-  const loadingDiv = document.getElementById("loading");
+                        <!-- Right Column: Brutalist Login Box -->
+                        <div class="col-lg-6">
+                            <div class="admin-card">
+                                <div class="d-flex justify-content-between align-items-center border-bottom border-dark pb-3 mb-4">
+                                    <div>
+                                        <span class="admin-badge mb-1">SECURE PORTAL</span>
+                                        <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                            AUTHENTICATE
+                                        </h2>
+                                    </div>
+                                    <i class="fas fa-lock fa-2x" style="opacity: 0.25;"></i>
+                                </div>
 
-  loginBtn.addEventListener("click", async () => {
-    const email = document.getElementById("email").value.trim();
-    const pass = document.getElementById("password").value;
+                                <!-- Feedback Alert -->
+                                <div id="error" class="contact-alert-success" style="background-color: #FEE2E2; border-color: #DC2626; color: #DC2626; display: none;">
+                                </div>
 
-    // Basic validation
-    if (!email || !pass) {
-      errorMsg.innerText = "Please fill in all fields.";
-      return;
-    }
+                                <form id="adminLoginForm" autocomplete="off">
+                                    <div class="admin-form-group">
+                                        <label for="email">Admin Email Address</label>
+                                        <input type="email" id="email" class="admin-input-field"
+                                            placeholder="admin@example.com" required autocomplete="email">
+                                    </div>
 
-    // Email validation
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      errorMsg.innerText = "Please enter a valid email address.";
-      return;
-    }
+                                    <div class="admin-form-group mb-4">
+                                        <label for="password">Security Password</label>
+                                        <input type="password" id="password" class="admin-input-field"
+                                            placeholder="••••••••••••" required autocomplete="current-password">
+                                    </div>
 
-    // Show loading state
-    errorMsg.innerText = "";
-    loginBtn.disabled = true;
-    loadingDiv.style.display = "block";
+                                    <div id="loading" style="display: none; font-weight: 600; color: var(--dark-black); margin-bottom: 1rem;">
+                                        <i class="fas fa-spinner fa-spin me-2"></i> Verifying credentials...
+                                    </div>
 
-    try {
-      await signInWithEmailAndPassword(auth, email, pass);
-      window.location.href = "admin-dashboard.html";
-    } catch (err) {
-      // User-friendly error messages
-      let errorMessage = "Login failed. ";
-      if (err.code === "auth/user-not-found") {
-        errorMessage += "No account found with this email.";
-      } else if (err.code === "auth/wrong-password") {
-        errorMessage += "Incorrect password.";
-      } else if (err.code === "auth/invalid-email") {
-        errorMessage += "Invalid email address.";
-      } else if (err.code === "auth/too-many-requests") {
-        errorMessage += "Too many failed attempts. Please try again later.";
-      } else {
-        errorMessage += err.message;
-      }
-      errorMsg.innerText = errorMessage;
-    } finally {
-      loginBtn.disabled = false;
-      loadingDiv.style.display = "none";
-    }
-  });
+                                    <!-- Submit Action Button matching Home/Contact Pill Style -->
+                                    <button type="submit" class="contact-submit-cta" id="loginBtn">
+                                        <span class="contact-submit-pill">
+                                            LOG IN TO DASHBOARD
+                                        </span>
+                                        <span class="contact-submit-circle" aria-hidden="true">
+                                            ↗
+                                        </span>
+                                    </button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-  // Allow Enter key to submit
-  document.getElementById("password").addEventListener("keypress", (e) => {
-    if (e.key === "Enter") {
-      loginBtn.click();
-    }
-  });
+                <!-- Bottom Subtle Watermark (Matching Home & Contact Watermark Style) -->
+                <div class="contact-watermark-wrap text-center overflow-hidden position-relative">
+                    <h2 class="contact-bottom-watermark text-uppercase">SECURITY</h2>
+                </div>
+            </section>
+        </main>
 
-  // Theme Toggle
-  const themeToggle = document.getElementById("themeToggle");
-  
-  // Restore theme from localStorage
-  const savedTheme = localStorage.getItem('portfolio-theme');
-  if (savedTheme) {
-    document.documentElement.setAttribute('data-theme', savedTheme);
-    const icon = themeToggle?.querySelector('i');
-    if (icon) {
-      if (savedTheme === 'light') icon.classList.replace('fa-moon', 'fa-sun');
-      else icon.classList.replace('fa-sun', 'fa-moon');
-    }
-  }
+        <!-- Dynamic Footer -->
+        <div id="site-footer"></div>
+    </div>
 
-  if (themeToggle) {
-    themeToggle.addEventListener('click', () => {
-      const current = document.documentElement.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
-      const next = current === 'dark' ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', next);
-      localStorage.setItem('portfolio-theme', next);
-      const icon = themeToggle.querySelector('i');
-      if (icon) {
-        if (next === 'light') icon.classList.replace('fa-moon', 'fa-sun');
-        else icon.classList.replace('fa-sun', 'fa-moon');
-      }
-    });
-  }
-</script>
+    <!-- Scripts -->
+    <script src="components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
 
+    <script>
+        // Preloader Animation
+        function createPreloaderTimeline() {
+            const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+            tl.fromTo('.group1', { scale: 0.1, transformOrigin: '124 124' }, { duration: 0.35, scale: 1, ease: 'expo.inOut' })
+                .to('.group1', { duration: 1.2, rotate: 15, ease: 'none' }, 0.1)
+                .to('.group1 image', { scale: (i) => [0.4, 0.2, 0.3][i], x: (i) => [0, 135, 100][i], y: (i) => [90, 24, 124][i], ease: 'back' }, 0.4)
+                .to('.group1 image', { duration: 0.01, opacity: 0, stagger: 0.06 }, 1.1)
+                .to('#g2_mask circle', { duration: 0.4, attr: { r: "124" }, ease: 'circ' }, 1.3)
+                .to('#g3_mask rect', { duration: 0.4, stagger: 0.05, attr: { y: "124" }, ease: 'power2.inOut' }, 1.6)
+                .to('.group4 image', { duration: 0.4, x: -70, ease: 'back' }, 1.9)
+                .to('#g5_mask circle', { duration: 0.3, attr: { r: 0 }, ease: 'expo.in' }, 2.3)
+                .to('#g5_mask path', { duration: 0.4, opacity: 0 }, 2.5);
+            return tl;
+        }
+
+        const preloaderTl = createPreloaderTimeline();
+        window.addEventListener('load', () => {
+            const preloader = document.getElementById('preloader');
+            if (preloader) {
+                gsap.to(preloader, {
+                    opacity: 0,
+                    duration: 0.6,
+                    onComplete: () => {
+                        preloader.style.display = 'none';
+                        preloaderTl.kill();
+                    }
+                });
+            }
+        });
+    </script>
+
+    <!-- Firebase Auth Script -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getAuth, signInWithEmailAndPassword, onAuthStateChanged }
+            from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
+            authDomain: "portfolio-contact-fe911.firebaseapp.com",
+            projectId: "portfolio-contact-fe911",
+            storageBucket: "portfolio-contact-fe911.firebasestorage.app",
+            messagingSenderId: "48417656668",
+            appId: "1:48417656668:web:759f639f233ea8a53c3b99"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const auth = getAuth(app);
+
+        // If already logged in, redirect straight to dashboard
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                window.location.href = "admin-dashboard.html";
+            }
+        });
+
+        const form = document.getElementById("adminLoginForm");
+        const loginBtn = document.getElementById("loginBtn");
+        const errorMsg = document.getElementById("error");
+        const loadingDiv = document.getElementById("loading");
+
+        form.addEventListener("submit", async (e) => {
+            e.preventDefault();
+
+            const email = document.getElementById("email").value.trim();
+            const pass = document.getElementById("password").value;
+
+            if (!email || !pass) {
+                showError("Please enter both email and password.");
+                return;
+            }
+
+            errorMsg.style.display = "none";
+            loginBtn.style.opacity = "0.5";
+            loginBtn.style.pointerEvents = "none";
+            loadingDiv.style.display = "block";
+
+            try {
+                await signInWithEmailAndPassword(auth, email, pass);
+                window.location.href = "admin-dashboard.html";
+            } catch (err) {
+                let msg = "Authentication failed: ";
+                if (err.code === "auth/user-not-found" || err.code === "auth/invalid-credential") {
+                    msg = "Incorrect credentials or account not registered.";
+                } else if (err.code === "auth/wrong-password") {
+                    msg = "Invalid password. Please try again.";
+                } else if (err.code === "auth/too-many-requests") {
+                    msg = "Too many attempts. Access temporarily locked for security.";
+                } else {
+                    msg += err.message;
+                }
+                showError(msg);
+            } finally {
+                loginBtn.style.opacity = "1";
+                loginBtn.style.pointerEvents = "auto";
+                loadingDiv.style.display = "none";
+            }
+        });
+
+        function showError(msg) {
+            errorMsg.textContent = msg;
+            errorMsg.style.display = "block";
+        }
+    </script>
 </body>
 </html>
