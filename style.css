@@ -761,3 +761,50 @@ footer input::placeholder {
         font-size: 2.5rem;
     }
 }
+
+/* Inner Page Dynamic Breadcrumb & Header */
+.inner-breadcrumb-section {
+    position: relative;
+    background: transparent;
+}
+
+.inner-breadcrumb-section .breadcrumb-item + .breadcrumb-item::before {
+    content: "—";
+    color: var(--dark-black);
+    padding: 0 10px;
+    font-weight: 700;
+}
+
+.inner-breadcrumb-section .breadcrumb-item a {
+    color: var(--dark-black);
+    transition: opacity 0.2s ease;
+    border-bottom: 1px dashed var(--dark-black);
+    padding-bottom: 2px;
+}
+
+.inner-breadcrumb-section .breadcrumb-item a:hover {
+    opacity: 0.7;
+}
+
+.inner-breadcrumb-section .breadcrumb-item.active {
+    color: var(--dark-black);
+    font-weight: 700;
+}
+
+.inner-page-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    color: var(--dark-black);
+}
+
+.inner-breadcrumb-section .index-badge {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(1.5rem, 3vw, 2.5rem);
+    font-weight: 700;
+    color: var(--dark-black);
+    letter-spacing: 1px;
+}

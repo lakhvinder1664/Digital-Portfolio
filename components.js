@@ -1,11 +1,15 @@
 /**
- * Reusable Header & Footer Components
+ * Reusable Header, Footer & Dynamic Breadcrumb Components
  * Lakhvinder Singh Portfolio
  * 
  * Usage in any page:
  *   1. Add <header id="site-header"></header> at top of page / main-wrapper
- *   2. Add <footer id="site-footer"></footer> at bottom
- *   3. Include <script src="components.js"></script>
+ *   2. Add <div id="site-breadcrumb"></div> for dynamic inner page banner
+ *   3. Add <div id="site-footer"></div> at bottom
+ *   4. Include <script src="components.js"></script>
+ *
+ * Optional breadcrumb custom attributes:
+ *   <div id="site-breadcrumb" data-title="CUSTOM TITLE" data-label="Breadcrumb Label" data-index="001"></div>
  *
  * For pages in sub-folders, add data-base="../" to <body data-base="../">
  */
@@ -73,6 +77,70 @@
                     </div>
                 </div>
             </div>
+        `;
+    }
+
+    function renderBreadcrumb() {
+        const container = document.getElementById('site-breadcrumb');
+        if (!container) return;
+
+        const base = getBasePath();
+
+        // Extract filename from current location URL
+        const filename = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
+        const cleanName = filename.replace(/\.html?$/i, '');
+
+        // Predefined configurations matching home page theme
+        const pageConfigs = {
+            'about': { title: 'ABOUT ME', label: 'About Us', index: '001' },
+            'service': { title: 'SERVICES', label: 'Service', index: '002' },
+            'services': { title: 'SERVICES', label: 'Services', index: '002' },
+            'pages': { title: 'ALL PAGES', label: 'Pages', index: '003' },
+            'work': { title: 'SELECTED WORKS', label: 'Work', index: '003' },
+            'blog': { title: 'LATEST BLOG', label: 'Blog', index: '004' },
+            'contact': { title: 'CONTACT ME', label: 'Contact', index: '005' }
+        };
+
+        const fallbackTitle = cleanName ? cleanName.replace(/[-_]/g, ' ').toUpperCase() : 'PORTFOLIO';
+        const fallbackLabel = cleanName ? cleanName.replace(/[-_]/g, ' ').replace(/\b\w/g, c => c.toUpperCase()) : 'Page';
+
+        const config = pageConfigs[cleanName] || {
+            title: fallbackTitle,
+            label: fallbackLabel,
+            index: '001'
+        };
+
+        const title = container.getAttribute('data-title') || config.title;
+        const label = container.getAttribute('data-label') || config.label;
+        const index = container.getAttribute('data-index') || config.index;
+
+        container.innerHTML = `
+            <section class="inner-breadcrumb-section px-4 pt-4 pb-2">
+                <div class="container-fluid p-0">
+                    <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb m-0 text-uppercase small-text fw-bold">
+                                <li class="breadcrumb-item">
+                                    <a href="${base}index.html" class="text-decoration-none">Home</a>
+                                </li>
+                                <li class="breadcrumb-item active" aria-current="page">
+                                    ${label}
+                                </li>
+                            </ol>
+                        </nav>
+                        <div class="d-none d-sm-block text-uppercase small-text text-secondary">
+                            [ Lakhvinder Singh — Portfolio ]
+                        </div>
+                    </div>
+
+                    <div class="d-flex align-items-end justify-content-between flex-wrap gap-3 my-2">
+                        <h1 class="inner-page-title mb-0">${title}</h1>
+                        <span class="index-badge">(${index})</span>
+                    </div>
+
+                    <div class="thick-line w-100 mt-3"></div>
+                </div>
+            </section>
         `;
     }
 
@@ -150,6 +218,7 @@
 
     function init() {
         renderHeader();
+        renderBreadcrumb();
         renderFooter();
     }
 
