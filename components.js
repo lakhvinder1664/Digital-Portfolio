@@ -69,7 +69,7 @@
                         </li>
                         <li class="list-group-item p-0">
                             <a href="${base}my-work.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
-                                <span>Client Projects & Case Studies</span>
+                                <span>Projects</span>
                             </a>
                         </li>
                         <li class="list-group-item p-0">
@@ -104,9 +104,9 @@
             'about': { title: 'ABOUT', label: 'About', index: '001' },
             'service': { title: 'SERVICES', label: 'Service', index: '002' },
             'services': { title: 'SERVICES', label: 'Services', index: '002' },
-            'my-work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
-            'pages': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
-            'work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
+            'my-work': { title: 'PROJECTS', label: 'Projects', index: '003' },
+            'pages': { title: 'PROJECTS', label: 'Projects', index: '003' },
+            'work': { title: 'PROJECTS', label: 'Projects', index: '003' },
             'contact': { title: 'CONTACT ME', label: 'Contact', index: '004' },
             'admin-login': { title: 'ADMIN LOGIN', label: 'Admin Login', index: '005' },
             'admin-dashboard': { title: 'ADMIN DASHBOARD', label: 'Admin Console', index: '006' }
