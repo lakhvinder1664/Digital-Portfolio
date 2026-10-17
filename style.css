@@ -1178,29 +1178,114 @@ footer input::placeholder {
     transform: translateY(-2px);
 }
 
-/* Experience Modal Popup (Clean White Background, Scrollable Content) */
-.btn-exp-modal {
-    background-color: var(--dark-black);
-    color: var(--white);
-    border: 1.5px solid var(--dark-black);
-    padding: 9px 20px;
-    border-radius: 50px;
-    font-family: 'Inter', sans-serif;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+/* Interactive Experience Modal Trigger Component */
+.exp-cta-trigger {
+    background: transparent;
+    border: none;
+    padding: 0;
+    margin: 0;
     display: inline-flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    outline: none;
+    vertical-align: middle;
+}
+
+.exp-cta-pill {
+    background-color: var(--dark-black);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.exp-cta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background-color: var(--neon-lime);
+    display: inline-block;
+    box-shadow: 0 0 6px var(--neon-lime);
+    animation: expCtaPulse 2s infinite ease-in-out;
+}
+
+@keyframes expCtaPulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.4);
+        opacity: 0.6;
+    }
+}
+
+.exp-cta-circle {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1;
+    border: 1.5px solid var(--dark-black);
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover Effects: Both Pill and Circle Animate Simultaneously */
+.exp-cta-trigger:hover .exp-cta-pill {
+    background-color: var(--dark-black);
+    color: var(--neon-lime);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+.exp-cta-trigger:hover .exp-cta-circle {
+    background-color: var(--dark-black);
+    color: var(--neon-lime);
+    border-color: var(--dark-black);
+    transform: translateY(-2px) rotate(45deg);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+/* Secondary Meta Badges */
+.exp-meta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background-color: transparent;
+    color: var(--dark-black);
+    border: 1.5px solid var(--dark-black);
+    padding: 7px 14px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
     transition: all 0.25s ease;
 }
 
-.btn-exp-modal:hover {
-    background-color: var(--neon-lime);
-    color: var(--dark-black);
-    transform: translateY(-2px);
+.exp-meta-badge:hover {
+    background-color: var(--dark-black);
+    color: var(--white);
+    transform: translateY(-1px);
 }
 
 .custom-exp-modal .modal-content {
