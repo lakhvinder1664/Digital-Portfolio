@@ -256,7 +256,7 @@
                                                     </div>
 
                                                     <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">9 MONTHS</span>
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold hivends-tenure-pill" style="font-size: 10px;">9 MONTHS</span>
                                                         <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">● CURRENT WORKPLACE</span>
                                                         <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> SCO-38, Zirakpur, Punjab 140603</span>
                                                     </div>
@@ -414,7 +414,7 @@
                         <div class="modal-content">
                             <div class="modal-header d-flex align-items-start justify-content-between">
                                 <div>
-                                    <span class="exp-tag-tenure mb-2 d-inline-block">FEB 2026 — PRESENT • 9 MONTHS</span>
+                                    <span class="exp-tag-tenure mb-2 d-inline-block hivends-modal-tenure">FEB 2026 — PRESENT • 9 MONTHS</span>
                                     <h3 class="modal-title" id="modalExpHivendsLabel">HIVENDS INFO SOLUTIONS PVT. LTD.</h3>
                                     <div class="d-flex flex-wrap align-items-center gap-2 mt-2">
                                         <span class="badge bg-black text-white px-3 py-1 small-text">WEB DEVELOPMENT INTERN</span>
@@ -875,6 +875,41 @@
                     { scale: 1.35, opacity: 0.2, ease: "none" });
             }
         }
+
+        // Auto-calculating Dynamic Tenure for Hivends Info Solutions
+        // Starts Feb 2026, automatically increments each month dynamically from client date
+        function updateHivendsDynamicTenure() {
+            const startYear = 2026;
+            const startMonth = 1; // February (0-indexed: 0=Jan, 1=Feb)
+            const now = new Date();
+            const currentYear = now.getFullYear();
+            const currentMonth = now.getMonth();
+
+            let totalMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
+            if (totalMonths < 1) totalMonths = 1;
+
+            let tenureText = '';
+            if (totalMonths < 12) {
+                tenureText = `${totalMonths} MONTH${totalMonths > 1 ? 'S' : ''}`;
+            } else {
+                const years = Math.floor(totalMonths / 12);
+                const remMonths = totalMonths % 12;
+                if (remMonths === 0) {
+                    tenureText = `${years} YEAR${years > 1 ? 'S' : ''}`;
+                } else {
+                    tenureText = `${years} YR${years > 1 ? 'S' : ''} ${remMonths} MO${remMonths > 1 ? 'S' : ''}`;
+                }
+            }
+
+            document.querySelectorAll('.hivends-tenure-pill').forEach(el => {
+                el.textContent = tenureText;
+            });
+
+            document.querySelectorAll('.hivends-modal-tenure').forEach(el => {
+                el.textContent = `FEB 2026 — PRESENT • ${tenureText}`;
+            });
+        }
+        updateHivendsDynamicTenure();
     </script>
 </body>
 

@@ -232,10 +232,43 @@
         `;
     }
 
+    function updateHivendsDynamicTenure() {
+        const startYear = 2026;
+        const startMonth = 1; // February (0-indexed: 0=Jan, 1=Feb)
+        const now = new Date();
+        const currentYear = now.getFullYear();
+        const currentMonth = now.getMonth();
+
+        let totalMonths = (currentYear - startYear) * 12 + (currentMonth - startMonth) + 1;
+        if (totalMonths < 1) totalMonths = 1;
+
+        let tenureText = '';
+        if (totalMonths < 12) {
+            tenureText = `${totalMonths} MONTH${totalMonths > 1 ? 'S' : ''}`;
+        } else {
+            const years = Math.floor(totalMonths / 12);
+            const remMonths = totalMonths % 12;
+            if (remMonths === 0) {
+                tenureText = `${years} YEAR${years > 1 ? 'S' : ''}`;
+            } else {
+                tenureText = `${years} YR${years > 1 ? 'S' : ''} ${remMonths} MO${remMonths > 1 ? 'S' : ''}`;
+            }
+        }
+
+        document.querySelectorAll('.hivends-tenure-pill').forEach(el => {
+            el.textContent = tenureText;
+        });
+
+        document.querySelectorAll('.hivends-modal-tenure').forEach(el => {
+            el.textContent = `FEB 2026 — PRESENT • ${tenureText}`;
+        });
+    }
+
     function init() {
         renderHeader();
         renderBreadcrumb();
         renderFooter();
+        updateHivendsDynamicTenure();
     }
 
     if (document.readyState === 'loading') {
