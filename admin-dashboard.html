@@ -109,8 +109,11 @@
 
                         <div class="admin-stat-card">
                             <div>
-                                <div class="admin-stat-number" id="statMessagesCount">0</div>
-                                <div class="admin-stat-label">Inbox Inquiries</div>
+                                <div class="d-flex align-items-baseline gap-2">
+                                    <span class="admin-stat-number" id="statUnreadCount">0</span>
+                                    <span class="badge" id="statUnreadBadge" style="background: #FEE2E2; border: 1.5px solid #DC2626; color: #DC2626; font-size: 11px; font-weight: 700; text-transform: uppercase;">0 Pending</span>
+                                </div>
+                                <div class="admin-stat-label">Inbox Messages (<span id="statTotalMessagesCount">0</span> Total)</div>
                             </div>
                             <div class="admin-stat-icon">
                                 <i class="fas fa-envelope"></i>
@@ -127,7 +130,7 @@
                             <i class="fas fa-layer-group"></i> Manage Projects (<span id="tabPostsBadge">0</span>)
                         </button>
                         <button class="admin-tab-btn" data-tab="tab-messages">
-                            <i class="fas fa-inbox"></i> Inbox Messages (<span id="tabMessagesBadge">0</span>)
+                            <i class="fas fa-inbox"></i> Inbox Messages (<span id="tabUnreadBadge" style="font-weight: 700;">0 Pending</span>)
                         </button>
                         <button class="admin-tab-btn" data-tab="tab-subscribers">
                             <i class="fas fa-address-book"></i> Newsletter Subscribers (<span id="tabSubscribersBadge">0</span>)
@@ -236,11 +239,39 @@
                     <!-- TAB 3: Inbox Messages -->
                     <div class="admin-tab-pane" id="tab-messages">
                         <div class="admin-card">
-                            <div class="border-bottom border-dark pb-3 mb-4">
-                                <span class="admin-badge mb-1">CONTACT FORM INQUIRIES</span>
-                                <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
-                                    Inbox Messages
-                                </h2>
+                            <div class="d-flex justify-content-between align-items-center border-bottom border-dark pb-3 mb-4 flex-wrap gap-2">
+                                <div>
+                                    <div class="d-flex align-items-center gap-2 mb-1 flex-wrap">
+                                        <span class="admin-badge">CONTACT INQUIRIES</span>
+                                        <span id="inboxPendingBadge" class="admin-badge" style="background: #FEE2E2; border-color: #DC2626; color: #DC2626; font-weight: 700;">
+                                            0 Pending to Read
+                                        </span>
+                                    </div>
+                                    <h2 style="font-family: 'Oswald', sans-serif; font-size: 2rem; margin: 0; text-transform: uppercase;">
+                                        Inbox Inquiries
+                                    </h2>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <button id="markAllReadBtn" class="btn-outline-brutalist" title="Mark all unread messages as read">
+                                        <i class="fas fa-check-double"></i> Mark All as Read
+                                    </button>
+                                    <button id="clearAllMessagesBtn" class="btn-delete-brutalist" style="padding: 8px 18px; font-size: 12px;" title="Permanently delete all inbox messages">
+                                        <i class="fas fa-trash-alt"></i> Clear All Messages
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Filter Pills for Inbox: All, Pending, Read -->
+                            <div class="d-flex gap-2 mb-4 flex-wrap" id="inboxFilterRow">
+                                <button class="btn-pill-brutalist inbox-filter-btn active" data-filter="all" style="padding: 6px 16px; font-size: 11px;">
+                                    All Messages (<span id="countFilterAll">0</span>)
+                                </button>
+                                <button class="btn-outline-brutalist inbox-filter-btn" data-filter="unread" style="padding: 6px 16px; font-size: 11px;">
+                                    Pending to Read (<span id="countFilterUnread">0</span>)
+                                </button>
+                                <button class="btn-outline-brutalist inbox-filter-btn" data-filter="read" style="padding: 6px 16px; font-size: 11px;">
+                                    Read (<span id="countFilterRead">0</span>)
+                                </button>
                             </div>
 
                             <div id="loadingMessages" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
@@ -331,6 +362,8 @@
             onSnapshot, 
             addDoc, 
             deleteDoc, 
+            updateDoc,
+            writeBatch,
             doc, 
             serverTimestamp,
             getDocs 
@@ -508,43 +541,60 @@
         });
 
         // =====================================================================
-        // 2. Real-time Messages Listener
+        // 2. Real-time Messages Listener with Unread Tracking & Management
         // =====================================================================
         const messagesDiv = document.getElementById("messages");
         const loadingMessagesDiv = document.getElementById("loadingMessages");
+        let cachedMessagesList = [];
+        let currentInboxFilter = 'all';
 
-        onSnapshot(collection(db, "messages"), (snapshot) => {
-            if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
+        function renderInboxMessages() {
+            if (!messagesDiv) return;
 
-            const count = snapshot.size;
-            document.getElementById("statMessagesCount").textContent = count;
-            document.getElementById("tabMessagesBadge").textContent = count;
-
-            if (snapshot.empty) {
-                messagesDiv.innerHTML = '<div class="text-center py-4 text-muted fw-bold">No messages received yet.</div>';
+            if (cachedMessagesList.length === 0) {
+                messagesDiv.innerHTML = '<div class="text-center py-5 text-muted fw-bold"><i class="fas fa-inbox fa-2x mb-3 d-block opacity-25"></i>No messages found in your inbox.</div>';
                 return;
             }
 
-            const docs = snapshot.docs.slice();
-            docs.sort((a, b) => getMillis(b.data().time) - getMillis(a.data().time));
+            let filtered = cachedMessagesList.filter(item => {
+                const isUnread = item.data.read !== true;
+                if (currentInboxFilter === 'unread') return isUnread;
+                if (currentInboxFilter === 'read') return !isUnread;
+                return true;
+            });
+
+            if (filtered.length === 0) {
+                messagesDiv.innerHTML = `<div class="text-center py-4 text-muted fw-bold">No ${currentInboxFilter === 'unread' ? 'pending / unread' : 'read'} messages found.</div>`;
+                return;
+            }
 
             let html = "";
-            docs.forEach((docSnap) => {
-                const d = docSnap.data();
+            filtered.forEach(({ id, data: d }) => {
+                const isUnread = d.read !== true;
                 html += `
-                    <div class="admin-item-box">
+                    <div class="admin-item-box" style="border-left: 6px solid ${isUnread ? '#DC2626' : '#27AE60'}; ${isUnread ? 'background: #FFFDF9;' : 'background: #FFFFFF;'}">
                         <div class="d-flex justify-content-between align-items-start gap-3 mb-3 flex-wrap">
                             <div>
-                                <span class="admin-badge mb-2"><i class="fas fa-envelope-open-text me-1"></i> Contact Inquiry</span>
-                                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; margin: 0; text-transform: uppercase;">
+                                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                    <span class="admin-badge" style="${isUnread ? 'background: #FEE2E2; border-color: #DC2626; color: #DC2626; font-weight: 700;' : 'background: #E8F7EE; border-color: #27AE60; color: #196F3D;'}">
+                                        <i class="fas ${isUnread ? 'fa-circle' : 'fa-check'} me-1" style="${isUnread ? 'font-size: 7px;' : ''}"></i>
+                                        ${isUnread ? 'UNREAD / PENDING' : 'READ'}
+                                    </span>
+                                    <span class="text-muted small">ID: ${escapeHtml(id.substring(0, 8))}...</span>
+                                </div>
+                                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.45rem; margin: 0; text-transform: uppercase;">
                                     ${escapeHtml(d.name || 'Anonymous Client')}
                                 </h3>
                             </div>
-                            <div class="d-flex gap-2">
-                                <a href="mailto:${escapeHtml(d.email || '')}?subject=Re: Inquiry on Lakhvinder Singh Portfolio" class="btn-outline-brutalist">
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn-outline-brutalist btn-toggle-read" data-msg-id="${id}" data-action="${isUnread ? 'mark-read' : 'mark-unread'}" title="${isUnread ? 'Mark this message as read' : 'Mark as unread'}">
+                                    <i class="fas ${isUnread ? 'fa-check-double text-success' : 'fa-envelope'}"></i>
+                                    ${isUnread ? 'Mark Read' : 'Mark Unread'}
+                                </button>
+                                <a href="mailto:${escapeHtml(d.email || '')}?subject=Re: Portfolio Inquiry from ${encodeURIComponent(d.name || 'Client')}" class="btn-outline-brutalist" title="Reply directly via email">
                                     <i class="fas fa-reply"></i> Reply
                                 </a>
-                                <button class="btn-delete-brutalist" data-msg-id="${docSnap.id}" title="Delete Message">
+                                <button class="btn-delete-brutalist btn-delete-single-msg" data-msg-id="${id}" title="Delete Message">
                                     <i class="fas fa-trash-alt"></i>
                                 </button>
                             </div>
@@ -562,16 +612,19 @@
                             </div>
                         </div>
 
-                        <div class="p-3 mb-3 rounded" style="background: #F4F4F2; border: 1px solid #DDD; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap;">${escapeHtml(d.message || 'No message content.')}</div>
+                        <div class="p-3 mb-3 rounded" style="background: #F4F4F2; border: 1.5px solid #DDD; font-size: 0.95rem; line-height: 1.6; white-space: pre-wrap; font-family: 'Inter', sans-serif;">${escapeHtml(d.message || 'No message content.')}</div>
 
-                        <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Received: ${formatDate(d.time)}</small>
+                        <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 pt-2 border-top">
+                            <small class="text-muted"><i class="fas fa-calendar-alt me-1"></i> Received: ${formatDate(d.time)}</small>
+                            ${isUnread ? '<span class="badge" style="background: #FEE2E2; color: #DC2626; border: 1px solid #DC2626; font-size: 10px;">ACTION PENDING</span>' : '<span class="text-muted small"><i class="fas fa-check-circle text-success me-1"></i> Read</span>'}
+                        </div>
                     </div>
                 `;
             });
             messagesDiv.innerHTML = html;
 
-            // Attach message delete listeners
-            messagesDiv.querySelectorAll('.btn-delete-brutalist').forEach(btn => {
+            // Attach single message delete listeners
+            messagesDiv.querySelectorAll('.btn-delete-single-msg').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const msgId = btn.getAttribute('data-msg-id');
                     if (confirm("Delete this inbox message?")) {
@@ -583,11 +636,171 @@
                     }
                 });
             });
+
+            // Attach toggle read/unread listeners
+            messagesDiv.querySelectorAll('.btn-toggle-read').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const msgId = btn.getAttribute('data-msg-id');
+                    const action = btn.getAttribute('data-action');
+                    const newReadState = action === 'mark-read';
+                    try {
+                        await updateDoc(doc(db, "messages", msgId), {
+                            read: newReadState
+                        });
+                    } catch (err) {
+                        alert("Error updating message status: " + err.message);
+                    }
+                });
+            });
+        }
+
+        onSnapshot(collection(db, "messages"), (snapshot) => {
+            if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
+
+            cachedMessagesList = [];
+            snapshot.forEach(docSnap => {
+                cachedMessagesList.push({
+                    id: docSnap.id,
+                    data: docSnap.data()
+                });
+            });
+
+            // Sort newest first
+            cachedMessagesList.sort((a, b) => getMillis(b.data.time) - getMillis(a.data.time));
+
+            const totalCount = cachedMessagesList.length;
+            const unreadCount = cachedMessagesList.filter(m => m.data.read !== true).length;
+            const readCount = totalCount - unreadCount;
+
+            // 1. Update quick stats card in header
+            const statUnreadEl = document.getElementById("statUnreadCount");
+            const statTotalEl = document.getElementById("statTotalMessagesCount");
+            const statBadgeEl = document.getElementById("statUnreadBadge");
+            if (statUnreadEl) statUnreadEl.textContent = unreadCount;
+            if (statTotalEl) statTotalEl.textContent = totalCount;
+            if (statBadgeEl) {
+                statBadgeEl.textContent = unreadCount === 0 ? "All Read" : `${unreadCount} Pending`;
+                statBadgeEl.style.background = unreadCount === 0 ? "#E8F7EE" : "#FEE2E2";
+                statBadgeEl.style.borderColor = unreadCount === 0 ? "#27AE60" : "#DC2626";
+                statBadgeEl.style.color = unreadCount === 0 ? "#196F3D" : "#DC2626";
+            }
+
+            // 2. Update navigation tab badge
+            const tabUnreadBadge = document.getElementById("tabUnreadBadge");
+            if (tabUnreadBadge) {
+                tabUnreadBadge.textContent = unreadCount === 0 ? "0 Pending" : `${unreadCount} Pending`;
+                tabUnreadBadge.style.color = unreadCount > 0 ? "#DC2626" : "inherit";
+            }
+
+            // 3. Update Tab 3 header badge
+            const inboxPendingBadge = document.getElementById("inboxPendingBadge");
+            if (inboxPendingBadge) {
+                inboxPendingBadge.textContent = unreadCount === 0 ? "All Messages Read" : `${unreadCount} Pending to Read`;
+                inboxPendingBadge.style.background = unreadCount === 0 ? "#E8F7EE" : "#FEE2E2";
+                inboxPendingBadge.style.borderColor = unreadCount === 0 ? "#27AE60" : "#DC2626";
+                inboxPendingBadge.style.color = unreadCount === 0 ? "#196F3D" : "#DC2626";
+            }
+
+            // 4. Update filter counts
+            const countAllEl = document.getElementById("countFilterAll");
+            const countUnreadEl = document.getElementById("countFilterUnread");
+            const countReadEl = document.getElementById("countFilterRead");
+            if (countAllEl) countAllEl.textContent = totalCount;
+            if (countUnreadEl) countUnreadEl.textContent = unreadCount;
+            if (countReadEl) countReadEl.textContent = readCount;
+
+            renderInboxMessages();
         }, (error) => {
             console.error("Error fetching messages:", error);
             if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
             messagesDiv.innerHTML = '<div class="text-danger text-center py-3">Error loading inbox messages.</div>';
         });
+
+        // Filter buttons click handler (All, Unread, Read)
+        document.querySelectorAll('.inbox-filter-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.inbox-filter-btn').forEach(b => {
+                    b.classList.remove('active', 'btn-pill-brutalist');
+                    b.classList.add('btn-outline-brutalist');
+                });
+                btn.classList.remove('btn-outline-brutalist');
+                btn.classList.add('active', 'btn-pill-brutalist');
+                currentInboxFilter = btn.getAttribute('data-filter') || 'all';
+                renderInboxMessages();
+            });
+        });
+
+        // Mark All as Read Action Button
+        const markAllReadBtn = document.getElementById("markAllReadBtn");
+        if (markAllReadBtn) {
+            markAllReadBtn.addEventListener("click", async () => {
+                const unreadItems = cachedMessagesList.filter(m => m.data.read !== true);
+                if (unreadItems.length === 0) {
+                    alert("All messages are already marked as read!");
+                    return;
+                }
+
+                markAllReadBtn.disabled = true;
+                markAllReadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
+
+                try {
+                    await Promise.all(unreadItems.map(item => 
+                        updateDoc(doc(db, "messages", item.id), { read: true })
+                    ));
+                    const alertBanner = document.getElementById("broadcastSuccessAlert");
+                    const alertText = document.getElementById("broadcastSuccessText");
+                    if (alertBanner && alertText) {
+                        alertBanner.style.display = "block";
+                        alertText.textContent = `✓ Marked ${unreadItems.length} message(s) as read!`;
+                        setTimeout(() => { alertBanner.style.display = "none"; }, 5000);
+                    }
+                } catch (err) {
+                    console.error("Error marking all read:", err);
+                    alert("Failed to mark all as read: " + err.message);
+                } finally {
+                    markAllReadBtn.disabled = false;
+                    markAllReadBtn.innerHTML = '<i class="fas fa-check-double"></i> Mark All as Read';
+                }
+            });
+        }
+
+        // Clear All Messages Action Button
+        const clearAllMessagesBtn = document.getElementById("clearAllMessagesBtn");
+        if (clearAllMessagesBtn) {
+            clearAllMessagesBtn.addEventListener("click", async () => {
+                if (cachedMessagesList.length === 0) {
+                    alert("Your inbox is already empty.");
+                    return;
+                }
+
+                const confirmClear = confirm(`⚠️ WARNING: Are you sure you want to permanently CLEAR ALL (${cachedMessagesList.length}) messages from your inbox?\n\nThis cannot be undone!`);
+                if (!confirmClear) return;
+
+                clearAllMessagesBtn.disabled = true;
+                clearAllMessagesBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Clearing All...';
+
+                try {
+                    const toDelete = [...cachedMessagesList];
+                    await Promise.all(toDelete.map(item => 
+                        deleteDoc(doc(db, "messages", item.id))
+                    ));
+
+                    const alertBanner = document.getElementById("broadcastSuccessAlert");
+                    const alertText = document.getElementById("broadcastSuccessText");
+                    if (alertBanner && alertText) {
+                        alertBanner.style.display = "block";
+                        alertText.textContent = `🗑️ All ${toDelete.length} inbox message(s) have been permanently cleared!`;
+                        setTimeout(() => { alertBanner.style.display = "none"; }, 6000);
+                    }
+                } catch (err) {
+                    console.error("Error clearing messages:", err);
+                    alert("Failed to clear messages: " + err.message);
+                } finally {
+                    clearAllMessagesBtn.disabled = false;
+                    clearAllMessagesBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Clear All Messages';
+                }
+            });
+        }
 
         // =====================================================================
         // 3. Real-time Published Posts Listener

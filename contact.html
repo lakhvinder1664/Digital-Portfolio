@@ -14,7 +14,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 
-<body class="contact-page">
+<body>
     <!-- Preloader Animation -->
     <div id="preloader">
         <svg id="svg-stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
@@ -139,12 +139,7 @@
                                     <a href="#" class="contact-social-btn" title="Instagram">
                                         <i class="fab fa-instagram"></i>
                                     </a>
-                                    <a href="#" class="contact-social-btn" title="Twitter / X">
-                                        <i class="fab fa-twitter"></i>
-                                    </a>
-                                    <a href="#" class="contact-social-btn" title="Facebook">
-                                        <i class="fab fa-facebook-f"></i>
-                                    </a>
+
                                 </div>
                             </div>
                         </div>
@@ -314,24 +309,58 @@
             }
         });
 
-        // Contact Form Interactive Submission Handler
+        // Contact Form Submission Handler (Integrated with Firestore)
         const contactForm = document.getElementById('contactForm');
         const contactSuccessAlert = document.getElementById('contactSuccessAlert');
         const contactSubmitBtn = document.getElementById('contactSubmitBtn');
 
         if (contactForm) {
-            contactForm.addEventListener('submit', (e) => {
+            contactForm.addEventListener('submit', async (e) => {
                 e.preventDefault();
+
+                const name = document.getElementById('contactName')?.value.trim();
+                const email = document.getElementById('contactEmail')?.value.trim();
+                const phone = document.getElementById('contactPhone')?.value.trim() || '';
+                const message = document.getElementById('contactMessage')?.value.trim();
+
+                if (!name || !email || !message) {
+                    alert('Please fill in your name, email, and message.');
+                    return;
+                }
 
                 // Button loading state
                 const pill = contactSubmitBtn.querySelector('.contact-submit-pill');
-                const origText = pill.textContent;
-                pill.textContent = 'SENDING...';
+                const origText = pill ? pill.textContent : 'SUBMIT';
+                if (pill) pill.textContent = 'SENDING...';
                 contactSubmitBtn.disabled = true;
 
-                setTimeout(() => {
-                    pill.textContent = origText;
-                    contactSubmitBtn.disabled = false;
+                try {
+                    // Dynamic import of Firebase Firestore
+                    const { initializeApp } = await import("https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js");
+                    const { getFirestore, collection, addDoc, serverTimestamp } = await import("https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js");
+
+                    const firebaseConfig = {
+                        apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
+                        authDomain: "portfolio-contact-fe911.firebaseapp.com",
+                        projectId: "portfolio-contact-fe911",
+                        storageBucket: "portfolio-contact-fe911.firebasestorage.app",
+                        messagingSenderId: "48417656668",
+                        appId: "1:48417656668:web:759f639f233ea8a53c3b99"
+                    };
+
+                    const app = initializeApp(firebaseConfig);
+                    const db = getFirestore(app);
+
+                    await addDoc(collection(db, "messages"), {
+                        name: name,
+                        email: email,
+                        phone: phone,
+                        message: message,
+                        subject: "Direct Portfolio Inquiry",
+                        read: false,
+                        time: serverTimestamp()
+                    });
+
                     contactForm.reset();
 
                     if (contactSuccessAlert) {
@@ -339,9 +368,15 @@
                         contactSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                         setTimeout(() => {
                             contactSuccessAlert.style.display = 'none';
-                        }, 6000);
+                        }, 7000);
                     }
-                }, 900);
+                } catch (err) {
+                    console.error("Error submitting contact inquiry:", err);
+                    alert("Unable to send message right now. Please try again or email directly to lakhvinder9567@gmail.com.");
+                } finally {
+                    if (pill) pill.textContent = origText;
+                    contactSubmitBtn.disabled = false;
+                }
             });
         }
 
