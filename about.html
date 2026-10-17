@@ -215,151 +215,192 @@
                                 <p class="small text-dark fw-bold text-uppercase mb-0">Web Development • UI/UX • Modern Stack</p>
                             </div>
 
-                            <!-- Right Column: Services-Style Experience Rows -->
+                            <!-- Right Column: Single-Spot Interactive Career Slider -->
                             <div class="col-lg-7">
-                                <h2 class="expertise-section-right-title mb-5">Work i have delivered.</h2>
+                                <!-- Slider Header Bar with Navigation Controls -->
+                                <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 pb-2 border-bottom border-dark">
+                                    <div>
+                                        <h2 class="expertise-section-right-title mb-0" style="font-size: clamp(2rem, 3.8vw, 3.2rem);">Work i have delivered.</h2>
+                                    </div>
+                                    <div class="d-flex align-items-center gap-3 mt-3 mt-sm-0">
+                                        <span id="expSlideCounter" class="exp-counter-text font-monospace fw-bold">01 / 04</span>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <button class="exp-slider-btn" type="button" data-bs-target="#carouselExperience" data-bs-slide="prev" aria-label="Previous role">
+                                                <i class="fas fa-arrow-left"></i>
+                                            </button>
+                                            <button class="exp-slider-btn" type="button" data-bs-target="#carouselExperience" data-bs-slide="next" aria-label="Next role">
+                                                <i class="fas fa-arrow-right"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <!-- Role 01: Hivends Info Solutions -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(001)</span>
-                                        <div class="ms-1">
-                                            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                                <span class="badge bg-black text-white px-2 py-1 rounded-pill small-text" style="font-size: 10px;">FEB 2026 — PRESENT</span>
-                                                <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text" style="font-size: 10px;">9 MONTHS</span>
-                                                <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Zirakpur, Punjab</span>
+                                <!-- Clickable Quick Jump Tab Buttons -->
+                                <div class="exp-slider-tabs mb-4">
+                                    <button type="button" class="exp-tab-btn active" data-bs-target="#carouselExperience" data-bs-slide-to="0">01. HIVENDS</button>
+                                    <button type="button" class="exp-tab-btn" data-bs-target="#carouselExperience" data-bs-slide-to="1">02. XPORTSOFT</button>
+                                    <button type="button" class="exp-tab-btn" data-bs-target="#carouselExperience" data-bs-slide-to="2">03. VISHYAT</button>
+                                    <button type="button" class="exp-tab-btn" data-bs-target="#carouselExperience" data-bs-slide-to="3">04. AMAZE</button>
+                                </div>
+
+                                <!-- Bootstrap Carousel Slider in One Spot (Images Removed) -->
+                                <div id="carouselExperience" class="carousel slide exp-carousel-wrapper" data-bs-interval="false">
+                                    <div class="carousel-inner">
+                                        <!-- Slide 01: Hivends Info Solutions -->
+                                        <div class="carousel-item active">
+                                            <div class="exp-slide-card">
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <span class="index-number mb-0" style="font-size: 1.25rem; font-weight: 700; color: var(--dark-black); font-family: 'Oswald', sans-serif;">(001)</span>
+                                                        <span class="badge bg-black text-white px-3 py-1 rounded-pill small-text" style="font-size: 10px;">FEB 2026 — PRESENT</span>
+                                                    </div>
+
+                                                    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">9 MONTHS</span>
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">● CURRENT WORKPLACE</span>
+                                                        <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> SCO-38, Zirakpur, Punjab 140603</span>
+                                                    </div>
+
+                                                    <h3 class="mb-2 exp-item-title">Hivends Info Solutions Pvt. Ltd.</h3>
+                                                    <div class="exp-role-sub mb-3">Web Development Intern</div>
+
+                                                    <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                                                        Working as a Web Developer Intern contributing to website development, UI design, maintenance, and digital projects for pharmaceutical businesses — managing client mockups, custom WordPress themes, and live product catalogs.
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+                                                    <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpHivends">
+                                                        <span class="exp-cta-pill">
+                                                            <span class="exp-cta-dot"></span>
+                                                            EXPLORE ROLE ARCHIVE
+                                                        </span>
+                                                        <span class="exp-cta-circle" aria-hidden="true">↗</span>
+                                                    </button>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <span class="exp-meta-badge"><i class="fas fa-layer-group me-1"></i> 9+ DELIVERABLES</span>
+                                                        <span class="exp-meta-badge"><i class="fas fa-check-circle me-1"></i> CLIENT APPROVED</span>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <h3 class="mb-2 exp-item-title">Hivends Info Solutions</h3>
-                                            <div class="exp-role-sub mb-2">Web Development Intern</div>
-                                            <p class="text-secondary mb-3" style="max-width: 440px;">
-                                                Contributing to website development, UI design, maintenance, and digital projects for pharmaceutical businesses — managing client mockups, custom WordPress themes, and live product catalogs.
-                                            </p>
-                                            <div class="d-flex flex-wrap align-items-center gap-3">
-                                                <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpHivends">
-                                                    <span class="exp-cta-pill">
-                                                        <span class="exp-cta-dot"></span>
-                                                        EXPLORE ROLE ARCHIVE
-                                                    </span>
-                                                    <span class="exp-cta-circle" aria-hidden="true">↗</span>
-                                                </button>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <span class="exp-meta-badge"><i class="fas fa-layer-group me-1"></i> 9+ DELIVERABLES</span>
-                                                    <span class="exp-meta-badge"><i class="fas fa-check-circle me-1"></i> CLIENT APPROVED</span>
+                                        </div>
+
+                                        <!-- Slide 02: Xportsoft Technologies -->
+                                        <div class="carousel-item">
+                                            <div class="exp-slide-card">
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <span class="index-number mb-0" style="font-size: 1.25rem; font-weight: 700; color: var(--dark-black); font-family: 'Oswald', sans-serif;">(002)</span>
+                                                        <span class="badge bg-black text-white px-3 py-1 rounded-pill small-text" style="font-size: 10px;">JUL 2025 — SEP 2025</span>
+                                                    </div>
+
+                                                    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">3 MONTHS</span>
+                                                        <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Ambala, Haryana, India</span>
+                                                    </div>
+
+                                                    <h3 class="mb-2 exp-item-title">Xportsoft Technologies Pvt. Ltd.</h3>
+                                                    <div class="exp-role-sub mb-3">Frontend Development Intern</div>
+
+                                                    <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                                                        Underwent intensive front-end training and development on responsive web design, Bootstrap 5, JavaScript, and React.js components, creating modular user interfaces.
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+                                                    <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpXportsoft">
+                                                        <span class="exp-cta-pill">
+                                                            <span class="exp-cta-dot"></span>
+                                                            EXPLORE FRONT-END JOURNEY
+                                                        </span>
+                                                        <span class="exp-cta-circle" aria-hidden="true">↗</span>
+                                                    </button>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <span class="exp-pill-tag">React.js</span>
+                                                        <span class="exp-pill-tag">Bootstrap 5</span>
+                                                        <span class="exp-pill-tag">JavaScript</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Slide 03: Vishyat Technologies -->
+                                        <div class="carousel-item">
+                                            <div class="exp-slide-card">
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <span class="index-number mb-0" style="font-size: 1.25rem; font-weight: 700; color: var(--dark-black); font-family: 'Oswald', sans-serif;">(003)</span>
+                                                        <span class="badge bg-black text-white px-3 py-1 rounded-pill small-text" style="font-size: 10px;">DEC 2024 — JUN 2025</span>
+                                                    </div>
+
+                                                    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">7 MONTHS</span>
+                                                        <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Zirakpur, Punjab</span>
+                                                    </div>
+
+                                                    <h3 class="mb-2 exp-item-title">Vishyat Technologies</h3>
+                                                    <div class="exp-role-sub mb-3">SEO Executive</div>
+
+                                                    <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                                                        Managed comprehensive OFF-page SEO strategies, backlink acquisition, search ranking visibility, and organic traffic optimization for digital brands.
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+                                                    <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpVishyat">
+                                                        <span class="exp-cta-pill">
+                                                            <span class="exp-cta-dot"></span>
+                                                            EXPLORE SEO STRATEGIES
+                                                        </span>
+                                                        <span class="exp-cta-circle" aria-hidden="true">↗</span>
+                                                    </button>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <span class="exp-pill-tag">OFF-Page SEO</span>
+                                                        <span class="exp-pill-tag">Backlink Building</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <!-- Slide 04: Amaze Technosoft -->
+                                        <div class="carousel-item">
+                                            <div class="exp-slide-card">
+                                                <div>
+                                                    <div class="d-flex justify-content-between align-items-center mb-3">
+                                                        <span class="index-number mb-0" style="font-size: 1.25rem; font-weight: 700; color: var(--dark-black); font-family: 'Oswald', sans-serif;">(004)</span>
+                                                        <span class="badge bg-black text-white px-3 py-1 rounded-pill small-text" style="font-size: 10px;">JAN 2025 — MAR 2025</span>
+                                                    </div>
+
+                                                    <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
+                                                        <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text fw-bold" style="font-size: 10px;">3 MONTHS</span>
+                                                        <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Zirakpur, Chandigarh</span>
+                                                    </div>
+
+                                                    <h3 class="mb-2 exp-item-title">Amaze Technosoft Pvt. Ltd.</h3>
+                                                    <div class="exp-role-sub mb-3">Web Designing Intern</div>
+
+                                                    <p class="text-secondary mb-4" style="font-size: 1.05rem; line-height: 1.7;">
+                                                        Developed responsive web interfaces using modern HTML5, CSS3, implementing new UI features and performance enhancements across live client websites.
+                                                    </p>
+                                                </div>
+
+                                                <div class="d-flex flex-wrap align-items-center gap-3 pt-2">
+                                                    <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpAmaze">
+                                                        <span class="exp-cta-pill">
+                                                            <span class="exp-cta-dot"></span>
+                                                            EXPLORE DESIGN PROJECTS
+                                                        </span>
+                                                        <span class="exp-cta-circle" aria-hidden="true">↗</span>
+                                                    </button>
+                                                    <div class="d-flex flex-wrap gap-2">
+                                                        <span class="exp-pill-tag">HTML5</span>
+                                                        <span class="exp-pill-tag">CSS3</span>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="Hivends Info Solutions">
-                                    </div>
                                 </div>
-
-                                <!-- Role 02: Xportsoft Technologies -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(002)</span>
-                                        <div class="ms-1">
-                                            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                                <span class="badge bg-black text-white px-2 py-1 rounded-pill small-text" style="font-size: 10px;">JUL 2025 — SEP 2025</span>
-                                                <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text" style="font-size: 10px;">3 MONTHS</span>
-                                                <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Ambala, Haryana</span>
-                                            </div>
-                                            <h3 class="mb-2 exp-item-title">Xportsoft Technologies</h3>
-                                            <div class="exp-role-sub mb-2">Frontend Development Intern</div>
-                                            <p class="text-secondary mb-3" style="max-width: 440px;">
-                                                Underwent intensive front-end training and development on responsive web design, Bootstrap, JavaScript, and React.js components.
-                                            </p>
-                                            <div class="d-flex flex-wrap align-items-center gap-3">
-                                                <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpXportsoft">
-                                                    <span class="exp-cta-pill">
-                                                        <span class="exp-cta-dot"></span>
-                                                        EXPLORE FRONT-END JOURNEY
-                                                    </span>
-                                                    <span class="exp-cta-circle" aria-hidden="true">↗</span>
-                                                </button>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <span class="exp-pill-tag">React.js</span>
-                                                    <span class="exp-pill-tag">Bootstrap 5</span>
-                                                    <span class="exp-pill-tag">JavaScript</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Xportsoft Technologies">
-                                    </div>
-                                </div>
-
-                                <!-- Role 03: Vishyat Technologies -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(003)</span>
-                                        <div class="ms-1">
-                                            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                                <span class="badge bg-black text-white px-2 py-1 rounded-pill small-text" style="font-size: 10px;">DEC 2024 — JUN 2025</span>
-                                                <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text" style="font-size: 10px;">7 MONTHS</span>
-                                                <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Zirakpur, Punjab</span>
-                                            </div>
-                                            <h3 class="mb-2 exp-item-title">Vishyat Technologies</h3>
-                                            <div class="exp-role-sub mb-2">SEO Executive</div>
-                                            <p class="text-secondary mb-3" style="max-width: 440px;">
-                                                Managed OFF-page SEO strategies, backlink acquisition, search ranking visibility, and organic traffic optimization.
-                                            </p>
-                                            <div class="d-flex flex-wrap align-items-center gap-3">
-                                                <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpVishyat">
-                                                    <span class="exp-cta-pill">
-                                                        <span class="exp-cta-dot"></span>
-                                                        EXPLORE SEO STRATEGIES
-                                                    </span>
-                                                    <span class="exp-cta-circle" aria-hidden="true">↗</span>
-                                                </button>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <span class="exp-pill-tag">OFF-Page SEO</span>
-                                                    <span class="exp-pill-tag">Backlink Building</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="Vishyat Technologies">
-                                    </div>
-                                </div>
-
-                                <!-- Role 04: Amaze Technosoft -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(004)</span>
-                                        <div class="ms-1">
-                                            <div class="d-flex flex-wrap align-items-center gap-2 mb-2">
-                                                <span class="badge bg-black text-white px-2 py-1 rounded-pill small-text" style="font-size: 10px;">JAN 2025 — MAR 2025</span>
-                                                <span class="badge border border-dark text-dark px-2 py-1 rounded-pill small-text" style="font-size: 10px;">3 MONTHS</span>
-                                                <span class="small text-muted ms-1"><i class="fas fa-map-marker-alt me-1"></i> Zirakpur, Chandigarh</span>
-                                            </div>
-                                            <h3 class="mb-2 exp-item-title">Amaze Technosoft</h3>
-                                            <div class="exp-role-sub mb-2">Web Designing Intern</div>
-                                            <p class="text-secondary mb-3" style="max-width: 440px;">
-                                                Developed responsive web interfaces using modern HTML5, CSS3, implementing new UI features and performance enhancements.
-                                            </p>
-                                            <div class="d-flex flex-wrap align-items-center gap-3">
-                                                <button type="button" class="exp-cta-trigger" data-bs-toggle="modal" data-bs-target="#modalExpAmaze">
-                                                    <span class="exp-cta-pill">
-                                                        <span class="exp-cta-dot"></span>
-                                                        EXPLORE DESIGN PROJECTS
-                                                    </span>
-                                                    <span class="exp-cta-circle" aria-hidden="true">↗</span>
-                                                </button>
-                                                <div class="d-flex flex-wrap gap-2">
-                                                    <span class="exp-pill-tag">HTML5</span>
-                                                    <span class="exp-pill-tag">CSS3</span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Amaze Technosoft">
-                                    </div>
-                                </div>
-
                             </div>
                         </div>
                     </div>
@@ -762,6 +803,28 @@
                 }
 
                 pageTransition(link.href);
+            }
+        });
+
+        // Career Experience Slider Tab & Counter Sync
+        document.addEventListener('DOMContentLoaded', () => {
+            const expCarousel = document.getElementById('carouselExperience');
+            if (expCarousel) {
+                expCarousel.addEventListener('slide.bs.carousel', (e) => {
+                    const idx = e.to;
+                    const counter = document.getElementById('expSlideCounter');
+                    if (counter) {
+                        counter.textContent = `0${idx + 1} / 04`;
+                    }
+                    const tabs = document.querySelectorAll('.exp-tab-btn');
+                    tabs.forEach((tab, i) => {
+                        if (i === idx) {
+                            tab.classList.add('active');
+                        } else {
+                            tab.classList.remove('active');
+                        }
+                    });
+                });
             }
         });
     </script>
