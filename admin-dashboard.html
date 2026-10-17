@@ -255,23 +255,44 @@
                                     <button id="markAllReadBtn" class="btn-outline-brutalist" title="Mark all unread messages as read">
                                         <i class="fas fa-check-double"></i> Mark All as Read
                                     </button>
-                                    <button id="clearAllMessagesBtn" class="btn-delete-brutalist" style="padding: 8px 18px; font-size: 12px;" title="Permanently delete all inbox messages">
-                                        <i class="fas fa-trash-alt"></i> Clear All Messages
+                                    <button id="clearAllMessagesBtn" class="btn-delete-brutalist" style="padding: 8px 18px; font-size: 12px; background: #DC2626; color: white;" title="Permanently delete all inbox messages in 1 click">
+                                        <i class="fas fa-trash-alt"></i> Delete All Messages (<span class="deleteAllNumBadge">0</span>)
                                     </button>
                                 </div>
                             </div>
 
                             <!-- Filter Pills for Inbox: All, Pending, Read -->
-                            <div class="d-flex gap-2 mb-4 flex-wrap" id="inboxFilterRow">
-                                <button class="btn-pill-brutalist inbox-filter-btn active" data-filter="all" style="padding: 6px 16px; font-size: 11px;">
-                                    All Messages (<span id="countFilterAll">0</span>)
-                                </button>
-                                <button class="btn-outline-brutalist inbox-filter-btn" data-filter="unread" style="padding: 6px 16px; font-size: 11px;">
-                                    Pending to Read (<span id="countFilterUnread">0</span>)
-                                </button>
-                                <button class="btn-outline-brutalist inbox-filter-btn" data-filter="read" style="padding: 6px 16px; font-size: 11px;">
-                                    Read (<span id="countFilterRead">0</span>)
-                                </button>
+                            <div class="d-flex justify-content-between align-items-center mb-3 flex-wrap gap-2">
+                                <div class="d-flex gap-2 flex-wrap" id="inboxFilterRow">
+                                    <button class="btn-pill-brutalist inbox-filter-btn active" data-filter="all" style="padding: 6px 16px; font-size: 11px;">
+                                        All Messages (<span id="countFilterAll">0</span>)
+                                    </button>
+                                    <button class="btn-outline-brutalist inbox-filter-btn" data-filter="unread" style="padding: 6px 16px; font-size: 11px;">
+                                        Pending to Read (<span id="countFilterUnread">0</span>)
+                                    </button>
+                                    <button class="btn-outline-brutalist inbox-filter-btn" data-filter="read" style="padding: 6px 16px; font-size: 11px;">
+                                        Read (<span id="countFilterRead">0</span>)
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Dedicated Bulk Management Bar (Select All & Bulk Delete) -->
+                            <div class="d-flex justify-content-between align-items-center p-3 mb-4 rounded flex-wrap gap-2"
+                                 style="background: #F8F8F6; border: 2px solid var(--dark-black); box-shadow: 4px 4px 0px var(--dark-black);">
+                                <div class="d-flex align-items-center gap-2">
+                                    <input type="checkbox" id="selectAllMessagesCheckbox" style="width: 18px; height: 18px; cursor: pointer; accent-color: #DC2626;">
+                                    <label for="selectAllMessagesCheckbox" class="m-0 fw-bold small text-uppercase" style="cursor: pointer; user-select: none;">
+                                        Select All (<span id="selectedCountDisplay">0</span> / <span id="totalSelectableDisplay">0</span>)
+                                    </label>
+                                </div>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <button id="deleteSelectedMessagesBtn" class="btn-delete-brutalist" style="display: none; padding: 7px 16px; font-size: 12px; background: #DC2626; color: white;">
+                                        <i class="fas fa-trash-alt"></i> Delete Selected (<span id="deleteSelectedNum">0</span>)
+                                    </button>
+                                    <button id="deleteAllMessagesMainBtn" class="btn-delete-brutalist" style="padding: 7px 16px; font-size: 12px; background: #FEE2E2; border: 1.5px solid #DC2626; color: #DC2626;">
+                                        <i class="fas fa-trash-alt"></i> Delete All Messages (<span class="deleteAllNumBadge">0</span>)
+                                    </button>
+                                </div>
                             </div>
 
                             <div id="loadingMessages" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
@@ -548,11 +569,38 @@
         let cachedMessagesList = [];
         let currentInboxFilter = 'all';
 
+        function updateBulkSelectionUI() {
+            const allCheckboxes = document.querySelectorAll('.msg-select-checkbox');
+            const selectedCheckboxes = document.querySelectorAll('.msg-select-checkbox:checked');
+            const total = allCheckboxes.length;
+            const count = selectedCheckboxes.length;
+
+            const selDisplay = document.getElementById("selectedCountDisplay");
+            const totalDisplay = document.getElementById("totalSelectableDisplay");
+            const delSelectedBtn = document.getElementById("deleteSelectedMessagesBtn");
+            const delSelectedNum = document.getElementById("deleteSelectedNum");
+            const selectAllCb = document.getElementById("selectAllMessagesCheckbox");
+
+            if (selDisplay) selDisplay.textContent = count;
+            if (totalDisplay) totalDisplay.textContent = total;
+            if (delSelectedNum) delSelectedNum.textContent = count;
+
+            if (delSelectedBtn) {
+                delSelectedBtn.style.display = count > 0 ? "inline-flex" : "none";
+            }
+
+            if (selectAllCb) {
+                selectAllCb.checked = total > 0 && count === total;
+                selectAllCb.indeterminate = count > 0 && count < total;
+            }
+        }
+
         function renderInboxMessages() {
             if (!messagesDiv) return;
 
             if (cachedMessagesList.length === 0) {
-                messagesDiv.innerHTML = '<div class="text-center py-5 text-muted fw-bold"><i class="fas fa-inbox fa-2x mb-3 d-block opacity-25"></i>No messages found in your inbox.</div>';
+                messagesDiv.innerHTML = '<div class="text-center py-5 text-muted fw-bold"><i class="fas fa-inbox fa-3x mb-3 d-block opacity-25"></i>No messages found in your inbox.</div>';
+                updateBulkSelectionUI();
                 return;
             }
 
@@ -565,6 +613,7 @@
 
             if (filtered.length === 0) {
                 messagesDiv.innerHTML = `<div class="text-center py-4 text-muted fw-bold">No ${currentInboxFilter === 'unread' ? 'pending / unread' : 'read'} messages found.</div>`;
+                updateBulkSelectionUI();
                 return;
             }
 
@@ -574,17 +623,20 @@
                 html += `
                     <div class="admin-item-box" style="border-left: 6px solid ${isUnread ? '#DC2626' : '#27AE60'}; ${isUnread ? 'background: #FFFDF9;' : 'background: #FFFFFF;'}">
                         <div class="d-flex justify-content-between align-items-start gap-3 mb-3 flex-wrap">
-                            <div>
-                                <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
-                                    <span class="admin-badge" style="${isUnread ? 'background: #FEE2E2; border-color: #DC2626; color: #DC2626; font-weight: 700;' : 'background: #E8F7EE; border-color: #27AE60; color: #196F3D;'}">
-                                        <i class="fas ${isUnread ? 'fa-circle' : 'fa-check'} me-1" style="${isUnread ? 'font-size: 7px;' : ''}"></i>
-                                        ${isUnread ? 'UNREAD / PENDING' : 'READ'}
-                                    </span>
-                                    <span class="text-muted small">ID: ${escapeHtml(id.substring(0, 8))}...</span>
+                            <div class="d-flex align-items-start gap-3">
+                                <input type="checkbox" class="msg-select-checkbox mt-1" data-msg-id="${id}" style="width: 20px; height: 20px; cursor: pointer; accent-color: #DC2626;" title="Select message">
+                                <div>
+                                    <div class="d-flex align-items-center gap-2 mb-2 flex-wrap">
+                                        <span class="admin-badge" style="${isUnread ? 'background: #FEE2E2; border-color: #DC2626; color: #DC2626; font-weight: 700;' : 'background: #E8F7EE; border-color: #27AE60; color: #196F3D;'}">
+                                            <i class="fas ${isUnread ? 'fa-circle' : 'fa-check'} me-1" style="${isUnread ? 'font-size: 7px;' : ''}"></i>
+                                            ${isUnread ? 'UNREAD / PENDING' : 'READ'}
+                                        </span>
+                                        <span class="text-muted small">ID: ${escapeHtml(id.substring(0, 8))}...</span>
+                                    </div>
+                                    <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.45rem; margin: 0; text-transform: uppercase;">
+                                        ${escapeHtml(d.name || 'Anonymous Client')}
+                                    </h3>
                                 </div>
-                                <h3 style="font-family: 'Oswald', sans-serif; font-size: 1.45rem; margin: 0; text-transform: uppercase;">
-                                    ${escapeHtml(d.name || 'Anonymous Client')}
-                                </h3>
                             </div>
                             <div class="d-flex gap-2 flex-wrap">
                                 <button class="btn-outline-brutalist btn-toggle-read" data-msg-id="${id}" data-action="${isUnread ? 'mark-read' : 'mark-unread'}" title="${isUnread ? 'Mark this message as read' : 'Mark as unread'}">
@@ -623,6 +675,11 @@
             });
             messagesDiv.innerHTML = html;
 
+            // Attach checkbox selection listeners
+            messagesDiv.querySelectorAll('.msg-select-checkbox').forEach(cb => {
+                cb.addEventListener('change', updateBulkSelectionUI);
+            });
+
             // Attach single message delete listeners
             messagesDiv.querySelectorAll('.btn-delete-single-msg').forEach(btn => {
                 btn.addEventListener('click', async () => {
@@ -652,6 +709,8 @@
                     }
                 });
             });
+
+            updateBulkSelectionUI();
         }
 
         onSnapshot(collection(db, "messages"), (snapshot) => {
@@ -709,6 +768,11 @@
             if (countUnreadEl) countUnreadEl.textContent = unreadCount;
             if (countReadEl) countReadEl.textContent = readCount;
 
+            // 5. Update Delete All badges
+            document.querySelectorAll('.deleteAllNumBadge').forEach(el => {
+                el.textContent = totalCount;
+            });
+
             renderInboxMessages();
         }, (error) => {
             console.error("Error fetching messages:", error);
@@ -730,6 +794,149 @@
             });
         });
 
+        // Select All Messages Checkbox Handler
+        const selectAllCb = document.getElementById("selectAllMessagesCheckbox");
+        if (selectAllCb) {
+            selectAllCb.addEventListener("change", (e) => {
+                const isChecked = e.target.checked;
+                document.querySelectorAll('.msg-select-checkbox').forEach(cb => {
+                    cb.checked = isChecked;
+                });
+                updateBulkSelectionUI();
+            });
+        }
+
+        // Delete Selected Messages Handler
+        const deleteSelectedBtn = document.getElementById("deleteSelectedMessagesBtn");
+        if (deleteSelectedBtn) {
+            deleteSelectedBtn.addEventListener("click", async () => {
+                const selectedCbs = document.querySelectorAll('.msg-select-checkbox:checked');
+                const selectedIds = Array.from(selectedCbs).map(cb => cb.getAttribute('data-msg-id')).filter(Boolean);
+
+                if (selectedIds.length === 0) {
+                    alert("Please select at least one message to delete.");
+                    return;
+                }
+
+                const confirmDelete = confirm(`⚠️ Are you sure you want to permanently delete the ${selectedIds.length} selected message(s)?`);
+                if (!confirmDelete) return;
+
+                deleteSelectedBtn.disabled = true;
+                deleteSelectedBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting...';
+
+                try {
+                    const batch = writeBatch(db);
+                    selectedIds.forEach(id => {
+                        batch.delete(doc(db, "messages", id));
+                    });
+                    await batch.commit();
+
+                    const alertBanner = document.getElementById("broadcastSuccessAlert");
+                    const alertText = document.getElementById("broadcastSuccessText");
+                    if (alertBanner && alertText) {
+                        alertBanner.style.display = "block";
+                        alertText.textContent = `✓ Successfully deleted ${selectedIds.length} message(s)!`;
+                        setTimeout(() => { alertBanner.style.display = "none"; }, 5000);
+                    }
+                } catch (err) {
+                    console.error("Batch delete error, fallback to individual:", err);
+                    try {
+                        await Promise.all(selectedIds.map(id => deleteDoc(doc(db, "messages", id))));
+                    } catch (fallbackErr) {
+                        alert("Error deleting selected messages: " + fallbackErr.message);
+                    }
+                } finally {
+                    deleteSelectedBtn.disabled = false;
+                    deleteSelectedBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Delete Selected (<span id="deleteSelectedNum">0</span>)';
+                    updateBulkSelectionUI();
+                }
+            });
+        }
+
+        // Unified 1-Click Delete All Messages Handler
+        async function handleExecuteDeleteAllMessages() {
+            const totalCount = cachedMessagesList.length;
+            if (totalCount === 0) {
+                alert("Your inbox is already empty. There are no messages to delete.");
+                return;
+            }
+
+            const confirmClear = confirm(`⚠️ DANGER: Are you sure you want to permanently DELETE ALL (${totalCount}) messages from your inbox at once?\n\nThis will completely wipe all messages from the database and cannot be recovered!`);
+            if (!confirmClear) return;
+
+            const btn1 = document.getElementById("clearAllMessagesBtn");
+            const btn2 = document.getElementById("deleteAllMessagesMainBtn");
+            if (btn1) {
+                btn1.disabled = true;
+                btn1.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting All...';
+            }
+            if (btn2) {
+                btn2.disabled = true;
+                btn2.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Deleting All...';
+            }
+
+            try {
+                // Fetch directly from Firestore collection for 100% complete wipe
+                const querySnapshot = await getDocs(collection(db, "messages"));
+                const batch = writeBatch(db);
+                let deletedCount = 0;
+
+                querySnapshot.forEach((docSnap) => {
+                    batch.delete(docSnap.ref);
+                    deletedCount++;
+                });
+
+                if (deletedCount > 0) {
+                    await batch.commit();
+                }
+
+                const alertBanner = document.getElementById("broadcastSuccessAlert");
+                const alertText = document.getElementById("broadcastSuccessText");
+                if (alertBanner && alertText) {
+                    alertBanner.style.display = "block";
+                    alertText.textContent = `🗑️ Successfully deleted all ${deletedCount} inbox message(s) at once!`;
+                    setTimeout(() => { alertBanner.style.display = "none"; }, 6000);
+                } else {
+                    alert(`Successfully deleted all ${deletedCount} messages!`);
+                }
+            } catch (err) {
+                console.error("Batch delete all error, trying parallel fallback:", err);
+                try {
+                    const querySnapshot = await getDocs(collection(db, "messages"));
+                    const promises = [];
+                    querySnapshot.forEach((docSnap) => {
+                        promises.push(deleteDoc(doc(db, "messages", docSnap.id)));
+                    });
+                    await Promise.all(promises);
+                    alert(`Successfully deleted ${promises.length} messages!`);
+                } catch (fallbackErr) {
+                    console.error("Parallel delete failed:", fallbackErr);
+                    alert("Failed to delete all messages: " + fallbackErr.message);
+                }
+            } finally {
+                if (btn1) {
+                    btn1.disabled = false;
+                    btn1.innerHTML = '<i class="fas fa-trash-alt"></i> Delete All Messages (<span class="deleteAllNumBadge">0</span>)';
+                }
+                if (btn2) {
+                    btn2.disabled = false;
+                    btn2.innerHTML = '<i class="fas fa-trash-alt"></i> Delete All Messages (<span class="deleteAllNumBadge">0</span>)';
+                }
+                updateBulkSelectionUI();
+            }
+        }
+
+        // Attach 1-Click Delete All to both top and bulk bar buttons
+        const clearAllMessagesBtn = document.getElementById("clearAllMessagesBtn");
+        if (clearAllMessagesBtn) {
+            clearAllMessagesBtn.addEventListener("click", handleExecuteDeleteAllMessages);
+        }
+
+        const deleteAllMessagesMainBtn = document.getElementById("deleteAllMessagesMainBtn");
+        if (deleteAllMessagesMainBtn) {
+            deleteAllMessagesMainBtn.addEventListener("click", handleExecuteDeleteAllMessages);
+        }
+
         // Mark All as Read Action Button
         const markAllReadBtn = document.getElementById("markAllReadBtn");
         if (markAllReadBtn) {
@@ -744,9 +951,12 @@
                 markAllReadBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Updating...';
 
                 try {
-                    await Promise.all(unreadItems.map(item => 
-                        updateDoc(doc(db, "messages", item.id), { read: true })
-                    ));
+                    const batch = writeBatch(db);
+                    unreadItems.forEach(item => {
+                        batch.update(doc(db, "messages", item.id), { read: true });
+                    });
+                    await batch.commit();
+
                     const alertBanner = document.getElementById("broadcastSuccessAlert");
                     const alertText = document.getElementById("broadcastSuccessText");
                     if (alertBanner && alertText) {
@@ -760,44 +970,6 @@
                 } finally {
                     markAllReadBtn.disabled = false;
                     markAllReadBtn.innerHTML = '<i class="fas fa-check-double"></i> Mark All as Read';
-                }
-            });
-        }
-
-        // Clear All Messages Action Button
-        const clearAllMessagesBtn = document.getElementById("clearAllMessagesBtn");
-        if (clearAllMessagesBtn) {
-            clearAllMessagesBtn.addEventListener("click", async () => {
-                if (cachedMessagesList.length === 0) {
-                    alert("Your inbox is already empty.");
-                    return;
-                }
-
-                const confirmClear = confirm(`⚠️ WARNING: Are you sure you want to permanently CLEAR ALL (${cachedMessagesList.length}) messages from your inbox?\n\nThis cannot be undone!`);
-                if (!confirmClear) return;
-
-                clearAllMessagesBtn.disabled = true;
-                clearAllMessagesBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Clearing All...';
-
-                try {
-                    const toDelete = [...cachedMessagesList];
-                    await Promise.all(toDelete.map(item => 
-                        deleteDoc(doc(db, "messages", item.id))
-                    ));
-
-                    const alertBanner = document.getElementById("broadcastSuccessAlert");
-                    const alertText = document.getElementById("broadcastSuccessText");
-                    if (alertBanner && alertText) {
-                        alertBanner.style.display = "block";
-                        alertText.textContent = `🗑️ All ${toDelete.length} inbox message(s) have been permanently cleared!`;
-                        setTimeout(() => { alertBanner.style.display = "none"; }, 6000);
-                    }
-                } catch (err) {
-                    console.error("Error clearing messages:", err);
-                    alert("Failed to clear messages: " + err.message);
-                } finally {
-                    clearAllMessagesBtn.disabled = false;
-                    clearAllMessagesBtn.innerHTML = '<i class="fas fa-trash-alt"></i> Clear All Messages';
                 }
             });
         }
