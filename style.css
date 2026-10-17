@@ -798,16 +798,16 @@ footer input::placeholder {
     letter-spacing: 1px;
 }
 
-/* About Page - Excellence Section (Using Global CSS Variables Only) */
+/* About Page - Excellence Section (Full Width like .client-section) */
 .about-excellence-section {
     background-color: var(--white);
     color: var(--dark-black);
-    padding: 4.5rem 3.5rem;
+    width: 100%;
 }
 
 .about-excellence-title {
     font-family: 'Oswald', sans-serif;
-    font-size: clamp(2.5rem, 5vw, 4.2rem);
+    font-size: clamp(2.5rem, 5vw, 4.4rem);
     font-weight: 700;
     text-transform: uppercase;
     line-height: 0.95;
@@ -820,14 +820,13 @@ footer input::placeholder {
     display: inline-flex;
     align-items: center;
     gap: 10px;
-    margin-top: 1.5rem;
 }
 
 .about-dot-badge .status-dot {
     width: 10px;
     height: 10px;
     border-radius: 50%;
-    background-color: var(--neon-yellow);
+    background-color: var(--neon-lime);
     display: inline-block;
 }
 
@@ -846,14 +845,13 @@ footer input::placeholder {
 .about-cta-group {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-top: 2rem;
+    gap: 12px;
 }
 
 .btn-explore-services {
     background-color: var(--dark-black);
     color: var(--white) !important;
-    padding: 14px 28px;
+    padding: 14px 30px;
     border-radius: 50px;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
@@ -876,7 +874,7 @@ footer input::placeholder {
     width: 48px;
     height: 48px;
     border-radius: 50%;
-    background-color: var(--neon-yellow);
+    background-color: var(--neon-lime);
     color: var(--dark-black) !important;
     display: inline-flex;
     align-items: center;
@@ -890,10 +888,4 @@ footer input::placeholder {
 
 .btn-arrow-circle:hover {
     transform: rotate(45deg);
-}
-
-@media (max-width: 991px) {
-    .about-excellence-section {
-        padding: 2.5rem 1.5rem;
-    }
 }
