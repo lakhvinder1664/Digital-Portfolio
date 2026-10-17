@@ -69,7 +69,7 @@
                         </li>
                         <li class="list-group-item p-0">
                             <a href="${base}my-work.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
-                                <span>My Work & Mockups</span>
+                                <span>Client Projects & Case Studies</span>
                             </a>
                         </li>
                         <li class="list-group-item p-0">
@@ -104,9 +104,9 @@
             'about': { title: 'ABOUT', label: 'About', index: '001' },
             'service': { title: 'SERVICES', label: 'Service', index: '002' },
             'services': { title: 'SERVICES', label: 'Services', index: '002' },
-            'my-work': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
-            'pages': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
-            'work': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
+            'my-work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
+            'pages': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
+            'work': { title: 'CLIENT PROJECTS & CASE STUDIES', label: 'Client Projects', index: '003' },
             'contact': { title: 'CONTACT ME', label: 'Contact', index: '004' }
         };
 
