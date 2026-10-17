@@ -1288,6 +1288,26 @@ footer input::placeholder {
     transform: translateY(-1px);
 }
 
+/* Service-Style Career Experience Elements */
+.service-item h3.exp-item-title {
+    font-size: clamp(2rem, 3.2vw, 2.8rem) !important;
+    line-height: 1.05;
+    font-weight: 700;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    color: var(--dark-black);
+    margin: 0;
+}
+
+.exp-role-sub {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--dark-black);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
 .custom-exp-modal .modal-content {
     background-color: #FFFFFF !important;
     border: 2px solid var(--dark-black) !important;
