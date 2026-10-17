@@ -1470,7 +1470,7 @@ footer input::placeholder {
 
 .contact-section {
     position: relative;
-    padding: 80px 0 120px 0;
+    padding: 80px 0 160px 0;
     background-color: var(--white);
     overflow: hidden;
 }
@@ -1718,31 +1718,9 @@ footer input::placeholder {
     margin-bottom: 1.5rem;
 }
 
-/* Contact Bottom Watermark (Placed cleanly below form card) */
-.contact-watermark-wrap {
-    width: 100%;
-    overflow: hidden;
-    pointer-events: none;
-    user-select: none;
-    line-height: 0.8;
-    position: relative;
-    z-index: 0;
-    margin-top: 3.5rem;
-    padding: 1rem 0 0 0;
-}
-
-.contact-bottom-watermark {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(5.5rem, 17vw, 15rem);
-    font-weight: 900;
-    line-height: 0.85;
-    letter-spacing: -2px;
-    margin: 0;
-    color: rgba(0, 0, 0, 0.07);
-    -webkit-text-stroke: 1.5px rgba(0, 0, 0, 0.12);
-    text-transform: uppercase;
-    display: block;
-    text-align: center;
-    white-space: nowrap;
-    will-change: transform, opacity;
+/* Contact Watermark (Exact original subtle watermark style, positioned below form card) */
+.about-watermark-contact {
+    top: auto !important;
+    bottom: 25px !important;
+    transform: translate(-50%, 0);
 }
