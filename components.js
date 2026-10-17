@@ -26,6 +26,7 @@
         if (!container) return;
 
         const base = getBasePath();
+        const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
         container.innerHTML = `
             <nav class="navbar navbar-expand-lg border-top border-dark px-4 mt-3">
@@ -50,23 +51,38 @@
                 </div>
                 <div class="offcanvas-body p-0">
                     <ul class="list-group list-group-flush menu-list">
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="${base}index.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Home</a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}index.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">
+                                <span>Home</span>
+                            </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="${base}about.html" class="text-decoration-none text-reset d-block">About</a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}about.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'about.html' ? 'active' : ''}">
+                                <span>About</span>
+                            </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="${base}service.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Service <span>+</span></a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}service.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'service.html' ? 'active' : ''}">
+                                <span>Service</span>
+                                <span>+</span>
+                            </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="${base}pages.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Pages <span>+</span></a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}pages.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'pages.html' ? 'active' : ''}">
+                                <span>Pages</span>
+                                <span>+</span>
+                            </a>
                         </li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                            <a href="${base}blog.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Blog <span>+</span></a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}blog.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'blog.html' ? 'active' : ''}">
+                                <span>Blog</span>
+                                <span>+</span>
+                            </a>
                         </li>
-                        <li class="list-group-item">
-                            <a href="${base}contact.html" class="text-decoration-none text-reset d-block">Contact</a>
+                        <li class="list-group-item p-0">
+                            <a href="${base}contact.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'contact.html' ? 'active' : ''}">
+                                <span>Contact</span>
+                            </a>
                         </li>
                     </ul>
                     <div class="contact-info p-4 mt-5">

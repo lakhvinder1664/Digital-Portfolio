@@ -305,10 +305,24 @@
                 const targetPath = normalizePath(link.pathname);
                 if (currentPath === targetPath) {
                     e.preventDefault();
+                    // Close offcanvas if open
+                    const offcanvasEl = document.getElementById('offcanvasRight');
+                    if (offcanvasEl && typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+                        const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                        if (bsOffcanvas) bsOffcanvas.hide();
+                    }
                     return;
                 }
 
                 e.preventDefault();
+
+                // Close offcanvas menu smoothly before transitioning
+                const offcanvasEl = document.getElementById('offcanvasRight');
+                if (offcanvasEl && typeof bootstrap !== 'undefined' && bootstrap.Offcanvas) {
+                    const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasEl);
+                    if (bsOffcanvas) bsOffcanvas.hide();
+                }
+
                 pageTransition(link.href);
             }
         });
