@@ -1177,3 +1177,80 @@ footer input::placeholder {
     color: var(--white);
     transform: translateY(-2px);
 }
+
+/* Experience Modal Popup (Clean White Background, Scrollable Content) */
+.btn-exp-modal {
+    background-color: var(--dark-black);
+    color: var(--white);
+    border: 1.5px solid var(--dark-black);
+    padding: 9px 20px;
+    border-radius: 50px;
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+}
+
+.btn-exp-modal:hover {
+    background-color: var(--neon-lime);
+    color: var(--dark-black);
+    transform: translateY(-2px);
+}
+
+.custom-exp-modal .modal-content {
+    background-color: #FFFFFF !important;
+    border: 2px solid var(--dark-black) !important;
+    border-radius: 8px !important;
+    box-shadow: 10px 10px 0px var(--dark-black) !important;
+    color: var(--dark-black) !important;
+}
+
+.custom-exp-modal .modal-header {
+    border-bottom: 2px solid var(--dark-black) !important;
+    padding: 1.5rem 1.75rem !important;
+    background-color: #FFFFFF !important;
+}
+
+.custom-exp-modal .modal-title {
+    font-family: 'Oswald', sans-serif !important;
+    font-size: clamp(1.8rem, 2.5vw, 2.3rem) !important;
+    font-weight: 700 !important;
+    text-transform: uppercase !important;
+    color: var(--dark-black) !important;
+    line-height: 1.1 !important;
+}
+
+.custom-exp-modal .modal-body {
+    padding: 1.75rem !important;
+    max-height: 60vh !important;
+    overflow-y: auto !important;
+    background-color: #FFFFFF !important;
+    color: var(--dark-black) !important;
+}
+
+/* Custom Scrollbar for Modal Body */
+.custom-exp-modal .modal-body::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-exp-modal .modal-body::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+.custom-exp-modal .modal-body::-webkit-scrollbar-thumb {
+    background: var(--dark-black);
+    border-radius: 4px;
+}
+
+.custom-exp-modal .modal-footer {
+    border-top: 2px solid var(--dark-black) !important;
+    padding: 1.25rem 1.75rem !important;
+    background-color: #FFFFFF !important;
+}
