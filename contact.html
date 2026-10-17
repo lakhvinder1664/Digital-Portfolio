@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Contact | Lakhvinder Singh Portfolio</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -67,7 +68,8 @@
                         <div class="col-lg-6">
                             <div class="d-flex align-items-center gap-3 mb-3">
                                 <span class="small-text text-uppercase fw-bold text-dark">[ GET IN TOUCH ]</span>
-                                <div class="thick-line" style="width: 60px; height: 2px; background: var(--dark-black);"></div>
+                                <div class="thick-line"
+                                    style="width: 60px; height: 2px; background: var(--dark-black);"></div>
                             </div>
 
                             <h1 class="contact-display-title">
@@ -76,7 +78,8 @@
                             </h1>
 
                             <p class="contact-lead-desc">
-                                A journey of passion and innovation. From humble beginnings to building modern, high-impact web applications, let's chart a path of digital excellence together.
+                                A journey of passion and innovation. From humble beginnings to building modern,
+                                high-impact web applications, let's chart a path of digital excellence together.
                             </p>
 
                             <!-- Contact Detail List -->
@@ -123,12 +126,14 @@
 
                             <!-- Follow Us Social Links -->
                             <div>
-                                <p class="contact-follow-title">FOLLOW US</p>
+                                <p class="contact-follow-title">FOLLOW ME ON</p>
                                 <div class="contact-social-pills">
-                                    <a href="https://www.linkedin.com/in/lakhvinder-singh-dev/" target="_blank" rel="noopener noreferrer" class="contact-social-btn" title="LinkedIn">
+                                    <a href="https://www.linkedin.com/in/lakhvinder-singh-dev/" target="_blank"
+                                        rel="noopener noreferrer" class="contact-social-btn" title="LinkedIn">
                                         <i class="fab fa-linkedin-in"></i>
                                     </a>
-                                    <a href="https://github.com/lakhvinder1664" target="_blank" rel="noopener noreferrer" class="contact-social-btn" title="GitHub">
+                                    <a href="https://github.com/lakhvinder1664" target="_blank"
+                                        rel="noopener noreferrer" class="contact-social-btn" title="GitHub">
                                         <i class="fab fa-github"></i>
                                     </a>
                                     <a href="#" class="contact-social-btn" title="Instagram">
@@ -155,19 +160,24 @@
 
                                 <form id="contactForm" autocomplete="off">
                                     <div>
-                                        <input type="text" id="contactName" name="name" class="contact-input-field" placeholder="Your Name" required>
+                                        <input type="text" id="contactName" name="name" class="contact-input-field"
+                                            placeholder="Your Name" required>
                                     </div>
 
                                     <div>
-                                        <input type="email" id="contactEmail" name="email" class="contact-input-field" placeholder="Your Email" required>
+                                        <input type="email" id="contactEmail" name="email" class="contact-input-field"
+                                            placeholder="Your Email" required>
                                     </div>
 
                                     <div>
-                                        <input type="tel" id="contactPhone" name="phone" class="contact-input-field" placeholder="Phone Number">
+                                        <input type="tel" id="contactPhone" name="phone" class="contact-input-field"
+                                            placeholder="Phone Number">
                                     </div>
 
                                     <div>
-                                        <textarea id="contactMessage" name="message" class="contact-input-field contact-textarea-field" placeholder="Type Message" required></textarea>
+                                        <textarea id="contactMessage" name="message"
+                                            class="contact-input-field contact-textarea-field"
+                                            placeholder="Type Message" required></textarea>
                                     </div>
 
                                     <!-- Submit Action Button matching Reference Image -->
@@ -185,8 +195,10 @@
                     </div>
                 </div>
 
-                <!-- Background Watermark (Exact original subtle watermark style, positioned below form card) -->
-                <h2 class="expertise-bg-text about-watermark-contact text-uppercase">CONNECT</h2>
+                <!-- Bottom Watermark (Placed cleanly below form card) -->
+                <div class="contact-watermark-wrap text-center overflow-hidden position-relative">
+                    <h2 class="contact-bottom-watermark about-watermark-contact text-uppercase">CONNECT</h2>
+                </div>
             </section>
         </main>
 
@@ -333,29 +345,27 @@
             });
         }
 
-        // Scroll-Driven Background Watermark Zoom Animation ("CONNECT")
+        // Scroll-Driven Watermark Zoom Animation ("CONNECT" Below Form Card)
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.set(".about-watermark-contact", {
-                xPercent: -50,
-                left: "50%",
                 transformOrigin: "center center"
             });
 
-            if (document.querySelector('.contact-section') && document.querySelector('.about-watermark-contact')) {
+            if (document.querySelector('.contact-watermark-wrap') && document.querySelector('.about-watermark-contact')) {
                 gsap.timeline({
                     scrollTrigger: {
-                        trigger: ".contact-section",
-                        start: "top bottom",
-                        end: "bottom top",
+                        trigger: ".contact-watermark-wrap",
+                        start: "top 95%",
+                        end: "bottom 15%",
                         scrub: 1.2
                     }
                 })
-                .fromTo(".about-watermark-contact", 
-                    { scale: 1.35, opacity: 0.2 }, 
-                    { scale: 1.0, opacity: 1, ease: "none" }
-                )
-                .to(".about-watermark-contact", 
-                    { scale: 1.35, opacity: 0.2, ease: "none" });
+                    .fromTo(".about-watermark-contact",
+                        { scale: 1.25, opacity: 0.35 },
+                        { scale: 1.0, opacity: 1, ease: "none" }
+                    )
+                    .to(".about-watermark-contact",
+                        { scale: 1.25, opacity: 0.35, ease: "none" });
             }
         }
     </script>
