@@ -908,8 +908,8 @@ footer input::placeholder {
 /* Clean Minimal Styling matching Home Page */
 .about-section-desc {
     color: var(--dark-black) !important;
-    font-size: 1.05rem;
-    line-height: 1.7;
+    font-size: 1.1rem;
+    line-height: 1.75;
     font-weight: 500;
 }
 
@@ -918,4 +918,91 @@ footer input::placeholder {
     font-weight: 500;
     font-size: 1.15rem;
     line-height: 1.6;
+}
+
+/* Editorial Who I Am Section (Home Page Aesthetic) */
+.about-who-section {
+    position: relative;
+    overflow: hidden;
+}
+
+.about-bg-watermark {
+    position: absolute;
+    top: 35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 22vw;
+    font-weight: 900;
+    color: rgba(0, 0, 0, 0.04);
+    line-height: 0.8;
+    text-transform: uppercase;
+    font-family: 'Oswald', sans-serif;
+    z-index: 0;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: -6px;
+}
+
+.about-who-content {
+    position: relative;
+    z-index: 1;
+}
+
+.who-headline {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2.4rem, 4.2vw, 4rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.05;
+    letter-spacing: -1px;
+    color: var(--dark-black);
+}
+
+.location-item {
+    transition: all 0.25s ease;
+}
+
+.location-item:hover {
+    padding-left: 8px;
+}
+
+.location-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    color: var(--dark-black);
+    text-transform: uppercase;
+}
+
+.about-value-item {
+    border-bottom: 1px solid var(--dark-black);
+    padding: 1.5rem 0;
+    transition: all 0.3s ease;
+}
+
+.about-value-item:first-of-type {
+    border-top: 1px solid var(--dark-black);
+}
+
+.about-value-item:hover {
+    padding-left: 10px;
+}
+
+.about-value-item .val-num {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--dark-black);
+    width: 60px;
+    flex-shrink: 0;
+}
+
+.about-value-item .val-title {
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    color: var(--dark-black);
+    margin-bottom: 4px;
 }
