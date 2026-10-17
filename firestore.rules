@@ -4,24 +4,21 @@ service cloud.firestore {
   match /databases/{database}/documents {
 
     function isAdmin() {
-      return request.auth != null
-        && request.auth.uid == "YOUR_ADMIN_UID_HERE";
+      return request.auth != null;
     }
 
+    // Contact messages collection
     match /messages/{messageId} {
       allow create: if
         request.resource.data.name is string &&
         request.resource.data.email is string &&
-        request.resource.data.subject is string &&
-        request.resource.data.message is string &&
         request.resource.data.name.size() > 0 &&
-        request.resource.data.email.size() > 0 &&
-        request.resource.data.subject.size() > 0 &&
-        request.resource.data.message.size() > 0;
+        request.resource.data.email.size() > 0;
 
       allow read, update, delete: if isAdmin();
     }
 
+    // Newsletter subscribers collection
     match /newsletter/{subscriberId} {
       allow create: if
         request.resource.data.email is string &&
@@ -29,6 +26,17 @@ service cloud.firestore {
         request.resource.data.email.size() <= 200;
 
       allow read, update, delete: if isAdmin();
+    }
+
+    // Published posts & project releases collection
+    match /posts/{postId} {
+      allow read: if true; // Publicly readable on My Work page
+      allow create, update, delete: if isAdmin();
+    }
+
+    // Mail queue collection for Firebase Trigger Email extension
+    match /mail/{mailId} {
+      allow create, read, update, delete: if isAdmin();
     }
 
     match /{document=**} {

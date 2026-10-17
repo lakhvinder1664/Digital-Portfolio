@@ -68,15 +68,8 @@
                             </a>
                         </li>
                         <li class="list-group-item p-0">
-                            <a href="${base}pages.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'pages.html' ? 'active' : ''}">
-                                <span>Pages</span>
-                                <span>+</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item p-0">
-                            <a href="${base}blog.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'blog.html' ? 'active' : ''}">
-                                <span>Blog</span>
-                                <span>+</span>
+                            <a href="${base}my-work.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
+                                <span>My Work & Mockups</span>
                             </a>
                         </li>
                         <li class="list-group-item p-0">
@@ -111,10 +104,10 @@
             'about': { title: 'ABOUT', label: 'About', index: '001' },
             'service': { title: 'SERVICES', label: 'Service', index: '002' },
             'services': { title: 'SERVICES', label: 'Services', index: '002' },
-            'pages': { title: 'ALL PAGES', label: 'Pages', index: '003' },
-            'work': { title: 'SELECTED WORKS', label: 'Work', index: '003' },
-            'blog': { title: 'LATEST BLOG', label: 'Blog', index: '004' },
-            'contact': { title: 'CONTACT ME', label: 'Contact', index: '005' }
+            'my-work': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
+            'pages': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
+            'work': { title: 'MY WORK & MOCKUPS', label: 'My Work', index: '003' },
+            'contact': { title: 'CONTACT ME', label: 'Contact', index: '004' }
         };
 
         const fallbackTitle = cleanName ? cleanName.replace(/[-_]/g, ' ').toUpperCase() : 'PORTFOLIO';

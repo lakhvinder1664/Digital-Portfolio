@@ -3,32 +3,34 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard — Portfolio Messages</title>
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <title>Admin Dashboard — Lakhvinder Singh Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <style>
     :root {
       --primary: #0a192f;
       --secondary: #172a45;
-      --accent: #64ffda;
+      --accent: #65c0f0;
       --text: #ccd6f6;
       --text-secondary: #8892b0;
       --black: #020c1b;
-      --white: #e6f1ff;
-      --card-bg: rgba(10, 25, 47, 0.5);
-      --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      --white: #ffffff;
+      --card-bg: rgba(10, 25, 47, 0.7);
+      --card-border: rgba(101, 192, 240, 0.2);
+      --transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     [data-theme="light"] {
-      --primary: #f8f9fa;
-      --secondary: #e9ecef;
-      --accent: #4361ee;
-      --text: #212529;
-      --text-secondary: #495057;
-      --black: #dee2e6;
-      --white: #020c1b;
-      --card-bg: rgba(248, 249, 250, 0.7);
+      --primary: #f4f6f8;
+      --secondary: #ffffff;
+      --accent: #0077b6;
+      --text: #0e0e0e;
+      --text-secondary: #555555;
+      --black: #e2e8f0;
+      --white: #0e0e0e;
+      --card-bg: #ffffff;
+      --card-border: rgba(0, 0, 0, 0.12);
     }
 
     * {
@@ -41,9 +43,14 @@
     body {
       background: var(--primary);
       color: var(--text);
-      padding: 20px;
+      padding: 24px;
       min-height: 100vh;
       transition: var(--transition);
+    }
+
+    .dashboard-container {
+      max-width: 1200px;
+      margin: 0 auto;
     }
 
     .header-controls {
@@ -52,45 +59,145 @@
       align-items: center;
       margin-bottom: 2rem;
       flex-wrap: wrap;
-      gap: 1rem;
+      gap: 1.25rem;
+      border-bottom: 2px solid var(--card-border);
+      padding-bottom: 1.5rem;
     }
 
-    h1 {
-      text-align: center;
-      margin-bottom: 2rem;
+    .brand-title {
+      font-family: 'Oswald', sans-serif;
+      font-size: 1.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
       color: var(--text);
-      font-size: 2rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
     }
 
+    .brand-title span {
+      color: var(--accent);
+    }
+
+    .header-actions {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .stat-card .num {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-card .label {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 600;
+      margin-top: 4px;
+    }
+
+    .stat-card i {
+      font-size: 2rem;
+      opacity: 0.3;
+      color: var(--text);
+    }
+
+    /* Tabs Bar */
+    .dashboard-tabs {
+      display: flex;
+      gap: 8px;
+      border-bottom: 2px solid var(--card-border);
+      margin-bottom: 2rem;
+      overflow-x: auto;
+      padding-bottom: 4px;
+    }
+
+    .tab-btn {
+      background: transparent;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 8px 8px 0 0;
+      color: var(--text-secondary);
+      font-weight: 600;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+
+    .tab-btn:hover {
+      color: var(--text);
+      background: var(--card-bg);
+    }
+
+    .tab-btn.active {
+      color: var(--accent);
+      background: var(--card-bg);
+      border-bottom: 3px solid var(--accent);
+    }
+
+    .tab-pane {
+      display: none;
+    }
+
+    .tab-pane.active {
+      display: block;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Message / Post Boxes */
     .message-box {
       background: var(--card-bg);
       backdrop-filter: blur(10px);
       padding: 1.5rem;
       margin-bottom: 1.5rem;
-      border-radius: 15px;
-      box-shadow: 0 10px 30px rgba(2, 12, 27, 0.2);
-      border: 1px solid rgba(100, 255, 218, 0.1);
+      border-radius: 12px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid var(--card-border);
       word-wrap: break-word;
       transition: var(--transition);
-    }
-
-    [data-theme="light"] .message-box {
-      border-color: rgba(67, 97, 238, 0.2);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+      position: relative;
     }
 
     .message-box:hover {
       transform: translateY(-2px);
-      box-shadow: 0 15px 40px rgba(2, 12, 27, 0.3);
-      border-color: rgba(100, 255, 218, 0.3);
-    }
-
-    [data-theme="light"] .message-box:hover {
-      border-color: rgba(67, 97, 238, 0.3);
+      box-shadow: 0 14px 35px rgba(0, 0, 0, 0.18);
+      border-color: var(--accent);
     }
 
     .message-box p {
-      margin-bottom: 0.8rem;
+      margin-bottom: 0.6rem;
       line-height: 1.6;
     }
 
@@ -98,125 +205,337 @@
       color: var(--accent);
     }
 
-    .message-box a {
-      color: var(--accent);
-      text-decoration: none;
-      transition: var(--transition);
-    }
-
-    .message-box a:hover {
-      text-decoration: underline;
-      color: #3a86ff;
-    }
-
     .message-box small {
       color: var(--text-secondary);
       font-size: 0.85rem;
     }
 
-    .message-box ul {
-      list-style: none;
-      padding: 0;
+    /* Broadcast Post Form */
+    .form-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      padding: 2rem;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
+      margin-bottom: 2.5rem;
     }
 
-    .message-box li {
-      margin-bottom: 1rem;
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 6px;
+      font-weight: 600;
+      font-size: 0.9rem;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .form-control {
+      width: 100%;
+      background: var(--secondary);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-size: 0.95rem;
+      outline: none;
+      transition: var(--transition);
+    }
+
+    [data-theme="light"] .form-control {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .form-control:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(101, 192, 240, 0.25);
+    }
+
+    textarea.form-control {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .btn-publish {
+      background: var(--accent);
+      color: #0E0E0E;
+      border: none;
+      border-radius: 50px;
+      padding: 14px 32px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      transition: var(--transition);
+    }
+
+    .btn-publish:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(101, 192, 240, 0.4);
+    }
+
+    .btn-publish:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .btn-delete {
+      background: transparent;
+      border: 1px solid rgba(220, 38, 38, 0.4);
+      color: #ef4444;
+      padding: 6px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-delete:hover {
+      background: #ef4444;
+      color: white;
+    }
+
+    .alert-banner {
+      padding: 14px 18px;
+      border-radius: 8px;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+      display: none;
+    }
+
+    .alert-success {
+      background: rgba(34, 197, 94, 0.15);
+      border: 1px solid #22c55e;
+      color: #22c55e;
+    }
+
+    .post-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      background: rgba(101, 192, 240, 0.2);
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      margin-bottom: 8px;
     }
 
     .logout-btn {
       background: linear-gradient(135deg, #dc2626, #b91c1c);
       color: white;
-      padding: 0.75rem 1.5rem;
+      padding: 0.65rem 1.25rem;
       border: none;
       border-radius: 8px;
       cursor: pointer;
-      font-weight: 500;
+      font-weight: 600;
+      font-size: 0.9rem;
       transition: var(--transition);
       display: flex;
       align-items: center;
       gap: 0.5rem;
     }
 
-    .logout-btn:hover:not(:disabled) {
+    .logout-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 6px 20px rgba(220, 38, 38, 0.3);
-    }
-
-    .logout-btn:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
+      box-shadow: 0 6px 16px rgba(220, 38, 38, 0.35);
     }
 
     .theme-toggle {
       background: var(--card-bg);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(100, 255, 218, 0.2);
+      border: 1px solid var(--card-border);
       color: var(--text);
-      width: 50px;
-      height: 50px;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.2rem;
+      font-size: 1.1rem;
       transition: var(--transition);
     }
 
-    [data-theme="light"] .theme-toggle {
-      border-color: rgba(67, 97, 238, 0.2);
-    }
-
     .theme-toggle:hover {
-      background: var(--accent);
-      color: var(--black);
-      transform: rotate(30deg);
-    }
-
-    @media (max-width: 768px) {
-      .header-controls {
-        flex-direction: column;
-        align-items: stretch;
-      }
-
-      .logout-btn {
-        width: 100%;
-        justify-content: center;
-      }
-
-      h1 {
-        font-size: 1.5rem;
-      }
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: rotate(20deg);
     }
   </style>
 </head>
 
 <body>
-  <div class="header-controls">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme">
-      <i class="fas fa-moon"></i>
-    </button>
-    <button class="logout-btn" id="logoutBtn">
-      <i class="fas fa-sign-out-alt"></i>
-      Logout
-    </button>
+  <div class="dashboard-container">
+    <!-- Top Header -->
+    <div class="header-controls">
+      <div class="brand-title">
+        <i class="fas fa-terminal"></i>
+        LAKHVINDER SINGH <span>/ ADMIN</span>
+      </div>
+      <div class="header-actions">
+        <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" title="Toggle Light/Dark Theme">
+          <i class="fas fa-moon"></i>
+        </button>
+        <button class="logout-btn" id="logoutBtn">
+          <i class="fas fa-sign-out-alt"></i>
+          Logout
+        </button>
+      </div>
+    </div>
+
+    <!-- Quick Stats Bar -->
+    <div class="stats-row">
+      <div class="stat-card">
+        <div>
+          <div class="num" id="statSubscribersCount">0</div>
+          <div class="label">Subscribers</div>
+        </div>
+        <i class="fas fa-users"></i>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="num" id="statPostsCount">0</div>
+          <div class="label">Published Posts</div>
+        </div>
+        <i class="fas fa-bullhorn"></i>
+      </div>
+      <div class="stat-card">
+        <div>
+          <div class="num" id="statMessagesCount">0</div>
+          <div class="label">Inbox Messages</div>
+        </div>
+        <i class="fas fa-envelope"></i>
+      </div>
+    </div>
+
+    <!-- Tabs Navigation -->
+    <div class="dashboard-tabs">
+      <button class="tab-btn active" data-tab="tab-broadcast">
+        <i class="fas fa-paper-plane"></i> Publish & Notify Subscribers
+      </button>
+      <button class="tab-btn" data-tab="tab-posts">
+        <i class="fas fa-layer-group"></i> Manage Posts (<span id="tabPostsBadge">0</span>)
+      </button>
+      <button class="tab-btn" data-tab="tab-messages">
+        <i class="fas fa-inbox"></i> Inbox Messages (<span id="tabMessagesBadge">0</span>)
+      </button>
+      <button class="tab-btn" data-tab="tab-subscribers">
+        <i class="fas fa-address-book"></i> Newsletter Subscribers (<span id="tabSubscribersBadge">0</span>)
+      </button>
+    </div>
+
+    <!-- Feedback Toast Alert -->
+    <div id="broadcastSuccessAlert" class="alert-banner alert-success">
+      <i class="fas fa-check-circle me-2"></i>
+      <span id="broadcastSuccessText">Post published successfully!</span>
+    </div>
+
+    <!-- TAB 1: Create & Broadcast Post to All Subscribers -->
+    <div class="tab-pane active" id="tab-broadcast">
+      <div class="form-card">
+        <h2 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text);">
+          <i class="fas fa-bullhorn" style="color: var(--accent);"></i>
+          Create New Project / Post Announcement
+        </h2>
+        <p style="color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1.75rem;">
+          Publish a new project or mockup to your website. Once published, an automated email notification will be queued and dispatched to all <strong><span id="subscriberCountNotice">0</span> newsletter subscribers</strong>!
+        </p>
+
+        <form id="broadcastPostForm" autocomplete="off">
+          <div class="form-group">
+            <label for="postTitle">Post / Project Title *</label>
+            <input type="text" id="postTitle" class="form-control" placeholder="e.g. Launched New Pharmaceutical Web Application / Approved Client Mockups" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1rem;">
+            <div class="form-group">
+              <label for="postCategory">Category / Type *</label>
+              <select id="postCategory" class="form-control" required>
+                <option value="Live Website">Live Website</option>
+                <option value="Approved UI Mockup">Approved UI Mockup</option>
+                <option value="Pharma Portal & UI">Pharma Portal & UI</option>
+                <option value="WordPress Theme Customization">WordPress Theme Customization</option>
+                <option value="Project Announcement">Project Announcement</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="postLink">Project / Live Demo URL</label>
+              <input type="url" id="postLink" class="form-control" placeholder="e.g. https://lakhvinder-portfolio.vercel.app/my-work.html">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="postImage">Mockup / Banner Image URL (Optional)</label>
+            <input type="url" id="postImage" class="form-control" placeholder="e.g. assets/portfolio-2026.png or public image link">
+          </div>
+
+          <div class="form-group">
+            <label for="postDescription">Post Description / Key Details *</label>
+            <textarea id="postDescription" class="form-control" placeholder="Describe the project, technologies used (HTML, CSS, Bootstrap, WordPress, PHP), client approvals, and responsive architecture..." required></textarea>
+          </div>
+
+          <button type="submit" class="btn-publish" id="publishBtn">
+            <i class="fas fa-paper-plane"></i>
+            Publish & Notify All Subscribers
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!-- TAB 2: Manage Published Posts -->
+    <div class="tab-pane" id="tab-posts">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
+        Published Posts & Projects
+      </h2>
+      <div id="loadingPosts" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading published posts...</div>
+      <div id="postsList"></div>
+    </div>
+
+    <!-- TAB 3: Inbox Messages -->
+    <div class="tab-pane" id="tab-messages">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
+        Inbox Messages (Contact Form)
+      </h2>
+      <div id="loadingMessages" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading messages...</div>
+      <div id="messages"></div>
+    </div>
+
+    <!-- TAB 4: Newsletter Subscribers -->
+    <div class="tab-pane" id="tab-subscribers">
+      <h2 style="font-size: 1.4rem; margin-bottom: 1.5rem; color: var(--text);">
+        Newsletter Subscribers
+      </h2>
+      <div id="loadingSubscribers" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading subscribers...</div>
+      <div id="subscribers"></div>
+    </div>
   </div>
-
-  <h1>Inbox Messages</h1>
-
-  <div id="loadingMessages" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading messages...</div>
-  <div id="messages"></div>
-
-  <h1 style="margin-top: 40px;">Newsletter Subscribers</h1>
-
-  <div id="loadingSubscribers" style="text-align: center; padding: 20px; color: var(--text-secondary);">Loading subscribers...</div>
-  <div id="subscribers"></div>
 
 <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
-  import { getFirestore, collection, query, orderBy, onSnapshot }
-    from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+  import { 
+    getFirestore, 
+    collection, 
+    query, 
+    orderBy, 
+    onSnapshot, 
+    addDoc, 
+    deleteDoc, 
+    doc, 
+    serverTimestamp,
+    getDocs 
+  } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
 
   import { getAuth, onAuthStateChanged, signOut }
     from "https://www.gstatic.com/firebasejs/12.6.0/firebase-auth.js";
@@ -252,19 +571,16 @@
     }
   };
 
-  // Real-time messages
-  const q = query(collection(db, "messages"), orderBy("time", "desc"));
-
-  // XSS Protection
+  // Helper: XSS Protection
   function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text ?? '';
     return div.innerHTML;
   }
 
-  // Format Firestore timestamp
+  // Helper: Format Firestore timestamp
   function formatDate(timestamp) {
-    if (!timestamp) return 'No date';
+    if (!timestamp) return 'Just now';
     try {
       const date = timestamp.toDate();
       return date.toLocaleString('en-US', {
@@ -275,45 +591,31 @@
         minute: '2-digit'
       });
     } catch (e) {
-      return 'Invalid date';
+      return 'Recent';
     }
   }
 
-  // ----- Messages (existing) -----
-  const messagesDiv = document.getElementById("messages");
-  const loadingMessagesDiv = document.getElementById("loadingMessages");
-  const messagesQuery = query(collection(db, "messages"), orderBy("time", "desc"));
+  // Tab Switching Logic
+  const tabButtons = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
 
-  onSnapshot(messagesQuery, (snapshot) => {
-    if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
-
-    if (snapshot.empty) {
-      messagesDiv.innerHTML = '<p style="text-align: center; color: #666;">No messages yet.</p>';
-      return;
-    }
-
-    let html = "";
-    snapshot.forEach((doc) => {
-      const d = doc.data();
-      html += `
-        <div class="message-box">
-          <p><strong>Name:</strong> ${escapeHtml(d.name || 'N/A')}</p>
-          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}">${escapeHtml(d.email || 'N/A')}</a></p>
-          <p><strong>Subject:</strong> ${escapeHtml(d.subject || 'N/A')}</p>
-          <p><strong>Message:</strong> ${escapeHtml(d.message || 'N/A')}</p>
-          <p><small>${formatDate(d.time)}</small></p>
-        </div>
-      `;
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetId = btn.getAttribute('data-tab');
+      tabButtons.forEach(b => b.classList.remove('active'));
+      tabPanes.forEach(p => p.classList.remove('active'));
+      btn.classList.add('active');
+      const targetPane = document.getElementById(targetId);
+      if (targetPane) targetPane.classList.add('active');
     });
-
-    messagesDiv.innerHTML = html;
-  }, (error) => {
-    console.error("Error fetching messages:", error);
-    messagesDiv.innerHTML =
-      '<p style="text-align: center; color: red;">Error loading messages. Please refresh the page.</p>';
   });
 
-  // ----- Newsletter subscribers (new) -----
+  // Global cache of current subscribers
+  let currentSubscribersList = [];
+
+  // =========================================================================
+  // 1. Real-time Newsletter Subscribers Listener & Counts
+  // =========================================================================
   const subscribersDiv = document.getElementById("subscribers");
   const loadingSubscribersDiv = document.getElementById("loadingSubscribers");
   const subscribersQuery = query(collection(db, "newsletter"), orderBy("time", "desc"));
@@ -321,34 +623,309 @@
   onSnapshot(subscribersQuery, (snapshot) => {
     if (loadingSubscribersDiv) loadingSubscribersDiv.style.display = "none";
 
+    currentSubscribersList = [];
+    const count = snapshot.size;
+
+    document.getElementById("statSubscribersCount").textContent = count;
+    document.getElementById("tabSubscribersBadge").textContent = count;
+    document.getElementById("subscriberCountNotice").textContent = count;
+
     if (snapshot.empty) {
-      subscribersDiv.innerHTML = '<p style="text-align: center; color: #666;">No subscribers yet.</p>';
+      subscribersDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No subscribers registered yet.</p>';
       return;
     }
 
     let html = "<ul style='list-style: none; padding: 0;'>";
-    snapshot.forEach((doc) => {
-      const d = doc.data();
+    snapshot.forEach((docSnap) => {
+      const d = docSnap.data();
+      const email = d.email || '';
+      if (email) currentSubscribersList.push({ id: docSnap.id, email: email });
+
       html += `
-        <li class="message-box">
-          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}">${escapeHtml(d.email || 'N/A')}</a></p>
-          <p><small>${formatDate(d.time)}</small></p>
+        <li class="message-box" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <p style="margin: 0;"><strong>Email:</strong> <a href="mailto:${escapeHtml(email)}" style="color: var(--accent); text-decoration: none;">${escapeHtml(email || 'N/A')}</a></p>
+            <p style="margin: 0;"><small><i class="fas fa-clock"></i> Subscribed: ${formatDate(d.time)}</small></p>
+          </div>
+          <button class="btn-delete" data-sub-id="${docSnap.id}">
+            <i class="fas fa-trash-alt"></i> Remove
+          </button>
         </li>
       `;
     });
     html += "</ul>";
-
     subscribersDiv.innerHTML = html;
+
+    // Attach subscriber delete listeners
+    subscribersDiv.querySelectorAll('.btn-delete').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const subId = btn.getAttribute('data-sub-id');
+        if (confirm("Are you sure you want to remove this subscriber?")) {
+          try {
+            await deleteDoc(doc(db, "newsletter", subId));
+          } catch (err) {
+            alert("Error removing subscriber: " + err.message);
+          }
+        }
+      });
+    });
   }, (error) => {
     console.error("Error fetching subscribers:", error);
-    subscribersDiv.innerHTML =
-      '<p style="text-align: center; color: red;">Error loading subscribers. Please refresh the page.</p>';
+    subscribersDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading subscribers.</p>';
   });
 
-  // Theme Toggle
+  // =========================================================================
+  // 2. Real-time Messages Listener
+  // =========================================================================
+  const messagesDiv = document.getElementById("messages");
+  const loadingMessagesDiv = document.getElementById("loadingMessages");
+  const messagesQuery = query(collection(db, "messages"), orderBy("time", "desc"));
+
+  onSnapshot(messagesQuery, (snapshot) => {
+    if (loadingMessagesDiv) loadingMessagesDiv.style.display = "none";
+
+    const count = snapshot.size;
+    document.getElementById("statMessagesCount").textContent = count;
+    document.getElementById("tabMessagesBadge").textContent = count;
+
+    if (snapshot.empty) {
+      messagesDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No messages received yet.</p>';
+      return;
+    }
+
+    let html = "";
+    snapshot.forEach((docSnap) => {
+      const d = docSnap.data();
+      html += `
+        <div class="message-box">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+            <span class="post-badge"><i class="fas fa-envelope-open-text me-1"></i> Contact Inquiry</span>
+            <button class="btn-delete" data-msg-id="${docSnap.id}" title="Delete Message">
+              <i class="fas fa-trash-alt"></i>
+            </button>
+          </div>
+          <p><strong>Name:</strong> ${escapeHtml(d.name || 'N/A')}</p>
+          <p><strong>Email:</strong> <a href="mailto:${escapeHtml(d.email || '')}" style="color: var(--accent);">${escapeHtml(d.email || 'N/A')}</a></p>
+          <p><strong>Phone:</strong> ${escapeHtml(d.phone || 'N/A')}</p>
+          <p><strong>Subject:</strong> ${escapeHtml(d.subject || '(Direct Inquiry)')}</p>
+          <p><strong>Message:</strong><br>${escapeHtml(d.message || 'N/A')}</p>
+          <p><small><i class="fas fa-calendar-alt"></i> ${formatDate(d.time)}</small></p>
+        </div>
+      `;
+    });
+    messagesDiv.innerHTML = html;
+
+    // Attach message delete listeners
+    messagesDiv.querySelectorAll('.btn-delete').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const msgId = btn.getAttribute('data-msg-id');
+        if (confirm("Delete this inbox message?")) {
+          try {
+            await deleteDoc(doc(db, "messages", msgId));
+          } catch (err) {
+            alert("Error deleting message: " + err.message);
+          }
+        }
+      });
+    });
+  }, (error) => {
+    console.error("Error fetching messages:", error);
+    messagesDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading messages.</p>';
+  });
+
+  // =========================================================================
+  // 3. Real-time Published Posts Listener
+  // =========================================================================
+  const postsListDiv = document.getElementById("postsList");
+  const loadingPostsDiv = document.getElementById("loadingPosts");
+  const postsQuery = query(collection(db, "posts"), orderBy("createdAt", "desc"));
+
+  onSnapshot(postsQuery, (snapshot) => {
+    if (loadingPostsDiv) loadingPostsDiv.style.display = "none";
+
+    const count = snapshot.size;
+    document.getElementById("statPostsCount").textContent = count;
+    document.getElementById("tabPostsBadge").textContent = count;
+
+    if (snapshot.empty) {
+      postsListDiv.innerHTML = '<p style="text-align: center; color: var(--text-secondary); padding: 20px;">No published posts yet. Create your first post using the Publish tab!</p>';
+      return;
+    }
+
+    let html = "";
+    snapshot.forEach((docSnap) => {
+      const d = docSnap.data();
+      html += `
+        <div class="message-box">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px;">
+            <div>
+              <span class="post-badge">${escapeHtml(d.category || 'Release')}</span>
+              <h3 style="color: var(--text); font-size: 1.25rem; margin-top: 4px;">${escapeHtml(d.title || 'Untitled Post')}</h3>
+            </div>
+            <button class="btn-delete" data-post-id="${docSnap.id}" title="Delete Post">
+              <i class="fas fa-trash-alt"></i> Delete
+            </button>
+          </div>
+          <p style="color: var(--text-secondary);">${escapeHtml(d.description || '')}</p>
+          ${d.link ? `<p><strong>Link:</strong> <a href="${escapeHtml(d.link)}" target="_blank" rel="noopener noreferrer" style="color: var(--accent);">${escapeHtml(d.link)} ↗</a></p>` : ''}
+          ${d.imageUrl ? `<p><strong>Image:</strong> <a href="${escapeHtml(d.imageUrl)}" target="_blank" style="color: var(--accent);">View Thumbnail ↗</a></p>` : ''}
+          <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 10px;">
+            <small><i class="fas fa-clock"></i> ${formatDate(d.createdAt)}</small>
+            <small><i class="fas fa-paper-plane"></i> Notified: ${d.subscribersNotified || 0} subscriber(s)</small>
+          </div>
+        </div>
+      `;
+    });
+    postsListDiv.innerHTML = html;
+
+    // Attach post delete listeners
+    postsListDiv.querySelectorAll('.btn-delete').forEach(btn => {
+      btn.addEventListener('click', async () => {
+        const postId = btn.getAttribute('data-post-id');
+        if (confirm("Are you sure you want to delete this post from your website?")) {
+          try {
+            await deleteDoc(doc(db, "posts", postId));
+          } catch (err) {
+            alert("Error deleting post: " + err.message);
+          }
+        }
+      });
+    });
+  }, (error) => {
+    console.error("Error fetching posts:", error);
+    postsListDiv.innerHTML = '<p style="color: red; text-align: center;">Error loading published posts.</p>';
+  });
+
+  // =========================================================================
+  // 4. Create Post & Broadcast to Subscribers
+  // =========================================================================
+  const broadcastForm = document.getElementById("broadcastPostForm");
+  const publishBtn = document.getElementById("publishBtn");
+  const alertBanner = document.getElementById("broadcastSuccessAlert");
+  const alertText = document.getElementById("broadcastSuccessText");
+
+  broadcastForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const title = document.getElementById("postTitle").value.trim();
+    const category = document.getElementById("postCategory").value;
+    const link = document.getElementById("postLink").value.trim();
+    const imageUrl = document.getElementById("postImage").value.trim();
+    const description = document.getElementById("postDescription").value.trim();
+
+    if (!title || !description) {
+      alert("Please enter a title and description for your post.");
+      return;
+    }
+
+    publishBtn.disabled = true;
+    publishBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Publishing & Sending Notifications...';
+
+    try {
+      // 1. Fetch current subscriber emails directly
+      let subscriberEmails = [];
+      const subSnap = await getDocs(collection(db, "newsletter"));
+      subSnap.forEach(d => {
+        const em = d.data().email;
+        if (em && em.includes("@")) {
+          subscriberEmails.push(em);
+        }
+      });
+
+      // 2. Add post document to Firestore 'posts' collection
+      const postRef = await addDoc(collection(db, "posts"), {
+        title: title,
+        category: category,
+        link: link || "https://lakhvinder-portfolio.vercel.app/my-work.html",
+        imageUrl: imageUrl || "",
+        description: description,
+        author: "Lakhvinder Singh",
+        subscribersNotified: subscriberEmails.length,
+        createdAt: serverTimestamp()
+      });
+
+      // 3. Queue email notification jobs into 'mail' collection for Trigger Email extension
+      let queuedCount = 0;
+      for (const subscriberEmail of subscriberEmails) {
+        try {
+          await addDoc(collection(db, "mail"), {
+            to: [subscriberEmail],
+            message: {
+              subject: `🚀 New Post by Lakhvinder Singh: ${title}`,
+              text: `Hello,\n\nA new post has been published on Lakhvinder Singh's portfolio:\n\nTitle: ${title} [${category}]\n\n${description}\n\nView details: ${link || "https://lakhvinder-portfolio.vercel.app/my-work.html"}\n\nThank you for following my journey!\nLakhvinder Singh`,
+              html: `
+                <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #ffffff; border: 2px solid #0E0E0E; border-radius: 12px;">
+                  <div style="text-align: center; border-bottom: 2px solid #0E0E0E; padding-bottom: 20px; margin-bottom: 25px;">
+                    <h2 style="margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; color: #0E0E0E;">LAKHVINDER SINGH</h2>
+                    <span style="font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px;">[ Project Release & Announcement ]</span>
+                  </div>
+                  
+                  <div style="margin-bottom: 15px;">
+                    <span style="background-color: #65c0f0; color: #0E0E0E; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; border: 1.5px solid #0E0E0E; display: inline-block;">
+                      ${escapeHtml(category)}
+                    </span>
+                  </div>
+
+                  <h1 style="font-size: 24px; color: #0E0E0E; line-height: 1.25; margin: 10px 0 15px 0;">
+                    ${escapeHtml(title)}
+                  </h1>
+
+                  <p style="font-size: 15px; line-height: 1.7; color: #222222; margin-bottom: 25px;">
+                    ${escapeHtml(description)}
+                  </p>
+
+                  ${imageUrl ? `<div style="text-align: center; margin-bottom: 25px;"><img src="${escapeHtml(imageUrl)}" alt="Project Preview" style="max-width: 100%; border-radius: 8px; border: 2px solid #0E0E0E;" /></div>` : ''}
+
+                  <div style="text-align: center; margin: 30px 0;">
+                    <a href="${escapeHtml(link || "https://lakhvinder-portfolio.vercel.app/my-work.html")}" style="background-color: #0E0E0E; color: #65c0f0; text-decoration: none; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">
+                      View Live Project ↗
+                    </a>
+                  </div>
+
+                  <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #718096; text-align: center; line-height: 1.5;">
+                    You are receiving this update because you subscribed to updates on Lakhvinder Singh's Web Development Portfolio.<br>
+                    Ambala Cantt, Haryana • Zirakpur, Punjab
+                  </div>
+                </div>
+              `
+            },
+            source: "admin-broadcast",
+            postId: postRef.id,
+            createdAt: serverTimestamp()
+          });
+          queuedCount++;
+        } catch (err) {
+          console.warn("Failed queuing mail for", subscriberEmail, err);
+        }
+      }
+
+      // Reset form
+      broadcastForm.reset();
+
+      // Show success feedback
+      alertBanner.style.display = "block";
+      alertText.textContent = `🎉 Success! Post published live to your website, and email notification queued for ${queuedCount} subscriber(s)!`;
+      setTimeout(() => {
+        alertBanner.style.display = "none";
+      }, 7000);
+
+      // Switch to Manage Posts tab to show the new post
+      const postsTabBtn = document.querySelector('[data-tab="tab-posts"]');
+      if (postsTabBtn) postsTabBtn.click();
+
+    } catch (err) {
+      console.error("Error broadcasting post:", err);
+      alert("Error publishing post: " + err.message);
+    } finally {
+      publishBtn.disabled = false;
+      publishBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Publish & Notify All Subscribers';
+    }
+  });
+
+  // =========================================================================
+  // 5. Theme Toggle Logic
+  // =========================================================================
   const themeToggle = document.getElementById("themeToggle");
-  
-  // Restore theme from localStorage
   const savedTheme = localStorage.getItem('portfolio-theme');
   if (savedTheme) {
     document.documentElement.setAttribute('data-theme', savedTheme);
