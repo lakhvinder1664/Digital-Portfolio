@@ -1007,101 +1007,173 @@ footer input::placeholder {
     margin-bottom: 4px;
 }
 
-/* Editorial Experience Section (Home Page Aesthetic) */
+/* Architectural Timeline Experience Section */
 .about-experience-section {
     position: relative;
     overflow: hidden;
 }
 
-.experience-item {
-    border-bottom: 1px solid var(--dark-black);
-    padding: 2.8rem 0;
-    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+.exp-timeline-wrapper {
     position: relative;
+    padding-left: 45px;
+    border-left: 2px solid var(--dark-black);
+    margin-left: 15px;
 }
 
-.experience-item:first-of-type {
-    border-top: 2px solid var(--dark-black);
+@media (max-width: 768px) {
+    .exp-timeline-wrapper {
+        padding-left: 24px;
+        margin-left: 8px;
+    }
 }
 
-.experience-item:hover {
-    padding-left: 12px;
+.exp-timeline-node {
+    position: relative;
+    padding-bottom: 3.5rem;
+    transition: all 0.3s ease;
 }
 
-.exp-index {
+.exp-timeline-node:last-child {
+    padding-bottom: 0;
+}
+
+.exp-timeline-node::before {
+    content: '';
+    position: absolute;
+    left: -53px;
+    top: 5px;
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    background-color: var(--neon-lime);
+    border: 3px solid var(--dark-black);
+    transition: all 0.25s ease;
+    z-index: 2;
+}
+
+@media (max-width: 768px) {
+    .exp-timeline-node::before {
+        left: -32px;
+    }
+}
+
+.exp-timeline-node.active-node::before {
+    background-color: var(--dark-black);
+    box-shadow: 0 0 0 4px var(--neon-lime);
+}
+
+.exp-timeline-node:hover::before {
+    transform: scale(1.35);
+    background-color: var(--dark-black);
+}
+
+.exp-period-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     font-family: 'Oswald', sans-serif;
-    font-size: 1.6rem;
+    font-size: 1.15rem;
     font-weight: 700;
     color: var(--dark-black);
     letter-spacing: 0.5px;
 }
 
-.exp-period {
-    font-family: 'Oswald', sans-serif;
-    font-size: 1.25rem;
+.exp-tag-tenure {
+    background-color: var(--dark-black);
+    color: var(--white);
+    padding: 3px 12px;
+    border-radius: 50px;
+    font-size: 11px;
     font-weight: 700;
-    color: var(--dark-black);
     letter-spacing: 0.5px;
-    line-height: 1.2;
+    text-transform: uppercase;
 }
 
-.exp-location-tag {
-    font-size: 0.85rem;
+.exp-tag-active {
+    background-color: var(--white);
+    color: var(--dark-black);
+    border: 1.5px solid var(--dark-black);
+    padding: 2px 10px;
+    border-radius: 50px;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+}
+
+.exp-title-company {
+    font-family: 'Oswald', sans-serif;
+    font-size: clamp(2rem, 3.4vw, 2.9rem);
+    font-weight: 700;
+    text-transform: uppercase;
+    line-height: 1.05;
+    color: var(--dark-black);
+    letter-spacing: -0.5px;
+    margin: 8px 0;
+    transition: transform 0.2s ease;
+}
+
+.exp-timeline-node:hover .exp-title-company {
+    transform: translateX(6px);
+}
+
+.exp-role-title {
+    font-family: 'Inter', sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--dark-black);
+}
+
+.exp-location-text {
+    font-size: 0.88rem;
     font-weight: 600;
     color: var(--dark-black);
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    opacity: 0.9;
 }
 
-.exp-company-title {
-    font-family: 'Oswald', sans-serif;
-    font-size: clamp(1.8rem, 2.6vw, 2.5rem);
-    font-weight: 700;
-    text-transform: uppercase;
-    line-height: 1.1;
-    color: var(--dark-black);
-}
-
-.exp-role-badge {
-    display: inline-block;
-    background-color: var(--dark-black);
-    color: var(--white);
-    padding: 4px 14px;
-    border-radius: 50px;
-    font-size: 11px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-}
-
-.exp-role-badge.current {
-    background-color: var(--dark-black);
-    color: var(--white);
-    border: 1px solid var(--dark-black);
-}
-
-.exp-bullet-list {
-    list-style: none;
-    padding-left: 0;
-    margin-bottom: 0;
-}
-
-.exp-bullet-list li {
-    position: relative;
-    padding-left: 20px;
-    margin-bottom: 8px;
-    font-size: 1.02rem;
-    line-height: 1.65;
+.exp-desc-text {
+    font-size: 1.08rem;
+    line-height: 1.75;
     color: var(--dark-black) !important;
     font-weight: 500;
 }
 
-.exp-bullet-list li::before {
-    content: "■";
-    position: absolute;
-    left: 0;
-    top: 2px;
-    font-size: 8px;
+.exp-check-item {
+    font-size: 0.98rem;
+    line-height: 1.6;
+    color: var(--dark-black) !important;
+    font-weight: 500;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+}
+
+.exp-check-item i {
+    font-size: 11px;
     color: var(--dark-black);
+    flex-shrink: 0;
+}
+
+.exp-pill-tag {
+    background-color: transparent;
+    color: var(--dark-black);
+    border: 1.5px solid var(--dark-black);
+    padding: 5px 14px;
+    border-radius: 50px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    display: inline-block;
+    transition: all 0.2s ease;
+}
+
+.exp-pill-tag:hover {
+    background-color: var(--dark-black);
+    color: var(--white);
+    transform: translateY(-2px);
 }
