@@ -198,7 +198,7 @@
             <!-- Career & Work Experience Section (Exact Home Page Services Architecture) -->
             <section class="expertise-section py-5 overflow-hidden position-relative">
                 <div class="container-fluid px-0 position-relative">
-                    <h2 class="expertise-bg-text text-uppercase">EXPERIENCE</h2>
+                    <h2 class="expertise-bg-text about-watermark-experience text-uppercase">EXPERIENCE</h2>
                     <div class="container py-5">
                         <div class="row">
                             <!-- Left Column: Sticky/Editorial Overview -->
@@ -827,6 +827,54 @@
                 });
             }
         });
+
+        // Scroll-Driven Background Watermark Zoom Animations ("CREATIVE" & "EXPERIENCE")
+        // Enters section: zooms out to scale 1.0; Leaves section: zooms in to scale 1.35
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.set([".about-bg-watermark", ".about-watermark-experience"], {
+                xPercent: -50,
+                yPercent: -50,
+                left: "50%",
+                top: "50%",
+                transformOrigin: "center center"
+            });
+
+            // 1. Who I Am Section: "CREATIVE" Watermark
+            if (document.querySelector('.about-who-section') && document.querySelector('.about-bg-watermark')) {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".about-who-section",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1.2
+                    }
+                })
+                .fromTo(".about-bg-watermark", 
+                    { scale: 1.35, opacity: 0.2 }, 
+                    { scale: 1.0, opacity: 1, ease: "none" }
+                )
+                .to(".about-bg-watermark", 
+                    { scale: 1.35, opacity: 0.2, ease: "none" });
+            }
+
+            // 2. Experience Section: "EXPERIENCE" Watermark
+            if (document.querySelector('.expertise-section') && document.querySelector('.about-watermark-experience')) {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".expertise-section",
+                        start: "top bottom",
+                        end: "bottom top",
+                        scrub: 1.2
+                    }
+                })
+                .fromTo(".about-watermark-experience", 
+                    { scale: 1.35, opacity: 0.2 }, 
+                    { scale: 1.0, opacity: 1, ease: "none" }
+                )
+                .to(".about-watermark-experience", 
+                    { scale: 1.35, opacity: 0.2, ease: "none" });
+            }
+        }
     </script>
 </body>
 
