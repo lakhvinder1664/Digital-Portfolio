@@ -308,20 +308,41 @@ footer input::placeholder {
 .marquee-inner-content {
     display: flex;
     width: max-content;
-    /* Ye line zaroori hai taaki width automate ho jaye */
     will-change: transform;
     transform: translate3d(0, 0, 0);
-    /* Speed fast: 12s desktop ke liye, animation linear hona chahiye */
-    animation: scrollRightToLeft 14s linear infinite;
+    animation: scrollRightToLeft 20s linear infinite;
+}
+
+.marquee-moving-part:hover .marquee-inner-content {
+    animation-play-state: paused;
 }
 
 .marquee-item {
-    padding: 0 45px;
-    color: #666;
-    font-family: 'Inter', sans-serif;
-    font-size: 1.4rem;
-    font-weight: 500;
+    padding: 0 35px;
+    color: #FFFFFF;
+    font-family: 'Oswald', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
     white-space: nowrap;
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.marquee-item span {
+    color: #FFFFFF;
+}
+
+.marquee-item .marquee-accent {
+    color: #65c0f0 !important;
+}
+
+.marquee-item .marquee-dot {
+    color: #65c0f0;
+    font-size: 1rem;
+    margin-left: 14px;
 }
 
 @keyframes scrollRightToLeft {
@@ -336,9 +357,9 @@ footer input::placeholder {
 
 @media (max-width: 768px) {
     .marquee-item {
-        /* Mobile par space kam karein taaki gaps na dikhein */
-        padding: 0 20px;
-        font-size: 1.1rem;
+        padding: 0 18px;
+        font-size: 1.15rem;
+        letter-spacing: 1px;
     }
 
     .marquee-fixed-side {
