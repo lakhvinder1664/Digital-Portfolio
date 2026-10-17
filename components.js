@@ -68,7 +68,7 @@
                             </a>
                         </li>
                         <li class="list-group-item p-0">
-                            <a href="${base}my-work.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
+                            <a href="${base}projects.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'projects.html' || currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
                                 <span>Projects</span>
                             </a>
                         </li>
@@ -104,6 +104,7 @@
             'about': { title: 'ABOUT', label: 'About', index: '001' },
             'service': { title: 'SERVICES', label: 'Service', index: '002' },
             'services': { title: 'SERVICES', label: 'Services', index: '002' },
+            'projects': { title: 'PROJECTS', label: 'Projects', index: '003' },
             'my-work': { title: 'PROJECTS', label: 'Projects', index: '003' },
             'pages': { title: 'PROJECTS', label: 'Projects', index: '003' },
             'work': { title: 'PROJECTS', label: 'Projects', index: '003' },

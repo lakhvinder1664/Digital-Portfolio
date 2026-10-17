@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | Lakhvinder Singh Portfolio</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Preloader Animation -->
+    <div id="preloader">
+        <svg id="svg-stage" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 248 248">
+            <g class="group1">
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+                <image href="https://assets.codepen.io/16327/flair-2.png" />
+            </g>
+            <g class="group2">
+                <image href="https://assets.codepen.io/16327/flair-3.png" mask="url(#g2_mask)" />
+            </g>
+            <mask id="g2_mask" fill="#fff">
+                <circle cx="124" cy="0" r="0" />
+                <circle cx="124" cy="248" r="0" />
+            </mask>
+            <g class="group3">
+                <image href="https://assets.codepen.io/16327/flair-4.png" mask="url(#g3_mask)" />
+            </g>
+            <mask id="g3_mask" fill="#fff">
+                <rect x="0" y="0" width="124" height="124" />
+                <rect x="124" y="0" width="124" height="124" />
+                <rect x="0" y="124" width="124" height="124" />
+                <rect x="124" y="124" width="124" height="124" />
+            </mask>
+            <g class="group4">
+                <image href="https://assets.codepen.io/16327/flair-5.png" x="70" />
+            </g>
+            <g class="group5">
+                <image href="https://assets.codepen.io/16327/flair-7.png" mask="url(#g5_mask)" />
+            </g>
+            <mask id="g5_mask" fill="#fff">
+                <path d="M0 248h248L124 0 0 247z" />
+                <circle cx="124" cy="83" r="83" />
+            </mask>
+        </svg>
+    </div>
+
+    <div class="main-wrapper">
+        <!-- Dynamic Header -->
+        <header id="site-header"></header>
+
+        <!-- Dynamic Breadcrumb & Inner Banner -->
+        <div id="site-breadcrumb" data-title="PROJECTS" data-label="Projects" data-index="003"></div>
+
+        <main class="container-fluid p-0">
+            <!-- Work Section -->
+            <section class="work-section position-relative">
+                <div class="container position-relative" style="z-index: 1;">
+                    <!-- Section Header -->
+                    <div class="d-flex align-items-center gap-3 mb-3">
+                        <span class="small-text text-uppercase fw-bold text-dark">[ PROVEN TRACK RECORD & DELIVERIES ]</span>
+                        <div class="thick-line" style="width: 60px; height: 2px; background: var(--dark-black);"></div>
+                    </div>
+
+                    <h1 class="work-display-title">
+                        Proven Work, Real Client Builds<br>& Approved UI Mockups
+                    </h1>
+
+                    <p class="work-lead-desc">
+                        A verified portfolio of actual websites, client-approved pharmaceutical mockups, responsive
+                        storefronts, and web applications built and delivered by <strong>Lakhvinder Singh</strong>.
+                        Every card below represents real deliverables, architecture decisions, and production-ready
+                        code.
+                    </p>
+
+                    <!-- Dynamic Category Filter Bar (Shown automatically only when projects exist) -->
+                    <div class="work-filter-bar" id="categoryFilterBar" style="display: none;"></div>
+
+                    <!-- Dynamic Project Grid (Directly fed from Firestore 'posts' collection) -->
+                    <div class="work-grid" id="projectGrid">
+                        <!-- Loading State -->
+                        <div id="gridLoadingState" class="col-12 text-center py-5" style="grid-column: 1 / -1;">
+                            <div class="spinner-border text-dark mb-3" role="status"></div>
+                            <p class="small-text fw-bold text-uppercase text-secondary">Checking projects & deliverables...</p>
+                        </div>
+                    </div>
+
+                    <!-- Coming Soon State (Shown by default until admin adds projects or on initial load) -->
+                    <div id="comingSoonState" class="p-4 p-md-5 border border-2 border-dark rounded-3 text-center my-4"
+                        style="display: none; background: #FFFFFF; box-shadow: 10px 10px 0px var(--dark-black);">
+                        <div class="d-inline-flex align-items-center justify-content-center mb-3"
+                            style="width: 76px; height: 76px; border-radius: 50%; background: var(--neon-lime); border: 2px solid var(--dark-black);">
+                            <i class="fas fa-rocket" style="font-size: 30px; color: var(--dark-black);"></i>
+                        </div>
+                        <h2
+                            style="font-family: 'Oswald', sans-serif; font-size: clamp(2.2rem, 4.5vw, 3.2rem); text-transform: uppercase; margin-bottom: 0.75rem; color: var(--dark-black); letter-spacing: -0.5px;">
+                            COMING SOON
+                        </h2>
+                        <p
+                            style="color: #444; max-width: 580px; margin: 0 auto 1.75rem auto; font-size: 1.05rem; line-height: 1.6; font-weight: 500;">
+                            Projects will automatically appear here once published from Lakhvinder's side! Stay tuned for upcoming updates.
+                        </p>
+                        <div class="d-flex justify-content-center gap-3 flex-wrap">
+                            <a href="contact.html" class="btn btn-dark rounded-pill px-4 py-2 fw-bold text-uppercase"
+                                style="font-size: 12px; letter-spacing: 1px;">
+                                Inquire Project Work ↗
+                            </a>
+                            <a href="index.html"
+                                class="btn btn-outline-dark rounded-pill px-4 py-2 fw-bold text-uppercase"
+                                style="font-size: 12px; letter-spacing: 1px;">
+                                <i class="fas fa-home me-1"></i> Back To Home
+                            </a>
+                        </div>
+                        <div id="dbErrorNotice" class="mt-4 pt-3 border-top border-secondary-subtle" style="display: none; font-size: 12px; color: #dc2626;">
+                            <i class="fas fa-exclamation-circle me-1"></i>
+                            <span id="dbErrorText">Error loading projects. Please refresh the page.</span>
+                        </div>
+                    </div>
+
+                    <!-- Client Inquiry Callout Box -->
+                    <div class="p-4 p-md-5 border border-2 border-dark rounded-3 mt-5 text-center position-relative"
+                        style="background-color: var(--neon-lime); box-shadow: 10px 10px 0px var(--dark-black);">
+                        <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">[ COLLABORATE ON YOUR NEXT BUILD ]</span>
+                        <h2
+                            style="font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.8vw, 3rem); text-transform: uppercase; line-height: 1.1; margin-bottom: 1rem; color: var(--dark-black);">
+                            Need A Similar High-Impact Website Or UI Mockup?
+                        </h2>
+                        <p
+                            style="font-size: 1.05rem; font-weight: 500; max-width: 620px; margin: 0 auto 1.75rem auto; color: var(--dark-black);">
+                            From initial mockup design to final client approval and responsive coding, I build modern
+                            web experiences that convert. Let's discuss your project today.
+                        </p>
+                        <a href="contact.html" class="btn btn-dark rounded-pill px-4 py-3 fw-bold text-uppercase"
+                            style="font-size: 13px; letter-spacing: 1px;">
+                            Start A Project Discussion ↗
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Bottom Watermark Matching Portfolio Theme -->
+                <div class="contact-watermark-wrap text-center overflow-hidden position-relative mt-5 pt-3">
+                    <h2 class="contact-bottom-watermark about-watermark-work text-uppercase">PROJECTS</h2>
+                </div>
+            </section>
+        </main>
+
+        <!-- Dynamic Footer -->
+        <div id="site-footer"></div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="components.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
+    <!-- Firebase SDK for Real-Time Projects Grid -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/12.6.0/firebase-app.js";
+        import { getFirestore, collection, onSnapshot }
+            from "https://www.gstatic.com/firebasejs/12.6.0/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU",
+            authDomain: "portfolio-contact-fe911.firebaseapp.com",
+            projectId: "portfolio-contact-fe911",
+            storageBucket: "portfolio-contact-fe911.firebasestorage.app",
+            messagingSenderId: "48417656668",
+            appId: "1:48417656668:web:759f639f233ea8a53c3b99"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const projectGrid = document.getElementById('projectGrid');
+        const comingSoonState = document.getElementById('comingSoonState');
+        const gridLoadingState = document.getElementById('gridLoadingState');
+        const categoryFilterBar = document.getElementById('categoryFilterBar');
+        const dbErrorNotice = document.getElementById('dbErrorNotice');
+        const dbErrorText = document.getElementById('dbErrorText');
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text ?? '';
+            return div.innerHTML;
+        }
+
+        function formatDate(timestamp) {
+            if (!timestamp) return 'Recent Project';
+            try {
+                const date = timestamp.toDate();
+                return date.toLocaleDateString('en-US', {
+                    month: 'short',
+                    year: 'numeric'
+                });
+            } catch (e) {
+                return 'Verified Build';
+            }
+        }
+
+        // Real-Time Listener for published projects
+        const postsCol = collection(db, "posts");
+
+        onSnapshot(postsCol, (snapshot) => {
+            if (gridLoadingState) gridLoadingState.style.display = 'none';
+
+            if (snapshot.empty) {
+                projectGrid.innerHTML = '';
+                categoryFilterBar.style.display = 'none';
+                comingSoonState.style.display = 'block';
+                return;
+            }
+
+            // When projects exist, hide Coming Soon and show filter bar automatically
+            comingSoonState.style.display = 'none';
+            categoryFilterBar.style.display = 'flex';
+
+            // Sort posts client-side descending by createdAt
+            const docs = [];
+            snapshot.forEach(docSnap => docs.push(docSnap));
+            docs.sort((a, b) => {
+                const timeA = a.data().createdAt?.seconds || 0;
+                const timeB = b.data().createdAt?.seconds || 0;
+                return timeB - timeA;
+            });
+
+            const categoriesSet = new Set();
+            let gridHtml = '';
+
+            docs.forEach(docSnap => {
+                const p = docSnap.data();
+                const category = p.category || 'Client Project';
+                categoriesSet.add(category);
+
+                const defaultThumb = 'assets/portfolio-2026.png';
+                const thumbUrl = p.imageUrl && p.imageUrl.trim().length > 0 ? p.imageUrl : defaultThumb;
+                const linkUrl = p.link && p.link.trim().length > 0 ? p.link : 'contact.html';
+
+                gridHtml += `
+                    <div class="work-card" data-category="${escapeHtml(category.toLowerCase())}">
+                        <div class="work-thumb-wrapper">
+                            <img src="${escapeHtml(thumbUrl)}" alt="${escapeHtml(p.title)}" class="work-thumb-img" onerror="this.onerror=null; this.src='img/service1.jpg';">
+                            <span class="work-badge-overlay">${escapeHtml(category)}</span>
+                        </div>
+                        <div class="work-card-body">
+                            <div>
+                                <h3 class="work-card-title">${escapeHtml(p.title || 'Untitled Project')}</h3>
+                                <p class="work-card-desc">
+                                    ${escapeHtml(p.description || 'Verified project delivered with clean responsive architecture.')}
+                                </p>
+                                <div class="work-tech-stack">
+                                    <span class="work-tech-pill"><i class="fas fa-check-circle me-1 text-success"></i> Delivered</span>
+                                    <span class="work-tech-pill">${escapeHtml(category)}</span>
+                                    <span class="work-tech-pill"><i class="fas fa-calendar-alt me-1"></i> ${formatDate(p.createdAt)}</span>
+                                </div>
+                            </div>
+                            <div class="work-card-footer">
+                                <span class="small-text fw-bold text-dark">[ Verified Case Study ]</span>
+                                <a href="${escapeHtml(linkUrl)}" target="${linkUrl.startsWith('http') ? '_blank' : '_self'}" rel="noopener noreferrer" class="work-cta-link">
+                                    View Project ↗
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+
+            projectGrid.innerHTML = gridHtml;
+
+            // Dynamically construct Category Filter Buttons (Only shown when projects exist)
+            let filterHtml = `<button class="work-filter-btn active" data-filter="all">All Projects (${docs.length})</button>`;
+            categoriesSet.forEach(cat => {
+                filterHtml += `<button class="work-filter-btn" data-filter="${escapeHtml(cat.toLowerCase())}">${escapeHtml(cat)}</button>`;
+            });
+            categoryFilterBar.innerHTML = filterHtml;
+
+            // Re-bind click event to dynamic filter buttons
+            categoryFilterBar.querySelectorAll('.work-filter-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    categoryFilterBar.querySelectorAll('.work-filter-btn').forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const filter = btn.getAttribute('data-filter');
+                    const cards = projectGrid.querySelectorAll('.work-card');
+
+                    cards.forEach(card => {
+                        if (filter === 'all') {
+                            card.style.display = 'flex';
+                        } else {
+                            const cardCat = card.getAttribute('data-category') || '';
+                            if (cardCat.includes(filter)) {
+                                card.style.display = 'flex';
+                            } else {
+                                card.style.display = 'none';
+                            }
+                        }
+                    });
+                });
+            });
+
+        }, (error) => {
+            console.error("Firestore onSnapshot error:", error);
+            if (gridLoadingState) gridLoadingState.style.display = 'none';
+            projectGrid.innerHTML = '';
+            categoryFilterBar.style.display = 'none';
+            comingSoonState.style.display = 'block';
+            if (dbErrorNotice && dbErrorText) {
+                dbErrorNotice.style.display = 'block';
+                dbErrorText.textContent = `Error loading projects. Please refresh the page. (${error.code || error.message || 'Check database connection'})`;
+            }
+        });
+    </script>
+
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+
+        // Preloader Timeline Animation
+        function createPreloaderTimeline() {
+            const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
+            tl.fromTo('.group1', { scale: 0.1, transformOrigin: '124 124' }, { duration: 0.35, scale: 1, ease: 'expo.inOut' })
+                .to('.group1', { duration: 1.2, rotate: 15, ease: 'none' }, 0.1)
+                .to('.group1 image', { scale: (i) => [0.4, 0.2, 0.3][i], x: (i) => [0, 135, 100][i], y: (i) => [90, 24, 124][i], ease: 'back' }, 0.4)
+                .to('.group1 image', { duration: 0.01, opacity: 0, stagger: 0.06 }, 1.1)
+                .to('#g2_mask circle', { duration: 0.4, attr: { r: "124" }, ease: 'circ' }, 1.3)
+                .fromTo('.group2', { scale: 1, transformOrigin: '124 124' }, { duration: 1.5, scale: 0.9, ease: 'none' }, 1.3)
+                .to('#g2_mask circle', { duration: 0.3, attr: { cx: (i) => ["+=248", "-=248"][i] }, ease: 'sine.in' }, 2.45)
+                .fromTo('.group3', { transformOrigin: '124 124', rotate: -90 }, { duration: 0.9, rotate: 0, ease: 'expo' }, 2.6)
+                .fromTo('#g3_mask rect', { transformOrigin: (i) => ['0 124', '124 0', '124 124', '248 124'][i], scale: 0 }, { duration: 0.4, scale: 1, ease: 'expo', stagger: -0.03 }, 2.6)
+                .to('.group3', { duration: 0.01, scale: 0 }, 3.7)
+                .from('.group4 image', { duration: 0.01, opacity: 0 }, 3.8)
+                .fromTo('.group4', { transformOrigin: '83 124', rotate: 15, scale: 0.2 }, { duration: 0.5, rotate: 0, scale: 0.85, ease: 'bounce' }, 3.8)
+                .to('.group4 image', { duration: 0.01, opacity: 0 }, 4.7)
+                .fromTo('#g5_mask path', { transformOrigin: '124 124', scale: 0 }, { duration: 0.8, scale: 1, ease: 'expo' }, 4.7)
+                .fromTo('#g5_mask circle', { transformOrigin: '83 0', scale: 0 }, { scale: 1, ease: 'expo' }, 4.7);
+            return tl;
+        }
+
+        const preloaderTl = createPreloaderTimeline();
+
+        function hidePreloader(delay = 0.8) {
+            gsap.to("#preloader", {
+                duration: 0.6,
+                opacity: 0,
+                delay: delay,
+                onComplete: () => {
+                    gsap.set("#preloader", { display: "none" });
+                    if (preloaderTl) preloaderTl.pause();
+                }
+            });
+        }
+
+        window.addEventListener("load", () => {
+            hidePreloader(1.0);
+        });
+
+        // Scroll-Driven Watermark Zoom Animation ("PROJECTS")
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+            gsap.set(".about-watermark-work", {
+                transformOrigin: "center center"
+            });
+
+            if (document.querySelector('.contact-watermark-wrap') && document.querySelector('.about-watermark-work')) {
+                gsap.timeline({
+                    scrollTrigger: {
+                        trigger: ".contact-watermark-wrap",
+                        start: "top 95%",
+                        end: "bottom 15%",
+                        scrub: 1.2
+                    }
+                })
+                    .fromTo(".about-watermark-work",
+                        { scale: 1.25, opacity: 0.35 },
+                        { scale: 1.0, opacity: 1, ease: "none" }
+                    )
+                    .to(".about-watermark-work",
+                        { scale: 1.25, opacity: 0.35, ease: "none" });
+            }
+        }
+    </script>
+</body>
+
+</html>
