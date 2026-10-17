@@ -240,38 +240,76 @@
 
         const preloaderTl = createPreloaderTimeline();
 
-        window.addEventListener("load", () => {
+        // Preloader hiding function
+        function hidePreloader(delay = 0.8) {
             gsap.to("#preloader", {
-                duration: 0.8,
+                duration: 0.6,
                 opacity: 0,
-                delay: 1.2,
+                delay: delay,
                 onComplete: () => {
                     gsap.set("#preloader", { display: "none" });
-                    preloaderTl.pause();
-                }
-            });
-        });
-
-        function pageTransition(url) {
-            gsap.set("#preloader", { display: "flex", opacity: 0 });
-            preloaderTl.play();
-            gsap.to("#preloader", {
-                duration: 0.5,
-                opacity: 1,
-                onComplete: () => {
-                    window.location.href = url;
+                    if (preloaderTl) preloaderTl.pause();
                 }
             });
         }
 
+        // Fresh page load
+        window.addEventListener("load", () => {
+            hidePreloader(1.0);
+        });
+
+        // BFCache / Browser Back & Forward Navigation handler
+        window.addEventListener("pageshow", (event) => {
+            if (event.persisted) {
+                gsap.killTweensOf("#preloader");
+                gsap.set("#preloader", { display: "none", opacity: 0 });
+                if (preloaderTl) preloaderTl.pause();
+            }
+        });
+
+        // Normalize URL paths to prevent stuck loader when clicking link to current page
+        function normalizePath(path) {
+            return (path || '').replace(/\/index\.html?$/i, '/').replace(/\/$/, '').toLowerCase();
+        }
+
+        // PAGE TRANSITION
+        function pageTransition(url) {
+            gsap.set("#preloader", { display: "flex", opacity: 0 });
+            if (preloaderTl) preloaderTl.play();
+
+            gsap.to("#preloader", {
+                duration: 0.4,
+                opacity: 1,
+                onComplete: () => {
+                    window.location.href = url;
+                    // Safety timeout in case navigation is cancelled or delayed
+                    setTimeout(() => {
+                        hidePreloader(0);
+                    }, 2500);
+                }
+            });
+        }
+
+        // LINK CLICK HANDLER (Event Delegation)
         document.addEventListener('click', (e) => {
             const link = e.target.closest('a');
-            if (link && link.hostname === window.location.hostname && !link.hash && link.target !== "_blank") {
-                const href = link.getAttribute('href');
-                if (href && href !== '#' && !href.startsWith('javascript:')) {
+            if (!link) return;
+
+            const href = link.getAttribute('href');
+            if (!href || href === '#' || href.startsWith('javascript:') || href.startsWith('mailto:') || href.startsWith('tel:')) return;
+            if (link.target === '_blank' || link.getAttribute('target') === '_blank') return;
+
+            if (link.hostname === window.location.hostname && !link.hash) {
+                // If clicking current page link, do not trigger preloader
+                const currentPath = normalizePath(window.location.pathname);
+                const targetPath = normalizePath(link.pathname);
+                if (currentPath === targetPath) {
                     e.preventDefault();
-                    pageTransition(link.href);
+                    return;
                 }
+
+                e.preventDefault();
+                pageTransition(link.href);
             }
         });
     </script>
