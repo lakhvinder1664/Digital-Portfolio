@@ -61,9 +61,6 @@
         <main class="container-fluid p-0">
             <!-- Contact Section (Matching Reference Design & Brand Identity) -->
             <section class="contact-section position-relative">
-                <!-- Centered Zooming Background Watermark -->
-                <h2 class="expertise-bg-text about-watermark-contact text-uppercase">CONNECT</h2>
-
                 <div class="container position-relative" style="z-index: 1;">
                     <div class="row g-5 align-items-start">
                         <!-- Left Column: Display Headline & Contact Info -->
@@ -186,6 +183,11 @@
                             </div>
                         </div>
                     </div>
+                </div>
+
+                <!-- Bottom Watermark (Placed cleanly below form card) -->
+                <div class="contact-watermark-wrap text-center overflow-hidden position-relative">
+                    <h2 class="contact-bottom-watermark about-watermark-contact text-uppercase">CONNECT</h2>
                 </div>
             </section>
         </main>
@@ -333,31 +335,27 @@
             });
         }
 
-        // Scroll-Driven Watermark Zoom Animation ("CONNECT")
+        // Scroll-Driven Watermark Zoom Animation ("CONNECT" Below Form Card)
         if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
             gsap.set(".about-watermark-contact", {
-                xPercent: -50,
-                yPercent: -50,
-                left: "50%",
-                top: "50%",
                 transformOrigin: "center center"
             });
 
-            if (document.querySelector('.contact-section') && document.querySelector('.about-watermark-contact')) {
+            if (document.querySelector('.contact-watermark-wrap') && document.querySelector('.about-watermark-contact')) {
                 gsap.timeline({
                     scrollTrigger: {
-                        trigger: ".contact-section",
-                        start: "top bottom",
-                        end: "bottom top",
+                        trigger: ".contact-watermark-wrap",
+                        start: "top 95%",
+                        end: "bottom 15%",
                         scrub: 1.2
                     }
                 })
                 .fromTo(".about-watermark-contact", 
-                    { scale: 1.35, opacity: 0.2 }, 
+                    { scale: 1.25, opacity: 0.35 }, 
                     { scale: 1.0, opacity: 1, ease: "none" }
                 )
                 .to(".about-watermark-contact", 
-                    { scale: 1.35, opacity: 0.2, ease: "none" });
+                    { scale: 1.25, opacity: 0.35, ease: "none" });
             }
         }
     </script>
