@@ -62,9 +62,8 @@
                             </a>
                         </li>
                         <li class="list-group-item p-0">
-                            <a href="${base}service.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'service.html' ? 'active' : ''}">
-                                <span>Service</span>
-                                <span>+</span>
+                            <a href="${base}service.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'service.html' || currentPath === 'services.html' ? 'active' : ''}">
+                                <span>Services</span>
                             </a>
                         </li>
                         <li class="list-group-item p-0">
