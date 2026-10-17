@@ -54,7 +54,7 @@
                             <a href="${base}index.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Home</a>
                         </li>
                         <li class="list-group-item">
-                            <a href="${base}about.html" class="text-decoration-none text-reset d-block">About Us</a>
+                            <a href="${base}about.html" class="text-decoration-none text-reset d-block">About</a>
                         </li>
                         <li class="list-group-item d-flex justify-content-between align-items-center">
                             <a href="${base}service.html" class="text-decoration-none text-reset w-100 d-flex justify-content-between align-items-center">Service <span>+</span></a>
@@ -92,7 +92,7 @@
 
         // Predefined configurations matching home page theme
         const pageConfigs = {
-            'about': { title: 'ABOUT ME', label: 'About Us', index: '001' },
+            'about': { title: 'ABOUT', label: 'About', index: '001' },
             'service': { title: 'SERVICES', label: 'Service', index: '002' },
             'services': { title: 'SERVICES', label: 'Services', index: '002' },
             'pages': { title: 'ALL PAGES', label: 'Pages', index: '003' },
