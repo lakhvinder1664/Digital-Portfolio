@@ -1722,13 +1722,44 @@ footer input::placeholder {
     background-color: #E8F7EE;
     border: 1.5px solid #27AE60;
     color: #196F3D;
-    padding: 14px 20px;
-    border-radius: 8px;
+    padding: 16px 20px;
+    border-radius: 10px;
     font-family: 'Inter', sans-serif;
     font-size: 0.95rem;
     font-weight: 600;
     margin-bottom: 1.5rem;
+    box-shadow: 0 6px 20px rgba(39, 174, 96, 0.12);
 }
+
+.contact-whatsapp-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    background-color: #25D366;
+    color: #FFFFFF !important;
+    font-family: 'Inter', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 30px;
+    text-decoration: none;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 14px rgba(37, 211, 102, 0.35);
+    margin-top: 10px;
+}
+
+.contact-whatsapp-btn:hover {
+    background-color: #1EBE5B;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 18px rgba(37, 211, 102, 0.45);
+    color: #FFFFFF !important;
+}
+
+.contact-whatsapp-btn i {
+    font-size: 1.2rem;
+}
+
 
 /* Contact Bottom Watermark (Placed cleanly below form card, no text-stroke) */
 .contact-watermark-wrap {

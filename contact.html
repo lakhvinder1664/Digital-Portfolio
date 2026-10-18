@@ -149,8 +149,18 @@
                             <div class="contact-form-box">
                                 <!-- Success Feedback Alert -->
                                 <div id="contactSuccessAlert" class="contact-alert-success">
-                                    <i class="fas fa-check-circle me-2"></i>
-                                    Thank you! Your message has been sent successfully. I'll get back to you soon.
+                                    <div class="d-flex align-items-center mb-1">
+                                        <i class="fas fa-check-circle me-2" style="font-size: 1.25rem;"></i>
+                                        <span><strong>Thank you!</strong> Your message has been saved successfully.</span>
+                                    </div>
+                                    <div class="mt-2 pt-2" style="border-top: 1px dashed rgba(39, 174, 96, 0.45);">
+                                        <div style="font-size: 0.88rem; color: #1e5631; margin-bottom: 6px;">
+                                            <i class="fab fa-whatsapp me-1"></i> Opening WhatsApp to chat directly with Lakhvinder...
+                                        </div>
+                                        <a id="contactWhatsAppLink" href="https://wa.me/917988379885" target="_blank" class="contact-whatsapp-btn">
+                                            <i class="fab fa-whatsapp"></i> Chat on WhatsApp (+91 7988379885)
+                                        </a>
+                                    </div>
                                 </div>
 
                                 <form id="contactForm" autocomplete="off">
@@ -361,15 +371,41 @@
                         time: serverTimestamp()
                     });
 
+                    // Generate Direct WhatsApp Chat URL
+                    const waPhone = "917988379885";
+                    const waLines = [
+                        "Hello Lakhvinder! \uD83D\uDC4B",
+                        "I just submitted an inquiry on your portfolio website:",
+                        "",
+                        "\uD83D\uDC64 Name: " + name,
+                        "\uD83D\uDCE7 Email: " + email,
+                        phone ? ("\uD83D\uDCDE Phone: " + phone) : null,
+                        "\uD83D\uDCAC Message: " + message,
+                        "",
+                        "Looking forward to connecting with you!"
+                    ].filter(line => line !== null).join('\n');
+
+                    const waUrl = "https://wa.me/" + waPhone + "?text=" + encodeURIComponent(waLines);
+
+                    const waLinkBtn = document.getElementById('contactWhatsAppLink');
+                    if (waLinkBtn) {
+                        waLinkBtn.href = waUrl;
+                    }
+
                     contactForm.reset();
 
                     if (contactSuccessAlert) {
                         contactSuccessAlert.style.display = 'block';
                         contactSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-                        setTimeout(() => {
-                            contactSuccessAlert.style.display = 'none';
-                        }, 7000);
                     }
+
+                    if (pill) pill.textContent = 'OPENING WHATSAPP...';
+
+                    // Direct redirect to WhatsApp (Never blocked by browser popup blockers)
+                    setTimeout(() => {
+                        window.location.href = waUrl;
+                    }, 1200);
+
                 } catch (err) {
                     console.error("Error submitting contact inquiry:", err);
                     alert("Unable to send message right now. Please try again or email directly to lakhvinder9567@gmail.com.");
