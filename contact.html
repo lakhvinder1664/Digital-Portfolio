@@ -151,11 +151,11 @@
                                 <div id="contactSuccessAlert" class="contact-alert-success">
                                     <div class="d-flex align-items-center mb-1">
                                         <i class="fas fa-check-circle me-2" style="font-size: 1.25rem;"></i>
-                                        <span><strong>Thank you!</strong> Your message has been saved successfully.</span>
+                                        <span><strong>Thank you!</strong> Your message has been sent successfully. I'll get back to you soon.</span>
                                     </div>
                                     <div class="mt-2 pt-2" style="border-top: 1px dashed rgba(39, 174, 96, 0.45);">
                                         <div style="font-size: 0.88rem; color: #1e5631; margin-bottom: 6px;">
-                                            <i class="fab fa-whatsapp me-1"></i> Opening WhatsApp to chat directly with Lakhvinder...
+                                            Need a quick response? You can also message me directly:
                                         </div>
                                         <a id="contactWhatsAppLink" href="https://wa.me/917988379885" target="_blank" class="contact-whatsapp-btn">
                                             <i class="fab fa-whatsapp"></i> Chat on WhatsApp (+91 7988379885)
@@ -371,7 +371,29 @@
                         time: serverTimestamp()
                     });
 
-                    // Generate Direct WhatsApp Chat URL
+                    // 2. Trigger Instant Phone Alert Notification (Sends directly to phone)
+                    try {
+                        fetch("https://formsubmit.co/ajax/lakhvinder9567@gmail.com", {
+                            method: "POST",
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'Accept': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                "Client Name": name,
+                                "Client Email": email,
+                                "Phone Number": phone || "Not provided",
+                                "Message": message,
+                                "_subject": "🚨 NEW PORTFOLIO LEAD: " + name,
+                                "_template": "table",
+                                "_captcha": "false"
+                            })
+                        }).catch(e => console.log("Push alert err:", e));
+                    } catch (e) {
+                        console.log("Push alert exception:", e);
+                    }
+
+                    // Optional WhatsApp Chat URL for client
                     const waPhone = "917988379885";
                     const waLines = [
                         "Hello Lakhvinder! \uD83D\uDC4B",
@@ -380,9 +402,7 @@
                         "\uD83D\uDC64 Name: " + name,
                         "\uD83D\uDCE7 Email: " + email,
                         phone ? ("\uD83D\uDCDE Phone: " + phone) : null,
-                        "\uD83D\uDCAC Message: " + message,
-                        "",
-                        "Looking forward to connecting with you!"
+                        "\uD83D\uDCAC Message: " + message
                     ].filter(line => line !== null).join('\n');
 
                     const waUrl = "https://wa.me/" + waPhone + "?text=" + encodeURIComponent(waLines);
@@ -398,13 +418,6 @@
                         contactSuccessAlert.style.display = 'block';
                         contactSuccessAlert.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
                     }
-
-                    if (pill) pill.textContent = 'OPENING WHATSAPP...';
-
-                    // Direct redirect to WhatsApp (Never blocked by browser popup blockers)
-                    setTimeout(() => {
-                        window.location.href = waUrl;
-                    }, 1200);
 
                 } catch (err) {
                     console.error("Error submitting contact inquiry:", err);
