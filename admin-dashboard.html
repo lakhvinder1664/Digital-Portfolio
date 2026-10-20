@@ -143,6 +143,14 @@
                         <span id="broadcastSuccessText">Post published successfully!</span>
                     </div>
 
+                    <!-- Global Error Toast Alert -->
+                    <div id="broadcastErrorAlert" class="contact-alert-error" style="display: none; border: 2px solid #DC2626; background: #FEE2E2; color: #DC2626; padding: 14px 18px; border-radius: 8px; margin-bottom: 1.5rem; font-weight: 600;">
+                        <div class="d-flex align-items-start gap-2">
+                            <i class="fas fa-exclamation-triangle mt-1"></i>
+                            <div id="broadcastErrorText"></div>
+                        </div>
+                    </div>
+
                     <!-- TAB 1: Publish New Project / Post Announcement -->
                     <div class="admin-tab-pane active" id="tab-broadcast">
                         <div class="admin-card">
@@ -162,7 +170,7 @@
                                 Once published, the new project will automatically appear on your <strong>Projects</strong> page, and an instant email alert will be queued for all newsletter subscribers!
                             </p>
 
-                            <form id="broadcastPostForm" autocomplete="off">
+                            <form id="broadcastPostForm" autocomplete="off" novalidate>
                                 <div class="admin-form-group">
                                     <label for="postTitle">Post / Project Title *</label>
                                     <input type="text" id="postTitle" class="admin-input-field"
@@ -183,14 +191,14 @@
 
                                     <div class="col-md-6 admin-form-group">
                                         <label for="postLink">Project / Live Demo URL</label>
-                                        <input type="url" id="postLink" class="admin-input-field"
-                                            placeholder="e.g. https://lakhvinder-portfolio.vercel.app/projects.html">
+                                        <input type="text" id="postLink" class="admin-input-field"
+                                            placeholder="e.g. https://... or projects.html">
                                     </div>
                                 </div>
 
                                 <div class="admin-form-group">
                                     <label for="postImage">Mockup / Banner Image URL (Optional)</label>
-                                    <input type="url" id="postImage" class="admin-input-field"
+                                    <input type="text" id="postImage" class="admin-input-field"
                                         placeholder="e.g. assets/portfolio-2026.png or public image link">
                                 </div>
 
@@ -1046,7 +1054,12 @@
         }, (error) => {
             console.error("Error fetching posts:", error);
             if (loadingPostsDiv) loadingPostsDiv.style.display = "none";
-            postsListDiv.innerHTML = '<div class="text-danger text-center py-3">Error loading published projects.</div>';
+            let msg = '<div class="text-danger text-center py-3">Error loading published projects.</div>';
+            if (error.code === 'permission-denied') {
+                msg = '<div class="p-3 my-2" style="background:#FEE2E2; border:2px solid #DC2626; border-radius:8px; color:#DC2626; font-size:13px; line-height:1.5;">' +
+                      '<strong><i class="fas fa-lock me-1"></i> Firestore Permission Denied:</strong> Your Firebase Console rules are blocking read access to "posts". Please update Firestore Rules in Firebase Console.</div>';
+            }
+            postsListDiv.innerHTML = msg;
         });
 
         // =====================================================================
@@ -1054,116 +1067,167 @@
         // =====================================================================
         const broadcastForm = document.getElementById("broadcastPostForm");
         const publishBtn = document.getElementById("publishBtn");
-        const alertBanner = document.getElementById("broadcastSuccessAlert");
-        const alertText = document.getElementById("broadcastSuccessText");
+        const alertSuccessBanner = document.getElementById("broadcastSuccessAlert");
+        const alertSuccessText = document.getElementById("broadcastSuccessText");
+        const alertErrorBanner = document.getElementById("broadcastErrorAlert");
+        const alertErrorText = document.getElementById("broadcastErrorText");
+
+        function showPublishError(message) {
+            if (alertErrorBanner && alertErrorText) {
+                alertErrorText.innerHTML = message;
+                alertErrorBanner.style.display = "block";
+                alertErrorBanner.scrollIntoView({ behavior: "smooth", block: "center" });
+            }
+            alert(message.replace(/<[^>]*>/g, ""));
+        }
 
         broadcastForm.addEventListener("submit", async (e) => {
             e.preventDefault();
 
+            // Clear previous alerts
+            if (alertErrorBanner) alertErrorBanner.style.display = "none";
+            if (alertSuccessBanner) alertSuccessBanner.style.display = "none";
+
+            // Verify user is authenticated
+            if (!auth.currentUser) {
+                showPublishError("You are not logged in or session expired. Please log in again.");
+                setTimeout(() => { window.location.href = "admin-login.html"; }, 1500);
+                return;
+            }
+
             const title = document.getElementById("postTitle").value.trim();
             const category = document.getElementById("postCategory").value;
-            const link = document.getElementById("postLink").value.trim();
-            const imageUrl = document.getElementById("postImage").value.trim();
+            let link = document.getElementById("postLink").value.trim();
+            let imageUrl = document.getElementById("postImage").value.trim();
             const description = document.getElementById("postDescription").value.trim();
 
-            if (!title || !description) {
-                alert("Please enter a title and description for your project.");
+            if (!title) {
+                showPublishError("Please enter a title for your project.");
                 return;
+            }
+            if (!description) {
+                showPublishError("Please enter a description for your project.");
+                return;
+            }
+
+            // Normalize URL format
+            if (link) {
+                if (!link.startsWith("http://") && !link.startsWith("https://") && !link.startsWith("/") && !link.endsWith(".html")) {
+                    link = "https://" + link;
+                }
+            } else {
+                link = "https://lakhvinder-portfolio.vercel.app/projects.html";
+            }
+
+            // Fallback image if not specified
+            if (!imageUrl) {
+                imageUrl = "assets/portfolio-2026.png";
             }
 
             publishBtn.style.opacity = "0.5";
             publishBtn.style.pointerEvents = "none";
             const pillSpan = publishBtn.querySelector(".contact-submit-pill");
             const originalPillText = pillSpan ? pillSpan.innerHTML : "PUBLISH";
-            if (pillSpan) pillSpan.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> PUBLISHING & NOTIFYING...';
+            if (pillSpan) pillSpan.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> PUBLISHING PROJECT...';
 
             try {
-                // 1. Fetch current subscriber emails directly
+                // Get subscriber list from memory or try snapshot
                 let subscriberEmails = [];
-                const subSnap = await getDocs(collection(db, "newsletter"));
-                subSnap.forEach(d => {
-                    const em = d.data().email;
-                    if (em && em.includes("@")) {
-                        subscriberEmails.push(em);
+                if (Array.isArray(currentSubscribersList) && currentSubscribersList.length > 0) {
+                    subscriberEmails = currentSubscribersList.map(s => s.email).filter(em => em && em.includes("@"));
+                } else {
+                    try {
+                        const subSnap = await getDocs(collection(db, "newsletter"));
+                        subSnap.forEach(d => {
+                            const em = d.data().email;
+                            if (em && em.includes("@")) subscriberEmails.push(em);
+                        });
+                    } catch (subErr) {
+                        console.warn("Could not fetch subscribers list ahead of post creation:", subErr);
                     }
-                });
+                }
 
-                // 2. Add post document to Firestore 'posts' collection
+                // 1. Primary Action: Add post document to Firestore 'posts' collection
                 const postRef = await addDoc(collection(db, "posts"), {
                     title: title,
                     category: category,
-                    link: link || "https://lakhvinder-portfolio.vercel.app/projects.html",
-                    imageUrl: imageUrl || "",
+                    link: link,
+                    imageUrl: imageUrl,
                     description: description,
                     author: "Lakhvinder Singh",
                     subscribersNotified: subscriberEmails.length,
                     createdAt: serverTimestamp()
                 });
 
-                // 3. Queue email notification jobs into 'mail' collection for Trigger Email extension
+                // 2. Secondary Action: Non-blocking queue of email notifications
                 let queuedCount = 0;
-                for (const subscriberEmail of subscriberEmails) {
-                    try {
-                        await addDoc(collection(db, "mail"), {
-                            to: [subscriberEmail],
-                            message: {
-                                subject: `🚀 New Project by Lakhvinder Singh: ${title}`,
-                                text: `Hello,\n\nA new project has been published on Lakhvinder Singh's portfolio:\n\nTitle: ${title} [${category}]\n\n${description}\n\nView details: ${link || "https://lakhvinder-portfolio.vercel.app/projects.html"}\n\nThank you for following my journey!\nLakhvinder Singh`,
-                                html: `
-                                    <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #ffffff; border: 2px solid #0E0E0E; border-radius: 12px;">
-                                        <div style="text-align: center; border-bottom: 2px solid #0E0E0E; padding-bottom: 20px; margin-bottom: 25px;">
-                                            <h2 style="margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; color: #0E0E0E;">LAKHVINDER SINGH</h2>
-                                            <span style="font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px;">[ Project Release & Announcement ]</span>
+                if (subscriberEmails.length > 0) {
+                    if (pillSpan) pillSpan.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> QUEUING SUBSCRIBER EMAILS...';
+                    for (const subscriberEmail of subscriberEmails) {
+                        try {
+                            await addDoc(collection(db, "mail"), {
+                                to: [subscriberEmail],
+                                message: {
+                                    subject: `🚀 New Project by Lakhvinder Singh: ${title}`,
+                                    text: `Hello,\n\nA new project has been published on Lakhvinder Singh's portfolio:\n\nTitle: ${title} [${category}]\n\n${description}\n\nView details: ${link}\n\nThank you for following my journey!\nLakhvinder Singh`,
+                                    html: `
+                                        <div style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 30px; background-color: #ffffff; border: 2px solid #0E0E0E; border-radius: 12px;">
+                                            <div style="text-align: center; border-bottom: 2px solid #0E0E0E; padding-bottom: 20px; margin-bottom: 25px;">
+                                                <h2 style="margin: 0; font-size: 24px; text-transform: uppercase; letter-spacing: 1.5px; color: #0E0E0E;">LAKHVINDER SINGH</h2>
+                                                <span style="font-size: 11px; font-weight: 700; color: #666; text-transform: uppercase; letter-spacing: 1px;">[ Project Release & Announcement ]</span>
+                                            </div>
+                                            
+                                            <div style="margin-bottom: 15px;">
+                                                <span style="background-color: #65c0f0; color: #0E0E0E; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; border: 1.5px solid #0E0E0E; display: inline-block;">
+                                                    ${escapeHtml(category)}
+                                                </span>
+                                            </div>
+
+                                            <h1 style="font-size: 24px; color: #0E0E0E; line-height: 1.25; margin: 10px 0 15px 0;">
+                                                 ${escapeHtml(title)}
+                                            </h1>
+
+                                            <p style="font-size: 15px; line-height: 1.7; color: #222222; margin-bottom: 25px;">
+                                                ${escapeHtml(description)}
+                                            </p>
+
+                                            ${imageUrl ? `<div style="text-align: center; margin-bottom: 25px;"><img src="${escapeHtml(imageUrl)}" alt="Project Preview" style="max-width: 100%; border-radius: 8px; border: 2px solid #0E0E0E;" /></div>` : ''}
+
+                                            <div style="text-align: center; margin: 30px 0;">
+                                                <a href="${escapeHtml(link)}" style="background-color: #0E0E0E; color: #65c0f0; text-decoration: none; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">
+                                                    View Live Project ↗
+                                                </a>
+                                            </div>
+
+                                            <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #718096; text-align: center; line-height: 1.5;">
+                                                You are receiving this update because you subscribed to updates on Lakhvinder Singh's Web Development Portfolio.<br>
+                                                Ambala Cantt, Haryana • Zirakpur, Punjab
+                                            </div>
                                         </div>
-                                        
-                                        <div style="margin-bottom: 15px;">
-                                            <span style="background-color: #65c0f0; color: #0E0E0E; font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 50px; text-transform: uppercase; border: 1.5px solid #0E0E0E; display: inline-block;">
-                                                ${escapeHtml(category)}
-                                            </span>
-                                        </div>
-
-                                        <h1 style="font-size: 24px; color: #0E0E0E; line-height: 1.25; margin: 10px 0 15px 0;">
-                                             ${escapeHtml(title)}
-                                        </h1>
-
-                                        <p style="font-size: 15px; line-height: 1.7; color: #222222; margin-bottom: 25px;">
-                                            ${escapeHtml(description)}
-                                        </p>
-
-                                        ${imageUrl ? `<div style="text-align: center; margin-bottom: 25px;"><img src="${escapeHtml(imageUrl)}" alt="Project Preview" style="max-width: 100%; border-radius: 8px; border: 2px solid #0E0E0E;" /></div>` : ''}
-
-                                        <div style="text-align: center; margin: 30px 0;">
-                                            <a href="${escapeHtml(link || "https://lakhvinder-portfolio.vercel.app/projects.html")}" style="background-color: #0E0E0E; color: #65c0f0; text-decoration: none; padding: 14px 34px; border-radius: 50px; font-weight: 700; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; display: inline-block;">
-                                                View Live Project ↗
-                                            </a>
-                                        </div>
-
-                                        <div style="border-top: 1px solid #e2e8f0; padding-top: 20px; font-size: 12px; color: #718096; text-align: center; line-height: 1.5;">
-                                            You are receiving this update because you subscribed to updates on Lakhvinder Singh's Web Development Portfolio.<br>
-                                            Ambala Cantt, Haryana • Zirakpur, Punjab
-                                        </div>
-                                    </div>
-                                `
-                            },
-                            source: "admin-broadcast",
-                            postId: postRef.id,
-                            createdAt: serverTimestamp()
-                        });
-                        queuedCount++;
-                    } catch (err) {
-                        console.warn("Failed queuing mail for", subscriberEmail, err);
+                                    `
+                                },
+                                source: "admin-broadcast",
+                                postId: postRef.id,
+                                createdAt: serverTimestamp()
+                            });
+                            queuedCount++;
+                        } catch (mailErr) {
+                            console.warn("Notice: Email queue skipped for " + subscriberEmail + ":", mailErr.message);
+                        }
                     }
                 }
 
-                // Reset form
+                // Reset form inputs
                 broadcastForm.reset();
 
                 // Show success feedback
-                alertBanner.style.display = "block";
-                alertText.textContent = `🎉 Success! Project published live to your website, and email notification queued for ${queuedCount} subscriber(s)!`;
-                setTimeout(() => {
-                    alertBanner.style.display = "none";
-                }, 7000);
+                if (alertSuccessBanner && alertSuccessText) {
+                    alertSuccessBanner.style.display = "block";
+                    alertSuccessText.textContent = `🎉 Success! Project "${title}" is now published LIVE on your website!${queuedCount > 0 ? ` Email alert queued for ${queuedCount} subscriber(s).` : ''}`;
+                    setTimeout(() => {
+                        alertSuccessBanner.style.display = "none";
+                    }, 8000);
+                }
 
                 // Switch to Manage Projects tab to show the new post
                 const postsTabBtn = document.querySelector('[data-tab="tab-posts"]');
@@ -1171,7 +1235,11 @@
 
             } catch (err) {
                 console.error("Error broadcasting post:", err);
-                alert("Error publishing post: " + err.message);
+                if (err.code === "permission-denied" || (err.message && err.message.toLowerCase().includes("permission"))) {
+                    showPublishError("<strong>Firestore Permission Denied!</strong><br>Aapke Firebase Console me Firestore Rules me <code>posts</code> collection allow nahi hai. Firebase Console &gt; Firestore &gt; Rules me jaakar updated rules paste karke 'Publish' karein.");
+                } else {
+                    showPublishError("Error publishing project: " + err.message);
+                }
             } finally {
                 publishBtn.style.opacity = "1";
                 publishBtn.style.pointerEvents = "auto";
