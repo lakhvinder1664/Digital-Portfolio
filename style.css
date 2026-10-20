@@ -209,7 +209,7 @@ main {
     box-shadow: none;
 }
 
-/* Hero Brand Block (Video + Divider + Service List) */
+/* Hero Brand Block (Video + Services Group) */
 .hero-brand-block {
     display: flex;
     flex-direction: column;
@@ -218,12 +218,13 @@ main {
     width: 100%;
     max-width: 360px;
     margin: 0 auto;
+    gap: 1.25rem;
 }
 
 .hero-video-box {
     width: 100%;
     max-width: 360px;
-    margin: 0 auto;
+    margin: 0;
     border-radius: 12px;
     overflow: hidden;
     transition: transform 0.3s ease;
@@ -233,16 +234,22 @@ main {
     transform: translateY(-2px);
 }
 
+.hero-services-group {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1.25rem;
+}
+
 .hero-brand-divider {
-    width: 70px;
-    height: 1.5px;
+    width: 1.5px;
+    height: 85px;
     background: var(--dark-black);
-    margin: 1.25rem 0 1rem 0;
-    align-self: flex-start;
+    margin: 0;
+    flex-shrink: 0;
 }
 
 .service-list-container {
-    width: 100%;
     text-align: left;
 }
 
@@ -254,11 +261,11 @@ main {
 
 .service-list li {
     font-size: 0.95rem;
-    line-height: 1.6;
+    line-height: 1.5;
     font-weight: 500;
     letter-spacing: 0.3px;
     color: var(--dark-black);
-    text-align: left;
+    white-space: nowrap;
 }
 
 @media (min-width: 992px) {
@@ -272,18 +279,22 @@ main {
         gap: 1.75rem;
     }
 
+    .hero-video-box {
+        max-width: 180px;
+        width: 100%;
+        margin: 0;
+    }
+
+    .hero-services-group {
+        gap: 1.75rem;
+    }
+
     .hero-brand-divider {
         width: 1.5px;
         height: 90px;
         background: var(--dark-black);
         margin: 0;
         flex-shrink: 0;
-    }
-
-    .hero-video-box {
-        max-width: 180px;
-        width: 100%;
-        margin: 0;
     }
 
     .service-list-container {
