@@ -162,65 +162,119 @@
         const base = getBasePath();
 
         container.innerHTML = `
-            <footer class="bg-black text-white py-5 px-4 mt-5">
+            <footer class="site-main-footer bg-black text-white pt-5 pb-4 px-3 px-md-4 mt-5 border-top border-dark">
                 <div class="container-fluid">
-                    <div class="row pt-4">
-                        <div class="col-lg-6 mb-5 mb-lg-0">
-                            <form id="footerNewsletterForm" class="position-relative" style="max-width: 400px;" novalidate>
-                                <input type="email" id="footerNewsletterEmail" class="form-control bg-dark border-0 text-white p-3 rounded-pill"
-                                    placeholder="Enter your email" style="padding-right: 50px;" required>
-                                <button type="submit" id="footerNewsletterBtn" class="btn position-absolute end-0 top-50 translate-middle-y me-2 text-white border-0" aria-label="Subscribe to newsletter">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
-                                        class="bi bi-send-fill" viewBox="0 0 16 16">
-                                        <path
-                                            d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.001.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
-                                    </svg>
-                                </button>
-                            </form>
-                            <div id="footerNewsletterFeedback" style="display: none; font-size: 13px; font-weight: 600; margin-top: 10px;"></div>
-                            <p class="small text-secondary mt-3 mb-0">
-                                By subscribing you agree with our <a href="#"
-                                    class="text-white text-decoration-underline">Privacy Policy</a>
-                            </p>
+                    <div class="row g-4 g-lg-5 pt-2">
+                        <!-- Brand & Newsletter Subscription -->
+                        <div class="col-lg-5">
+                            <div class="mb-4">
+                                <span class="d-inline-block text-uppercase fw-bold mb-2" style="color: #65c0f0; font-size: 11px; letter-spacing: 2px;">
+                                    [ WEB DEVELOPER &amp; UI DESIGNER ]
+                                </span>
+                                <h2 class="text-white text-uppercase m-0 mb-3" style="font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: 1px;">
+                                    LAKHVINDER SINGH
+                                </h2>
+                                <p class="text-secondary" style="font-size: 0.95rem; line-height: 1.6; max-width: 440px;">
+                                    Crafting high-impact websites, custom WordPress solutions, and intuitive digital interfaces with clean responsive code.
+                                </p>
+                            </div>
+
+                            <div class="footer-newsletter-wrap" style="max-width: 420px;">
+                                <label for="footerNewsletterEmail" class="text-white small text-uppercase fw-bold mb-2 d-block" style="font-size: 11px; letter-spacing: 1px;">
+                                    Subscribe for Project Releases &amp; Updates
+                                </label>
+                                <form id="footerNewsletterForm" class="position-relative" novalidate>
+                                    <input type="email" id="footerNewsletterEmail" class="form-control text-white p-3 rounded-pill"
+                                        placeholder="Enter your email..." 
+                                        style="padding-right: 55px; background: #1a1a1a; border: 1.5px solid #333; color: #fff; font-size: 14px;" required>
+                                    <button type="submit" id="footerNewsletterBtn" class="btn position-absolute end-0 top-50 translate-middle-y me-2 rounded-circle d-flex align-items-center justify-content-center text-dark" 
+                                        style="width: 38px; height: 38px; background: #65c0f0; border: none; transition: transform 0.2s ease;" 
+                                        title="Subscribe">
+                                        <i class="fas fa-arrow-right" style="font-size: 13px;"></i>
+                                    </button>
+                                </form>
+                                <div id="footerNewsletterFeedback" style="display: none; font-size: 13px; font-weight: 600; margin-top: 10px;"></div>
+                                <p class="small text-secondary mt-2 mb-0" style="font-size: 12px;">
+                                    Direct updates whenever new projects or case studies go live.
+                                </p>
+                            </div>
                         </div>
 
-                        <div class="col-lg-6">
-                            <div class="row">
-                                <div class="col-4">
-                                    <h6 class="text-secondary small text-uppercase mb-4">Services</h6>
-                                    <ul class="list-unstyled footer-link-list">
-                                        <li><a href="${base}service.html">Web Development</a></li>
-                                        <li><a href="${base}service.html">UI/UX Design</a></li>
-                                        <li><a href="${base}service.html">WordPress Customization</a></li>
-                                        <li><a href="${base}service.html">Web Performance & Optimization</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-4">
-                                    <h6 class="text-secondary small text-uppercase mb-4">Social</h6>
-                                    <ul class="list-unstyled footer-link-list">
-                                        <li><a href="https://www.linkedin.com/in/lakhvinder-singh-dev/" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
-                                        <li><a href="#">GitHub</a></li>
-                                        <li><a href="#">WhatsApp</a></li>
-                                        <li><a href="#">Instagram</a></li>
-                                    </ul>
-                                </div>
-                                <div class="col-4">
-                                    <h6 class="text-secondary small text-uppercase mb-4">Contact Info</h6>
-                                    <ul class="list-unstyled footer-link-list">
-                                        <li>Zirakpur, Punjanb (current)</li>
-                                        <li>Ambala Cantt, HR (from) </li>
-                                        <li>+91 798-837-9885</li>
-                                    </ul>
-                                </div>
+                        <!-- Navigation Links -->
+                        <div class="col-6 col-sm-4 col-lg-2 offset-lg-1">
+                            <h6 class="text-uppercase fw-bold mb-3" style="font-family: 'Oswald', sans-serif; font-size: 1.05rem; letter-spacing: 1.5px; color: #65c0f0;">
+                                Navigation
+                            </h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-2"><a href="${base}index.html" class="footer-link">Home</a></li>
+                                <li class="mb-2"><a href="${base}about.html" class="footer-link">About Me</a></li>
+                                <li class="mb-2"><a href="${base}service.html" class="footer-link">Services</a></li>
+                                <li class="mb-2"><a href="${base}projects.html" class="footer-link">Projects</a></li>
+                                <li class="mb-2"><a href="${base}contact.html" class="footer-link">Contact</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Services Column -->
+                        <div class="col-6 col-sm-4 col-lg-2">
+                            <h6 class="text-uppercase fw-bold mb-3" style="font-family: 'Oswald', sans-serif; font-size: 1.05rem; letter-spacing: 1.5px; color: #65c0f0;">
+                                Services
+                            </h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-2"><a href="${base}service.html" class="footer-link">Web Development</a></li>
+                                <li class="mb-2"><a href="${base}service.html" class="footer-link">WordPress Custom</a></li>
+                                <li class="mb-2"><a href="${base}service.html" class="footer-link">UI / UX Design</a></li>
+                                <li class="mb-2"><a href="${base}service.html" class="footer-link">Website Maintenance</a></li>
+                            </ul>
+                        </div>
+
+                        <!-- Contact & Social Column -->
+                        <div class="col-12 col-sm-4 col-lg-2">
+                            <h6 class="text-uppercase fw-bold mb-3" style="font-family: 'Oswald', sans-serif; font-size: 1.05rem; letter-spacing: 1.5px; color: #65c0f0;">
+                                Connect
+                            </h6>
+                            <ul class="list-unstyled m-0">
+                                <li class="mb-2">
+                                    <a href="tel:+917988379885" class="footer-link d-inline-flex align-items-center gap-2">
+                                        <i class="fas fa-phone-alt text-secondary" style="font-size: 11px;"></i> +91 798-837-9885
+                                    </a>
+                                </li>
+                                <li class="mb-2">
+                                    <a href="mailto:luckysngh08966@gmail.com" class="footer-link d-inline-flex align-items-center gap-2">
+                                        <i class="fas fa-envelope text-secondary" style="font-size: 11px;"></i> Email Me ↗
+                                    </a>
+                                </li>
+                                <li class="mb-3 text-secondary" style="font-size: 0.88rem; line-height: 1.4;">
+                                    <i class="fas fa-map-marker-alt text-secondary me-1" style="font-size: 11px;"></i> Zirakpur, Punjab • Ambala Cantt, HR
+                                </li>
+                            </ul>
+
+                            <div class="d-flex align-items-center gap-2 flex-wrap pt-1">
+                                <a href="https://www.linkedin.com/in/lakhvinder-singh-dev/" target="_blank" rel="noopener noreferrer" 
+                                   class="footer-social-icon" title="LinkedIn">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/lakhvinder1664" target="_blank" rel="noopener noreferrer" 
+                                   class="footer-social-icon" title="GitHub">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://wa.me/917988379885" target="_blank" rel="noopener noreferrer" 
+                                   class="footer-social-icon" title="WhatsApp">
+                                    <i class="fab fa-whatsapp"></i>
+                                </a>
                             </div>
                         </div>
                     </div>
 
-                    <div class="row mt-5 pt-5 border-top border-secondary align-items-center">
-                        <div class="col-12">
-                            <p class="small text-secondary m-0">
-                                © 2026 <span class="text-white fw-bold">Lakhvinder Singh Portfolio</span>. All rights reserved
-                            </p>
+                    <!-- Bottom Bar -->
+                    <div class="mt-5 pt-4 border-top border-dark d-flex justify-content-between align-items-center flex-wrap gap-3">
+                        <p class="small text-secondary m-0">
+                            © 2026 <strong class="text-white">Lakhvinder Singh</strong>. All rights reserved.
+                        </p>
+                        <div class="d-flex align-items-center gap-3">
+                            <span class="small text-secondary d-none d-md-inline">Open for Freelance &amp; Full-time Roles</span>
+                            <a href="#site-header" class="footer-back-to-top text-secondary small text-decoration-none">
+                                Back to top <i class="fas fa-arrow-up ms-1"></i>
+                            </a>
                         </div>
                     </div>
                 </div>
