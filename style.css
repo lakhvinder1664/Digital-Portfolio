@@ -184,7 +184,7 @@ h1,
 .scroll-scale-img {
     width: 100%;
     height: auto;
-    /* 👈 MOST IMPORTANT */
+    /* ðŸ‘ˆ MOST IMPORTANT */
     display: block;
     transform-origin: center;
     will-change: transform;
@@ -210,7 +210,7 @@ h1,
 .laptop-img-wrapper {
     display: flex;
     justify-content: flex-end;
-    /* 👈 right side fix */
+    /* ðŸ‘ˆ right side fix */
 }
 
 /* footer */
@@ -829,7 +829,7 @@ footer {
 
 /* Inner Page Dynamic Breadcrumb */
 .inner-breadcrumb-section .breadcrumb-item + .breadcrumb-item::before {
-    content: "—";
+    content: "â€”";
     color: var(--dark-black);
     padding: 0 10px;
     font-weight: 700;
@@ -2578,3 +2578,176 @@ body:has(.admin-section) #site-footer footer {
     font-size: 11px;
     font-weight: 600;
 }
+
+/* ==========================================================================
+   CUSTOM FABULOUS ANIMATION SYSTEM (HIGH-PERFORMANCE GSAP-FEEL ENGINE)
+   ========================================================================== */
+
+/* High-fashion Easing Curves */
+:root {
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --ease-in-out-smooth: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* 1. Base Vertical Reveal (Upward Glide) */
+.custom-reveal {
+    opacity: 0;
+    transform: translate3d(0, 36px, 0);
+    transition: opacity 0.85s var(--ease-out-expo),
+                transform 0.85s var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+
+.custom-reveal.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* 2. Slide from Left / Right */
+.custom-reveal-left {
+    opacity: 0;
+    transform: translate3d(-35px, 0, 0);
+    transition: opacity 0.85s var(--ease-out-expo),
+                transform 0.85s var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+.custom-reveal-left.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+.custom-reveal-right {
+    opacity: 0;
+    transform: translate3d(35px, 0, 0);
+    transition: opacity 0.85s var(--ease-out-expo),
+                transform 0.85s var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+.custom-reveal-right.is-revealed {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+}
+
+/* 3. Scale-In (for Images, Cards, Thumbnails) */
+.custom-reveal-scale {
+    opacity: 0;
+    transform: scale3d(0.93, 0.93, 1) translate3d(0, 24px, 0);
+    transition: opacity 0.9s var(--ease-out-expo),
+                transform 0.9s var(--ease-out-expo);
+    will-change: opacity, transform;
+}
+.custom-reveal-scale.is-revealed {
+    opacity: 1;
+    transform: scale3d(1, 1, 1) translate3d(0, 0, 0);
+}
+
+/* 4. Pop-In (for Badges, Pills, Buttons) */
+.custom-reveal-pop {
+    opacity: 0;
+    transform: scale3d(0.82, 0.82, 1);
+    transition: opacity 0.5s var(--ease-out-expo),
+                transform 0.6s var(--ease-out-back);
+    will-change: opacity, transform;
+}
+.custom-reveal-pop.is-revealed {
+    opacity: 1;
+    transform: scale3d(1, 1, 1);
+}
+
+/* 5. Brutalist Line Expansion Reveal */
+.custom-line-draw {
+    transform: scaleX(0);
+    transform-origin: left center;
+    transition: transform 1s var(--ease-out-expo);
+    will-change: transform;
+}
+.custom-line-draw.is-revealed {
+    transform: scaleX(1);
+}
+
+/* 6. Stagger Delay Offsets */
+.stagger-1 { transition-delay: 0.07s; }
+.stagger-2 { transition-delay: 0.14s; }
+.stagger-3 { transition-delay: 0.21s; }
+.stagger-4 { transition-delay: 0.28s; }
+.stagger-5 { transition-delay: 0.35s; }
+.stagger-6 { transition-delay: 0.42s; }
+.stagger-7 { transition-delay: 0.49s; }
+.stagger-8 { transition-delay: 0.56s; }
+
+/* 7. Hover Micro-Interactions */
+.hover-lift {
+    transition: transform 0.35s var(--ease-out-expo),
+                box-shadow 0.35s var(--ease-out-expo),
+                border-color 0.35s ease;
+}
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 32px rgba(0, 0, 0, 0.28) !important;
+}
+
+/* 8. Magnetic Arrow Spring Animation on CTA */
+.contact-submit-cta:hover .contact-submit-circle,
+.footer-newsletter-wrap button:hover i {
+    transform: scale(1.18) rotate(45deg);
+    transition: transform 0.35s var(--ease-out-back);
+}
+.contact-submit-circle,
+.footer-newsletter-wrap button i {
+    transition: transform 0.25s var(--ease-out-expo);
+}
+
+/* 9. Floating Watermark Animation */
+@keyframes floatGentle {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+.custom-float {
+    animation: floatGentle 8s ease-in-out infinite;
+}
+
+/* 10. Subtle Pulse Glow on Badges */
+@keyframes pulseSubtle {
+    0%, 100% {
+        opacity: 0.9;
+        transform: scale(1);
+    }
+    50% {
+        opacity: 1;
+        transform: scale(1.03);
+    }
+}
+.pulse-subtle {
+    animation: pulseSubtle 3s ease-in-out infinite;
+}
+
+/* 11. Subtle Parallax Effect on Scroll-Scale Image */
+.scroll-scale-img {
+    transition: transform 0.6s var(--ease-out-expo);
+}
+.scroll-scale-img:hover {
+    transform: scale(1.04);
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .custom-reveal,
+    .custom-reveal-left,
+    .custom-reveal-right,
+    .custom-reveal-scale,
+    .custom-reveal-pop,
+    .custom-line-draw {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+    }
+    .custom-float,
+    .pulse-subtle {
+        animation: none !important;
+    }
+}

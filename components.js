@@ -387,11 +387,209 @@
         });
     }
 
+    // =========================================================================
+    // CUSTOM FABULOUS ANIMATION ENGINE (NATIVE 60FPS GSAP-FEEL SYSTEM)
+    // =========================================================================
+    function initCustomAnimations() {
+        if (window._custom_anim_initialized) return;
+        window._custom_anim_initialized = true;
+
+        // Respect reduced motion preference
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            return;
+        }
+
+        // 1. Selector Configurations
+        const configMappings = [
+            // Headings & Giant Titles (Upward Glide)
+            {
+                selector: '.giant-title, .hero-subtext, h1:not(.breadcrumb-giant-title), .expertise-section-right-title, .about-giant-heading, .service-cta-title',
+                revealClass: 'custom-reveal',
+                hoverClass: null
+            },
+            // Badges & Section Tags (Slide from Left)
+            {
+                selector: '.small-text.text-uppercase, .admin-badge, .breadcrumb-label-pill',
+                revealClass: 'custom-reveal-left',
+                hoverClass: null
+            },
+            // Text Descriptions & Paragraphs
+            {
+                selector: '.body-description, .service-card-desc, .service-cta-desc, .breadcrumb-sub, .about-section-desc',
+                revealClass: 'custom-reveal',
+                hoverClass: null
+            },
+            // Brutalist Thick Lines (Expand Draw)
+            {
+                selector: '.thick-line',
+                revealClass: 'custom-line-draw',
+                hoverClass: null
+            },
+            // Scale-In Images & Cards
+            {
+                selector: '.thumbnail-box, .laptop-img-wrapper, .service-hero-card',
+                revealClass: 'custom-reveal-scale',
+                hoverClass: null
+            },
+            // Interactive Cards with Subtle Hover Lift
+            {
+                selector: '.service-detail-card, .process-step-box, .guarantee-box, .contact-card, .admin-card, .admin-item-box, .about-value-item, .location-item',
+                revealClass: 'custom-reveal',
+                hoverClass: 'hover-lift'
+            },
+            // FAQ Accordion Items
+            {
+                selector: '.faq-accordion-item',
+                revealClass: 'custom-reveal',
+                hoverClass: null
+            },
+            // Pop-in Tags & Badges
+            {
+                selector: '.tech-tag, .skill-pill, .filter-btn, .service-tag-highlight',
+                revealClass: 'custom-reveal-pop',
+                hoverClass: null
+            },
+            // Form Fields
+            {
+                selector: '.contact-card .form-control, .contact-card .form-select',
+                revealClass: 'custom-reveal',
+                hoverClass: null
+            },
+            // Footer Columns
+            {
+                selector: '.site-main-footer .col-lg-5, .site-main-footer .col-6, .site-main-footer .col-12',
+                revealClass: 'custom-reveal',
+                hoverClass: null
+            }
+        ];
+
+        // 2. High-Performance IntersectionObserver
+        const observerOptions = {
+            root: null,
+            rootMargin: '0px 0px -40px 0px',
+            threshold: 0.08
+        };
+
+        const observer = ('IntersectionObserver' in window)
+            ? new IntersectionObserver((entries, obs) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('is-revealed');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions)
+            : null;
+
+        // 3. Register Elements
+        configMappings.forEach(({ selector, revealClass, hoverClass }) => {
+            document.querySelectorAll(selector).forEach(el => {
+                if (el.closest('#preloader') || el.classList.contains('anim-bound')) return;
+                el.classList.add('anim-bound', revealClass);
+                if (hoverClass) el.classList.add(hoverClass);
+
+                if (observer) {
+                    observer.observe(el);
+                } else {
+                    el.classList.add('is-revealed');
+                }
+            });
+        });
+
+        // 4. Stagger Grouping for Grid & Siblings
+        const groupSelectors = [
+            '.service-detail-card',
+            '.process-step-box',
+            '.faq-accordion-item',
+            '.guarantee-box',
+            '.service-list li',
+            '.about-value-item',
+            '.location-item',
+            '.tech-tag',
+            '.skill-pill',
+            '.filter-btn',
+            '.social-link'
+        ];
+
+        groupSelectors.forEach(sel => {
+            const items = document.querySelectorAll(sel);
+            items.forEach((item, idx) => {
+                const staggerIndex = (idx % 8) + 1;
+                item.classList.add(`stagger-${staggerIndex}`);
+                if (!item.classList.contains('anim-bound')) {
+                    item.classList.add('anim-bound', 'custom-reveal');
+                    if (observer) {
+                        observer.observe(item);
+                    } else {
+                        item.classList.add('is-revealed');
+                    }
+                }
+            });
+        });
+
+        // 5. Dynamic Projects Grid MutationObserver (for Firestore loads)
+        function bindDynamicWorkCards() {
+            document.querySelectorAll('.work-card:not(.anim-bound)').forEach((card, idx) => {
+                const staggerIndex = (idx % 6) + 1;
+                card.classList.add('anim-bound', 'custom-reveal', `stagger-${staggerIndex}`, 'hover-lift');
+                if (observer) {
+                    observer.observe(card);
+                } else {
+                    card.classList.add('is-revealed');
+                }
+            });
+        }
+        bindDynamicWorkCards();
+
+        const projectGrid = document.getElementById('projectGrid');
+        if (projectGrid && window.MutationObserver) {
+            const gridObserver = new MutationObserver(() => {
+                bindDynamicWorkCards();
+            });
+            gridObserver.observe(projectGrid, { childList: true });
+        }
+
+        // 6. Watermark Floating Motion
+        document.querySelectorAll('.contact-bottom-watermark, .expertise-bg-text').forEach(wm => {
+            wm.classList.add('custom-float');
+        });
+
+        // 7. Header & Breadcrumb Immediate Reveal
+        const navBrand = document.querySelector('.navbar-brand');
+        const navCenter = document.querySelector('.navbar .small-text');
+        const navToggle = document.querySelector('.navbar button[data-bs-toggle="offcanvas"]');
+        const bcTitle = document.querySelector('.breadcrumb-giant-title');
+
+        [navBrand, navCenter, navToggle].filter(Boolean).forEach((el, i) => {
+            el.classList.add('custom-reveal', `stagger-${i + 1}`, 'is-revealed');
+        });
+
+        if (bcTitle && !bcTitle.classList.contains('anim-bound')) {
+            bcTitle.classList.add('anim-bound', 'custom-reveal', 'is-revealed');
+        }
+    }
+
+    // Expose for external calls
+    window.initCustomAnimations = initCustomAnimations;
+
     function init() {
         renderHeader();
         renderBreadcrumb();
         renderFooter();
         updateHivendsDynamicTenure();
+
+        const preloader = document.getElementById('preloader');
+        const delay = preloader ? 800 : 80;
+
+        if (document.readyState === 'complete') {
+            setTimeout(initCustomAnimations, delay);
+        } else {
+            window.addEventListener('load', () => {
+                setTimeout(initCustomAnimations, delay);
+            });
+            // Safety timeout
+            setTimeout(initCustomAnimations, 1400);
+        }
     }
 
     if (document.readyState === 'loading') {
