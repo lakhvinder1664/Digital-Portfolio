@@ -32,7 +32,7 @@
             <nav class="navbar navbar-expand-lg border-top border-dark px-4 mt-3">
                 <div class="container-fluid">
                     <a class="navbar-brand fw-bold" href="${base}index.html">
-                        <img src="${base}img/cat-logo-animate.gif" class="logo-img" alt="logo">
+                        <img src="${base}img/cat-logo-animate.gif" class="logo-img" alt="Lakhvinder Singh Portfolio Logo">
                     </a>
                     <div class="d-none d-md-block text-uppercase small-text text-center mx-auto">
                         I'm Front-end developer building modern,<br>responsive, and clean web interfaces.<br> [Since 2024]
