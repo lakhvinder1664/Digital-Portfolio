@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 :root {
     --neon-lime: #65c0f0;
     --dark-black: #0E0E0E;
@@ -184,7 +186,7 @@ h1,
 .scroll-scale-img {
     width: 100%;
     height: auto;
-    /* ðŸ‘ˆ MOST IMPORTANT */
+    /* 👈 MOST IMPORTANT */
     display: block;
     transform-origin: center;
     will-change: transform;
@@ -210,7 +212,7 @@ h1,
 .laptop-img-wrapper {
     display: flex;
     justify-content: flex-end;
-    /* ðŸ‘ˆ right side fix */
+    /* 👈 right side fix */
 }
 
 /* footer */
@@ -829,7 +831,7 @@ footer {
 
 /* Inner Page Dynamic Breadcrumb */
 .inner-breadcrumb-section .breadcrumb-item + .breadcrumb-item::before {
-    content: "â€”";
+    content: "\2014";
     color: var(--dark-black);
     padding: 0 10px;
     font-weight: 700;

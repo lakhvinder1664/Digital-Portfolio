@@ -39,7 +39,7 @@
                     </div>
                     <button class="btn border-0 fw-bold text-uppercase" type="button" data-bs-toggle="offcanvas"
                         data-bs-target="#offcanvasRight">
-                        (Browse — Menu)
+                        (Browse &mdash; Menu)
                     </button>
                 </div>
             </nav>
@@ -140,7 +140,7 @@
                             </ol>
                         </nav>
                         <div class="d-none d-sm-block text-uppercase small-text text-secondary">
-                            [ Lakhvinder Singh — Portfolio ]
+                            [ Lakhvinder Singh &mdash; Portfolio ]
                         </div>
                     </div>
 
@@ -383,7 +383,7 @@
         });
 
         document.querySelectorAll('.hivends-modal-tenure').forEach(el => {
-            el.textContent = `FEB 2026 — PRESENT • ${tenureText}`;
+            el.textContent = `FEB 2026 \u2014 PRESENT \u2022 ${tenureText}`;
         });
     }
 
