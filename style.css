@@ -600,23 +600,19 @@ footer input::placeholder {
 
 .expertise-bg-text {
     position: absolute;
-    top: 50%;
-    left: 50%;
+    top: 38%;
+    left: 49%;
     transform: translate(-50%, -50%);
-    width: 100%;
-    text-align: center;
-    font-size: clamp(4.5rem, 13vw, 12rem);
+    font-size: 26vw;
     font-weight: 900;
-    color: rgba(0, 0, 0, 0.035);
-    line-height: 0.85;
+    color: rgba(0, 0, 0, 0.05);
+    line-height: 0.8;
     text-transform: uppercase;
     font-family: 'Oswald', sans-serif;
     z-index: 0;
     pointer-events: none;
     white-space: nowrap;
-    letter-spacing: -2px;
-    margin: 0;
-    will-change: transform, opacity;
+    letter-spacing: -10px;
 }
 
 .expertise-section .container {
