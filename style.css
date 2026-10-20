@@ -9,11 +9,38 @@
     --white: #FFFFFF;
 }
 
+/* Foundation Anti-Overflow & Responsive Zoom System */
+html {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    background-color: var(--neon-lime);
+    box-sizing: border-box;
+    -webkit-text-size-adjust: 100%;
+    scroll-behavior: smooth;
+}
+
 body {
+    width: 100%;
+    max-width: 100%;
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    margin: 0;
+    padding: 0;
     background-color: var(--neon-lime);
     color: var(--dark-black);
     font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+img, video, canvas, svg {
+    max-width: 100%;
+    height: auto;
 }
 
 .logo-img {
@@ -43,12 +70,32 @@ h1,
 
 /* Layout Components */
 .main-wrapper {
+    width: 100%;
+    max-width: 100%;
     min-height: 100vh;
+    overflow-x: clip;
+    position: relative;
+    background-color: var(--neon-lime);
+}
+
+main {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
+.container,
+.container-fluid {
+    width: 100%;
+    max-width: 100%;
 }
 
 .hero-subtext {
-    font-size: 5rem;
-    letter-spacing: -2px;
+    font-size: clamp(2.2rem, 5.2vw, 4.8rem);
+    letter-spacing: -1.5px;
+    line-height: 1.05;
+    word-break: break-word;
+    overflow-wrap: break-word;
 }
 
 .italic-outline {
@@ -64,21 +111,29 @@ h1,
     margin-bottom: 5px;
 }
 
-/* Giant Footer Text */
+/* Giant Header/Banner Text */
+.giant-text-container {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: clip;
+}
+
 .giant-title {
-    font-size: 14vw;
+    font-size: clamp(3rem, 12vw, 13vw);
     margin: 0;
+    max-width: 100%;
+    word-break: break-word;
 }
 
 .thick-line {
     height: 15px;
     background-color: var(--dark-black);
+    min-width: 20px;
 }
 
 .body-description {
-    font-size: 1.3rem;
-    /* max-width: 400px; */
-    line-height: 1.4;
+    font-size: clamp(1rem, 2vw, 1.3rem);
+    line-height: 1.5;
     text-align: end;
 }
 
@@ -161,12 +216,21 @@ h1,
 
 /* Responsive Adjustments */
 @media (max-width: 768px) {
-    /* .hero-subtext {
-        font-size: 3rem;
-    } */
+    .hero-subtext {
+        font-size: clamp(1.85rem, 6.5vw, 2.6rem);
+        letter-spacing: -1px;
+        padding-left: 0;
+        margin-top: 0.5rem;
+        text-align: left;
+    }
 
     .giant-title {
-        font-size: 17vw;
+        font-size: clamp(2.5rem, 12.5vw, 5.5rem);
+    }
+
+    .body-description {
+        text-align: left;
+        margin-top: 0.75rem;
     }
 
     .offcanvas {
@@ -307,12 +371,18 @@ footer {
     height: 90px;
     display: flex;
     align-items: center;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
 }
 
 .marquee-container {
     display: flex;
     width: 100%;
+    max-width: 100%;
     align-items: center;
+    overflow: hidden;
 }
 
 /* Fixed Side Setup */
@@ -1679,6 +1749,13 @@ footer {
     }
 }
 
+@media (max-width: 576px) {
+    .contact-form-box {
+        padding: 1.5rem 1.15rem;
+        box-shadow: 5px 5px 0px var(--dark-black);
+    }
+}
+
 .contact-input-field {
     width: 100%;
     background-color: #FAFAF8;
@@ -1768,6 +1845,26 @@ footer {
     color: var(--dark-black);
     transform: translateY(-2px) rotate(45deg);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+}
+
+@media (max-width: 576px) {
+    .contact-submit-cta {
+        width: 100%;
+        display: flex;
+    }
+    .contact-submit-pill {
+        padding: 12px 16px;
+        font-size: 11px;
+        letter-spacing: 0.5px;
+        flex-grow: 1;
+        white-space: normal;
+        text-align: center;
+    }
+    .contact-submit-circle {
+        width: 42px;
+        height: 42px;
+        min-width: 42px;
+    }
 }
 
 /* Form Success Toast */
@@ -1917,7 +2014,7 @@ body:has(.admin-section) #site-footer footer {
 /* Work Project Cards */
 .work-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
     gap: 2rem;
     margin-bottom: 3.5rem;
 }
@@ -1925,6 +2022,11 @@ body:has(.admin-section) #site-footer footer {
 @media (max-width: 576px) {
     .work-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .work-card {
+        box-shadow: 6px 6px 0px var(--dark-black) !important;
     }
 }
 

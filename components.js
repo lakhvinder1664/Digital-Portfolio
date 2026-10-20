@@ -29,7 +29,7 @@
         const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
         container.innerHTML = `
-            <nav class="navbar navbar-expand-lg border-top border-dark px-4 mt-3">
+            <nav class="navbar navbar-expand-lg border-top border-dark px-3 px-md-4 mt-3">
                 <div class="container-fluid">
                     <a class="navbar-brand fw-bold" href="${base}index.html">
                         <img src="${base}img/cat-logo-animate.gif" class="logo-img" alt="Lakhvinder Singh Portfolio Logo">
@@ -126,7 +126,7 @@
         const index = container.getAttribute('data-index') || config.index;
 
         container.innerHTML = `
-            <section class="inner-breadcrumb-section px-4 pt-4 pb-2">
+            <section class="inner-breadcrumb-section px-3 px-md-4 pt-4 pb-2">
                 <div class="container-fluid p-0">
                     <div class="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                         <nav aria-label="breadcrumb">
