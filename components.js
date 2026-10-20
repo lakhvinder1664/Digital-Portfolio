@@ -166,17 +166,18 @@
                 <div class="container-fluid">
                     <div class="row pt-4">
                         <div class="col-lg-6 mb-5 mb-lg-0">
-                            <div class="position-relative" style="max-width: 400px;">
-                                <input type="email" class="form-control bg-dark border-0 text-white p-3 rounded-pill"
-                                    placeholder="Enter your email" style="padding-right: 50px;">
-                                <button class="btn position-absolute end-0 top-50 translate-middle-y me-2 text-white border-0">
+                            <form id="footerNewsletterForm" class="position-relative" style="max-width: 400px;" novalidate>
+                                <input type="email" id="footerNewsletterEmail" class="form-control bg-dark border-0 text-white p-3 rounded-pill"
+                                    placeholder="Enter your email" style="padding-right: 50px;" required>
+                                <button type="submit" id="footerNewsletterBtn" class="btn position-absolute end-0 top-50 translate-middle-y me-2 text-white border-0" aria-label="Subscribe to newsletter">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
                                         class="bi bi-send-fill" viewBox="0 0 16 16">
                                         <path
                                             d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.001.26.41a.5.5 0 0 0 .886-.083zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471z" />
                                     </svg>
                                 </button>
-                            </div>
+                            </form>
+                            <div id="footerNewsletterFeedback" style="display: none; font-size: 13px; font-weight: 600; margin-top: 10px;"></div>
                             <p class="small text-secondary mt-3 mb-0">
                                 By subscribing you agree with our <a href="#"
                                     class="text-white text-decoration-underline">Privacy Policy</a>
@@ -225,6 +226,79 @@
                 </div>
             </footer>
         `;
+
+        attachFooterNewsletterHandler();
+    }
+
+    function attachFooterNewsletterHandler() {
+        const form = document.getElementById('footerNewsletterForm');
+        if (!form) return;
+
+        const emailInput = document.getElementById('footerNewsletterEmail');
+        const submitBtn = document.getElementById('footerNewsletterBtn');
+        const feedbackEl = document.getElementById('footerNewsletterFeedback');
+
+        if (!emailInput || !submitBtn || !feedbackEl) return;
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const email = (emailInput.value || '').trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            if (!email || !emailRegex.test(email)) {
+                feedbackEl.style.display = 'block';
+                feedbackEl.style.color = '#ef4444';
+                feedbackEl.innerHTML = '⚠ Please enter a valid email address.';
+                return;
+            }
+
+            // Loading state
+            submitBtn.disabled = true;
+            submitBtn.style.opacity = '0.6';
+            const originalBtnContent = submitBtn.innerHTML;
+            submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm text-white" role="status" aria-hidden="true" style="width: 1rem; height: 1rem; border-width: 2px;"></span>';
+            feedbackEl.style.display = 'none';
+
+            try {
+                const endpoint = 'https://firestore.googleapis.com/v1/projects/portfolio-contact-fe911/databases/(default)/documents/newsletter';
+                const res = await fetch(endpoint, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        fields: {
+                            email: { stringValue: email },
+                            time: { timestampValue: new Date().toISOString() }
+                        }
+                    })
+                });
+
+                if (!res.ok) {
+                    const errData = await res.json().catch(() => ({}));
+                    throw new Error(errData?.error?.message || 'Subscription failed');
+                }
+
+                // Success
+                form.reset();
+                feedbackEl.style.display = 'block';
+                feedbackEl.style.color = '#65c0f0';
+                feedbackEl.innerHTML = '🎉 Thank you! You are now subscribed to project updates.';
+
+                setTimeout(() => {
+                    feedbackEl.style.display = 'none';
+                }, 7000);
+
+            } catch (err) {
+                console.error('Newsletter subscription error:', err);
+                feedbackEl.style.display = 'block';
+                feedbackEl.style.color = '#ef4444';
+                feedbackEl.innerHTML = '⚠ Unable to subscribe right now. Please try again.';
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.style.opacity = '1';
+                submitBtn.innerHTML = originalBtnContent;
+            }
+        });
     }
 
     function updateHivendsDynamicTenure() {
