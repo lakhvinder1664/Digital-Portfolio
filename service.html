@@ -4,7 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Services | Lakhvinder Singh Portfolio</title>
+    <title>Services & Capabilities | Lakhvinder Singh Portfolio</title>
+    <meta name="description" content="Explore front-end web development, custom WordPress themes, UI/UX design in Figma, and website performance optimization services by Lakhvinder Singh.">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link
         href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Inter:wght@300;400;500;600;700&display=swap"
@@ -12,6 +13,197 @@
     <link href="https://fonts.cdnfonts.com/css/thunder-2" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="style.css">
+
+    <style>
+        /* Specific Brutalist Enhancements for Services Page */
+        .service-hero-card {
+            background-color: var(--white);
+            border: 2px solid var(--dark-black);
+            box-shadow: 8px 8px 0px var(--dark-black);
+            border-radius: 12px;
+            padding: 2.5rem;
+            position: relative;
+        }
+
+        .service-detail-card {
+            background-color: var(--white);
+            border: 2px solid var(--dark-black);
+            box-shadow: 6px 6px 0px var(--dark-black);
+            border-radius: 12px;
+            padding: 2.2rem;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .service-detail-card:hover {
+            transform: translate(-4px, -4px);
+            box-shadow: 10px 10px 0px var(--dark-black);
+        }
+
+        .service-pill-num {
+            background-color: var(--neon-lime);
+            color: var(--dark-black);
+            font-family: 'Oswald', sans-serif;
+            font-weight: 700;
+            font-size: 13px;
+            letter-spacing: 1px;
+            padding: 4px 14px;
+            border-radius: 50px;
+            border: 1.5px solid var(--dark-black);
+            display: inline-block;
+        }
+
+        .service-card-title {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            line-height: 1.1;
+            margin: 1rem 0 0.75rem 0;
+            color: var(--dark-black);
+        }
+
+        .service-card-desc {
+            font-size: 0.95rem;
+            line-height: 1.65;
+            color: #333333;
+            margin-bottom: 1.25rem;
+        }
+
+        .service-feature-list {
+            list-style: none;
+            padding: 0;
+            margin: 0 0 1.5rem 0;
+        }
+
+        .service-feature-list li {
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #222;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .service-feature-list li i {
+            color: var(--dark-black);
+            margin-top: 3px;
+            font-size: 12px;
+        }
+
+        .tech-pill-tag {
+            background-color: var(--dark-black);
+            color: #ffffff;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 11px;
+            border-radius: 50px;
+            display: inline-block;
+            letter-spacing: 0.5px;
+        }
+
+        .process-step-box {
+            background-color: var(--white);
+            border: 2px solid var(--dark-black);
+            box-shadow: 5px 5px 0px var(--dark-black);
+            border-radius: 10px;
+            padding: 1.8rem;
+            height: 100%;
+            transition: all 0.25s ease;
+        }
+
+        .process-step-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 8px 8px 0px var(--dark-black);
+        }
+
+        .process-num-large {
+            font-family: 'Oswald', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--dark-black);
+            line-height: 1;
+            margin-bottom: 0.5rem;
+        }
+
+        .guarantee-box {
+            background-color: #0E0E0E;
+            color: #ffffff;
+            border-radius: 12px;
+            padding: 2.5rem;
+            border: 2px solid var(--dark-black);
+            box-shadow: 8px 8px 0px var(--neon-lime);
+        }
+
+        .faq-accordion-item {
+            background: var(--white);
+            border: 2px solid var(--dark-black);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            box-shadow: 4px 4px 0px var(--dark-black);
+            overflow: hidden;
+        }
+
+        .faq-accordion-header {
+            padding: 18px 22px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            user-select: none;
+            background: var(--white);
+            transition: background 0.2s ease;
+        }
+
+        .faq-accordion-header:hover {
+            background: #f6f6f6;
+        }
+
+        .faq-accordion-header h4 {
+            font-family: 'Oswald', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            margin: 0;
+            color: var(--dark-black);
+        }
+
+        .faq-accordion-body {
+            padding: 0 22px 18px 22px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #444;
+            display: none;
+            border-top: 1px solid #eee;
+            padding-top: 14px;
+        }
+
+        .faq-accordion-item.active .faq-accordion-body {
+            display: block;
+        }
+
+        .faq-accordion-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-icon {
+            font-size: 16px;
+            font-weight: 700;
+            transition: transform 0.25s ease;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--dark-black);
+            color: var(--white);
+        }
+    </style>
 </head>
 
 <body>
@@ -57,211 +249,523 @@
         <header id="site-header"></header>
 
         <!-- Dynamic Breadcrumb & Inner Banner -->
-        <div id="site-breadcrumb" data-title="SERVICES" data-label="Services" data-index="002"></div>
+        <div id="site-breadcrumb" data-title="SERVICES" data-label="Services & Capabilities" data-index="002"></div>
 
-        <main class="container-fluid p-0">
-            <!-- Services Section (Exact Home Page .expertise-section Style) -->
-            <section class="expertise-section py-5 overflow-hidden">
-                <div class="container-fluid px-0 position-relative">
-                    <h2 class="expertise-bg-text text-uppercase">SERVICES</h2>
-                    <div class="container py-5">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <p class="small-text text-uppercase mb-4">SERVICES</p>
-                                <h1 class="hero-subtext mb-4" style="font-size: clamp(2.2rem, 4.2vw, 3.6rem); line-height: 1;">
-                                    Building Digital Experiences That Make an Impact
-                                </h1>
-                                <p class="body-description text-start mb-5" style="max-width: 420px;">
-                                    I help businesses and individuals build modern, responsive, and user-friendly websites. From website development and WordPress customization to UI design and website maintenance, I deliver practical solutions tailored to your needs.
-                                </p>
+        <main class="container py-5">
+            <!-- Hero Statement Section -->
+            <section class="service-hero-card mb-5">
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="small-text text-uppercase fw-bold text-dark">[ WHAT I DELIVER ]</span>
+                    <span class="badge bg-black text-white px-3 py-1 rounded-pill small-text" style="font-size: 11px;">
+                        END-TO-END WEB SOLUTIONS
+                    </span>
+                </div>
+                <h1 style="font-family: 'Oswald', sans-serif; font-size: clamp(2.3rem, 4.6vw, 3.8rem); text-transform: uppercase; line-height: 1.05; margin-bottom: 1.25rem;">
+                    Building High-Performance Websites &amp; Intuitive Digital Experiences
+                </h1>
+                <p style="font-size: 1.15rem; line-height: 1.7; color: #333333; max-width: 860px; margin-bottom: 2rem;">
+                    I partner with businesses, founders, and digital agencies to turn concepts into lightning-fast, production-ready web interfaces. From clean hand-coded frontends and custom WordPress themes to Figma-to-code implementations and speed optimization, every deliverable is built for high conversion, rock-solid responsiveness, and seamless usability.
+                </p>
+
+                <!-- Value Highlights Strip -->
+                <div class="row g-3 pt-3 border-top border-dark">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-bolt" style="font-size: 18px; color: var(--dark-black);"></i>
+                            <div>
+                                <strong class="d-block text-uppercase" style="font-size: 13px;">Ultra-Fast Speed</strong>
+                                <span class="text-secondary small">Core Web Vitals optimized</span>
                             </div>
-                            <div class="col-lg-7">
-                                <h2 class="expertise-section-right-title mb-5">Services i provide.</h2>
-
-                                <!-- 01. Website Development -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(001)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">Website Development</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                I create modern, responsive websites using HTML, CSS, JavaScript, and Bootstrap 5, focusing on clean layouts, smooth functionality, and seamless experiences across devices.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Website Development">
-                                    </div>
-                                </div>
-
-                                <!-- 02. WordPress Development & Customization -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(002)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">WordPress Development & Customization</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                I build and customize WordPress websites with tailored page layouts, theme modifications, Elementor sections, contact forms, and easy-to-manage content.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="WordPress Development">
-                                    </div>
-                                </div>
-
-                                <!-- 03. UI Design & Figma -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(003)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">UI Design & Figma</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                I design clean, professional website interfaces and page layouts in Figma, focusing on visual consistency, usability, and responsive design.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="UI Design">
-                                    </div>
-                                </div>
-
-                                <!-- 04. Website Maintenance & Improvements -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(004)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">Website Maintenance & Improvements</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                I help keep websites running smoothly through bug fixes, responsive adjustments, UI improvements, content updates, image optimization, and product uploads.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Website Maintenance">
-                                    </div>
-                                </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-mobile-alt" style="font-size: 18px; color: var(--dark-black);"></i>
+                            <div>
+                                <strong class="d-block text-uppercase" style="font-size: 13px;">100% Responsive</strong>
+                                <span class="text-secondary small">Flawless on phone to 4K</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fas fa-code" style="font-size: 18px; color: var(--dark-black);"></i>
+                            <div>
+                                <strong class="d-block text-uppercase" style="font-size: 13px;">Hand-Crafted Code</strong>
+                                <span class="text-secondary small">Semantic &amp; zero bloat</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="d-flex align-items-center gap-2">
+                            <i class="fab fa-whatsapp" style="font-size: 20px; color: #16a34a;"></i>
+                            <div>
+                                <strong class="d-block text-uppercase" style="font-size: 13px;">Direct Support</strong>
+                                <span class="text-secondary small">Fast WhatsApp communication</span>
                             </div>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- My Work Process Section (Exact Home Page Structure) -->
-            <section class="expertise-section py-5 overflow-hidden border-top border-dark">
-                <div class="container-fluid px-0 position-relative">
-                    <h2 class="expertise-bg-text text-uppercase">PROCESS</h2>
-                    <div class="container py-5">
-                        <div class="row">
-                            <div class="col-lg-5">
-                                <p class="small-text text-uppercase mb-4">MY WORK PROCESS</p>
-                                <h2 class="hero-subtext mb-4" style="font-size: clamp(2.2rem, 4.2vw, 3.6rem); line-height: 1;">
-                                    My Work Process
-                                </h2>
-                                <p class="body-description text-start mb-5" style="max-width: 420px;">
-                                    A structured 4-step workflow to turn your vision into a production-ready digital reality.
-                                </p>
-                            </div>
-                            <div class="col-lg-7">
-                                <h2 class="expertise-section-right-title mb-5">How I work.</h2>
-
-                                <!-- 01. Discuss -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(001)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">01. Discuss</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                Understand your goals, requirements, and project vision.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="Discuss">
-                                    </div>
-                                </div>
-
-                                <!-- 02. Design -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(002)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">02. Design</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                Plan the layout and create a clear visual direction.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Design">
-                                    </div>
-                                </div>
-
-                                <!-- 03. Develop -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(003)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">03. Develop</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                Build and refine the website to meet your requirements.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service1.jpg" alt="Develop">
-                                    </div>
-                                </div>
-
-                                <!-- 04. Deliver -->
-                                <div class="service-item d-flex align-items-center justify-content-between">
-                                    <div class="d-flex align-items-start">
-                                        <span class="index-number mt-2">(004)</span>
-                                        <div class="ms-1">
-                                            <h3 class="mb-2">04. Deliver</h3>
-                                            <p class="text-secondary mb-0" style="max-width: 420px;">
-                                                Test responsiveness, fix issues, and prepare the website for delivery.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div class="service-img">
-                                        <img src="img/service2.jpg" alt="Deliver">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+            <!-- 4 Core Services Pillars -->
+            <section class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-4 flex-wrap gap-2">
+                    <div>
+                        <span class="small-text text-uppercase fw-bold text-dark d-block mb-1">[ SPECIALIZED EXPERTISE ]</span>
+                        <h2 style="font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem); text-transform: uppercase; margin: 0;">
+                            Services I Provide
+                        </h2>
                     </div>
+                    <a href="contact.html" class="btn-pill-brutalist">
+                        Discuss Your Project ↗
+                    </a>
                 </div>
-            </section>
 
-            <!-- Call To Action (Exact Home Page .client-section Style) -->
-            <section class="client-section py-5 mt-5">
-                <div class="container py-5">
-                    <h1 class="giant-title mb-4 text-center">
-                        <span style="color: var(--dark-black);">Have a Project</span> in Mind?
-                    </h1>
-                    <div class="row justify-content-center">
-                        <div class="col-lg-8 text-center">
-                            <p class="text-secondary mb-4" style="font-size: 1.15rem; line-height: 1.7;">
-                                Let's turn your ideas into a functional, professional online experience. Whether you need a new website or want to improve an existing one, I'm ready to help.
-                            </p>
-                            <div class="d-flex justify-content-center gap-3 mt-4 flex-wrap">
-                                <a href="contact.html" class="contact-submit-cta text-decoration-none">
-                                    <span class="contact-submit-pill">GET IN TOUCH</span>
+                <div class="row g-4">
+                    <!-- Service 01: Frontend Web Development -->
+                    <div class="col-lg-6">
+                        <div class="service-detail-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="service-pill-num">(01) CORE SPECIALTY</span>
+                                    <span class="small-text fw-bold text-uppercase text-secondary">Front-End Engineering</span>
+                                </div>
+                                <h3 class="service-card-title">
+                                    Custom Responsive Web Development
+                                </h3>
+                                <p class="service-card-desc">
+                                    I create modern, high-speed websites built with clean, semantic code from the ground up. No heavy page-builders or bloated templates — your site loads fast, ranks higher on Google, and delivers smooth interactions on every screen size.
+                                </p>
+
+                                <div class="border-top border-dark pt-3 mb-3">
+                                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">Key Deliverables:</span>
+                                    <ul class="service-feature-list">
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Custom Multi-Page Websites:</strong> Semantic HTML5, CSS3/SCSS, and modern JavaScript architectures.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Fluid Mobile-First Responsive:</strong> Flawless layouts tested across iOS Safari, Android Chrome, tablets &amp; desktop.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>GSAP Micro-Animations:</strong> Engaging scroll-triggered animations, interactive hover effects &amp; smooth loaders.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>SEO &amp; Performance Ready:</strong> Structured metadata, clean heading hierarchies, and sub-second load times.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="tech-pill-tag">HTML5</span>
+                                    <span class="tech-pill-tag">CSS3 / SCSS</span>
+                                    <span class="tech-pill-tag">JavaScript (ES6+)</span>
+                                    <span class="tech-pill-tag">Bootstrap 5</span>
+                                    <span class="tech-pill-tag">GSAP</span>
+                                    <span class="tech-pill-tag">Git &amp; GitHub</span>
+                                </div>
+                                <a href="contact.html" class="contact-submit-cta text-decoration-none w-100 text-center" style="display: flex;">
+                                    <span class="contact-submit-pill flex-grow-1">INQUIRE FOR WEB DEVELOPMENT</span>
                                     <span class="contact-submit-circle" aria-hidden="true">↗</span>
                                 </a>
-                                <a href="projects.html" class="btn btn-outline-dark rounded-pill px-4 py-3 fw-bold text-uppercase" style="font-size: 13px; letter-spacing: 1px;">
-                                    View Projects ↗
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 02: WordPress Customization & Development -->
+                    <div class="col-lg-6">
+                        <div class="service-detail-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="service-pill-num">(02) BUSINESS CMS</span>
+                                    <span class="small-text fw-bold text-uppercase text-secondary">Content Management</span>
+                                </div>
+                                <h3 class="service-card-title">
+                                    WordPress Customization &amp; Elementor
+                                </h3>
+                                <p class="service-card-desc">
+                                    I build and customize flexible WordPress websites that give you 100% control over your content. Whether creating custom Elementor sections, modifying themes, or configuring WooCommerce stores, you get an easy-to-manage platform tailored to your brand.
+                                </p>
+
+                                <div class="border-top border-dark pt-3 mb-3">
+                                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">Key Deliverables:</span>
+                                    <ul class="service-feature-list">
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Tailored Elementor Layouts:</strong> Custom headers, footers, landing sections, and dynamic blog archives.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Theme Customization &amp; PHP Tweaks:</strong> Styling fixes, child-theme adjustments, and custom hooks.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>WooCommerce &amp; Product Portals:</strong> Store setup, payment gateways, product catalogs, and checkout optimization.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Forms &amp; Lead Generation:</strong> Contact Form 7, WPForms, floating WhatsApp leads, and newsletter integration.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="tech-pill-tag">WordPress</span>
+                                    <span class="tech-pill-tag">Elementor Pro</span>
+                                    <span class="tech-pill-tag">WooCommerce</span>
+                                    <span class="tech-pill-tag">PHP</span>
+                                    <span class="tech-pill-tag">Contact Form 7</span>
+                                    <span class="tech-pill-tag">WP Rocket</span>
+                                </div>
+                                <a href="contact.html" class="contact-submit-cta text-decoration-none w-100 text-center" style="display: flex;">
+                                    <span class="contact-submit-pill flex-grow-1">DISCUSS WORDPRESS PROJECT</span>
+                                    <span class="contact-submit-circle" aria-hidden="true">↗</span>
                                 </a>
                             </div>
                         </div>
                     </div>
+
+                    <!-- Service 03: UI / UX Design & Figma to Code -->
+                    <div class="col-lg-6">
+                        <div class="service-detail-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="service-pill-num">(03) VISUAL ARCHITECTURE</span>
+                                    <span class="small-text fw-bold text-uppercase text-secondary">Figma to Production</span>
+                                </div>
+                                <h3 class="service-card-title">
+                                    UI/UX Design &amp; Figma To Code
+                                </h3>
+                                <p class="service-card-desc">
+                                    I bridge the gap between creative visual design and working frontend code. I design clean, modern website interfaces and design systems in Figma, and personally convert them into functional web pages with exact 1:1 pixel accuracy.
+                                </p>
+
+                                <div class="border-top border-dark pt-3 mb-3">
+                                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">Key Deliverables:</span>
+                                    <ul class="service-feature-list">
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>High-Fidelity Figma Mockups:</strong> Modern layout structures, color systems, and typographic hierarchies.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Interactive Clickable Prototypes:</strong> Review navigation flows, buttons, and user journeys before coding.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>1:1 Figma to HTML/CSS Conversion:</strong> Zero compromises on spacing, typography, colors, or animations.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Component Design Systems:</strong> Reusable button variants, navigation bars, cards, and modal components.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="tech-pill-tag">Figma</span>
+                                    <span class="tech-pill-tag">Wireframing</span>
+                                    <span class="tech-pill-tag">UI Prototyping</span>
+                                    <span class="tech-pill-tag">Design Systems</span>
+                                    <span class="tech-pill-tag">Pixel-Perfect Code</span>
+                                </div>
+                                <a href="contact.html" class="contact-submit-cta text-decoration-none w-100 text-center" style="display: flex;">
+                                    <span class="contact-submit-pill flex-grow-1">REQUEST UI DESIGN / MOCKUP</span>
+                                    <span class="contact-submit-circle" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Service 04: Maintenance, Speed Optimization & Bug Fixes -->
+                    <div class="col-lg-6">
+                        <div class="service-detail-card">
+                            <div>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <span class="service-pill-num">(04) PERFORMANCE &amp; CARE</span>
+                                    <span class="small-text fw-bold text-uppercase text-secondary">Speed &amp; Reliability</span>
+                                </div>
+                                <h3 class="service-card-title">
+                                    Website Maintenance &amp; Bug Fixing
+                                </h3>
+                                <p class="service-card-desc">
+                                    A broken layout or slow load time directly hurts conversions. I diagnose responsive glitches, overhaul Google PageSpeed scores, fix cross-browser bugs, update content, and keep your website running smoothly and securely 24/7.
+                                </p>
+
+                                <div class="border-top border-dark pt-3 mb-3">
+                                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">Key Deliverables:</span>
+                                    <ul class="service-feature-list">
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Mobile Responsive Bug Fixes:</strong> Resolving horizontal scroll issues, overlapping text, and broken flexboxes.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>PageSpeed &amp; Core Web Vitals:</strong> Image optimization, CSS/JS minification, caching setup, and render audits.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Content &amp; Banner Updates:</strong> Adding fresh sections, product updates, case studies, and announcement banners.</span>
+                                        </li>
+                                        <li>
+                                            <i class="fas fa-check-circle"></i>
+                                            <span><strong>Script &amp; Form Troubleshooting:</strong> Fixing broken contact forms, email notifications, and JavaScript errors.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="d-flex flex-wrap gap-1 mb-3">
+                                    <span class="tech-pill-tag">Lighthouse</span>
+                                    <span class="tech-pill-tag">Core Web Vitals</span>
+                                    <span class="tech-pill-tag">Responsive Debugging</span>
+                                    <span class="tech-pill-tag">Image Optimization</span>
+                                    <span class="tech-pill-tag">Form Troubleshooting</span>
+                                </div>
+                                <a href="contact.html" class="contact-submit-cta text-decoration-none w-100 text-center" style="display: flex;">
+                                    <span class="contact-submit-pill flex-grow-1">FIX OR SPEED UP MY SITE</span>
+                                    <span class="contact-submit-circle" aria-hidden="true">↗</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 4-Step Collaborative Workflow -->
+            <section class="mb-5 py-4">
+                <div class="text-center mb-5">
+                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-1">[ THE PROCESS ]</span>
+                    <h2 style="font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.8vw, 3rem); text-transform: uppercase; margin: 0;">
+                        How We Work Together
+                    </h2>
+                    <p class="text-secondary mx-auto mt-2" style="max-width: 540px; font-size: 1rem;">
+                        A transparent 4-stage development process designed for speed, clarity, and zero surprises.
+                    </p>
+                </div>
+
+                <div class="row g-4">
+                    <!-- Step 01 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="process-step-box">
+                            <span class="process-num-large">01.</span>
+                            <h4 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.6rem;">
+                                DISCOVERY
+                            </h4>
+                            <p style="font-size: 0.9rem; line-height: 1.6; color: #444; margin: 0;">
+                                We discuss your business goals, target audience, preferred visual style, and specific features needed for the build.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 02 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="process-step-box">
+                            <span class="process-num-large">02.</span>
+                            <h4 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.6rem;">
+                                UI WIREFRAME
+                            </h4>
+                            <p style="font-size: 0.9rem; line-height: 1.6; color: #444; margin: 0;">
+                                I craft clean page layouts and interactive prototypes in Figma, confirming colors, typography, and structure with you.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 03 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="process-step-box">
+                            <span class="process-num-large">03.</span>
+                            <h4 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.6rem;">
+                                HAND CODING
+                            </h4>
+                            <p style="font-size: 0.9rem; line-height: 1.6; color: #444; margin: 0;">
+                                Transforming approved layouts into clean, semantic HTML5, CSS3, JavaScript, or WordPress with smooth animations.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Step 04 -->
+                    <div class="col-md-6 col-lg-3">
+                        <div class="process-step-box">
+                            <span class="process-num-large">04.</span>
+                            <h4 style="font-family: 'Oswald', sans-serif; font-size: 1.4rem; text-transform: uppercase; margin-bottom: 0.6rem;">
+                                LAUNCH &amp; CARE
+                            </h4>
+                            <p style="font-size: 0.9rem; line-height: 1.6; color: #444; margin: 0;">
+                                Rigorous cross-browser testing, mobile responsiveness checks, Google speed audits, and deployment to your domain.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quality Guarantees & Standards Strip -->
+            <section class="guarantee-box mb-5">
+                <div class="row align-items-center g-4">
+                    <div class="col-lg-5">
+                        <span class="small-text text-uppercase fw-bold mb-2 d-block" style="color: #65c0f0;">
+                            [ STANDARDS OF WORK ]
+                        </span>
+                        <h2 style="font-family: 'Oswald', sans-serif; font-size: clamp(1.8rem, 3.2vw, 2.6rem); text-transform: uppercase; line-height: 1.1; margin-bottom: 1rem;">
+                            What You Get With Every Single Project
+                        </h2>
+                        <p class="text-secondary" style="font-size: 0.95rem; line-height: 1.6; margin: 0;">
+                            I don't just write code — I build production assets that elevate your brand image and convert visitors into clients.
+                        </p>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="p-3 border border-secondary rounded" style="background: #161616;">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-check-circle" style="color: #65c0f0;"></i>
+                                        <strong class="text-uppercase" style="font-size: 13px;">100% Hand-Crafted Code</strong>
+                                    </div>
+                                    <p class="small text-secondary m-0">Zero bloated code. Clean, maintainable syntax adhering to modern web standards.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-3 border border-secondary rounded" style="background: #161616;">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-check-circle" style="color: #65c0f0;"></i>
+                                        <strong class="text-uppercase" style="font-size: 13px;">Mobile-First Precision</strong>
+                                    </div>
+                                    <p class="small text-secondary m-0">Engineered to deliver seamless thumb-friendly navigation across all screen sizes.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-3 border border-secondary rounded" style="background: #161616;">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-check-circle" style="color: #65c0f0;"></i>
+                                        <strong class="text-uppercase" style="font-size: 13px;">Direct Milestone Updates</strong>
+                                    </div>
+                                    <p class="small text-secondary m-0">Regular progress demos shared directly on live staging links via WhatsApp &amp; Email.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="p-3 border border-secondary rounded" style="background: #161616;">
+                                    <div class="d-flex align-items-center gap-2 mb-2">
+                                        <i class="fas fa-check-circle" style="color: #65c0f0;"></i>
+                                        <strong class="text-uppercase" style="font-size: 13px;">Post-Launch Support</strong>
+                                    </div>
+                                    <p class="small text-secondary m-0">Dedicated support after deployment to ensure everything continues running smoothly.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- FAQ Accordion -->
+            <section class="mb-5 py-4">
+                <div class="text-center mb-5">
+                    <span class="small-text text-uppercase fw-bold text-dark d-block mb-1">[ COMMON QUESTIONS ]</span>
+                    <h2 style="font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.5vw, 2.8rem); text-transform: uppercase; margin: 0;">
+                        Frequently Asked Questions
+                    </h2>
+                </div>
+
+                <div class="mx-auto" style="max-width: 820px;">
+                    <!-- FAQ 1 -->
+                    <div class="faq-accordion-item active">
+                        <div class="faq-accordion-header">
+                            <h4>How long does a typical website project take?</h4>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-accordion-body">
+                            A focused landing page or one-page website usually takes between <strong>3 to 5 business days</strong>. Full multi-page business websites or custom WordPress builds typically take <strong>1 to 2 weeks</strong>, depending on content readiness and custom feature complexity.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 2 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h4>Can you convert my existing Figma or Adobe XD design into code?</h4>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-accordion-body">
+                            Yes, absolutely! Figma to code is one of my primary specialties. I ensure exact 1:1 pixel accuracy, identical typography scaling, fluid responsive breakpoints, and smooth micro-animations.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 3 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h4>Will I be able to update content, images, and text myself?</h4>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-accordion-body">
+                            Yes! For WordPress websites, you will have a user-friendly admin dashboard with Elementor where you can update text, images, blog posts, and products without writing any code. For custom HTML sites, I structure the content cleanly and can provide a short walkthrough.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 4 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h4>What do you need from me to get started on a project?</h4>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-accordion-body">
+                            Just a brief overview of your business goals, any reference websites whose design or vibe you like, your branding assets (logo, preferred color scheme), and the text/media you want included. If you don't have all the content yet, I can assist with wireframing the structure first.
+                        </div>
+                    </div>
+
+                    <!-- FAQ 5 -->
+                    <div class="faq-accordion-item">
+                        <div class="faq-accordion-header">
+                            <h4>Do you offer post-launch support and maintenance?</h4>
+                            <span class="faq-icon">+</span>
+                        </div>
+                        <div class="faq-accordion-body">
+                            Yes. Every project includes complimentary post-launch support to resolve any minor tweaks or questions. I also offer monthly website maintenance for continuous updates, speed monitoring, and new section additions.
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Direct Callout CTA Box -->
+            <section class="p-4 p-md-5 border border-2 border-dark rounded-3 text-center position-relative mt-5 mb-5"
+                style="background-color: var(--neon-lime); box-shadow: 10px 10px 0px var(--dark-black);">
+                <span class="small-text text-uppercase fw-bold text-dark d-block mb-2">[ LET'S BUILD SOMETHING GREAT ]</span>
+                <h2 style="font-family: 'Oswald', sans-serif; font-size: clamp(2rem, 3.8vw, 3.2rem); text-transform: uppercase; line-height: 1.1; margin-bottom: 1.25rem; color: var(--dark-black);">
+                    Have A Project In Mind? Let's Discuss Your Vision Today.
+                </h2>
+                <p style="font-size: 1.1rem; font-weight: 500; max-width: 680px; margin: 0 auto 2rem auto; color: var(--dark-black);">
+                    Whether you need a brand-new website from scratch, a custom WordPress solution, or improvements to an existing site, I'm ready to help you bring it to life.
+                </p>
+                <div class="d-flex justify-content-center gap-3 flex-wrap">
+                    <a href="contact.html" class="contact-submit-cta text-decoration-none">
+                        <span class="contact-submit-pill">START A PROJECT DISCUSSION</span>
+                        <span class="contact-submit-circle" aria-hidden="true">↗</span>
+                    </a>
+                    <a href="https://wa.me/917988379885" target="_blank" rel="noopener noreferrer" 
+                       class="btn btn-outline-dark rounded-pill px-4 py-3 fw-bold text-uppercase d-inline-flex align-items-center gap-2" 
+                       style="font-size: 13px; letter-spacing: 1px; border-width: 2px;">
+                        <i class="fab fa-whatsapp text-success" style="font-size: 18px;"></i> Chat on WhatsApp ↗
+                    </a>
                 </div>
             </section>
         </main>
+
+        <!-- Bottom Subtle Watermark (Matching Home & Contact Theme) -->
+        <div class="contact-watermark-wrap text-center overflow-hidden position-relative">
+            <h2 class="contact-bottom-watermark text-uppercase">SERVICES</h2>
+        </div>
     </div>
 
-    <!-- Animated Skills Marquee (Bottom Placement like About & Other Pages) -->
+    <!-- Animated Skills Marquee (Bottom Placement like About & Projects Pages) -->
     <div class="marquee-section">
         <div class="marquee-container">
             <div class="marquee-fixed-side">
@@ -279,8 +783,9 @@
                     <div class="marquee-item"><span>CSS3</span></div>
                     <div class="marquee-item"><span>Bootstrap 5</span></div>
                     <div class="marquee-item"><span>JavaScript</span></div>
-                    <div class="marquee-item"><span>React.js</span></div>
                     <div class="marquee-item"><span>WordPress</span></div>
+                    <div class="marquee-item"><span>Elementor</span></div>
+                    <div class="marquee-item"><span>Figma</span></div>
                     <div class="marquee-item"><span>Responsive Design</span></div>
 
                     <div class="marquee-item"><span>UI/UX Design</span></div>
@@ -288,8 +793,9 @@
                     <div class="marquee-item"><span>CSS3</span></div>
                     <div class="marquee-item"><span>Bootstrap 5</span></div>
                     <div class="marquee-item"><span>JavaScript</span></div>
-                    <div class="marquee-item"><span>React.js</span></div>
                     <div class="marquee-item"><span>WordPress</span></div>
+                    <div class="marquee-item"><span>Elementor</span></div>
+                    <div class="marquee-item"><span>Figma</span></div>
                     <div class="marquee-item"><span>Responsive Design</span></div>
                 </div>
             </div>
@@ -308,7 +814,7 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
-        // Preloader Animation Function
+        // Preloader Animation
         function createPreloaderTimeline() {
             const tl = gsap.timeline({ repeat: -1, repeatDelay: 0.5 });
             tl.fromTo('.group1', { scale: 0.1, transformOrigin: '124 124' }, { duration: 0.35, scale: 1, ease: 'expo.inOut' })
@@ -347,7 +853,25 @@
             hidePreloader(0.8);
         });
 
-        // Normalize paths for comparison
+        // Interactive FAQ Accordion Logic
+        document.querySelectorAll('.faq-accordion-header').forEach(header => {
+            header.addEventListener('click', () => {
+                const item = header.parentElement;
+                const wasActive = item.classList.contains('active');
+
+                // Close all items
+                document.querySelectorAll('.faq-accordion-item').forEach(el => {
+                    el.classList.remove('active');
+                });
+
+                // Toggle clicked item
+                if (!wasActive) {
+                    item.classList.add('active');
+                }
+            });
+        });
+
+        // Normalize paths for navigation
         function normalizePath(path) {
             let p = path.replace(/\\/g, '/');
             p = p.split('/').pop() || 'index.html';
