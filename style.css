@@ -335,6 +335,24 @@ main {
     z-index: 1050 !important;
 }
 
+/* Offcanvas Background Scroll Lock */
+html.offcanvas-open-lock,
+body.offcanvas-open-lock {
+    overflow: hidden !important;
+    overscroll-behavior: none !important;
+    touch-action: none !important;
+}
+
+.offcanvas.show {
+    touch-action: auto !important;
+}
+
+.offcanvas-body {
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y !important;
+}
+
 .menu-list .list-group-item {
     background: transparent;
     border-color: #333;

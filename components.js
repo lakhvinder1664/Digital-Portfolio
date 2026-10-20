@@ -39,7 +39,7 @@
                         I'm Front-end developer building modern,<br>responsive, and clean web interfaces.<br> [Since 2024]
                     </div>
                     <button class="btn border-0 fw-bold text-uppercase" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
+                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight" data-bs-scroll="false" data-bs-backdrop="true">
                         (Browse &mdash; Menu)
                     </button>
                 </div>
@@ -54,9 +54,15 @@
             offcanvas.className = 'offcanvas offcanvas-end text-bg-dark';
             offcanvas.tabIndex = -1;
             offcanvas.setAttribute('aria-labelledby', 'offcanvasRightLabel');
+            offcanvas.setAttribute('data-bs-scroll', 'false');
+            offcanvas.setAttribute('data-bs-backdrop', 'true');
             document.body.appendChild(offcanvas);
-        } else if (offcanvas.parentElement !== document.body) {
-            document.body.appendChild(offcanvas);
+        } else {
+            offcanvas.setAttribute('data-bs-scroll', 'false');
+            offcanvas.setAttribute('data-bs-backdrop', 'true');
+            if (offcanvas.parentElement !== document.body) {
+                document.body.appendChild(offcanvas);
+            }
         }
 
         offcanvas.innerHTML = `
@@ -641,12 +647,95 @@
         }, { passive: true });
     }
 
+    /**
+     * Prevents background page scrolling while the offcanvas drawer is open.
+     * Works seamlessly across mobile touch swiping, mouse wheel, and desktop scrolling,
+     * maintaining the exact scroll position without layout shift or header glitch.
+     */
+    function initOffcanvasScrollLock() {
+        const offcanvas = document.getElementById('offcanvasRight');
+        if (!offcanvas) return;
+
+        let lockedScrollY = 0;
+        let isLocked = false;
+
+        function onScrollLock() {
+            if (isLocked) {
+                window.scrollTo(0, lockedScrollY);
+            }
+        }
+
+        function preventBackgroundScroll(e) {
+            if (!isLocked) return;
+            const offcanvasEl = document.getElementById('offcanvasRight');
+            if (!offcanvasEl) return;
+
+            // Allow touch/wheel interactions if inside offcanvas
+            if (offcanvasEl.contains(e.target)) {
+                return;
+            }
+
+            // Block scroll/touch on background/backdrop
+            if (e.cancelable) {
+                e.preventDefault();
+            }
+        }
+
+        function handleKeyScroll(e) {
+            if (!isLocked) return;
+            const keys = ['ArrowUp', 'ArrowDown', 'PageUp', 'PageDown', 'Home', 'End', ' '];
+            if (keys.includes(e.key)) {
+                const offcanvasEl = document.getElementById('offcanvasRight');
+                if (!offcanvasEl || !offcanvasEl.contains(document.activeElement)) {
+                    e.preventDefault();
+                }
+            }
+        }
+
+        function lockScroll() {
+            if (isLocked) return;
+            lockedScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+            isLocked = true;
+
+            document.documentElement.classList.add('offcanvas-open-lock');
+            document.body.classList.add('offcanvas-open-lock');
+
+            window.addEventListener('scroll', onScrollLock, { passive: false });
+            window.addEventListener('wheel', preventBackgroundScroll, { passive: false });
+            window.addEventListener('touchmove', preventBackgroundScroll, { passive: false });
+            window.addEventListener('keydown', handleKeyScroll, { passive: false });
+        }
+
+        function unlockScroll() {
+            if (!isLocked) return;
+            isLocked = false;
+
+            document.documentElement.classList.remove('offcanvas-open-lock');
+            document.body.classList.remove('offcanvas-open-lock');
+
+            window.removeEventListener('scroll', onScrollLock);
+            window.removeEventListener('wheel', preventBackgroundScroll);
+            window.removeEventListener('touchmove', preventBackgroundScroll);
+            window.removeEventListener('keydown', handleKeyScroll);
+
+            // Restore exact scroll position
+            window.scrollTo(0, lockedScrollY);
+        }
+
+        offcanvas.addEventListener('show.bs.offcanvas', lockScroll);
+        offcanvas.addEventListener('hidden.bs.offcanvas', unlockScroll);
+        offcanvas.addEventListener('hide.bs.offcanvas', function () {
+            setTimeout(unlockScroll, 350);
+        });
+    }
+
     // Expose for external calls
     window.initCustomAnimations = initCustomAnimations;
 
     function init() {
         renderHeader();
         initStickyHeader();
+        initOffcanvasScrollLock();
         renderBreadcrumb();
         renderFooter();
         updateHivendsDynamicTenure();
