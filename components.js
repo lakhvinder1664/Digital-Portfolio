@@ -549,8 +549,8 @@
             gridObserver.observe(projectGrid, { childList: true });
         }
 
-        // 6. Watermark Floating Motion
-        document.querySelectorAll('.contact-bottom-watermark, .expertise-bg-text').forEach(wm => {
+        // 6. Watermark Floating Motion (Contact page only - keep home expertise text 100% static)
+        document.querySelectorAll('.contact-bottom-watermark').forEach(wm => {
             wm.classList.add('custom-float');
         });
 
