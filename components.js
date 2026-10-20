@@ -569,11 +569,70 @@
         }
     }
 
+    // Smart Auto-Hiding Sticky Header (Disappear on Scroll Down, Reappear on Scroll Up)
+    function initStickyHeader() {
+        const header = document.getElementById('site-header');
+        if (!header) return;
+
+        let lastScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+        let isTicking = false;
+        const scrollThreshold = 70;
+        const delta = 6;
+
+        function handleScroll() {
+            const currentScrollY = Math.max(0, window.pageYOffset || document.documentElement.scrollTop);
+
+            // Keep header visible if offcanvas menu is active
+            const offcanvas = document.getElementById('offcanvasRight');
+            if (offcanvas && offcanvas.classList.contains('show')) {
+                header.classList.remove('header-hidden');
+                isTicking = false;
+                return;
+            }
+
+            // At the very top: restore clean initial state
+            if (currentScrollY <= 15) {
+                header.classList.remove('header-scrolled', 'header-hidden');
+                lastScrollY = currentScrollY;
+                isTicking = false;
+                return;
+            }
+
+            // Scrolled down past 40px: apply compact frosted glass header
+            if (currentScrollY > 40) {
+                header.classList.add('header-scrolled');
+            }
+
+            // Directional detection
+            const diff = currentScrollY - lastScrollY;
+            if (Math.abs(diff) >= delta) {
+                if (diff > 0 && currentScrollY > scrollThreshold) {
+                    // Scrolling DOWN -> Disappear
+                    header.classList.add('header-hidden');
+                } else if (diff < 0) {
+                    // Scrolling UP -> Reappear
+                    header.classList.remove('header-hidden');
+                }
+                lastScrollY = currentScrollY;
+            }
+
+            isTicking = false;
+        }
+
+        window.addEventListener('scroll', function () {
+            if (!isTicking) {
+                window.requestAnimationFrame(handleScroll);
+                isTicking = true;
+            }
+        }, { passive: true });
+    }
+
     // Expose for external calls
     window.initCustomAnimations = initCustomAnimations;
 
     function init() {
         renderHeader();
+        initStickyHeader();
         renderBreadcrumb();
         renderFooter();
         updateHivendsDynamicTenure();
