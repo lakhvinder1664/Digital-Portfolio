@@ -213,10 +213,10 @@ main {
 .hero-brand-block {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    align-items: flex-start;
+    text-align: left;
     width: 100%;
+    max-width: 360px;
     margin: 0 auto;
 }
 
@@ -234,19 +234,20 @@ main {
 }
 
 .hero-brand-divider {
-    width: 60px;
-    height: 2px;
+    width: 70px;
+    height: 1.5px;
     background: var(--dark-black);
-    margin: 1.25rem auto 1rem auto;
-    border-radius: 2px;
+    margin: 1.25rem 0 1rem 0;
+    align-self: flex-start;
 }
 
 .service-list-container {
     width: 100%;
+    text-align: left;
 }
 
 .service-list {
-    text-align: center;
+    text-align: left;
     padding: 0;
     margin: 0;
 }
@@ -257,6 +258,7 @@ main {
     font-weight: 500;
     letter-spacing: 0.3px;
     color: var(--dark-black);
+    text-align: left;
 }
 
 @media (min-width: 992px) {
