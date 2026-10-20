@@ -28,6 +28,7 @@
         const base = getBasePath();
         const currentPath = (window.location.pathname.split('/').pop() || 'index.html').toLowerCase();
 
+        // 1. Render Navbar inside sticky header
         container.innerHTML = `
             <nav class="navbar navbar-expand-lg border-top border-dark px-3 px-md-4 mt-3">
                 <div class="container-fluid">
@@ -38,51 +39,64 @@
                         I'm Front-end developer building modern,<br>responsive, and clean web interfaces.<br> [Since 2024]
                     </div>
                     <button class="btn border-0 fw-bold text-uppercase" type="button" data-bs-toggle="offcanvas"
-                        data-bs-target="#offcanvasRight">
+                        data-bs-target="#offcanvasRight" aria-controls="offcanvasRight">
                         (Browse &mdash; Menu)
                     </button>
                 </div>
             </nav>
+        `;
 
-            <div class="offcanvas offcanvas-end text-bg-dark" tabindex="-1" id="offcanvasRight">
-                <div class="offcanvas-header border-bottom border-secondary p-4">
-                    <h5 class="offcanvas-title fw-bold">LAKHVINDER SINGH</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas"></button>
-                </div>
-                <div class="offcanvas-body p-0">
-                    <ul class="list-group list-group-flush menu-list">
-                        <li class="list-group-item p-0">
-                            <a href="${base}index.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">
-                                <span>Home</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item p-0">
-                            <a href="${base}about.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'about.html' ? 'active' : ''}">
-                                <span>About</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item p-0">
-                            <a href="${base}service.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'service.html' || currentPath === 'services.html' ? 'active' : ''}">
-                                <span>Services</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item p-0">
-                            <a href="${base}projects.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'projects.html' || currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
-                                <span>Projects</span>
-                            </a>
-                        </li>
-                        <li class="list-group-item p-0">
-                            <a href="${base}contact.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'contact.html' ? 'active' : ''}">
-                                <span>Contact</span>
-                            </a>
-                        </li>
-                    </ul>
-                    <div class="contact-info p-4 mt-5">
-                        <h6>Contact Me</h6>
-                        <p class="small text-secondary mb-1">Ambala Cantt, Haryana</p>
-                        <p class="small text-secondary mb-1">lakhvinder9567@gmail.com</p>
-                        <p class="small text-secondary">798-837-9885</p>
-                    </div>
+        // 2. Render Offcanvas directly into document.body (prevents CSS transform and overflow clipping)
+        let offcanvas = document.getElementById('offcanvasRight');
+        if (!offcanvas) {
+            offcanvas = document.createElement('div');
+            offcanvas.id = 'offcanvasRight';
+            offcanvas.className = 'offcanvas offcanvas-end text-bg-dark';
+            offcanvas.tabIndex = -1;
+            offcanvas.setAttribute('aria-labelledby', 'offcanvasRightLabel');
+            document.body.appendChild(offcanvas);
+        } else if (offcanvas.parentElement !== document.body) {
+            document.body.appendChild(offcanvas);
+        }
+
+        offcanvas.innerHTML = `
+            <div class="offcanvas-header border-bottom border-secondary p-4">
+                <h5 class="offcanvas-title fw-bold" id="offcanvasRightLabel">LAKHVINDER SINGH</h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+            </div>
+            <div class="offcanvas-body p-0">
+                <ul class="list-group list-group-flush menu-list">
+                    <li class="list-group-item p-0">
+                        <a href="${base}index.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'index.html' || currentPath === '' ? 'active' : ''}">
+                            <span>Home</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a href="${base}about.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'about.html' ? 'active' : ''}">
+                            <span>About</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a href="${base}service.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'service.html' || currentPath === 'services.html' ? 'active' : ''}">
+                            <span>Services</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a href="${base}projects.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'projects.html' || currentPath === 'my-work.html' || currentPath === 'work.html' || currentPath === 'pages.html' ? 'active' : ''}">
+                            <span>Projects</span>
+                        </a>
+                    </li>
+                    <li class="list-group-item p-0">
+                        <a href="${base}contact.html" class="menu-nav-link d-flex justify-content-between align-items-center w-100 ${currentPath === 'contact.html' ? 'active' : ''}">
+                            <span>Contact</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="contact-info p-4 mt-5">
+                    <h6>Contact Me</h6>
+                    <p class="small text-secondary mb-1">Ambala Cantt, Haryana</p>
+                    <p class="small text-secondary mb-1">lakhvinder9567@gmail.com</p>
+                    <p class="small text-secondary">798-837-9885</p>
                 </div>
             </div>
         `;

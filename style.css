@@ -224,6 +224,13 @@ main {
 /* Offcanvas Customization */
 .offcanvas {
     width: 400px !important;
+    max-width: 100vw !important;
+    height: 100vh !important;
+    z-index: 1060 !important;
+}
+
+.offcanvas-backdrop {
+    z-index: 1050 !important;
 }
 
 .menu-list .list-group-item {
