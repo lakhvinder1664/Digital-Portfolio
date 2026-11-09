@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 400 400" width="400" height="400">
+  <defs>
+    <!-- Circular clip for the photo -->
+    <clipPath id="circleClip">
+      <circle cx="200" cy="200" r="178"/>
+    </clipPath>
+
+    <!-- Green → Blue gradient for the border ring -->
+    <linearGradient id="ringGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%"   stop-color="#4CAF7D"/>
+      <stop offset="50%"  stop-color="#6EC6A0"/>
+      <stop offset="100%" stop-color="#5B8EE6"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Gradient border ring -->
+  <circle cx="200" cy="200" r="191" fill="none" stroke="url(#ringGradient)" stroke-width="22"/>
+
+  <!-- Profile photo clipped to circle -->
+  <image
+    href="./profile-photo.jpg"
+    x="22" y="22"
+    width="356" height="356"
+    clip-path="url(#circleClip)"
+    preserveAspectRatio="xMidYMid slice"
+  />
+</svg>
+

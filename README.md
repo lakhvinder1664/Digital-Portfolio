@@ -1,52 +1,63 @@
-<h1 align="center">🌐 Digital Portfolio</h1>
+<h1 align="center">🌐 Lakhvinder Singh — Personal Digital Portfolio</h1>
 
 <p align="center">
-  <b>Showcasing my skills, projects, and journey as a Front-End Developer</b>  
+  <b>Front-End Web Developer &amp; UI Designer Portfolio</b>  
 </p>
 
 <p align="center">
-  <a href="https://lakhvinder-portfolio.vercel.app/">
+  <a href="https://lakhvinder1664.github.io/Digital-Portfolio/">
     <img src="https://img.shields.io/badge/Live%20Demo-000000?style=for-the-badge&logoColor=white" alt="Live Demo">
   </a>
 </p>
 
 ---
 
-## 📖 About  
+## 📖 About
 
-This is my **personal digital portfolio**, designed to highlight my **skills, projects, and professional profile** in a modern and interactive way.  
-It reflects my growth as a **front-end developer** by combining **clean UI, responsive design, and smooth interactivity**.  
+This is the official digital portfolio of **Lakhvinder Singh**, showcasing responsive websites, client-approved pharmaceutical mockups, WordPress customizations, and modern web application frontends. Built with **React 19, Vite, and Bootstrap 5**, it delivers high performance, fluid animations, and pixel-perfect design.
 
-🔗 **Live Portfolio:** [lakhvinder-portfolio.vercel.app](https://lakhvinder-portfolio.vercel.app/)  
-
----
-
-## ✨ Features  
-
-- 🎨 **Modern UI/UX** — visually clean and engaging design  
-- 📱 **Responsive Layout** — optimized for desktop, tablet, and mobile  
-- ⚡ **Interactive Components** — animations, smooth scrolling, and navigation  
-- 🗂️ **Projects Showcase** — highlights selected works with details  
-- 📬 **Contact Section** — contact form and newsletter subscription  
+🔗 **Live Portfolio:** [lakhvinder1664.github.io/Digital-Portfolio](https://lakhvinder1664.github.io/Digital-Portfolio/)
 
 ---
 
-## 🛠️ Tech Stack  
+## ✨ Features
 
-<p align="center">
-  <a href="https://developer.mozilla.org/docs/Web/HTML"><img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white" alt="HTML5"></a>
-  <a href="https://developer.mozilla.org/docs/Web/CSS"><img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" alt="CSS3"></a>
-  <a href="https://developer.mozilla.org/docs/Web/JavaScript"><img src="https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black" alt="JavaScript"></a>
-  <a href="https://vercel.com/"><img src="https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white" alt="Vercel"></a>
-</p>
+- 🎨 **Modern Brutalist UI/UX** — High-impact typography, dark editorial aesthetic, and custom cursor
+- 📱 **100% Mobile Responsive** — Tested across iOS Safari, Android Chrome, tablet & desktop
+- ⚡ **Lightning Fast** — Built with Vite 8 + React 19 for sub-second load times
+- 🗂️ **Verified Client Builds** — Accubic Labs, Granmed Labs, GMH Pharmaceuticals, Zerdia & Black Mango
+- 📬 **Live Contact System** — Saves to Firebase Firestore + instant email alerts via FormSubmit + direct WhatsApp chat
+- 📰 **Newsletter Integration** — Direct subscription to Firestore `newsletter` collection
+- 🛠️ **Admin Console** — Standalone admin dashboard to view inquiries and manage projects
 
-- Firebase (Firestore & Authentication) for contact messages, newsletter, and admin dashboard.
+---
 
-> Note: The Firebase `apiKey` in this repo is a public client key used by the browser.  
-> It is restricted to `https://lakhvinder-portfolio.vercel.app/*` and protected by Firestore security rules.
+## 🛠️ Tech Stack
 
+- **Frontend:** React 19, Vite, JavaScript (ES6+), Bootstrap 5, Lucide Icons
+- **Backend / Database:** Firebase Firestore REST API
+- **Deployment:** Vercel / GitHub Pages
 
-## 📧 Contact Email Notifications
+---
 
-If you want email alerts when someone submits the contact form, follow `EMAIL_NOTIFICATIONS_SETUP.md`.
-This uses Firebase Extension **Trigger Email** plus a Cloud Function trigger in `functions/index.js`.
+## 🚀 Getting Started
+
+```bash
+# Install dependencies
+npm install
+
+# Run local development server
+npm run dev
+
+# Build for production
+npm run build
+```
+
+---
+
+## 📬 Contact & Connect
+
+- **Email:** [lakhvinder9567@gmail.com](mailto:lakhvinder9567@gmail.com)
+- **Phone / WhatsApp:** [+91 79883 79885](https://wa.me/917988379885)
+- **LinkedIn:** [linkedin.com/in/lakhvinder-singh-dev](https://www.linkedin.com/in/lakhvinder-singh-dev/)
+- **GitHub:** [github.com/lakhvinder1664](https://github.com/lakhvinder1664)
