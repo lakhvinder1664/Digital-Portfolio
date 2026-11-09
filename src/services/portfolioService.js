@@ -239,3 +239,4 @@ export async function fetchLiveProjects() {
     return DEFAULT_PROJECTS;
   }
 }
+
