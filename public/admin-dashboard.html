@@ -1015,9 +1015,14 @@
                                     ${escapeHtml(d.title || 'Untitled Project')}
                                 </h3>
                             </div>
-                            <button class="btn-delete-brutalist" data-post-id="${docSnap.id}" title="Delete Project">
-                                <i class="fas fa-trash-alt"></i> Delete Project
-                            </button>
+                            <div class="d-flex gap-2 flex-wrap">
+                                <button class="btn-edit-post btn-outline-brutalist" data-post-id="${docSnap.id}" data-title="${escapeHtml(d.title||'')}" data-category="${escapeHtml(d.category||'')}" data-link="${escapeHtml(d.link||'')}" data-image="${escapeHtml(d.imageUrl||'')}" data-description="${escapeHtml(d.description||'')}" data-tags="${escapeHtml((d.tags||[]).join(','))}" title="Edit Project" style="padding:7px 16px; font-size:12px;">
+                                    <i class="fas fa-edit"></i> Edit
+                                </button>
+                                <button class="btn-delete-brutalist btn-delete-post" data-post-id="${docSnap.id}" title="Delete Project">
+                                    <i class="fas fa-trash-alt"></i> Delete
+                                </button>
+                            </div>
                         </div>
 
                         <p style="font-size: 0.95rem; line-height: 1.6; color: #333; margin-bottom: 1rem;">
@@ -1038,8 +1043,8 @@
             });
             postsListDiv.innerHTML = html;
 
-            // Attach post delete listeners
-            postsListDiv.querySelectorAll('.btn-delete-brutalist').forEach(btn => {
+            // Attach post DELETE listeners
+            postsListDiv.querySelectorAll('.btn-delete-post').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const postId = btn.getAttribute('data-post-id');
                     if (confirm("Are you sure you want to permanently delete this project from your website?")) {
@@ -1049,6 +1054,20 @@
                             alert("Error deleting post: " + err.message);
                         }
                     }
+                });
+            });
+
+            // Attach post EDIT listeners
+            postsListDiv.querySelectorAll('.btn-edit-post').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const postId   = btn.getAttribute('data-post-id');
+                    const title    = btn.getAttribute('data-title');
+                    const category = btn.getAttribute('data-category');
+                    const link     = btn.getAttribute('data-link');
+                    const image    = btn.getAttribute('data-image');
+                    const desc     = btn.getAttribute('data-description');
+                    const tags     = btn.getAttribute('data-tags');
+                    openEditModal(postId, { title, category, link, imageUrl: image, description: desc, tags });
                 });
             });
         }, (error) => {
@@ -1247,5 +1266,188 @@
             }
         });
     </script>
+
+    <!-- ===== EDIT PROJECT MODAL ===== -->
+    <div id="editProjectModal" style="display:none; position:fixed; inset:0; z-index:9999; background:rgba(0,0,0,0.65); overflow-y:auto;">
+        <div style="max-width:620px; margin:60px auto; background:#fff; border:3px solid #000; border-radius:0; padding:0; box-shadow:8px 8px 0 #000;">
+            <!-- Modal Header -->
+            <div style="background:#000; color:#fff; padding:16px 24px; display:flex; justify-content:space-between; align-items:center;">
+                <span style="font-family:'Oswald',sans-serif; font-size:1.2rem; letter-spacing:1px; text-transform:uppercase;">
+                    <i class="fas fa-edit me-2"></i>Edit Project
+                </span>
+                <button id="closeEditModal" style="background:none; border:none; color:#fff; font-size:1.4rem; cursor:pointer; padding:0 4px;" title="Close">&times;</button>
+            </div>
+
+            <!-- Modal Body -->
+            <form id="editProjectForm" style="padding:28px 28px 20px;">
+                <input type="hidden" id="editPostId">
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Project Title *</label>
+                    <input type="text" id="editTitle" required placeholder="e.g. Accubic Labs"
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; border-radius:0;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Category</label>
+                    <input type="text" id="editCategory" placeholder="e.g. Web App, E-Commerce, SaaS"
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; border-radius:0;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Live Link (URL)</label>
+                    <input type="url" id="editLink" placeholder="https://example.com"
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; border-radius:0;">
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Banner Image URL</label>
+                    <input type="url" id="editImageUrl" placeholder="https://your-image-host.com/image.jpg"
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; border-radius:0;">
+                    <div id="editImagePreview" style="margin-top:8px; display:none;">
+                        <img id="editImagePreviewImg" src="" alt="Banner Preview" style="max-width:100%; height:140px; object-fit:cover; border:2px solid #ccc;">
+                    </div>
+                </div>
+
+                <div style="margin-bottom:16px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Tags <span style="font-weight:400; text-transform:none;">(comma separated)</span></label>
+                    <input type="text" id="editTags" placeholder="React, Firebase, Tailwind"
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; border-radius:0;">
+                </div>
+
+                <div style="margin-bottom:20px;">
+                    <label style="display:block; font-weight:700; font-size:12px; letter-spacing:1px; text-transform:uppercase; margin-bottom:6px;">Description</label>
+                    <textarea id="editDescription" rows="4" placeholder="Short description of the project..."
+                        style="width:100%; padding:10px 14px; border:2px solid #000; font-size:1rem; font-family:inherit; outline:none; resize:vertical; border-radius:0;"></textarea>
+                </div>
+
+                <!-- Error / Success -->
+                <div id="editModalError" style="display:none; padding:10px 14px; background:#FEE2E2; border:2px solid #DC2626; color:#DC2626; font-size:13px; margin-bottom:14px; border-radius:0;"></div>
+                <div id="editModalSuccess" style="display:none; padding:10px 14px; background:#D1FAE5; border:2px solid #059669; color:#065F46; font-size:13px; margin-bottom:14px; border-radius:0;"></div>
+
+                <!-- Buttons -->
+                <div style="display:flex; gap:12px; justify-content:flex-end; flex-wrap:wrap;">
+                    <button type="button" id="cancelEditModal" class="btn-outline-brutalist" style="padding:10px 24px;">
+                        <i class="fas fa-times me-1"></i> Cancel
+                    </button>
+                    <button type="submit" id="saveEditBtn" style="padding:10px 28px; background:#000; color:#fff; border:2px solid #000; font-family:'Oswald',sans-serif; font-size:1rem; letter-spacing:1px; text-transform:uppercase; cursor:pointer;">
+                        <i class="fas fa-save me-2"></i><span id="saveEditBtnText">Save Changes</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // ===== EDIT MODAL LOGIC =====
+        const editModal     = document.getElementById('editProjectModal');
+        const editForm      = document.getElementById('editProjectForm');
+        const editPostIdEl  = document.getElementById('editPostId');
+        const editTitleEl   = document.getElementById('editTitle');
+        const editCatEl     = document.getElementById('editCategory');
+        const editLinkEl    = document.getElementById('editLink');
+        const editImageEl   = document.getElementById('editImageUrl');
+        const editTagsEl    = document.getElementById('editTags');
+        const editDescEl    = document.getElementById('editDescription');
+        const editErrEl     = document.getElementById('editModalError');
+        const editOkEl      = document.getElementById('editModalSuccess');
+        const saveEditBtn   = document.getElementById('saveEditBtn');
+        const saveEditText  = document.getElementById('saveEditBtnText');
+
+        function openEditModal(postId, data) {
+            editPostIdEl.value  = postId;
+            editTitleEl.value   = data.title       || '';
+            editCatEl.value     = data.category    || '';
+            editLinkEl.value    = data.link        || '';
+            editImageEl.value   = data.imageUrl    || '';
+            editTagsEl.value    = data.tags        || '';
+            editDescEl.value    = data.description || '';
+            editErrEl.style.display = 'none';
+            editOkEl.style.display  = 'none';
+            // Show image preview if URL present
+            updateEditImagePreview(data.imageUrl || '');
+            editModal.style.display = 'block';
+            document.body.style.overflow = 'hidden';
+            editTitleEl.focus();
+        }
+
+        function closeEditModal() {
+            editModal.style.display = 'none';
+            document.body.style.overflow = '';
+        }
+
+        function updateEditImagePreview(url) {
+            const previewWrap = document.getElementById('editImagePreview');
+            const previewImg  = document.getElementById('editImagePreviewImg');
+            if (url && url.startsWith('http')) {
+                previewImg.src = url;
+                previewWrap.style.display = 'block';
+            } else {
+                previewWrap.style.display = 'none';
+            }
+        }
+
+        document.getElementById('closeEditModal').addEventListener('click', closeEditModal);
+        document.getElementById('cancelEditModal').addEventListener('click', closeEditModal);
+
+        // Close modal on backdrop click
+        editModal.addEventListener('click', (e) => {
+            if (e.target === editModal) closeEditModal();
+        });
+
+        // Live image URL preview
+        editImageEl.addEventListener('input', () => updateEditImagePreview(editImageEl.value.trim()));
+
+        // Form submit → Firestore updateDoc
+        editForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            editErrEl.style.display = 'none';
+            editOkEl.style.display  = 'none';
+
+            const postId = editPostIdEl.value;
+            if (!postId) return;
+
+            const title    = editTitleEl.value.trim();
+            const category = editCatEl.value.trim();
+            const link     = editLinkEl.value.trim();
+            const imageUrl = editImageEl.value.trim();
+            const rawTags  = editTagsEl.value.trim();
+            const desc     = editDescEl.value.trim();
+
+            if (!title) {
+                editErrEl.textContent = 'Project title is required.';
+                editErrEl.style.display = 'block';
+                editTitleEl.focus();
+                return;
+            }
+
+            const tagsArray = rawTags ? rawTags.split(',').map(t => t.trim()).filter(Boolean) : [];
+
+            saveEditBtn.disabled   = true;
+            saveEditText.textContent = 'Saving…';
+
+            try {
+                await updateDoc(doc(db, "posts", postId), {
+                    title,
+                    category,
+                    link,
+                    imageUrl,
+                    description: desc,
+                    tags: tagsArray,
+                    updatedAt: serverTimestamp()
+                });
+                editOkEl.textContent = '✅ Project updated successfully!';
+                editOkEl.style.display = 'block';
+                setTimeout(() => closeEditModal(), 1200);
+            } catch (err) {
+                editErrEl.textContent = 'Error updating project: ' + err.message;
+                editErrEl.style.display = 'block';
+            } finally {
+                saveEditBtn.disabled     = false;
+                saveEditText.textContent = 'Save Changes';
+            }
+        });
+    </script>
+
 </body>
 </html>
