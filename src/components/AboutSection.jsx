@@ -46,9 +46,11 @@ export default function AboutSection() {
 
             <div className="about-resume-wrap">
               <a
-                href="#resume"
+                href="/Lakhvinder_Singh_Web_Developer_CV.pdf"
                 className="about-download-btn"
-                download
+                download="Lakhvinder_Singh_Web_Developer_CV.pdf"
+                target="_blank"
+                rel="noreferrer"
               >
                 DOWNLOAD RESUME
               </a>
