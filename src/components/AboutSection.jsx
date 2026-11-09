@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import aboutImg from '../assets/about-portrait.jpeg';
+import cvPdf from '../assets/Lakhvinder_Singh_Web_Developer_CV.pdf';
 
 const AWARDS = [
   { id: '1', title: 'FRONT-END WEB DEVELOPMENT', year: '2026 — PRESENT', hasArrow: true },
@@ -10,6 +11,17 @@ const AWARDS = [
 
 export default function AboutSection() {
   const [activeAward, setActiveAward] = useState('1');
+
+  const handleDownload = (e) => {
+    // Ensures download initiates even if browser tries to navigate
+    const link = document.createElement('a');
+    link.href = cvPdf;
+    link.download = 'Lakhvinder_Singh_Web_Developer_CV.pdf';
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  };
 
   return (
     <section className="portfolio-about-section" id="about">
@@ -46,11 +58,12 @@ export default function AboutSection() {
 
             <div className="about-resume-wrap">
               <a
-                href="/Lakhvinder_Singh_Web_Developer_CV.pdf"
-                className="about-download-btn"
+                href={cvPdf}
                 download="Lakhvinder_Singh_Web_Developer_CV.pdf"
+                className="about-download-btn"
                 target="_blank"
                 rel="noreferrer"
+                onClick={handleDownload}
               >
                 DOWNLOAD RESUME
               </a>
