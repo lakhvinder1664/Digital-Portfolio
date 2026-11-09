@@ -1,12 +1,6 @@
-import React, { useState } from 'react';
-import { subscribeNewsletter, CONTACT_INFO } from '../services/portfolioService';
+import React from 'react';
 
 export default function Footer({ onNavigate }) {
-  const [newsletterEmail, setNewsletterEmail] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
-  const [errorMsg, setErrorMsg] = useState('');
-
   const handleBrandClick = () => {
     if (onNavigate) {
       onNavigate('home');
@@ -14,200 +8,9 @@ export default function Footer({ onNavigate }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNewsletterSubmit = async (e) => {
-    e.preventDefault();
-    setErrorMsg('');
-    setSubmitting(true);
-
-    try {
-      await subscribeNewsletter(newsletterEmail);
-      setSubscribed(true);
-      setNewsletterEmail('');
-    } catch (err) {
-      setErrorMsg(err.message || 'Error subscribing. Please try again.');
-    } finally {
-      setSubmitting(false);
-    }
-  };
-
   return (
     <footer className="portfolio-footer-section" id="footer">
       <div className="footer-inner">
-        {/* Newsletter & Direct Connect Bar */}
-        <div style={{
-          borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
-          paddingBottom: 'clamp(28px, 4vw, 44px)',
-          marginBottom: 'clamp(32px, 4.5vw, 56px)',
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '24px'
-        }}>
-          <div>
-            <span style={{
-              display: 'block',
-              fontSize: '11px',
-              fontWeight: '700',
-              letterSpacing: '1.5px',
-              color: 'var(--color-lime, #d4ff00)',
-              textTransform: 'uppercase',
-              marginBottom: '6px'
-            }}>
-              [ STAY UPDATED ]
-            </span>
-            <h4 style={{
-              color: '#ffffff',
-              fontSize: 'clamp(18px, 2vw, 24px)',
-              fontWeight: '700',
-              margin: 0,
-              textTransform: 'uppercase'
-            }}>
-              Subscribe for Project Releases &amp; Case Studies
-            </h4>
-          </div>
-
-          <div style={{ maxWidth: '440px', width: '100%' }}>
-            {subscribed ? (
-              <div style={{
-                color: 'var(--color-lime, #d4ff00)',
-                fontWeight: '700',
-                fontSize: '14px',
-                padding: '12px 18px',
-                background: 'rgba(212, 255, 0, 0.1)',
-                borderRadius: '50px',
-                textAlign: 'center'
-              }}>
-                ✓ Subscribed successfully! Direct updates on new builds.
-              </div>
-            ) : (
-              <form onSubmit={handleNewsletterSubmit} style={{ position: 'relative', width: '100%' }}>
-                <input
-                  type="email"
-                  value={newsletterEmail}
-                  onChange={(e) => setNewsletterEmail(e.target.value)}
-                  placeholder="Enter your email address..."
-                  required
-                  style={{
-                    width: '100%',
-                    padding: '14px 120px 14px 20px',
-                    borderRadius: '50px',
-                    background: 'rgba(255, 255, 255, 0.05)',
-                    border: '1px solid rgba(255, 255, 255, 0.2)',
-                    color: '#ffffff',
-                    fontSize: '14px',
-                    outline: 'none',
-                  }}
-                />
-                <button
-                  type="submit"
-                  disabled={submitting}
-                  style={{
-                    position: 'absolute',
-                    right: '6px',
-                    top: '50%',
-                    transform: 'translateY(-50%)',
-                    background: 'var(--color-lime, #d4ff00)',
-                    color: '#000000',
-                    border: 'none',
-                    borderRadius: '50px',
-                    padding: '8px 18px',
-                    fontSize: '12px',
-                    fontWeight: '800',
-                    letterSpacing: '0.5px',
-                    textTransform: 'uppercase',
-                    cursor: submitting ? 'wait' : 'pointer',
-                  }}
-                >
-                  {submitting ? '...' : 'JOIN ↗'}
-                </button>
-              </form>
-            )}
-            {errorMsg && (
-              <div style={{ color: '#ff4d4f', fontSize: '12px', marginTop: '6px', paddingLeft: '12px' }}>
-                ⚠ {errorMsg}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Quick Social & Navigation Strip */}
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          gap: '20px',
-          marginBottom: 'clamp(28px, 4vw, 48px)',
-          fontSize: '13px',
-          fontWeight: '600',
-          letterSpacing: '0.5px'
-        }}>
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-            <a
-              href="#home"
-              onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate('home'); }}
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              HOME
-            </a>
-            <a
-              href="#services"
-              onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate('services'); }}
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              SERVICES
-            </a>
-            <a
-              href="#projects"
-              onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate('projects'); }}
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              PROJECTS
-            </a>
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); if (onNavigate) onNavigate('contact'); }}
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              CONTACT
-            </a>
-          </div>
-
-          <div style={{ display: 'flex', flexWrap: 'wrap', gap: '20px' }}>
-            <a
-              href={CONTACT_INFO.socials.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              LINKEDIN ↗
-            </a>
-            <a
-              href={CONTACT_INFO.socials.github}
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              GITHUB ↗
-            </a>
-            <a
-              href={CONTACT_INFO.socials.whatsapp}
-              target="_blank"
-              rel="noreferrer"
-              style={{ color: 'rgba(255,255,255,0.7)', textDecoration: 'none' }}
-            >
-              WHATSAPP ↗
-            </a>
-            <a
-              href={`mailto:${CONTACT_INFO.email}`}
-              style={{ color: 'var(--color-lime, #d4ff00)', textDecoration: 'none' }}
-            >
-              {CONTACT_INFO.email}
-            </a>
-          </div>
-        </div>
-
         {/* Centered Massive Brand Typography matching exact screenshot */}
         <div className="footer-brand-container">
           <h2
@@ -227,9 +30,7 @@ export default function Footer({ onNavigate }) {
         {/* Bottom Metadata Row: Copyright Left, Double Circles + Location Right */}
         <div className="footer-bottom-bar">
           <div className="footer-bottom-left">
-            <span className="footer-copyright-text">
-              &copy; 2026 Lakhvinder Singh • All Rights Reserved
-            </span>
+            <span className="footer-copyright-text">&copy;2026 Design</span>
           </div>
 
           <div className="footer-bottom-right">
@@ -245,7 +46,7 @@ export default function Footer({ onNavigate }) {
               </svg>
             </span>
             <span className="footer-location-text">
-              ZIRAKPUR, PUNJAB • AMBALA CANTT, HARYANA • CHANDIGARH, INDIA
+              ZIRAKPUR, PUNJAB • CHANDIGARH, INDIA
             </span>
           </div>
         </div>
