@@ -116,7 +116,7 @@ export default function ProjectsPage({ onStartProject }) {
                   </div>
 
                   <div className="projects-card-info">
-                    {/* Top Row: Badge & Title on Left, Category & Index on Right */}
+                    {/* Meta Row: Badge & Title on Left, Category & Index on Right */}
                     <div className="projects-card-meta-row">
                       <div className="projects-card-meta-left">
                         <span className="projects-card-badge">
@@ -139,14 +139,7 @@ export default function ProjectsPage({ onStartProject }) {
                       </div>
                     </div>
 
-                    {/* Full-width Description under the meta row */}
-                    {proj.description && (
-                      <p className="projects-card-desc">
-                        {proj.description}
-                      </p>
-                    )}
-
-                    {/* Full-width Tags under description */}
+                    {/* Tags only — no description paragraph */}
                     {proj.tags && proj.tags.length > 0 && (
                       <div className="projects-card-tags">
                         {proj.tags.map((t, i) => (
