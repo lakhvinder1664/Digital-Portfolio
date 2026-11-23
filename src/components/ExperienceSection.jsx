@@ -4,38 +4,29 @@ const EXPERIENCE_DATA = [
   {
     company: 'HIVENDS INFO SOLUTIONS PVT. LTD.',
     period: '[ FEB 2026 - PRESENT ]',
-    role: 'FRONTEND DEVELOPER INTERN',
+    role: 'WEB DEVELOPMENT INTERN',
     location: 'Zirakpur, Punjab',
     description:
-      'Handling frontend development and WordPress customization for live client websites, primarily in pharmaceutical and healthcare sectors. Working on PHP theme modifications, Bootstrap 5 layouts, responsive fixes, website sections, UI implementation, enquiry forms, and continuous project updates.',
+      'Develop and customize WordPress websites using HTML, CSS, Bootstrap, PHP, and theme templates. Build responsive layouts, navigation, headers, footers, and page components for client websites. Create UI mockups, handle responsive fixes, and implement content updates.',
     tags: ['WordPress', 'PHP', 'Bootstrap 5', 'Live Client Sites'],
   },
   {
     company: 'XPORTSOFT TECHNOLOGIES PVT. LTD.',
     period: '[ JUL 2025 - SEP 2025 ]',
     role: 'FRONTEND DEVELOPMENT INTERN',
-    location: 'Ambala Cantt, Haryana',
+    location: 'Ambala, Haryana',
     description:
-      'Developed responsive web interfaces, clean HTML/CSS/JavaScript components, and mobile-friendly layouts, ensuring cross-browser stability and smooth navigation.',
+      'Practiced responsive web design, Bootstrap, and JavaScript. Built responsive layouts, interactive UI elements, and front-end interface components.',
     tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
-  },
-  {
-    company: 'VISHYAT TECHNOLOGIES',
-    period: '[ DEC 2024 - JUN 2025 ]',
-    role: 'SEO & WEB EXECUTIVE',
-    location: 'Zirakpur, Punjab',
-    description:
-      'Handled website audits, on-page and off-page technical SEO improvements, search visibility, metadata optimization, and web content updates.',
-    tags: ['SEO Optimization', 'Website Audits', 'Web Updates'],
   },
   {
     company: 'AMAZE TECHNOSOFT PVT. LTD.',
     period: '[ JAN 2025 - MAR 2025 ]',
     role: 'WEB DESIGNING INTERN',
-    location: 'Zirakpur, Chandigarh',
+    location: 'Zirakpur / Chandigarh',
     description:
-      'Assisted in building responsive webpage layouts using HTML5 and CSS3, updating UI elements, testing cross-device behavior, and fixing visual styling bugs.',
-    tags: ['HTML5', 'CSS3', 'Responsive Design', 'Bug Fixes'],
+      'Developed responsive web layouts using HTML5 and CSS3, implemented UI features, and worked on front-end performance and user experience.',
+    tags: ['HTML5', 'CSS3', 'Responsive Design', 'UI Layouts'],
   },
 ];
 
@@ -55,7 +46,7 @@ export default function ExperienceSection() {
 
           <div className="experience-badge-wrap">
             <span className="experience-dot" />
-            <span className="experience-period-badge">4 ROLES • 2024 - PRESENT</span>
+            <span className="experience-period-badge">VERIFIED ROLES • 2025 - PRESENT</span>
           </div>
         </div>
 

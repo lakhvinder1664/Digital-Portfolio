@@ -3,7 +3,7 @@ import React from 'react';
 const STACK_DATA = [
   {
     name: 'HTML5',
-    percentage: '[ 98% ]',
+    category: '[ SEMANTIC MARKUP ]',
     role: 'SEMANTIC WEB STRUCTURE',
     description:
       'Clean semantic markup, SEO best practices, accessible structures, responsive image tags, and fast-loading web hierarchies.',
@@ -11,7 +11,7 @@ const STACK_DATA = [
   },
   {
     name: 'CSS3',
-    percentage: '[ 96% ]',
+    category: '[ MODERN STYLING ]',
     role: 'MODERN STYLING & MEDIA QUERIES',
     description:
       'Pixel-perfect responsive styling, CSS Grid, Flexbox, media queries, layout debugging, and custom UI component styling.',
@@ -19,7 +19,7 @@ const STACK_DATA = [
   },
   {
     name: 'JAVASCRIPT',
-    percentage: '[ 92% ]',
+    category: '[ CORE SCRIPTING ]',
     role: 'CORE LOGIC & DOM INTERACTION',
     description:
       'Modern ES6+ JavaScript, DOM manipulation, responsive event handling, dynamic client UI mechanics, and form validation.',
@@ -27,7 +27,7 @@ const STACK_DATA = [
   },
   {
     name: 'BOOTSTRAP 5',
-    percentage: '[ 97% ]',
+    category: '[ UI FRAMEWORK ]',
     role: 'RESPONSIVE UI FRAMEWORK',
     description:
       'Rapid mobile-first responsive grids, utility classes, cross-device layouts, navigation bars, and custom style overrides.',
@@ -35,7 +35,7 @@ const STACK_DATA = [
   },
   {
     name: 'PHP',
-    percentage: '[ 90% ]',
+    category: '[ BACKEND LOGIC ]',
     role: 'WORDPRESS THEME & TEMPLATE LOGIC',
     description:
       'Theme template hierarchy, functions.php custom code, template tags, dynamic loops, and server-side WordPress rendering.',
@@ -43,7 +43,7 @@ const STACK_DATA = [
   },
   {
     name: 'WORDPRESS',
-    percentage: '[ 95% ]',
+    category: '[ CMS PLATFORM ]',
     role: 'CMS & THEME CUSTOMIZATION',
     description:
       'Custom theme development, PHP template modifications, client mockups to live sites, content management, and bug fixing.',
@@ -51,7 +51,7 @@ const STACK_DATA = [
   },
   {
     name: 'WOOCOMMERCE & ACF',
-    percentage: '[ 94% ]',
+    category: '[ COMMERCE & FIELDS ]',
     role: 'PRODUCT CATALOGUES & CUSTOM FIELDS',
     description:
       'Structured product listings, custom post types, ACF field groups, pharmaceutical catalogues, and inquiry workflows.',
@@ -59,7 +59,7 @@ const STACK_DATA = [
   },
   {
     name: 'FIGMA',
-    percentage: '[ 94% ]',
+    category: '[ UI/UX DESIGN ]',
     role: 'UI/UX DESIGN & WIREFRAMING',
     description:
       'Creating website UI mockups, inspecting design components, typography hierarchies, and translating vectors into code.',
@@ -67,7 +67,7 @@ const STACK_DATA = [
   },
   {
     name: 'GIT & GITHUB',
-    percentage: '[ 93% ]',
+    category: '[ VERSION CONTROL ]',
     role: 'VERSION CONTROL & REPOSITORIES',
     description:
       'Version tracking, Git branching, clean commit workflows, repository management, and code syncing across environments.',
@@ -181,15 +181,15 @@ export default function SkillsStackSection() {
               <div className="stack-detail-col">
                 <div className="stack-header-line">
                   <h3 className="stack-tool-title">{item.name}</h3>
-                  <span className="stack-percent-mobile">{item.percentage}</span>
+                  <span className="stack-percent-mobile">{item.category}</span>
                 </div>
                 <h4 className="stack-role-title">{item.role}</h4>
                 <p className="stack-desc-text">{item.description}</p>
               </div>
 
-              {/* Percentage (Desktop Right) */}
+              {/* Classification Tag (Desktop Right) */}
               <div className="stack-percent-col">
-                <span className="stack-percent-text">{item.percentage}</span>
+                <span className="stack-percent-text">{item.category}</span>
               </div>
             </div>
           ))}

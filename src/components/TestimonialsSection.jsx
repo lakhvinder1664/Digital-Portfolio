@@ -82,7 +82,7 @@ export default function TestimonialsSection() {
         {/* Header */}
         <div className="testimonials-header-wrap">
           <span className="testimonials-eyebrow">QUALITY STANDARDS</span>
-          <h2 className="testimonials-main-heading">HOW I DELIVER FOR CLIENTS</h2>
+          <h2 className="testimonials-main-heading">WHAT I FOCUS ON</h2>
           <span className="testimonials-pill-tag">
             [ CORE PRINCIPLES AND STANDARDS APPLIED TO EVERY CLIENT PROJECT ]
           </span>

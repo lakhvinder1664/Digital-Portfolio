@@ -59,7 +59,7 @@ const SERVICES_DATA = [
 const STATS_DATA = [
   { value: '1+', label: '[ YEARS PRACTICAL EXP ]' },
   { value: '6+', label: '[ FEATURED BUILDS ]' },
-  { value: '100%', label: '[ RESPONSIVE CODE ]' },
+  { value: 'DEV', label: '[ RESPONSIVE DEVELOPMENT ]' },
   { value: '10+', label: '[ CORE TECHNOLOGIES ]' },
 ];
 

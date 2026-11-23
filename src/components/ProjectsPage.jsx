@@ -38,7 +38,7 @@ export default function ProjectsPage({ onStartProject }) {
     };
   }, []);
 
-  const categories = ['ALL', 'Live Website', 'Approved UI Mockup', 'Project Announcement'];
+  const categories = ['ALL', 'WordPress Website', 'UI/UX Mockup', 'Frontend & WordPress'];
 
   const filteredProjects = activeFilter === 'ALL'
     ? projects
