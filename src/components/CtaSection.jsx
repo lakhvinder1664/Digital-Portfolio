@@ -9,16 +9,16 @@ export default function CtaSection() {
         <div className="cta-left-col">
           <div className="cta-top-content">
             <h2 className="cta-main-heading">
-              <span>LET&apos;S MAKE YOUR</span>
-              <span>DESIGN SHINE</span>
+              <span>LET&apos;S BUILD YOUR</span>
+              <span>NEXT WEBSITE</span>
             </h2>
 
             <p className="cta-quote-text">
-              &ldquo;COLLABORATE WITH ME TO CRAFT EXCEPTIONAL DESIGNS REFLECT YOUR UNIQUE VISION.&rdquo;
+              &ldquo;COLLABORATE WITH ME FOR FRONTEND DEVELOPMENT, WORDPRESS WEBSITES &amp; CLEAN UI.&rdquo;
             </p>
 
             <a href="#contact" className="cta-contact-btn">
-              CONTACT NOW
+              START A PROJECT
             </a>
           </div>
 

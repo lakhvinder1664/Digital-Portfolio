@@ -3,45 +3,45 @@ import React, { useState } from 'react';
 const FAQ_DATA = [
   {
     id: 1,
-    question: 'WHAT INDUSTRIES DO YOU SPECIALIZE IN?',
+    question: 'WHAT TYPES OF WEBSITES DO YOU PRIMARILY BUILD?',
     answer:
-      'I have experience working across various industries including but not limited to Technology, Healthcare, Fashion, Hospitality and Non Profit Organization.',
+      'I specialize in building responsive pharmaceutical, healthcare, and business websites, including WordPress product catalogues, landing pages, and client portals.',
   },
   {
     id: 2,
-    question: 'WHAT IS YOUR TYPICAL PROJECT TIMELINE?',
+    question: 'WHAT TECHNOLOGIES DO YOU USE FOR DEVELOPMENT?',
     answer:
-      'Project timelines generally range from 2 to 6 weeks depending on scope, deliverables, and complexity. Standard sprint kickoffs happen within 24 hours of onboarding.',
+      'My core stack includes HTML5, CSS3, JavaScript, Bootstrap 5, PHP, WordPress, WooCommerce, and ACF, with Figma for UI design and Git for version control.',
   },
   {
     id: 3,
-    question: 'DO YOU OFFER POST-LAUNCH SUPPORT OR MAINTENANCE?',
+    question: 'HOW DO YOU ENSURE WEBSITES ARE FULLY RESPONSIVE?',
     answer:
-      'Yes, I provide comprehensive post-launch support including bug fixes, system updates, team onboarding, and optional monthly retainer maintenance packages.',
+      'I use a mobile-first approach with Bootstrap 5 and modern CSS media queries, testing layouts thoroughly across smartphones, tablets, laptops, and desktops.',
   },
   {
     id: 4,
-    question: 'WHAT SOFTWARE AND TOOLS DO YOU USE FOR YOUR DESIGNS?',
+    question: 'CAN YOU CUSTOMIZE EXISTING WORDPRESS THEMES AND PLUGINS?',
     answer:
-      'I primarily use Figma, Framer, and Webflow for design and prototyping, alongside Adobe Creative Cloud, Notion for project management, and Canva.',
+      'Yes, I modify existing WordPress themes, edit PHP templates, style WooCommerce catalogues, configure custom post types, and resolve plugin conflicts.',
   },
   {
     id: 5,
-    question: 'WHAT ARE YOUR GO-TO PROGRAMS FOR DESIGN WORK?',
+    question: 'HOW DO YOU CONVERT FIGMA DESIGNS INTO LIVE WEBPAGES?',
     answer:
-      'Figma is my primary workspace for UI/UX wireframing, high-fidelity prototypes, and component design systems, complemented by Framer for micro-interactions.',
+      'I translate Figma wireframes into clean, semantic HTML and Bootstrap code, matching typography, colors, spacing, and responsive behavior with pixel-accuracy.',
   },
   {
     id: 6,
-    question: 'DO YOUR DESIGNS ARE TAILORED TO EACH CLIENT?',
+    question: 'DO YOU HANDLE WEBSITE REDESIGNS AND BUG FIXES?',
     answer:
-      'Every project is custom-designed from scratch based on in-depth research, brand positioning, and unique audience requirements. No generic templates.',
+      'Yes, I fix visual glitches, resolve mobile responsiveness bugs, optimize layouts, and redesign outdated sections to deliver a clean, modern user experience.',
   },
   {
     id: 7,
-    question: 'HOW DO I UPGRADE, DOWNGRADE, OR CANCEL?',
+    question: 'WHAT IS YOUR TYPICAL PROCESS FOR A CLIENT PROJECT?',
     answer:
-      'You can modify your project scope or service tier at any time by contacting me directly. Clear change orders and transparent milestones ensure complete flexibility.',
+      'I start by understanding requirements and reference designs, plan the visual layout, develop with clean modular code, and test responsiveness before delivery.',
   },
 ];
 

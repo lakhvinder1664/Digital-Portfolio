@@ -7,7 +7,7 @@ const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/portfolio-c
 
 export const CONTACT_INFO = {
   name: 'Lakhvinder Singh',
-  role: 'Front-End Web Developer & UI Designer',
+  role: 'Frontend Developer, WordPress Developer & UI Designer',
   email: 'lakhvinder9567@gmail.com',
   phone: '+91 79883 79885',
   phoneRaw: '917988379885',
@@ -28,7 +28,7 @@ export const DEFAULT_PROJECTS = [
     id: '01',
     title: 'Accubic Labs – Pharmaceutical Website',
     category: 'Live Website',
-    badge: 'LIVE PRODUCTION',
+    badge: 'LIVE WEBSITE',
     description:
       'Developed a responsive pharmaceutical website for Accubic Labs using WordPress and WooCommerce. Structured product catalogue with compositions, packaging details, and MRP info. Clean mobile-optimized architecture.',
     link: 'https://hivends.org/accubic-labs/',
@@ -40,7 +40,7 @@ export const DEFAULT_PROJECTS = [
     id: '02',
     title: 'Granmed Labs – Healthcare Website UI/UX',
     category: 'Approved UI Mockup',
-    badge: 'CLIENT APPROVED',
+    badge: 'HEALTHCARE REDESIGN',
     description:
       'Designed and developed a responsive pharmaceutical website mockup for Granmed Labs, focusing on third-party manufacturing, nutraceutical products, and veterinary healthcare with client testimonials and certifications.',
     link: 'https://hivends.org/mockup/granmed-labs/',
@@ -52,7 +52,7 @@ export const DEFAULT_PROJECTS = [
     id: '03',
     title: 'GMH Pharmaceuticals – Website UI Mockup',
     category: 'Project Announcement',
-    badge: 'UI MOCKUP',
+    badge: 'PRODUCT SHOWCASE',
     description:
       'Modern responsive website UI mockup for GMH Pharmaceuticals, highlighting third-party manufacturing, PCD franchise opportunities, and product divisions with clean professional layouts.',
     link: 'https://hivends.org/mockup/gmh-pharmaceuticals/',
@@ -64,7 +64,7 @@ export const DEFAULT_PROJECTS = [
     id: '04',
     title: 'Zerdia – Pharmaceutical Website UI/UX',
     category: 'Approved UI Mockup',
-    badge: 'FIGMA DESIGN',
+    badge: 'FIGMA TO WEBPAGE',
     description:
       'Modern healthcare website UI/UX mockup designed in Figma for Zerdia. Features product categories, compliance sections, inquiry forms, team profiles, and intuitive navigation across devices.',
     link: 'https://hivends.org/mockup/zerdia/',
@@ -76,7 +76,7 @@ export const DEFAULT_PROJECTS = [
     id: '05',
     title: 'Black Mango – Veterinary Healthcare UI',
     category: 'Approved UI Mockup',
-    badge: 'ANIMAL HEALTHCARE',
+    badge: 'LANDING PAGE',
     description:
       'Modern veterinary healthcare website mockup focusing on animal healthcare, veterinary medicines, and livestock wellness with nature-inspired color palette and responsive layout.',
     link: 'https://hivends.org/mockup/black-mango/',

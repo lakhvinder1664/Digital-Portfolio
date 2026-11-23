@@ -12,7 +12,7 @@ export default function Hero({ videoSrc }) {
           {/* Kickoff Notice (No box border, matches screenshot) */}
           <div className="hero-kickoff-notice">
             <img src={clockIcon} alt="Clock" className="kickoff-icon" />
-            <span className="kickoff-text">PROJECT WILL KICKOFF WITHIN 24 HOURS</span>
+            <span className="kickoff-text">AVAILABLE FOR FRONTEND &amp; WORDPRESS PROJECTS</span>
           </div>
 
           {/* Huge Typography with Lime Circle */}
@@ -46,13 +46,13 @@ export default function Hero({ videoSrc }) {
             </div>
 
             <p className="hero-brand-statement">
-              FRONT-END DEVELOPER EXPERIENCED IN CREATING RESPONSIVE, CLEAN, AND USER-FRIENDLY WEBSITES USING MODERN FRAMEWORKS &amp; CREATIVE UI/UX.
+              FRONTEND DEVELOPER EXPERIENCED IN BUILDING RESPONSIVE CLIENT WEBSITES, WORDPRESS THEME CUSTOMIZATIONS &amp; CLEAN UI DESIGNS.
             </p>
           </div>
 
           <div className="hero-right-bottom">
             <a href="#works" className="hero-see-all-link">
-              SEE ALL PROJECTS (17+)
+              SEE ALL PROJECTS (6+)
             </a>
           </div>
         </div>

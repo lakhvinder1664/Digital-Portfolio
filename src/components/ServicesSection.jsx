@@ -4,63 +4,63 @@ import booksImg from '../assets/service-books.jpg';
 const SERVICES_DATA = [
   {
     id: '01',
-    title: 'UX/UI DESIGNING',
+    title: 'FRONTEND DEVELOPMENT',
     iconType: 'cross-circle',
-    tagline: 'Blending Aesthetic and Innovation, My UX/UI gives you a Top Notch Client.',
-    price: 'Starts At Cost® — $2000',
+    tagline: 'Developing clean, responsive, and cross-browser web interfaces using modern HTML5, CSS3, JavaScript, and Bootstrap 5.',
+    price: 'Client Projects® — Front-End',
     features: [
-      '- Portfolio Highlights',
-      '- Client Testimonials',
-      '- Design Process',
+      '- Semantic HTML5 & Modern CSS3',
+      '- Responsive Bootstrap 5 Grids',
+      '- Cross-Browser Compatibility',
     ],
     image: booksImg,
   },
   {
     id: '02',
-    title: 'GRAPHIC DESIGN',
+    title: 'WORDPRESS CUSTOMIZATION',
     iconType: 'bullseye',
-    tagline: 'Creating stunning visual identities and high-impact graphic design solutions.',
-    price: 'Starts At Cost® — $1500',
+    tagline: 'Custom WordPress theme development, PHP modifications, WooCommerce stores, and structured product catalogues for pharma & business.',
+    price: 'Client Projects® — WordPress',
     features: [
-      '- Visual Identity Systems',
-      '- Brand Guidelines',
-      '- Editorial & Print Media',
+      '- Custom Theme Modifications',
+      '- WooCommerce & Product Catalogs',
+      '- ACF & Custom Post Types',
     ],
     image: booksImg,
   },
   {
     id: '03',
-    title: 'WEB DESIGN',
+    title: 'UI DESIGN & FIGMA',
     iconType: 'bars',
-    tagline: 'Crafting responsive, high-performance websites and interactive digital spaces.',
-    price: 'Starts At Cost® — $2500',
+    tagline: 'Designing modern, intuitive website mockups and converting Figma wireframes into pixel-perfect, interactive web interfaces.',
+    price: 'Client Projects® — UI/UX',
     features: [
-      '- Custom Web Architecture',
-      '- Interactive Micro-animations',
-      '- Responsive Design Systems',
+      '- Figma UI/UX Mockups',
+      '- Design to Production Code',
+      '- Component-Driven UI Systems',
     ],
     image: booksImg,
   },
   {
     id: '04',
-    title: 'BRAND DESIGN',
+    title: 'REDESIGN & BUG FIXES',
     iconType: 'pen',
-    tagline: 'Building cohesive, memorable brands that resonate globally across industries.',
-    price: 'Starts At Cost® — $1800',
+    tagline: 'Revamping outdated websites, fixing layout bugs, optimizing mobile responsiveness, and enhancing overall user experience.',
+    price: 'Client Projects® — Maintenance',
     features: [
-      '- Brand Strategy & Positioning',
-      '- Typography & Color Systems',
-      '- Marketing Collaterals',
+      '- Mobile Responsive Fixes',
+      '- Website Layout Overhauls',
+      '- Performance & CSS Bug Fixes',
     ],
     image: booksImg,
   },
 ];
 
 const STATS_DATA = [
-  { value: '1+', label: '[ YEARS OF EXPERIENCE ]' },
-  { value: '20+', label: '[ PROJECT DONE ]' },
-  { value: '25+', label: '[ Approved Work ]' },
-  { value: '46+', label: '[ Live Sites   ]' },
+  { value: '1+', label: '[ YEARS PRACTICAL EXP ]' },
+  { value: '6+', label: '[ FEATURED BUILDS ]' },
+  { value: '100%', label: '[ RESPONSIVE CODE ]' },
+  { value: '10+', label: '[ CORE TECHNOLOGIES ]' },
 ];
 
 export default function ServicesSection({ onNavigateToServices }) {
@@ -79,11 +79,11 @@ export default function ServicesSection({ onNavigateToServices }) {
             <h2 className="services-main-heading">SERVICES</h2>
             <div className="services-subtitle-group">
               <p className="services-sub-line">
-                EVERYTHING STARTS WITH THOROUGH RESEARCH AND ITERATIVE EXPERIMENTATION.
+                PRACTICAL WEB DEVELOPMENT, WORDPRESS THEME CUSTOMIZATIONS &amp; UI DESIGN.
               </p>
               <p className="services-sub-line">
-                WHAT USES DESIGNING, IDEAS AND DEVELOPING,{' '}
-                <span className="services-sub-underlined">WHAT USER NEED&copy;</span>
+                DELIVERING RELIABLE WEBSITES,{' '}
+                <span className="services-sub-underlined">TAILORED FOR CLIENTS&copy;</span>
               </p>
             </div>
           </div>

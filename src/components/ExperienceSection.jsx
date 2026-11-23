@@ -4,11 +4,11 @@ const EXPERIENCE_DATA = [
   {
     company: 'HIVENDS INFO SOLUTIONS PVT. LTD.',
     period: '[ FEB 2026 - PRESENT ]',
-    role: 'WEB DEVELOPMENT INTERN',
+    role: 'FRONTEND DEVELOPER INTERN',
     location: 'Zirakpur, Punjab',
     description:
-      'Contributing to website development, UI design, maintenance, and digital projects for pharmaceutical businesses — managing client mockups, custom WordPress themes, and live product catalogs.',
-    tags: ['WordPress', 'PHP', 'Bootstrap 5', 'Pharma Catalogs'],
+      'Handling frontend development and WordPress customization for live client websites, primarily in pharmaceutical and healthcare sectors. Working on PHP theme modifications, Bootstrap 5 layouts, responsive fixes, website sections, UI implementation, enquiry forms, and continuous project updates.',
+    tags: ['WordPress', 'PHP', 'Bootstrap 5', 'Live Client Sites'],
   },
   {
     company: 'XPORTSOFT TECHNOLOGIES PVT. LTD.',
@@ -16,17 +16,17 @@ const EXPERIENCE_DATA = [
     role: 'FRONTEND DEVELOPMENT INTERN',
     location: 'Ambala Cantt, Haryana',
     description:
-      'Engineered responsive web applications, modular React.js components, and pixel-perfect front-end interfaces optimized for cross-device performance.',
-    tags: ['React.js', 'JavaScript (ES6+)', 'Bootstrap 5', 'UI/UX'],
+      'Developed responsive web interfaces, clean HTML/CSS/JavaScript components, and mobile-friendly layouts, ensuring cross-browser stability and smooth navigation.',
+    tags: ['HTML5', 'CSS3', 'JavaScript', 'Bootstrap'],
   },
   {
     company: 'VISHYAT TECHNOLOGIES',
     period: '[ DEC 2024 - JUN 2025 ]',
-    role: 'SEO EXECUTIVE',
+    role: 'SEO & WEB EXECUTIVE',
     location: 'Zirakpur, Punjab',
     description:
-      'Managed comprehensive OFF-page SEO strategies, backlink acquisition, search ranking visibility, and organic traffic optimization for digital brands.',
-    tags: ['OFF-Page SEO', 'Backlink Building', 'Traffic Optimization'],
+      'Handled website audits, on-page and off-page technical SEO improvements, search visibility, metadata optimization, and web content updates.',
+    tags: ['SEO Optimization', 'Website Audits', 'Web Updates'],
   },
   {
     company: 'AMAZE TECHNOSOFT PVT. LTD.',
@@ -34,8 +34,8 @@ const EXPERIENCE_DATA = [
     role: 'WEB DESIGNING INTERN',
     location: 'Zirakpur, Chandigarh',
     description:
-      'Developed responsive web interfaces with modern HTML5, CSS3, implementing new UI features and performance enhancements across live client websites.',
-    tags: ['HTML5', 'CSS3', 'Web Design', 'Responsive UI'],
+      'Assisted in building responsive webpage layouts using HTML5 and CSS3, updating UI elements, testing cross-device behavior, and fixing visual styling bugs.',
+    tags: ['HTML5', 'CSS3', 'Responsive Design', 'Bug Fixes'],
   },
 ];
 
@@ -48,8 +48,8 @@ export default function ExperienceSection() {
           <div className="experience-title-wrap">
             <h2 className="experience-main-heading">EXPERIENCE</h2>
             <p className="experience-subtitle">
-              SHOWCASING MY WEB DEVELOPMENT{' '}
-              <span className="experience-sub-underlined">&amp; UI DESIGN JOURNEY</span>
+              PRACTICAL EXPERIENCE &amp;{' '}
+              <span className="experience-sub-underlined">CLIENT DELIVERABLES</span>
             </p>
           </div>
 

@@ -72,7 +72,7 @@ export default function ContactPage() {
               [ FILL THE FORM BELOW ]
             </div>
             <p className="contact-hero-desc">
-              COLLABORATE FOR VISUAL EXCELLENCE, TRANSFORMING IDEAS INTO EXCEPTIONAL DESIGN.
+              COLLABORATE FOR FRONTEND DEVELOPMENT, WORDPRESS WEBSITES, AND CLEAN UI IMPLEMENTATION.
             </p>
           </div>
         </div>

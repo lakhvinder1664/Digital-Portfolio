@@ -3,10 +3,10 @@ import aboutImg from '../assets/about-portrait.jpeg';
 import cvPdf from '../assets/Lakhvinder_Singh_Web_Developer_CV.pdf';
 
 const AWARDS = [
-  { id: '1', title: 'FRONT-END WEB DEVELOPMENT', year: '2026 — PRESENT', hasArrow: true },
-  { id: '2', title: 'UI/UX & FIGMA PROTOTYPING', year: '2024 — 2026', hasArrow: true },
-  { id: '3', title: 'HIVENDS PHARMA CLIENT BUILDS', year: '2026', hasArrow: true },
-  { id: '4', title: 'CUSTOM WORDPRESS & CMS PORTALS', year: '2026', hasArrow: true },
+  { id: '1', title: 'FRONTEND & BOOTSTRAP INTERFACES', year: 'CORE FOCUS', hasArrow: true },
+  { id: '2', title: 'WORDPRESS THEMES & WOOCOMMERCE', year: 'DEVELOPMENT', hasArrow: true },
+  { id: '3', title: 'PHARMA & BUSINESS WEBSITES', year: 'CLIENT BUILDS', hasArrow: true },
+  { id: '4', title: 'FIGMA TO RESPONSIVE WEBPAGES', year: 'UI IMPLEMENTATION', hasArrow: true },
 ];
 
 export default function AboutSection() {
@@ -31,8 +31,8 @@ export default function AboutSection() {
           <div className="about-title-group">
             <h2 className="about-main-title">ABOUT LAKHVINDER</h2>
             <div className="about-subtitle-wrap">
-              <span>FROM CHANDIGARH - BASED STARTUP TO GLOBAL </span>
-              <span className="about-subtitle-underlined">VISUAL DESIGN STUDIO</span>
+              <span>BUILDING FUNCTIONAL CLIENT WEBSITES WITH CLEAN </span>
+              <span className="about-subtitle-underlined">FRONTEND &amp; WORDPRESS CODE</span>
             </div>
           </div>
 
@@ -78,20 +78,15 @@ export default function AboutSection() {
 
               {/* Bio Paragraph */}
               <p className="about-bio-text">
-                With a strong foundation in modern front-end development, responsive design, and creative UI/UX, I build websites and web applications that not only look visually stunning but deliver seamless user experiences. Based in Zirakpur / Chandigarh, I help progressive brands achieve meaningful growth through impactful digital solutions and clean, high-performance code.
+                I am a Frontend Developer, WordPress Developer and UI Designer with practical experience building and customizing client websites, primarily in pharmaceutical and healthcare sectors. From developing responsive interfaces with Bootstrap and CSS to implementing custom WordPress theme modifications and converting Figma designs into clean, functional code, I focus on delivering reliable, user-friendly web solutions that work seamlessly across all devices.
               </p>
 
-              {/* Honourable mention link */}
+              {/* Focus mention */}
               <div className="about-mention-wrap">
-                <span>Honourable mention on </span>
-                <a
-                  href="https://www.awwwards.com"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="about-mention-link"
-                >
-                  Awwwards&copy;
-                </a>
+                <span>Focused on </span>
+                <span className="about-mention-link" style={{ textDecoration: 'none', cursor: 'default' }}>
+                  Responsive Client Deliverables
+                </span>
               </div>
 
               {/* Awards Table matching exact screenshot */}
@@ -122,7 +117,7 @@ export default function AboutSection() {
               <div className="about-mission-block">
                 <span className="about-section-tag">[ MY MISSION ]</span>
                 <p className="about-mission-text">
-                  Building purposeful web experiences with clean architecture, fluid responsiveness, and high performance.
+                  Developing robust, responsive websites with clean code, accurate visual implementation, and practical client usability.
                 </p>
               </div>
             </div>

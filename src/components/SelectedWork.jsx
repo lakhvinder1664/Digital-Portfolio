@@ -14,21 +14,21 @@ const INITIAL_PROJECTS = [
     id: '01',
     cost: 'LIVE WEBSITE',
     title: 'ACCUBIC LABS',
-    category: '(WORDPRESS / E-COMMERCE)',
+    category: '(WORDPRESS / PHARMA CATALOG)',
     image: proj1,
     link: 'https://hivends.org/accubic-labs/',
   },
   {
     id: '02',
-    cost: 'APPROVED UI MOCKUP',
+    cost: 'HEALTHCARE REDESIGN',
     title: 'GRANMED LABS',
-    category: '(PHARMA HEALTHCARE)',
+    category: '(PHARMA HEALTHCARE UI)',
     image: proj2,
     link: 'https://hivends.org/mockup/granmed-labs/',
   },
   {
     id: '03',
-    cost: 'CLIENT APPROVED',
+    cost: 'PRODUCT SHOWCASE',
     title: 'GMH PHARMACEUTICALS',
     category: '(MANUFACTURING UI)',
     image: proj3,
@@ -36,15 +36,15 @@ const INITIAL_PROJECTS = [
   },
   {
     id: '04',
-    cost: 'FIGMA UI/UX',
+    cost: 'UI MOCKUP',
     title: 'ZERDIA HEALTHCARE',
-    category: '(FIGMA TO PRODUCTION)',
+    category: '(FIGMA TO WEBPAGE)',
     image: proj4,
     link: 'https://hivends.org/mockup/zerdia/',
   },
   {
     id: '05',
-    cost: 'UI DESIGN',
+    cost: 'LANDING PAGE',
     title: 'BLACK MANGO',
     category: '(VETERINARY HEALTHCARE)',
     image: proj5,
@@ -52,9 +52,9 @@ const INITIAL_PROJECTS = [
   },
   {
     id: '06',
-    cost: 'WEB DEVELOPMENT',
-    title: 'CUSTOM CMS & CLIENT PORTALS',
-    category: '(REACT & WORDPRESS)',
+    cost: 'FRONTEND & CMS',
+    title: 'CUSTOM CLIENT PORTALS',
+    category: '(WORDPRESS & BUG FIXES)',
     image: proj6,
     link: '#contact',
   },
@@ -106,12 +106,12 @@ export default function SelectedWork({ onExplore }) {
                 onClick={onExplore}
                 style={{ cursor: onExplore ? 'pointer' : 'default' }}
               >
-                EXPLORE ALL (5+)
+                EXPLORE ALL (6+)
               </button>
             </div>
 
             <p className="work-header-description">
-              Verified portfolio of actual websites, client-approved pharmaceutical mockups, and responsive web applications built and delivered by Lakhvinder Singh.
+              Real client websites, pharmaceutical portals, WordPress theme customizations and responsive UI mockups developed by Lakhvinder Singh.
             </p>
           </div>
         </div>

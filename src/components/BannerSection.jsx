@@ -17,10 +17,10 @@ export default function BannerSection() {
         {/* Sub-text Row Below Banner */}
         <div className="banner-caption-row">
           <p className="banner-caption-left">
-            XOTTO<sup>&reg;</sup> A LEADING STRATEGIC BRAND CONSULTANCY THAT POSITIONS AND REDEFINES THE WORLD&apos;.
+            LAKHVINDER SINGH<sup>&reg;</sup> FRONTEND DEVELOPER, WORDPRESS DEVELOPER &amp; UI DESIGNER SPECIALIZING IN CLIENT WEBSITES.
           </p>
           <span className="banner-caption-right">
-            ALL RIGHTS RESERVED &copy;
+            PORTFOLIO &copy; 2026
           </span>
         </div>
       </div>

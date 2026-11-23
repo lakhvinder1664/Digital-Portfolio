@@ -64,7 +64,7 @@ export default function ProjectsPage({ onStartProject }) {
           <div className="projects-hero-right">
             <div className="projects-hero-badge">[ 2024 — PRESENT ]</div>
             <p className="projects-hero-desc">
-              PROVEN WORK, REAL CLIENT BUILDS &amp; APPROVED UI MOCKUPS DELIVERED BY LAKHVINDER SINGH.
+              REAL CLIENT WEBSITES, PHARMACEUTICAL PORTALS &amp; RESPONSIVE UI MOCKUPS DELIVERED BY LAKHVINDER SINGH.
             </p>
           </div>
         </div>

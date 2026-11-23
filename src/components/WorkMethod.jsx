@@ -4,39 +4,51 @@ import processImg from '../assets/process-method.jpg';
 const STEPS = [
   {
     id: '01',
-    title: 'PLANNING',
+    title: 'REQUIREMENTS & REFERENCES',
     description:
-      'Before we start, we determine if and how I can help you. What are your requirements for your new design? Why do you need a new design? What goals do you have in that, and what problem can we solve with a new design?',
+      'Understanding client requirements, analyzing design references, and clarifying website scope. Identifying target audience needs, essential features, page structures, and functional goals before writing any code.',
     bullets: [
-      '- We get to know each other better',
-      '- Determine how i can best assist you',
-      '- Understand the goals you have for the work',
+      '- Review project brief & reference designs',
+      '- Understand client goals & website purpose',
+      '- Determine technical scope & requirements',
     ],
     iconType: 'branch',
   },
   {
     id: '02',
-    title: 'CONCEPT & STRATEGY',
+    title: 'LAYOUT & VISUAL STRUCTURE',
     description:
-      'Once we have assessed your requirements and objectives, we move into the concept and strategy phase. Here, we define the overall vision and strategic approach for your design project. What are the core ideas we want to develop?',
+      'Planning the responsive layout and visual hierarchy. Translating ideas into clear wireframes or Figma mockups, establishing component structures, typography, and intuitive cross-device navigation flows.',
     bullets: [
-      '- UX/UI Design',
-      '- Wireframes',
-      '- Interactive Prototype',
+      '- Plan page structure & responsive grids',
+      '- Prepare visual layouts & wireframes',
+      '- Organize UI components & design flow',
     ],
     iconType: 'spiral',
   },
   {
     id: '03',
-    title: 'DESIGN ONBOARDING',
+    title: 'DEVELOPMENT & IMPLEMENTATION',
     description:
-      "I'm thrilled to embark on this creative journey with you. My mission is to bring your vision to life with a collaborativeand personalised design process.",
+      'Building the website with clean, semantic frontend code and custom WordPress architecture. Implementing responsive Bootstrap layouts, PHP theme modifications, product catalogues, and interactive forms.',
     bullets: [
-      '- Personal Workshop',
-      '- Personalised Video Tutorials',
-      '- Edit Text and Images directly on Website',
+      '- Clean HTML5, CSS3 & JavaScript coding',
+      '- Custom WordPress & PHP theme development',
+      '- Bootstrap 5 responsive layout implementation',
     ],
     iconType: 'segmented',
+  },
+  {
+    id: '04',
+    title: 'TESTING & REFINEMENT',
+    description:
+      'Testing the website across multiple devices, screen resolutions, and browsers. Resolving responsiveness bugs, fixing layout inconsistencies, verifying forms, and refining the final result for delivery.',
+    bullets: [
+      '- Cross-browser & device responsiveness testing',
+      '- Bug fixing & visual styling refinements',
+      '- Form validation & final client handoff',
+    ],
+    iconType: 'check',
   },
 ];
 
@@ -87,10 +99,10 @@ export default function WorkMethod() {
       <div className="method-inner">
         {/* Top Centered Header */}
         <div className="method-header-wrap">
-          <span className="method-eyebrow">LET ME SHOW HOW I DO</span>
+          <span className="method-eyebrow">DEVELOPMENT WORKFLOW</span>
           <h2 className="method-main-heading">DISCOVER MY WORK METHOD</h2>
           <span className="method-pill-tag">
-            [ &copy;ELEVATE YOUR VISUAL DESIGN WITH EXPERT TECHNIQUES AND ADVICE ]
+            [ STRUCTURED APPROACH FROM REQUIREMENTS TO PRODUCTION DEPLOYMENT ]
           </span>
         </div>
 
@@ -158,6 +170,12 @@ export default function WorkMethod() {
                           <path d="M30 7V53M7 30H53" stroke="currentColor" strokeWidth="2.2" />
                           <path d="M13.7 13.7L46.3 46.3M13.7 46.3L46.3 13.7" stroke="currentColor" strokeWidth="2.2" />
                           <circle cx="30" cy="30" r="7" stroke="currentColor" strokeWidth="2.2" fill="#000000" />
+                        </svg>
+                      )}
+                      {step.iconType === 'check' && (
+                        <svg viewBox="0 0 60 60" fill="none" width="46" height="46">
+                          <circle cx="30" cy="30" r="23" stroke="currentColor" strokeWidth="2.5" />
+                          <path d="M20 31L27 38L40 22" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       )}
                     </div>
