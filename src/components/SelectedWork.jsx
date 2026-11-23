@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { fetchLiveProjects } from '../services/portfolioService';
 import proj1 from '../assets/project-1.jpg';
 import proj2 from '../assets/project-2.jpg';
 import proj3 from '../assets/project-3.jpg';
@@ -6,7 +7,9 @@ import proj4 from '../assets/project-4.jpg';
 import proj5 from '../assets/project-5.jpg';
 import proj6 from '../assets/project-6.jpg';
 
-const PROJECTS = [
+const PROJECT_IMAGE_MAP = [proj1, proj2, proj3, proj4, proj5, proj6];
+
+const INITIAL_PROJECTS = [
   {
     id: '01',
     cost: 'LIVE WEBSITE',
@@ -58,6 +61,30 @@ const PROJECTS = [
 ];
 
 export default function SelectedWork({ onExplore }) {
+  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+
+  useEffect(() => {
+    let isMounted = true;
+    fetchLiveProjects()
+      .then((data) => {
+        if (isMounted && data && data.length > 0) {
+          const mapped = data.map((p, idx) => ({
+            id: p.id || String(idx + 1).padStart(2, '0'),
+            cost: p.cost || p.badge || 'CLIENT PROJECT',
+            title: p.title,
+            category: p.category ? `(${p.category.toUpperCase()})` : '',
+            image: (p.imageUrl && p.imageUrl.startsWith('http')) ? p.imageUrl : PROJECT_IMAGE_MAP[idx % 6],
+            link: p.link || '#',
+          }));
+          setProjects(mapped);
+        }
+      })
+      .catch((err) => console.log('SelectedWork live projects notice:', err));
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
   return (
     <section className="portfolio-work-section" id="works">
       <div className="work-inner">
@@ -91,7 +118,7 @@ export default function SelectedWork({ onExplore }) {
 
         {/* 2-Column Projects Grid */}
         <div className="work-grid">
-          {PROJECTS.map((p) => (
+          {projects.slice(0, 6).map((p) => (
             <article key={p.id} className="work-card">
               <div className="work-card-media">
                 <a

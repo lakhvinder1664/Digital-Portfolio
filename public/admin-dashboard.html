@@ -203,6 +203,12 @@
                                 </div>
 
                                 <div class="admin-form-group">
+                                    <label for="postTags">Tags / Technologies (Optional, comma-separated)</label>
+                                    <input type="text" id="postTags" class="admin-input-field"
+                                        placeholder="e.g. React, Bootstrap 5, WordPress, WooCommerce, UI/UX">
+                                </div>
+
+                                <div class="admin-form-group">
                                     <label for="postDescription">Post Description / Key Details *</label>
                                     <textarea id="postDescription" class="admin-input-field admin-textarea-field"
                                         placeholder="Describe the project, technologies used (HTML, CSS, Bootstrap, WordPress, PHP), client approvals, and responsive architecture..." required></textarea>
@@ -232,9 +238,14 @@
                                         Published Projects & Posts
                                     </h2>
                                 </div>
-                                <a href="projects.html" target="_blank" class="btn-pill-brutalist">
-                                    View On Website ↗
-                                </a>
+                                <div class="d-flex align-items-center gap-2 flex-wrap">
+                                    <button id="syncDefaultProjectsBtn" class="btn-outline-brutalist" style="padding: 8px 18px; font-size: 12px;" title="Import default projects into Firestore so you can edit and manage them">
+                                        <i class="fas fa-cloud-download-alt me-1"></i> Sync Default Projects
+                                    </button>
+                                    <a href="projects.html" target="_blank" class="btn-pill-brutalist">
+                                        View On Website ↗
+                                    </a>
+                                </div>
                             </div>
 
                             <div id="loadingPosts" style="text-align: center; padding: 30px; font-weight: 600; color: #666;">
@@ -996,7 +1007,20 @@
             document.getElementById("tabPostsBadge").textContent = count;
 
             if (snapshot.empty) {
-                postsListDiv.innerHTML = '<div class="text-center py-4 text-muted fw-bold">No published projects yet. Create your first project using the Publish tab!</div>';
+                postsListDiv.innerHTML = `
+                    <div class="text-center py-5">
+                        <div class="mb-3" style="font-size: 2.5rem; color: #888;"><i class="fas fa-folder-open"></i></div>
+                        <h4 style="font-family: 'Oswald', sans-serif; text-transform: uppercase; margin-bottom: 8px;">No Published Projects in Database</h4>
+                        <p class="text-muted small mb-4" style="max-width: 520px; margin: 0 auto 20px;">
+                            You can publish a new project from the <strong>Publish tab</strong>, or click below to sync your 5 real portfolio projects into Firestore so you can edit their links, images, and descriptions right now!
+                        </p>
+                        <button id="seedDefaultProjectsEmptyBtn" class="btn-pill-brutalist" style="padding: 10px 24px; font-size: 13px;">
+                            <i class="fas fa-cloud-download-alt me-2"></i> Sync 5 Default Portfolio Projects to Database
+                        </button>
+                    </div>
+                `;
+                const emptySeedBtn = document.getElementById("seedDefaultProjectsEmptyBtn");
+                if (emptySeedBtn) emptySeedBtn.addEventListener("click", seedDefaultProjects);
                 return;
             }
 
@@ -1006,6 +1030,7 @@
             let html = "";
             docs.forEach((docSnap) => {
                 const d = docSnap.data();
+                const tagsList = Array.isArray(d.tags) ? d.tags : (d.tags ? String(d.tags).split(',').map(s => s.trim()).filter(Boolean) : []);
                 html += `
                     <div class="admin-item-box">
                         <div class="d-flex justify-content-between align-items-start gap-3 mb-2 flex-wrap">
@@ -1016,7 +1041,7 @@
                                 </h3>
                             </div>
                             <div class="d-flex gap-2 flex-wrap">
-                                <button class="btn-edit-post btn-outline-brutalist" data-post-id="${docSnap.id}" data-title="${escapeHtml(d.title||'')}" data-category="${escapeHtml(d.category||'')}" data-link="${escapeHtml(d.link||'')}" data-image="${escapeHtml(d.imageUrl||'')}" data-description="${escapeHtml(d.description||'')}" data-tags="${escapeHtml((d.tags||[]).join(','))}" title="Edit Project" style="padding:7px 16px; font-size:12px;">
+                                <button class="btn-edit-post btn-outline-brutalist" data-post-id="${docSnap.id}" data-title="${escapeHtml(d.title||'')}" data-category="${escapeHtml(d.category||'')}" data-link="${escapeHtml(d.link||'')}" data-image="${escapeHtml(d.imageUrl||'')}" data-description="${escapeHtml(d.description||'')}" data-tags="${escapeHtml(tagsList.join(', '))}" title="Edit Project" style="padding:7px 16px; font-size:12px;">
                                     <i class="fas fa-edit"></i> Edit
                                 </button>
                                 <button class="btn-delete-brutalist btn-delete-post" data-post-id="${docSnap.id}" title="Delete Project">
@@ -1028,6 +1053,12 @@
                         <p style="font-size: 0.95rem; line-height: 1.6; color: #333; margin-bottom: 1rem;">
                             ${escapeHtml(d.description || '')}
                         </p>
+
+                        ${tagsList.length > 0 ? `
+                            <div class="d-flex flex-wrap gap-1 mb-3">
+                                ${tagsList.map(t => `<span style="font-size:11px; padding:2px 8px; background:#f0f0f0; border:1px solid #ccc; font-weight:600; text-transform:uppercase;">${escapeHtml(t)}</span>`).join('')}
+                            </div>
+                        ` : ''}
 
                         <div class="d-flex gap-3 flex-wrap mb-3">
                             ${d.link ? `<a href="${escapeHtml(d.link)}" target="_blank" rel="noopener noreferrer" class="btn-outline-brutalist"><i class="fas fa-external-link-alt"></i> Live Link ↗</a>` : ''}
@@ -1082,6 +1113,116 @@
         });
 
         // =====================================================================
+        // Sync Default Curated Projects into Firestore
+        // =====================================================================
+        const DEFAULT_PORTFOLIO_PROJECTS = [
+            {
+                title: "Accubic Labs – Pharmaceutical Website",
+                category: "Live Website",
+                link: "https://hivends.org/accubic-labs/",
+                imageUrl: "",
+                tags: ["WordPress", "WooCommerce", "Bootstrap 5", "Pharma Catalog"],
+                description: "Developed a responsive pharmaceutical website for Accubic Labs using WordPress and WooCommerce. Structured product catalogue with compositions, packaging details, and MRP info. Clean mobile-optimized architecture.",
+                author: "Lakhvinder Singh",
+                subscribersNotified: 0
+            },
+            {
+                title: "Granmed Labs – Healthcare Website UI/UX",
+                category: "Approved UI Mockup",
+                link: "https://hivends.org/mockup/granmed-labs/",
+                imageUrl: "",
+                tags: ["Figma", "UI/UX Design", "Pharma Portal", "Responsive"],
+                description: "Designed and developed a responsive pharmaceutical website mockup for Granmed Labs, focusing on third-party manufacturing, nutraceutical products, and veterinary healthcare with client testimonials and certifications.",
+                author: "Lakhvinder Singh",
+                subscribersNotified: 0
+            },
+            {
+                title: "GMH Pharmaceuticals – Website UI Mockup",
+                category: "Approved UI Mockup",
+                link: "https://hivends.org/mockup/gmh-pharmaceuticals/",
+                imageUrl: "",
+                tags: ["UI Mockup", "Pharma Franchise", "Clean Architecture"],
+                description: "Modern responsive website UI mockup for GMH Pharmaceuticals, highlighting third-party manufacturing, PCD franchise opportunities, and product divisions with clean professional layouts.",
+                author: "Lakhvinder Singh",
+                subscribersNotified: 0
+            },
+            {
+                title: "Zerdia – Pharmaceutical Website UI/UX",
+                category: "Approved UI Mockup",
+                link: "https://hivends.org/mockup/zerdia/",
+                imageUrl: "",
+                tags: ["Figma to Code", "Design System", "Healthcare UI"],
+                description: "Modern healthcare website UI/UX mockup designed in Figma for Zerdia. Features product categories, compliance sections, inquiry forms, team profiles, and intuitive navigation across devices.",
+                author: "Lakhvinder Singh",
+                subscribersNotified: 0
+            },
+            {
+                title: "Black Mango – Veterinary Healthcare UI",
+                category: "Approved UI Mockup",
+                link: "https://hivends.org/mockup/black-mango/",
+                imageUrl: "",
+                tags: ["UI/UX", "Veterinary Healthcare", "Responsive Web"],
+                description: "Modern veterinary healthcare website mockup focusing on animal healthcare, veterinary medicines, and livestock wellness with nature-inspired color palette and responsive layout.",
+                author: "Lakhvinder Singh",
+                subscribersNotified: 0
+            }
+        ];
+
+        async function seedDefaultProjects() {
+            if (!auth.currentUser) {
+                alert("Please log in to sync projects.");
+                return;
+            }
+            if (!confirm("Do you want to sync your 5 default curated projects into Firestore?\n\nThis will allow you to edit, change links, upload custom image banners, and update descriptions for all of them right here from the dashboard!")) {
+                return;
+            }
+
+            const syncBtn = document.getElementById("syncDefaultProjectsBtn");
+            const originalText = syncBtn ? syncBtn.innerHTML : "";
+            if (syncBtn) {
+                syncBtn.disabled = true;
+                syncBtn.innerHTML = '<i class="fas fa-spinner fa-spin me-1"></i> Syncing...';
+            }
+
+            try {
+                const snap = await getDocs(collection(db, "posts"));
+                const existingTitles = new Set();
+                snap.forEach(d => {
+                    const t = d.data().title;
+                    if (t) existingTitles.add(t.toLowerCase().trim());
+                });
+
+                let added = 0;
+                for (const proj of DEFAULT_PORTFOLIO_PROJECTS) {
+                    if (!existingTitles.has(proj.title.toLowerCase().trim())) {
+                        await addDoc(collection(db, "posts"), {
+                            ...proj,
+                            createdAt: serverTimestamp()
+                        });
+                        added++;
+                    }
+                }
+
+                if (added > 0) {
+                    alert(`✅ Successfully synced ${added} project(s) into your Firestore database!\nYou can now click 'Edit' on any project to modify its details.`);
+                } else {
+                    alert("All default projects are already present in your database.");
+                }
+            } catch (err) {
+                console.error("Error syncing default projects:", err);
+                alert("Error syncing projects: " + err.message);
+            } finally {
+                if (syncBtn) {
+                    syncBtn.disabled = false;
+                    syncBtn.innerHTML = originalText;
+                }
+            }
+        }
+
+        const syncProjectsBtn = document.getElementById("syncDefaultProjectsBtn");
+        if (syncProjectsBtn) syncProjectsBtn.addEventListener("click", seedDefaultProjects);
+
+        // =====================================================================
         // 4. Create Post & Broadcast to Subscribers
         // =====================================================================
         const broadcastForm = document.getElementById("broadcastPostForm");
@@ -1118,6 +1259,9 @@
             const category = document.getElementById("postCategory").value;
             let link = document.getElementById("postLink").value.trim();
             let imageUrl = document.getElementById("postImage").value.trim();
+            const postTagsEl = document.getElementById("postTags");
+            const rawTags = postTagsEl ? postTagsEl.value.trim() : "";
+            const tagsArray = rawTags ? rawTags.split(",").map(t => t.trim()).filter(Boolean) : [];
             const description = document.getElementById("postDescription").value.trim();
 
             if (!title) {
@@ -1172,6 +1316,7 @@
                     category: category,
                     link: link,
                     imageUrl: imageUrl,
+                    tags: tagsArray,
                     description: description,
                     author: "Lakhvinder Singh",
                     subscribersNotified: subscriberEmails.length,

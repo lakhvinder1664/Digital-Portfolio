@@ -116,7 +116,8 @@ export default function ProjectsPage({ onStartProject }) {
         <div className="projects-grid-container">
           <div className="projects-masonry-list">
             {filteredProjects.map((proj, idx) => {
-              const imageSrc = PROJECT_IMAGE_MAP[idx % 6] || project1;
+              const fallbackImage = PROJECT_IMAGE_MAP[idx % 6] || project1;
+              const imageSrc = proj.imageUrl && proj.imageUrl.startsWith('http') ? proj.imageUrl : fallbackImage;
               return (
                 <article key={proj.id || idx} className="projects-card-item">
                   <div className="projects-card-media-box">

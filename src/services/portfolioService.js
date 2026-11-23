@@ -216,16 +216,36 @@ export async function fetchLiveProjects() {
 
     const fetched = data.documents.map((doc, idx) => {
       const f = doc.fields || {};
+      const docId = doc.name ? doc.name.split('/').pop() : `post-${idx + 1}`;
+
+      // Parse tags (support arrayValue or comma-separated string)
+      let tags = [];
+      if (f.tags?.arrayValue?.values) {
+        tags = f.tags.arrayValue.values.map((v) => v.stringValue).filter(Boolean);
+      } else if (f.tags?.stringValue) {
+        tags = f.tags.stringValue.split(',').map((s) => s.trim()).filter(Boolean);
+      }
+      if (!tags.length) {
+        const cat = f.category?.stringValue;
+        tags = cat ? [cat, 'Responsive Web', 'Delivered'] : ['Web Project', 'Delivered'];
+      }
+
+      const category = f.category?.stringValue || 'Web Project';
+      const badge = f.badge?.stringValue || (category.toUpperCase().includes('LIVE') ? 'LIVE WEBSITE' : category.toUpperCase());
+
       return {
         id: String(idx + 1).padStart(2, '0'),
+        docId,
         title: f.title?.stringValue || 'Untitled Project',
-        category: f.category?.stringValue || 'Client Project',
-        badge: f.category?.stringValue || 'DELIVERED',
+        category,
+        cost: badge,
+        badge,
         description:
           f.description?.stringValue ||
           'Verified project delivered with clean responsive architecture.',
         link: f.link?.stringValue || '#',
-        tags: [f.category?.stringValue || 'Web Project', 'Responsive', 'Delivered'],
+        imageUrl: f.imageUrl?.stringValue || '',
+        tags,
         year: f.createdAt?.timestampValue
           ? new Date(f.createdAt.timestampValue).getFullYear().toString()
           : '2026',
