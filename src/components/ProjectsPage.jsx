@@ -71,18 +71,8 @@ export default function ProjectsPage({ onStartProject }) {
       </section>
 
       {/* Category Filter Pills */}
-      <section className="projects-filter-bar-section" style={{
-        maxWidth: 'var(--container-max)',
-        margin: '0 auto',
-        padding: '0 var(--page-gutter)',
-        marginBottom: '40px'
-      }}>
-        <div style={{
-          display: 'flex',
-          flexWrap: 'wrap',
-          gap: '12px',
-          alignItems: 'center'
-        }}>
+      <section className="projects-filter-bar-section">
+        <div className="projects-filter-bar-inner">
           {categories.map((cat) => {
             const isActive = activeFilter === cat;
             return (
@@ -90,19 +80,7 @@ export default function ProjectsPage({ onStartProject }) {
                 key={cat}
                 type="button"
                 onClick={() => setActiveFilter(cat)}
-                style={{
-                  background: isActive ? 'var(--color-lime, #d4ff00)' : 'rgba(255, 255, 255, 0.05)',
-                  color: isActive ? '#000000' : '#ffffff',
-                  border: isActive ? '1px solid var(--color-lime, #d4ff00)' : '1px solid rgba(255, 255, 255, 0.15)',
-                  borderRadius: '50px',
-                  padding: '8px 20px',
-                  fontSize: '12px',
-                  fontWeight: '700',
-                  letterSpacing: '1px',
-                  textTransform: 'uppercase',
-                  cursor: 'pointer',
-                  transition: 'all 0.2s ease',
-                }}
+                className={`projects-filter-btn ${isActive ? 'active' : ''}`}
               >
                 {cat}
               </button>
@@ -125,7 +103,7 @@ export default function ProjectsPage({ onStartProject }) {
                       href={proj.link}
                       target={proj.link?.startsWith('http') ? '_blank' : '_self'}
                       rel="noreferrer"
-                      style={{ display: 'block', width: '100%', height: '100%' }}
+                      className="projects-card-media-link"
                     >
                       <img
                         src={imageSrc}
@@ -137,59 +115,47 @@ export default function ProjectsPage({ onStartProject }) {
                     </a>
                   </div>
 
-                  <div className="projects-card-meta-row">
-                    <div className="projects-card-meta-left">
-                      <span className="projects-card-price" style={{ letterSpacing: '0.5px' }}>
-                        {proj.badge || proj.category}
-                      </span>
-                      <h3 className="projects-card-title">
-                        <a
-                          href={proj.link}
-                          target={proj.link?.startsWith('http') ? '_blank' : '_self'}
-                          rel="noreferrer"
-                          style={{ color: 'inherit', textDecoration: 'none' }}
-                        >
-                          {proj.title} ↗
-                        </a>
-                      </h3>
-                      {proj.description && (
-                        <p style={{
-                          color: 'rgba(255, 255, 255, 0.65)',
-                          fontSize: '13px',
-                          lineHeight: '1.6',
-                          marginTop: '8px',
-                          marginBottom: '12px'
-                        }}>
-                          {proj.description}
-                        </p>
-                      )}
-                      {proj.tags && (
-                        <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
-                          {proj.tags.map((t, i) => (
-                            <span
-                              key={i}
-                              style={{
-                                fontSize: '10px',
-                                textTransform: 'uppercase',
-                                padding: '3px 10px',
-                                borderRadius: '4px',
-                                background: 'rgba(255, 255, 255, 0.08)',
-                                color: 'rgba(255, 255, 255, 0.8)',
-                                fontWeight: '600',
-                                letterSpacing: '0.5px',
-                              }}
-                            >
-                              {t}
-                            </span>
-                          ))}
-                        </div>
-                      )}
+                  <div className="projects-card-info">
+                    {/* Top Row: Badge & Title on Left, Category & Index on Right */}
+                    <div className="projects-card-meta-row">
+                      <div className="projects-card-meta-left">
+                        <span className="projects-card-badge">
+                          {proj.badge || proj.category}
+                        </span>
+                        <h3 className="projects-card-title">
+                          <a
+                            href={proj.link}
+                            target={proj.link?.startsWith('http') ? '_blank' : '_self'}
+                            rel="noreferrer"
+                          >
+                            {proj.title} ↗
+                          </a>
+                        </h3>
+                      </div>
+
+                      <div className="projects-card-meta-right">
+                        <span className="projects-card-cat">{proj.category}</span>
+                        <span className="projects-card-index">[{proj.id || String(idx + 1).padStart(2, '0')}]</span>
+                      </div>
                     </div>
 
-                    <div className="projects-card-meta-right">
-                      <span className="projects-card-cat">{proj.category}</span>
-                      <span className="projects-card-index">[{proj.id || String(idx + 1).padStart(2, '0')}]</span>
-                    </div>
+                    {/* Full-width Description under the meta row */}
+                    {proj.description && (
+                      <p className="projects-card-desc">
+                        {proj.description}
+                      </p>
+                    )}
+
+                    {/* Full-width Tags under description */}
+                    {proj.tags && proj.tags.length > 0 && (
+                      <div className="projects-card-tags">
+                        {proj.tags.map((t, i) => (
+                          <span key={i} className="projects-card-tag">
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </article>
               );
