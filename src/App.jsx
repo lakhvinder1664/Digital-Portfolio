@@ -17,6 +17,7 @@ import Footer from './components/Footer';
 import ServicePage from './components/ServicePage';
 import ContactPage from './components/ContactPage';
 import ProjectsPage from './components/ProjectsPage';
+import AdminDashboard from './components/AdminDashboard';
 import CustomCursor from './components/CustomCursor';
 import Preloader from './components/Preloader';
 
@@ -36,6 +37,8 @@ export default function App() {
         targetPage = 'contact';
       } else if (hash.includes('service')) {
         targetPage = 'services';
+      } else if (hash.includes('admin') || hash.includes('dashboard')) {
+        targetPage = 'admin';
       } else {
         targetPage = 'home';
       }
@@ -72,6 +75,9 @@ export default function App() {
       } else if (page === 'services') {
         window.location.hash = '/services';
         window.scrollTo({ top: 0, behavior: 'instant' });
+      } else if (page === 'admin') {
+        window.location.hash = '/admin';
+        window.scrollTo({ top: 0, behavior: 'instant' });
       } else {
         if (hashTarget) {
           window.location.hash = hashTarget;
@@ -103,7 +109,9 @@ export default function App() {
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
       <main>
-        {currentPage === 'projects' ? (
+        {currentPage === 'admin' ? (
+          <AdminDashboard onNavigate={handleNavigate} />
+        ) : currentPage === 'projects' ? (
           <ProjectsPage onStartProject={() => handleNavigate('contact')} />
         ) : currentPage === 'contact' ? (
           <ContactPage />

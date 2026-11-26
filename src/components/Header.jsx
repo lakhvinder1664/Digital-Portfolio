@@ -10,6 +10,7 @@ const MENU_ITEMS = [
 
 export default function Header({ currentPage = 'home', onNavigate }) {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [atTop, setAtTop] = useState(true);
   const getInitialActiveItem = () => {
     if (currentPage === 'services') return '02';
     if (currentPage === 'projects') return '03';
@@ -26,6 +27,13 @@ export default function Header({ currentPage = 'home', onNavigate }) {
     else if (currentPage === 'contact') setActiveItem('04');
     else setActiveItem('01');
   }, [currentPage]);
+
+  // Show mobile time bar only when at top of page
+  useEffect(() => {
+    const onScroll = () => setAtTop(window.scrollY < 40);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
   // Live Chandigarh, India Time Clock
   useEffect(() => {
@@ -155,6 +163,11 @@ export default function Header({ currentPage = 'home', onNavigate }) {
           </div>
         </div>
       </header>
+
+      {/* Mobile Time Sub-bar: shows below nav bar only at top of page, disappears on scroll */}
+      <div className={`mobile-time-subbar ${atTop ? 'is-visible' : ''}`}>
+        Chandigarh, India / {currentTime}
+      </div>
 
       {/* Fullscreen Overlay Menu (Shows on Click) */}
       <div className={`menu-fullscreen-overlay ${menuOpen ? 'is-open' : ''}`}>

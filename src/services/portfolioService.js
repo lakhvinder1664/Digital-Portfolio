@@ -4,6 +4,7 @@
  */
 
 const FIRESTORE_BASE = 'https://firestore.googleapis.com/v1/projects/portfolio-contact-fe911/databases/(default)/documents';
+const FIREBASE_API_KEY = 'AIzaSyDEhANm35w2A6i3b5VJjDK92pboIKESHQU';
 
 export const CONTACT_INFO = {
   name: 'Lakhvinder Singh',
@@ -258,5 +259,199 @@ export async function fetchLiveProjects() {
     console.warn('Error fetching live projects from Firestore, using default projects:', err);
     return DEFAULT_PROJECTS;
   }
+}
+
+/**
+ * Admin Authentication via Firebase Identity Toolkit REST
+ */
+export async function adminLogin(email, password) {
+  const cleanEmail = (email || '').trim();
+  if (!cleanEmail || !password) {
+    throw new Error('Please enter both email and password.');
+  }
+
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      email: cleanEmail,
+      password,
+      returnSecureToken: true,
+    }),
+  });
+
+  const data = await res.json();
+  if (!res.ok) {
+    let msg = 'Authentication failed.';
+    if (data.error?.message?.includes('EMAIL_NOT_FOUND') || data.error?.message?.includes('INVALID_LOGIN_CREDENTIALS')) {
+      msg = 'Incorrect credentials or account not registered.';
+    } else if (data.error?.message?.includes('INVALID_PASSWORD')) {
+      msg = 'Invalid password. Please try again.';
+    } else if (data.error?.message?.includes('TOO_MANY_ATTEMPTS')) {
+      msg = 'Too many attempts. Access temporarily locked.';
+    }
+    throw new Error(msg);
+  }
+
+  const user = {
+    email: data.email,
+    idToken: data.idToken,
+    localId: data.localId,
+    loggedInAt: Date.now(),
+  };
+  localStorage.setItem('portfolio_admin_auth', JSON.stringify(user));
+  return user;
+}
+
+export function getStoredAdmin() {
+  try {
+    const raw = localStorage.getItem('portfolio_admin_auth');
+    if (!raw) return null;
+    return JSON.parse(raw);
+  } catch {
+    return null;
+  }
+}
+
+export function adminLogout() {
+  localStorage.removeItem('portfolio_admin_auth');
+}
+
+/**
+ * Admin Projects CRUD
+ */
+export async function saveAdminProject(projectData, docId = null) {
+  const fields = {
+    title: { stringValue: projectData.title || '' },
+    category: { stringValue: projectData.category || 'WordPress Website' },
+    badge: { stringValue: projectData.badge || 'CLIENT PROJECT' },
+    link: { stringValue: projectData.link || '#' },
+    imageUrl: { stringValue: projectData.imageUrl || '' },
+    description: { stringValue: projectData.description || '' },
+    author: { stringValue: projectData.author || 'Lakhvinder Singh' },
+    createdAt: { timestampValue: new Date().toISOString() },
+  };
+
+  const tagList = Array.isArray(projectData.tags)
+    ? projectData.tags
+    : (projectData.tags || '').split(',').map((t) => t.trim()).filter(Boolean);
+
+  if (tagList.length > 0) {
+    fields.tags = {
+      arrayValue: {
+        values: tagList.map((t) => ({ stringValue: t })),
+      },
+    };
+  }
+
+  const url = docId ? `${FIRESTORE_BASE}/posts/${docId}` : `${FIRESTORE_BASE}/posts`;
+  const method = docId ? 'PATCH' : 'POST';
+
+  const res = await fetch(url, {
+    method,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ fields }),
+  });
+
+  if (!res.ok) {
+    const err = await res.json().catch(() => ({}));
+    throw new Error(err.error?.message || 'Failed to save project.');
+  }
+
+  return true;
+}
+
+export async function deleteAdminProject(docId) {
+  if (!docId) throw new Error('Document ID required for deletion.');
+  const res = await fetch(`${FIRESTORE_BASE}/posts/${docId}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete project.');
+  return true;
+}
+
+/**
+ * Admin Inbox Messages
+ */
+export async function fetchAdminMessages() {
+  try {
+    const res = await fetch(`${FIRESTORE_BASE}/messages`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!data.documents) return [];
+
+    return data.documents.map((doc) => {
+      const f = doc.fields || {};
+      const docId = doc.name ? doc.name.split('/').pop() : '';
+      return {
+        docId,
+        name: f.name?.stringValue || 'Anonymous',
+        email: f.email?.stringValue || '',
+        phone: f.phone?.stringValue || '',
+        companyType: f.companyType?.stringValue || '',
+        budget: f.budget?.stringValue || '',
+        message: f.message?.stringValue || '',
+        read: f.read?.booleanValue || false,
+        time: f.time?.timestampValue || '',
+      };
+    }).sort((a, b) => new Date(b.time || 0) - new Date(a.time || 0));
+  } catch (err) {
+    console.error('Error fetching admin messages:', err);
+    return [];
+  }
+}
+
+export async function markAdminMessageRead(docId) {
+  if (!docId) return;
+  await fetch(`${FIRESTORE_BASE}/messages/${docId}?updateMask.fieldPaths=read`, {
+    method: 'PATCH',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      fields: { read: { booleanValue: true } },
+    }),
+  }).catch(() => {});
+}
+
+export async function deleteAdminMessage(docId) {
+  if (!docId) return;
+  const res = await fetch(`${FIRESTORE_BASE}/messages/${docId}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete message.');
+  return true;
+}
+
+/**
+ * Admin Newsletter Subscribers
+ */
+export async function fetchAdminSubscribers() {
+  try {
+    const res = await fetch(`${FIRESTORE_BASE}/newsletter`);
+    if (!res.ok) return [];
+    const data = await res.json();
+    if (!data.documents) return [];
+
+    return data.documents.map((doc) => {
+      const f = doc.fields || {};
+      const docId = doc.name ? doc.name.split('/').pop() : '';
+      return {
+        docId,
+        email: f.email?.stringValue || '',
+        time: f.time?.timestampValue || '',
+      };
+    }).sort((a, b) => new Date(b.time || 0) - new Date(a.time || 0));
+  } catch (err) {
+    console.error('Error fetching admin subscribers:', err);
+    return [];
+  }
+}
+
+export async function deleteAdminSubscriber(docId) {
+  if (!docId) return;
+  const res = await fetch(`${FIRESTORE_BASE}/newsletter/${docId}`, {
+    method: 'DELETE',
+  });
+  if (!res.ok) throw new Error('Failed to delete subscriber.');
+  return true;
 }
 

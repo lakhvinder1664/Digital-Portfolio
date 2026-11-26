@@ -31,6 +31,27 @@ export default function Footer({ onNavigate }) {
         <div className="footer-bottom-bar">
           <div className="footer-bottom-left">
             <span className="footer-copyright-text">&copy;2026 Design</span>
+            <a
+              href="#/admin"
+              onClick={(e) => {
+                e.preventDefault();
+                if (onNavigate) onNavigate('admin');
+              }}
+              style={{
+                marginLeft: '14px',
+                fontSize: '11px',
+                fontWeight: '600',
+                letterSpacing: '0.04em',
+                color: 'rgba(255, 255, 255, 0.35)',
+                textDecoration: 'none',
+                transition: 'color 0.2s ease',
+              }}
+              onMouseEnter={(e) => (e.currentTarget.style.color = 'var(--color-lime)')}
+              onMouseLeave={(e) => (e.currentTarget.style.color = 'rgba(255, 255, 255, 0.35)')}
+              title="Admin Dashboard"
+            >
+              [ CONSOLE ]
+            </a>
           </div>
 
           <div className="footer-bottom-right">
