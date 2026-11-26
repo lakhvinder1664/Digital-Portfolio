@@ -128,7 +128,14 @@ button {
   white-space: nowrap;
 }
 
-.mobile-time-subbar {
+.header-menu-btn-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.header-mobile-time {
   display: none;
 }
 
@@ -2930,31 +2937,26 @@ button {
     display: none;
   }
 
-  .mobile-time-subbar {
+  .header-mobile-time {
     display: block;
-    position: sticky;
-    top: var(--header-height);
-    left: 0;
-    width: 100%;
-    z-index: 999;
-    padding: 6px var(--header-gutter);
-    background-color: var(--color-black);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    position: absolute;
+    top: calc(100% + 6px);
+    right: 0;
+    font-family: var(--font-main);
     font-size: 11px;
     font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
-    color: rgba(255, 255, 255, 0.7);
-    text-align: right;
-    transition: opacity 0.25s ease, transform 0.25s ease;
-    opacity: 0;
+    color: rgba(255, 255, 255, 0.75);
+    white-space: nowrap;
     pointer-events: none;
-    transform: translateY(-6px);
+    opacity: 0;
+    transform: translateY(-4px);
+    transition: opacity 0.25s cubic-bezier(0.16, 1, 0.3, 1), transform 0.25s cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .mobile-time-subbar.is-visible {
+  .header-mobile-time.is-visible {
     opacity: 1;
-    pointer-events: auto;
     transform: translateY(0);
   }
 

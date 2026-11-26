@@ -30,7 +30,8 @@ export default function Header({ currentPage = 'home', onNavigate }) {
 
   // Show mobile time bar only when at top of page
   useEffect(() => {
-    const onScroll = () => setAtTop(window.scrollY < 40);
+    const onScroll = () => setAtTop(window.scrollY < 20);
+    onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
@@ -152,22 +153,27 @@ export default function Header({ currentPage = 'home', onNavigate }) {
               </a>
             </nav>
 
-            <button
-              type="button"
-              className="header-menu-btn"
-              onClick={() => setMenuOpen(true)}
-              aria-label="Open Navigation Menu"
-            >
-              NAVIGATION MENU
-            </button>
+            <div className="header-menu-btn-wrap">
+              <button
+                type="button"
+                className="header-menu-btn"
+                onClick={() => setMenuOpen(true)}
+                aria-label="Open Navigation Menu"
+              >
+                NAVIGATION MENU
+              </button>
+
+              {/* Mobile Time: directly below Navigation Menu button, disappears on scroll */}
+              <div
+                className={`header-mobile-time ${atTop ? 'is-visible' : ''}`}
+                aria-hidden={!atTop}
+              >
+                Chandigarh, India / {currentTime}
+              </div>
+            </div>
           </div>
         </div>
       </header>
-
-      {/* Mobile Time Sub-bar: shows below nav bar only at top of page, disappears on scroll */}
-      <div className={`mobile-time-subbar ${atTop ? 'is-visible' : ''}`}>
-        Chandigarh, India / {currentTime}
-      </div>
 
       {/* Fullscreen Overlay Menu (Shows on Click) */}
       <div className={`menu-fullscreen-overlay ${menuOpen ? 'is-open' : ''}`}>
